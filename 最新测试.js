@@ -322,9 +322,9 @@ function 签到() {
 function 停留100秒滑动() {
     var downup = 0;
     var jos = 1;
-    for (gjdjs = 0; gjdjs < 100; gjdjs++) {
+    for (gjdjs = 0; gjdjs < 103; gjdjs++) {
         downup = downup + 1;
-        lloogg("等待" + (100 - gjdjs) + "秒后返回");
+        lloogg("等待" + (103 - gjdjs) + "秒后返回");
         sleep(1000);
         if (downup == 5 && jos % 2 === 0) {
             lloogg("上");
@@ -1064,7 +1064,7 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                         if (逛街倒计时) {
                             停留100秒滑动();
                             back();
-                            var 继续逛街 = text("继续逛街").findOne();
+                            var 继续逛街 = text("继续逛街").findOne(10000);
                             if (继续逛街) {
                                 lloogg("还没逛完,继续等待100秒");
                                 var 继续逛街but = text("继续逛街").findOne();

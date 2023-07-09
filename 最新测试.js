@@ -1395,6 +1395,7 @@ lloogg("已完成");
 ///////////////////////////////////////////////////////////////////////////////
 
 function xx() {
+    var 好评弹窗 = id("com.kuaishou.nebula:id/icon").findOne(100) || text("喜欢就给个好评吧").findOne(100);
     var 签到弹窗 = textContains("gift-active").findOne(100) || textContains("coins-active").findOne(100) || textContains("redpack-active").findOne(100);
     var 金币箱弹窗 = text("nebula-box-jinbi").findOne(100);
     var 第一类弹窗 = text("恭喜获得看视频惊喜红包").findOne(100)
@@ -1645,6 +1646,10 @@ function xx() {
         back();
         回顶();
         // runThreads();
+    };
+    if (好评弹窗 && 好评弹窗.visibleToUser() === true) {
+        lloogg("检测到好评弹窗");
+        back();
     };
 
     sleep(1000);

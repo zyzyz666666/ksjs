@@ -1043,46 +1043,48 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
             for (n = 0; n > -1; n++) {
                 if (列表_逛街金币 == 0) {
                     var gjljb = text("逛街领金币").findOne(3500);
-                    if (gjljb && gjljb.visibleToUser() === true) {
-                        列表_逛街金币 = 1;
-                        lloogg("正在逛街");
-                        for (gj = 1; gj > 0; gj++) {
-                            var 逛街 = text("逛街领金币").findOne(1000);
-                            var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
-                            if (逛街) {
-                                if (逛街.visibleToUser() === true) {
-                                    var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
-                                    if (逛完了.text() !== "去逛街") {
-                                        lloogg("逛完了");
-                                        break;
-                                    } else {
-                                        click(逛街.bounds().centerX(), 逛街.bounds().centerY());
-                                        sleep(500);
-                                    }
+                    if (gjljb) {
+                        if (gjljb.visibleToUser() === true) {
+                            列表_逛街金币 = 1;
+                            lloogg("正在逛街");
+                            for (gj = 1; gj > 0; gj++) {
+                                var 逛街 = text("逛街领金币").findOne(1000);
+                                var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
+                                if (逛街) {
+                                    if (逛街.visibleToUser() === true) {
+                                        var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
+                                        if (逛完了.text() !== "去逛街") {
+                                            lloogg("逛完了");
+                                            break;
+                                        } else {
+                                            click(逛街.bounds().centerX(), 逛街.bounds().centerY());
+                                            sleep(500);
+                                        }
+                                    };
                                 };
+                                if (逛街倒计时) {
+                                    lloogg("正在逛街逛街——滑动停留100秒")
+                                    break;
+                                } else {
+                                    continue;
+                                };
+
                             };
                             if (逛街倒计时) {
-                                lloogg("正在逛街逛街——滑动停留100秒")
-                                break;
-                            } else {
-                                continue;
-                            };
-
-                        };
-                        if (逛街倒计时) {
-                            停留100秒滑动();
-                            back();
-                            var 继续逛街 = text("继续逛街").findOne(10000);
-                            if (继续逛街) {
-                                lloogg("还没逛完,继续等待100秒");
-                                var 继续逛街but = text("继续逛街").findOne();
-                                click(继续逛街but.bounds().centerX(), 继续逛街but.bounds().centerY());
                                 停留100秒滑动();
+                                back();
+                                var 继续逛街 = text("继续逛街").findOne(10000);
+                                if (继续逛街) {
+                                    lloogg("还没逛完,继续等待100秒");
+                                    var 继续逛街but = text("继续逛街").findOne();
+                                    click(继续逛街but.bounds().centerX(), 继续逛街but.bounds().centerY());
+                                    停留100秒滑动();
+                                };
                             };
+                        } else {
+                            lloogg("逛街不在视野内");
+                            upslide();
                         };
-                    } else {
-                        lloogg("逛街不在视野内");
-                        upslide();
                     };
 
                 }

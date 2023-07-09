@@ -250,6 +250,7 @@ function 签到() {
                         if (rootElement) {
                             log(rootElement.children().length);
                             if (rootElement.children().length > 1) {
+                                中心签到 = 1;
                                 log("是任务中心签到");
                             } else {
                                 log("是弹窗")
@@ -584,9 +585,9 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                 if (宝箱下 && 宝箱下.text().includes("开宝箱")) {
                     lloogg("🈶 开宝箱✅");
                     click(宝箱.bounds().centerX(), 宝箱.bounds().centerY());
-                    xx();
-                    停留x秒倒计时(50);
-                    goandearn();
+                    //xx();
+                    停留x秒倒计时(60);
+                    //goandearn();
                 } else {
                     lloogg("没找到宝箱或宝箱不能开启");
                     goandearn();

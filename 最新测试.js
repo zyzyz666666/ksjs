@@ -1219,18 +1219,18 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
             function 看视频() {
                 var downup = 0;
                 var counter = 0;
-                for (gjdjs = 0; gjdjs < 20; gjdjs++) {
+                for (gjdjs = 0; gjdjs < 600; gjdjs++) {
                     downup = downup + 1;
                     counter = counter + 1;
                     if (counter == 10) { // 每10秒提示一次
-                        lloogg("继续刷" + (20 - gjdjs) + "秒视频");
+                        lloogg("继续刷" + (600 - gjdjs) + "秒视频");
                         counter = 0;
                     };
                     sleep(1000);
                     if (downup == 10) {
                         lloogg("看视频");
                         upslide();
-                        lloogg("继续刷" + (20 - gjdjs) + "秒视频");
+                        lloogg("继续刷" + (600 - gjdjs) + "秒视频");
                         downup = 0;
                     };
                 };

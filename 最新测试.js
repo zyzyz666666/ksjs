@@ -917,9 +917,9 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                 if (列表_奖励翻倍 == 0) {
                     var jlfb = textContains("看视频奖励翻倍特权").findOne(3500);
                     if (jlfb) {
-                        列表_奖励翻倍 = 1;
                         lloogg("看视频奖励翻倍特权")
                         if (jlfb.visibleToUser() === true) {
+                            列表_奖励翻倍 = 1;
                             log("正在翻倍奖励");
                             for (ble = 0; ble < 5; ble++) {
                                 var 翻倍 = textContains("看视频奖励翻倍特权").findOne(1000);
@@ -928,12 +928,12 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                                     click(翻倍.bounds().centerX(), 翻倍.bounds().centerY());
                                     sleep(500);
                                 };
-                                if (翻倍中.text() !== "点击翻倍") {
-                                    log("翻倍中")
-                                    break;
-                                } else {
-                                    continue;
-                                };
+                                // if (翻倍中.text() !== "点击翻倍") {
+                                //     log("翻倍中")
+                                //     break;
+                                // } else {
+                                //     continue;
+                                // };
                             };
                         } else {
                             log("奖励翻倍不在视野内");

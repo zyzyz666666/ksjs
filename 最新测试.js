@@ -218,8 +218,16 @@ function 签到() {
     var GG = null;
     var 中心签到 = 0;
     if ((G11 || G22 || G33)) {
-        if (G11.visibleToUser() == true || G22.visibleToUser() == true || G33.visibleToUser() == true) {
-
+        if (G11 != null) {
+            var GG1 = G11.visibleToUser();
+        };
+        if (G22 != null) {
+            var GG2 = G22.visibleToUser();
+        };
+        if (G33 != null) {
+            var GG3 = G33.visibleToUser();
+        };
+        if (GG1 || GG2 || GG3) {
 
             log("发现签到");
             if (G11 && G11 !== null) {

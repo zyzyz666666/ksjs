@@ -1576,6 +1576,7 @@ function xx() {
 
 threads.start(function () {
     setInterval(xx, 2000); // run the task every 5 second
+    lloogg("xx")
 
 });
 

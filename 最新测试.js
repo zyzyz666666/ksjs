@@ -217,97 +217,101 @@ function 签到() {
     var G33 = textContains("redpack-active").findOne(1500);
     var GG = null;
     var 中心签到 = 0;
-    if ((G11 || G22 || G33) && (G11.visibleToUser() == true || G22.visibleToUser() == true || G33.visibleToUser() == true)) {
-        log("发现签到");
-        if (G11 && G11 !== null) {
-            GG = G11;
-        } else
-            if (G22 && G22 !== null) {
-                GG = G22;
+    if ((G11 || G22 || G33)) {
+        if (G11.visibleToUser() == true || G22.visibleToUser() == true || G33.visibleToUser() == true) {
+
+
+            log("发现签到");
+            if (G11 && G11 !== null) {
+                GG = G11;
             } else
-                if (G33 && G33 !== null) {
-                    GG = G33;
+                if (G22 && G22 !== null) {
+                    GG = G22;
+                } else
+                    if (G33 && G33 !== null) {
+                        GG = G33;
+                    };
+            //log(GG);
+            var 签到条 = GG.parent().parent().parent().parent();
+            if (签到条) {
+                log("签到条");
+                var aa = Number;
+                var bb = 签到条.indexInParent();
+                if (bb == -1) {
+                    aa = 2;
+                } else if (bb >= 0) {
+                    aa = 1;
                 };
-        //log(GG);
-        var 签到条 = GG.parent().parent().parent().parent();
-        if (签到条) {
-            log("签到条");
-            var aa = Number;
-            var bb = 签到条.indexInParent();
-            if (bb == -1) {
-                aa = 2;
-            } else if (bb >= 0) {
-                aa = 1;
-            };
-            var 领签到 = 签到条.parent();
-            if (领签到) {
-                log("正在判断签到");
-                if (领签到.children().length > 1) {
-                    var rootElement = 领签到.child(bb + aa);
-                    if (rootElement) {
-                        log(rootElement.children().length);
-                        if (rootElement.children().length > 1) {
-                            log("是任务中心签到");
-                        } else {
-                            log("是弹窗")
-                        };
-                        var x = 0;
-                        var y = 0;
-                        var a = null; // 定义为全局变量
-
-                        function traverseChildren(element) {
-                            if (element.childCount() === 0) {
-                                return;
-                            };
-
-                            var childCount = element.childCount();
-                            for (var i = 0; i < childCount; i++) {
-                                var child = element.child(i);
-                                x = x + 1;
-                                //console.log(x + child.className());
-                                if (child.className() == "android.widget.Button") {
-                                    a = element.child(i);
-                                    y = y + 1;
-                                };
-                                traverseChildren(child);
-                            };
-
-                        };
-                        traverseChildren(rootElement);
-                        if (a !== null) {
-                            log("找到按钮了");
-                            if (a.visibleToUser() == true) {
-                                log("可签")
-                                //log(a);
-                                click(a.bounds().centerX(), a.bounds().centerY());
-                                alwayspermit();
-                                var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                if (广子倒计时) {
-                                    log("正在看广告");
-                                    停留30秒倒计时();
-                                    var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(1000);
-                                    if (还没看完) {
-                                        log("还没看完,继续等待30秒");
-                                        var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
-                                        还没看完button.click();
-                                        停留30秒倒计时();
-                                    };
-                                };
+                var 领签到 = 签到条.parent();
+                if (领签到) {
+                    log("正在判断签到");
+                    if (领签到.children().length > 1) {
+                        var rootElement = 领签到.child(bb + aa);
+                        if (rootElement) {
+                            log(rootElement.children().length);
+                            if (rootElement.children().length > 1) {
+                                log("是任务中心签到");
                             } else {
-                                log("不在视野内，不可签到")
-                            }
+                                log("是弹窗")
+                            };
+                            var x = 0;
+                            var y = 0;
+                            var a = null; // 定义为全局变量
 
+                            function traverseChildren(element) {
+                                if (element.childCount() === 0) {
+                                    return;
+                                };
+
+                                var childCount = element.childCount();
+                                for (var i = 0; i < childCount; i++) {
+                                    var child = element.child(i);
+                                    x = x + 1;
+                                    //console.log(x + child.className());
+                                    if (child.className() == "android.widget.Button") {
+                                        a = element.child(i);
+                                        y = y + 1;
+                                    };
+                                    traverseChildren(child);
+                                };
+
+                            };
+                            traverseChildren(rootElement);
+                            if (a !== null) {
+                                log("找到按钮了");
+                                if (a.visibleToUser() == true) {
+                                    log("可签")
+                                    //log(a);
+                                    click(a.bounds().centerX(), a.bounds().centerY());
+                                    alwayspermit();
+                                    var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                    if (广子倒计时) {
+                                        log("正在看广告");
+                                        停留30秒倒计时();
+                                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(1000);
+                                        if (还没看完) {
+                                            log("还没看完,继续等待30秒");
+                                            var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                            还没看完button.click();
+                                            停留30秒倒计时();
+                                        };
+                                    };
+                                } else {
+                                    log("不在视野内，不可签到")
+                                }
+
+                            };
                         };
+                    } else {
+                        lloogg("无需点击");
                     };
                 } else {
-                    lloogg("无需点击");
+                    log("无法判断签到");
                 };
             } else {
-                log("无法判断签到");
+                log("未找到签到条");
             };
-        } else {
-            log("未找到签到条");
-        };
+        }
     };
 };
 
@@ -1028,7 +1032,6 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
             currentThread = 7;
             // 线程2的逻辑
             for (n = 0; n > -1; n++) {
-
                 if (列表_逛街金币 == 0) {
                     var gjljb = text("逛街领金币").findOne(3500);
                     if (gjljb && gjljb.visibleToUser() === true) {
@@ -1036,14 +1039,18 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                         lloogg("正在逛街");
                         for (gj = 1; gj > 0; gj++) {
                             var 逛街 = text("逛街领金币").findOne(1000);
-                            var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
                             var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
-                            if (逛完了.text() !== "去逛街") {
-                                lloogg("逛完了");
-                                break;
-                            } else if (逛街 && 逛街.visibleToUser() === true) {
-                                click(逛街.bounds().centerX(), 逛街.bounds().centerY());
-                                sleep(500);
+                            if (逛街) {
+                                if (逛街.visibleToUser() === true) {
+                                    var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
+                                    if (逛完了.text() !== "去逛街") {
+                                        lloogg("逛完了");
+                                        break;
+                                    } else {
+                                        click(逛街.bounds().centerX(), 逛街.bounds().centerY());
+                                        sleep(500);
+                                    }
+                                };
                             };
                             if (逛街倒计时) {
                                 lloogg("正在逛街逛街——滑动停留100秒")
@@ -1433,8 +1440,18 @@ function xx() {
         };
         回顶();
         if (先暂停 == 1) {
-            runThreads();
             先暂停 = 0;
+            resumeThread10();
+            resumeThread1();
+            resumeThread2();
+            resumeThread3();
+            resumeThread4();
+            resumeThread5();
+            resumeThread6();
+            resumeThread7();
+            resumeThread8();
+            resumeThread11();
+            runThreads();
         }
     }
     if (第一类弹窗 && 第一类弹窗.parent().child(0).className() == "android.widget.ImageView" && 第一类弹窗.visibleToUser() === true) {
@@ -1461,8 +1478,18 @@ function xx() {
         };
         回顶();
         if (先暂停 == 1) {
-            runThreads();
             先暂停 = 0;
+            resumeThread10();
+            resumeThread1();
+            resumeThread2();
+            resumeThread3();
+            resumeThread4();
+            resumeThread5();
+            resumeThread6();
+            resumeThread7();
+            resumeThread8();
+            resumeThread11();
+            runThreads();
         }
     };
     if (第二类弹窗 && 第二类弹窗.visibleToUser() === true) {
@@ -1499,8 +1526,18 @@ function xx() {
         };
         回顶();
         if (先暂停 == 1) {
-            runThreads();
             先暂停 = 0;
+            resumeThread10();
+            resumeThread1();
+            resumeThread2();
+            resumeThread3();
+            resumeThread4();
+            resumeThread5();
+            resumeThread6();
+            resumeThread7();
+            resumeThread8();
+            resumeThread11();
+            runThreads();
         }
     };
     if (金币箱弹窗 && 金币箱弹窗.visibleToUser() === true) {
@@ -1539,8 +1576,18 @@ function xx() {
         goandearn();
         回顶();
         if (先暂停 == 1) {
-            runThreads();
             先暂停 = 0;
+            resumeThread10();
+            resumeThread1();
+            resumeThread2();
+            resumeThread3();
+            resumeThread4();
+            resumeThread5();
+            resumeThread6();
+            resumeThread7();
+            resumeThread8();
+            resumeThread11();
+            runThreads();
         }
     }
     if (邀请新用户 && 邀请新用户.visibleToUser() === true) {
@@ -1563,8 +1610,18 @@ function xx() {
         shut新用户.click();
         回顶();
         if (先暂停 == 1) {
-            runThreads();
             先暂停 = 0;
+            resumeThread10();
+            resumeThread1();
+            resumeThread2();
+            resumeThread3();
+            resumeThread4();
+            resumeThread5();
+            resumeThread6();
+            resumeThread7();
+            resumeThread8();
+            resumeThread11();
+            runThreads();
         }
     }
     if (青少年模式 && 青少年模式.visibleToUser() === true) {

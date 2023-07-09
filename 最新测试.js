@@ -242,61 +242,65 @@ function 签到() {
             var 领签到 = 签到条.parent();
             if (领签到) {
                 log("正在判断签到");
-                var rootElement = 领签到.child(bb + aa);
-                if (rootElement) {
-                    log(rootElement.children().length);
-                    if (rootElement.children().length > 1) {
-                        log("是任务中心签到");
-                    } else {
-                        log("是弹窗")
-                    };
-                    var x = 0;
-                    var y = 0;
-                    var a = null; // 定义为全局变量
-
-                    function traverseChildren(element) {
-                        if (element.childCount() === 0) {
-                            return;
-                        };
-
-                        var childCount = element.childCount();
-                        for (var i = 0; i < childCount; i++) {
-                            var child = element.child(i);
-                            x = x + 1;
-                            //console.log(x + child.className());
-                            if (child.className() == "android.widget.Button") {
-                                a = element.child(i);
-                                y = y + 1;
-                            };
-                            traverseChildren(child);
-                        };
-
-                    };
-                    traverseChildren(rootElement);
-                    if (a !== null) {
-                        log("找到按钮了");
-                        if (a.visibleToUser() == true) {
-                            log("可签")
-                            //log(a);
-                            click(a.bounds().centerX(), a.bounds().centerY());
-                            alwayspermit();
-                            var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                            if (广子倒计时) {
-                                log("正在看广告");
-                                停留30秒倒计时();
-                                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(1000);
-                                if (还没看完) {
-                                    log("还没看完,继续等待30秒");
-                                    var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
-                                    还没看完button.click();
-                                    停留30秒倒计时();
-                                };
-                            };
+                if (领签到.children().length > 1) {
+                    var rootElement = 领签到.child(bb + aa);
+                    if (rootElement) {
+                        log(rootElement.children().length);
+                        if (rootElement.children().length > 1) {
+                            log("是任务中心签到");
                         } else {
-                            log("不在视野内，不可签到")
-                        }
+                            log("是弹窗")
+                        };
+                        var x = 0;
+                        var y = 0;
+                        var a = null; // 定义为全局变量
 
+                        function traverseChildren(element) {
+                            if (element.childCount() === 0) {
+                                return;
+                            };
+
+                            var childCount = element.childCount();
+                            for (var i = 0; i < childCount; i++) {
+                                var child = element.child(i);
+                                x = x + 1;
+                                //console.log(x + child.className());
+                                if (child.className() == "android.widget.Button") {
+                                    a = element.child(i);
+                                    y = y + 1;
+                                };
+                                traverseChildren(child);
+                            };
+
+                        };
+                        traverseChildren(rootElement);
+                        if (a !== null) {
+                            log("找到按钮了");
+                            if (a.visibleToUser() == true) {
+                                log("可签")
+                                //log(a);
+                                click(a.bounds().centerX(), a.bounds().centerY());
+                                alwayspermit();
+                                var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                if (广子倒计时) {
+                                    log("正在看广告");
+                                    停留30秒倒计时();
+                                    var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(1000);
+                                    if (还没看完) {
+                                        log("还没看完,继续等待30秒");
+                                        var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                        还没看完button.click();
+                                        停留30秒倒计时();
+                                    };
+                                };
+                            } else {
+                                log("不在视野内，不可签到")
+                            }
+
+                        };
                     };
+                } else {
+                    lloogg("无需点击");
                 };
             } else {
                 log("无法判断签到");
@@ -1062,7 +1066,7 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                         };
                     } else {
                         lloogg("逛街不在视野内");
-                        //upslide();
+                        upslide();
                     };
 
                 }
@@ -1373,13 +1377,13 @@ lloogg("已完成");
 ///////////////////////////////////////////////////////////////////////////////
 
 function xx() {
-    var 签到弹窗 = textContains("gift-active").findOne(500) || textContains("coins-active").findOne(500) || textContains("redpack-active").findOne(500);
-    var 金币箱弹窗 = text("nebula-box-jinbi").findOne(600);
-    var 第一类弹窗 = text("恭喜获得看视频惊喜红包").findOne(600)
-    var 第二类弹窗 = text("popup_icon").findOne(600) || id("com.kuaishou.nebula.neo_video:id/again_dialog_image").findOne(600);
-    var 弹窗 = textContains("签到领取").findOne(500) || textContains("恭喜你获得").findOne(500) || text("早起打卡瓜分金币").findOne(500) || text("恭喜获得金币大礼包").findOne(500)//|| textContains("限时福利").findOne(500); 
-    var 邀请新用户 = textContains("邀请新用户").findOne(500);
-    var 青少年模式 = id("com.kuaishou.nebula:id/set_teenage_mode").findOne(500);
+    var 签到弹窗 = textContains("gift-active").findOne(100) || textContains("coins-active").findOne(100) || textContains("redpack-active").findOne(100);
+    var 金币箱弹窗 = text("nebula-box-jinbi").findOne(100);
+    var 第一类弹窗 = text("恭喜获得看视频惊喜红包").findOne(100)
+    var 第二类弹窗 = text("popup_icon").findOne(100) || id("com.kuaishou.nebula.neo_video:id/again_dialog_image").findOne(100);
+    var 弹窗 = textContains("签到领取").findOne(100) || textContains("恭喜你获得").findOne(100) || text("早起打卡瓜分金币").findOne(100) || text("恭喜获得金币大礼包").findOne(100)//|| textContains("限时福利").findOne(500); 
+    var 邀请新用户 = textContains("邀请新用户").findOne(100);
+    var 青少年模式 = id("com.kuaishou.nebula:id/set_teenage_mode").findOne(100);
     var 先暂停 = 0;
     // if (弹窗 && 弹窗.visibleToUser() === true) {
     //     lloogg("检测到弹窗");
@@ -1476,7 +1480,7 @@ function xx() {
             pauseThread8();
             pauseThread11();
         }
-        var shut第二类 = 第二类弹窗.parent().child(第二类弹窗.parent().indexInParent() + 1);
+        var shut第二类 = 第二类弹窗.parent().child(第二类弹窗.indexInParent() + 1);
         if (shut第二类) {
             lloogg("正在关闭存钱罐弹窗/再看一个");
             shut第二类.click();
@@ -1575,7 +1579,7 @@ function xx() {
 
 
 threads.start(function () {
-    setInterval(xx, 2000); // run the task every 5 second
+    setInterval(xx, 1000); // run the task every 5 second
     lloogg("xx")
 
 });

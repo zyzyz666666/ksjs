@@ -1566,8 +1566,13 @@ function xx() {
             pauseThread7();
             pauseThread8();
             pauseThread11();
-        }
-        var chahcakan = 金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).child(金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).children().length - 1);
+        };
+        try {
+            var chahcakan = 金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).child(金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).children().length - 1);
+        } catch (error) {
+            lloogg("金币箱弹窗领取error")
+        };
+
         if (chahcakan) {
             log("  z  ")
             chahcakan.click();

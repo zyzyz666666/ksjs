@@ -496,7 +496,105 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                 setTimeout(thread1, 1000);  // 延迟1秒调用线程3
             }
         }
+        var thread1Id, thread2Id, thread3Id, thread4Id, thread5Id, thread6Id, thread7Id;
+        // 暂停线程11
+        function pauseThread11() {
+            thread11Paused = true;
+        }
 
+        // 恢复线程10的执行
+        function resumeThread11() {
+            thread11Paused = false;
+        };
+        // 暂停线程10
+        function pauseThread10() {
+            thread10Paused = true;
+        }
+
+        // 恢复线程10的执行
+        function resumeThread10() {
+            thread10Paused = false;
+        };
+        // 暂停线程1
+        function pauseThread1() {
+            thread1Paused = true;
+
+        }
+
+        // 恢复线程1的执行
+        function resumeThread1() {
+            thread1Paused = false;
+        }
+
+        // 暂停线程2
+        function pauseThread2() {
+            thread2Paused = true;
+        }
+
+        // 恢复线程2的执行
+        function resumeThread2() {
+            thread2Paused = false;
+        }
+
+        // 暂停线程3
+        function pauseThread3() {
+            thread3Paused = true;
+        }
+
+        // 恢复线程3的执行
+        function resumeThread3() {
+            thread3Paused = false;
+        };
+
+        // 暂停线程4
+        function pauseThread4() {
+            thread4Paused = true;
+        }
+
+        // 恢复线程4的执行
+        function resumeThread4() {
+            thread4Paused = false;
+        };
+
+        // 暂停线程5
+        function pauseThread5() {
+            thread4Paused = true;
+        }
+
+        // 恢复线程5的执行
+        function resumeThread5() {
+            thread4Paused = false;
+        };
+
+        // 暂停线程6
+        function pauseThread6() {
+            thread6Paused = true;
+        }
+
+        // 恢复线程6的执行
+        function resumeThread6() {
+            thread6Paused = false;
+        };
+
+        // 暂停线程7
+        function pauseThread7() {
+            thread7Paused = true;
+        }
+
+        // 恢复线程7的执行
+        function resumeThread7() {
+            thread7Paused = false;
+        };
+
+        // 暂停线程8
+        function pauseThread8() {
+            thread8Paused = true;
+        }
+
+        // 恢复线程8的执行
+        function resumeThread8() {
+            thread8Paused = false;
+        };
         function thread1() {
             var t1 = 0;
             currentThread = 1;
@@ -1322,105 +1420,7 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
             }
         }
 
-        var thread1Id, thread2Id, thread3Id, thread4Id, thread5Id, thread6Id, thread7Id;
-        // 暂停线程11
-        function pauseThread11() {
-            thread11Paused = true;
-        }
 
-        // 恢复线程10的执行
-        function resumeThread11() {
-            thread11Paused = false;
-        };
-        // 暂停线程10
-        function pauseThread10() {
-            thread10Paused = true;
-        }
-
-        // 恢复线程10的执行
-        function resumeThread10() {
-            thread10Paused = false;
-        };
-        // 暂停线程1
-        function pauseThread1() {
-            thread1Paused = true;
-
-        }
-
-        // 恢复线程1的执行
-        function resumeThread1() {
-            thread1Paused = false;
-        }
-
-        // 暂停线程2
-        function pauseThread2() {
-            thread2Paused = true;
-        }
-
-        // 恢复线程2的执行
-        function resumeThread2() {
-            thread2Paused = false;
-        }
-
-        // 暂停线程3
-        function pauseThread3() {
-            thread3Paused = true;
-        }
-
-        // 恢复线程3的执行
-        function resumeThread3() {
-            thread3Paused = false;
-        };
-
-        // 暂停线程4
-        function pauseThread4() {
-            thread4Paused = true;
-        }
-
-        // 恢复线程4的执行
-        function resumeThread4() {
-            thread4Paused = false;
-        };
-
-        // 暂停线程5
-        function pauseThread5() {
-            thread4Paused = true;
-        }
-
-        // 恢复线程5的执行
-        function resumeThread5() {
-            thread4Paused = false;
-        };
-
-        // 暂停线程6
-        function pauseThread6() {
-            thread6Paused = true;
-        }
-
-        // 恢复线程6的执行
-        function resumeThread6() {
-            thread6Paused = false;
-        };
-
-        // 暂停线程7
-        function pauseThread7() {
-            thread7Paused = true;
-        }
-
-        // 恢复线程7的执行
-        function resumeThread7() {
-            thread7Paused = false;
-        };
-
-        // 暂停线程8
-        function pauseThread8() {
-            thread8Paused = true;
-        }
-
-        // 恢复线程8的执行
-        function resumeThread8() {
-            thread8Paused = false;
-        };
 
 
 

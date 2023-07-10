@@ -412,11 +412,7 @@ function 重置ksapp() {
 停留x秒倒计时(20);
 重置ksapp();
 停留x秒倒计时(10);
-threads.start(function () {
-    setInterval(xx, 1000); // run the task every 5 second
-    lloogg("xx")
 
-});
 log(currentThread);
 var ISLOGIN = -1;
 var earnmoney = text("去赚钱").findOne();
@@ -451,6 +447,11 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
 
     if (ISLOGIN == 1) {
         lloogg("开始任务,正在检测可做任务……");
+        threads.start(function () {
+            setInterval(xx, 1000); // run the task every 5 second
+            lloogg("xx")
+
+        });
         八秒倒计时();
         签到();
         八秒倒计时();
@@ -709,7 +710,7 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                     lloogg("🈶 开宝箱✅");
                     click(宝箱.bounds().centerX(), 宝箱.bounds().centerY());
                     //xx();
-                    停留x秒倒计时(60);
+                    停留x秒倒计时(40);
                     //goandearn();
                 } else {
                     lloogg("没找到宝箱或宝箱不能开启");
@@ -1461,6 +1462,7 @@ lloogg("已完成");
 ///////////////////////////////////////////////////////////////////////////////
 
 function xx() {
+    lloogg("xx");
     var 好评弹窗 = id("com.kuaishou.nebula:id/icon").findOne(100) || text("喜欢就给个好评吧").findOne(100);
     var 签到弹窗 = textContains("gift-active").findOne(100) || textContains("coins-active").findOne(100) || textContains("redpack-active").findOne(100);
     var 金币箱弹窗 = text("nebula-box-jinbi").findOne(100);

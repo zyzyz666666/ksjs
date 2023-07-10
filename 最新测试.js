@@ -65,13 +65,20 @@ function goandearn() {
             lloogg("正在调用abclick");
             click(a, b);
             var 抵用金 = textContains("抵用金").findOne(1000);
-            if (抵用金 && 抵用金.visibleToUser() == true) {
+            try {
+                var diyongjin = 抵用金.visibleToUser()
+            } catch (e) {
+                diyongjin = false;
+            }
+
+            if (抵用金 && diyongjin == true) {
                 lloogg("在任务中心界面");
                 lloogg("若出现点赞，等待自查找");
                 break;
             } else {
                 continue;
             };
+
         };
     } else {
         back();
@@ -175,13 +182,23 @@ function exit_app(name) {
 function doubleclickearnmoney() {
     var quzhaunqian = text("去赚钱").findOne(1000);
     if (quzhaunqian) {
-        if (quzhaunqian.visibleToUser() == true) {
+        try {
+            var qquzq = quzhaunqian.visibleToUser() == true
+        } catch (e) {
+            qquzq = false;
+        }
+        if (qquzq) {
             for (qzq = 1; qzq > 0; qzq++) {
                 click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
                 sleep(50);
                 click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
                 var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                if (在顶 && 在顶.visibleToUser() == true) {
+                try {
+                    var zzaiding = 在顶.visibleToUser()
+                } catch (e) {
+                    zzaiding = false;
+                }
+                if (在顶 && zzaiding == true) {
                     lloogg("在任务中心顶");
                     break;
                 } else {
@@ -195,14 +212,21 @@ function doubleclickearnmoney() {
                 sleep(50);
                 click(a, b);
                 var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                if (在顶 && 在顶.visibleToUser() == true) {
+                try {
+                    var zaiding = 在顶.visibleToUser()
+                } catch (e) {
+                    zaiding = false;
+                }
+                if (在顶 && zaiding == true) {
                     lloogg("在任务中心顶");
                     break;
                 } else {
                     continue;
                 };
+
             };
         };
+
     } else {
         lloogg("卡🙅‍了")
     };
@@ -420,8 +444,11 @@ var a = earnmoney.bounds().centerX();
 var b = earnmoney.bounds().centerY();
 log((a, b));
 八秒倒计时();
-
-if (earnmoney && earnmoney.visibleToUser() === true) {
+try {
+    var c = earnmoney.visibleToUser()
+} catch (e) {
+}
+if (earnmoney && c === true) {
     for (m = 1; m > 0; m++) {
         click(a, b);
         lloogg("click任务中心");
@@ -747,6 +774,15 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                         var 金币500 = text("500金币").findOne(500);
                         var 金币1200 = text("1200金币").findOne(500);
                         try {
+                            var sansan = 完成3个.visibleToUser();
+                            var wuwu = 完成5个.visibleToUser();
+                            var qiqi = 完成7个.visibleToUser();
+                        } catch (e) {
+                            sansan = false;
+                            wuwu = false;
+                            qiqi = false;
+                        }
+                        try {
                             var 完成3个 = 金币300.parent().child(金币300.indexInParent() + 1);
                         } catch (e) {
                             lloogg("No 300")
@@ -761,7 +797,7 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                         } catch (e) {
                             lloogg("No 1200")
                         };
-                        if (金币300 && 金币500 && 金币1200 && 完成3个.visibleToUser() === true && 完成5个.visibleToUser() === true && 完成7个.visibleToUser() === true) {
+                        if (金币300 && 金币500 && 金币1200 && sansan === true && wuwu === true && qiqi === true) {
                             lloogg("判断每日挑战");
                             列表_每日挑战 = 1;
                             //300
@@ -898,12 +934,22 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                     var fdbt = text("到饭点领饭补").findOne(3500);
                     if (fdbt) {
                         lloogg("到饭点领饭补")
-                        if (fdbt.visibleToUser() === true) {
+                        try {
+                            var ffdbt = fdbt.visibleToUser();
+                        } catch (e) {
+                            ffdbt = false;
+                        }
+                        if (ffdbt) {
                             log("正在去领取饭点补贴");
                             列表_饭点补贴 = 1;
                             for (ff = 1; ff > 0; ff++) {
                                 var 饭补 = textContains("到饭点领饭补").findOne(1000);
-                                if (饭补 && 饭补.visibleToUser() === true) {
+                                try {
+                                    var fbb = 饭补.visibleToUser()
+                                } catch (e) {
+                                    fbb = false;
+                                }
+                                if (饭补 && fbb) {
                                     log("正在进领取饭补界面");
                                     click(饭补.bounds().centerX(), 饭补.bounds().centerY());
                                     sleep(500);
@@ -1088,7 +1134,12 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                             for (ble = 0; ble < 5; ble++) {
                                 var 翻倍 = textContains("看视频奖励翻倍特权").findOne(1000);
                                 var 翻倍中 = 翻倍.parent().parent().child(翻倍.parent().parent().children().length - 1);
-                                if (翻倍 && 翻倍.visibleToUser() === true) {
+                                try {
+                                    var ffb = 翻倍.visibleToUser()
+                                } catch (e) {
+                                    ffb = false;
+                                }
+                                if (翻倍 && ffb) {
                                     click(翻倍.bounds().centerX(), 翻倍.bounds().centerY());
                                     sleep(500);
                                 };
@@ -1133,17 +1184,27 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
 
                 if (列表_看视频赚得金币 == 0) {
                     var kspzdjb = textMatches(/(看视频[得赚].*金币$)/).findOne(3500);
-                    if (kspzdjb && kspzdjb.visibleToUser() === true) {
+                    try {
+                        var kksbz = kspzdjb.visibleToUser()
+                    } catch (e) {
+                        kksbz = false;
+                    }
+                    if (kspzdjb && kksbz === true) {
                         列表_看视频赚得金币 = 1;
                         log("正在看视频赚得金币-停留2分钟");
                         for (ksp = 1; ksp < 5; ksp++) {
                             var 明天再来 = text("明天再来").findOne(1000);
                             var 看视频 = textMatches(/(看视频[得赚].*金币$)/).findOne(1000);
                             var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
+                            try {
+                                var lknlks = 看视频.visibleToUser()
+                            } catch (e) {
+                                lknlks = false;
+                            }
                             if (明天再来) {
                                 log("明天再来");
                                 break;
-                            } else if (看视频 && 看视频.visibleToUser() === true) {
+                            } else if (看视频 && lknlks === true) {
                                 click(看视频.bounds().centerX(), 看视频.bounds().centerY());
                                 sleep(500);
                             };
@@ -1273,22 +1334,37 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                 var 在视频页 = 0;
                 if (列表_给视频表态 == 0) {
                     var gspbt = textContains("给视频表态").findOne(3500);
-                    if (gspbt && gspbt.visibleToUser() === true) {
+                    try {
+                        var ads = gspbt.visibleToUser()
+                    } catch (e) {
+                        ads = false;
+                    }
+                    if (gspbt && ads === true) {
                         列表_给视频表态 = 1;
                         lloogg("正在给视频表态");
                         for (bt = 1; bt > 0; bt++) {
                             var 明日再来 = text("明日再来").findOne(1000);
                             var 表态 = textContains("给视频表态").findOne();
+                            try {
+                                var bbtt = 表态.visibleToUser()
+                            } catch (e) {
+                                bbtt = false;
+                            }
                             if (明日再来) {
                                 lloogg("明日再来");
                                 break;
-                            } else if (表态 && 表态.visibleToUser() === true) {
+                            } else if (表态 && bbtt === true) {
                                 click(表态.bounds().centerX(), 表态.bounds().centerY());
                                 sleep(500);
 
                                 function if视频() {
                                     var 视频 = id("com.kuaishou.nebula:id/nasa_groot_view_pager").findOne(3000);
-                                    if (视频 && 视频.visibleToUser() === true) {
+                                    try {
+                                        var qdss = 视频.visibleToUser()
+                                    } catch (e) {
+                                        qdss = false;
+                                    }
+                                    if (视频 && qdss === true) {
                                         toast("在视频页");
                                         在视频页 = 1;
                                     } else {
@@ -1382,7 +1458,14 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
             lloogg("刷十分钟视频");
             for (sy = 1; sy > 0; sy++) {
                 var 首页 = text("首页").findOne();
-                if (首页.visibleToUser() == true && 首页.selected() == false) {
+                try {
+                    var sssyy = 首页.visibleToUser()
+                    var ssyyy = 首页.selected()
+                } catch (e) {
+                    sssyy = false;
+                    ssyyy = false;
+                }
+                if (sssyy == true && ssyyy == false) {
                     click(首页.bounds().centerX(), 首页.bounds().centerY());
                 };
                 if (首页.selected() == true) {
@@ -1504,10 +1587,10 @@ function xx() {
             var but = dkh.parent().child(dkh.parent().children().length - 2);
         } catch (e) {
         }
-        log(but);
-        log(but.visibleToUser())
-        log(but.child(0));
-        log(but.child(0).visibleToUser())
+        // log(but);
+        // log(but.visibleToUser())
+        // log(but.child(0));
+        // log(but.child(0).visibleToUser())
         click(but.bounds().centerX(), but.bounds().centerY());
         var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
         if (广子倒计时) {

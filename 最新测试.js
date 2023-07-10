@@ -774,9 +774,9 @@ if (earnmoney && c === true) {
                         var 金币500 = text("500金币").findOne(1500);
                         var 金币1200 = text("1200金币").findOne(1500);
                         try {
-                            var sansan = 完成3个.visibleToUser();
-                            var wuwu = 完成5个.visibleToUser();
-                            var qiqi = 完成7个.visibleToUser();
+                            var sansan = 金币300.visibleToUser();
+                            var wuwu = 金币500.visibleToUser();
+                            var qiqi = 金币1200.visibleToUser();
                         } catch (e) {
                             sansan = false;
                             wuwu = false;

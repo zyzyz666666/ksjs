@@ -797,7 +797,7 @@ if (earnmoney && c === true) {
                         } catch (e) {
                             lloogg("No 1200")
                         };
-                        if ((金币300 && sansan === true) && (金币500 && wuwu === true) && (金币1200 && qiqi === true)) {
+                        if ((金币300 && sansan === true) || (金币500 && wuwu === true) || (金币1200 && qiqi === true)) {
                             lloogg("判断每日挑战");
                             列表_每日挑战 = 1;
                             //300

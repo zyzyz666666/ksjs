@@ -1570,17 +1570,20 @@ function xx() {
         log("检测到签到弹窗");
         lloogg("先暂停");
         if (currentThread !== 100) {
-            先暂停 = 1;
-            pauseThread10();
-            pauseThread1();
-            pauseThread2();
-            pauseThread3();
-            pauseThread4();
-            pauseThread5();
-            pauseThread6();
-            pauseThread7();
-            pauseThread8();
-            pauseThread11();
+            try {
+                pauseThread10();
+                pauseThread1();
+                pauseThread2();
+                pauseThread3();
+                pauseThread4();
+                pauseThread5();
+                pauseThread6();
+                pauseThread7();
+                pauseThread8();
+                pauseThread11();
+                先暂停 = 1;
+            } catch (e) {
+            }
         }
         var dkh = textContains("将从第一天开始签到").findOne(1500);
         try {
@@ -1624,17 +1627,20 @@ function xx() {
         lloogg("检测到惊喜红包弹窗");
         lloogg("先暂停");
         if (currentThread !== 100) {
-            先暂停 = 1;
-            pauseThread10();
-            pauseThread1();
-            pauseThread2();
-            pauseThread3();
-            pauseThread4();
-            pauseThread5();
-            pauseThread6();
-            pauseThread7();
-            pauseThread8();
-            pauseThread11();
+            try {
+                pauseThread10();
+                pauseThread1();
+                pauseThread2();
+                pauseThread3();
+                pauseThread4();
+                pauseThread5();
+                pauseThread6();
+                pauseThread7();
+                pauseThread8();
+                pauseThread11();
+                先暂停 = 1;
+            } catch (e) {
+            }
         }
         var 惊喜 = text("恭喜获得看视频惊喜红包").findOne(1000);
         var dian继续观看 = 惊喜.parent().child(惊喜.parent().children().length - 2);
@@ -1661,17 +1667,20 @@ function xx() {
     if (第二类弹窗 && 第二类弹窗.visibleToUser() === true) {
         lloogg("检测到存钱罐/再看一个弹窗");
         if (currentThread !== 100) {
-            先暂停 = 1;
-            pauseThread10();
-            pauseThread1();
-            pauseThread2();
-            pauseThread3();
-            pauseThread4();
-            pauseThread5();
-            pauseThread6();
-            pauseThread7();
-            pauseThread8();
-            pauseThread11();
+            try {
+                pauseThread10();
+                pauseThread1();
+                pauseThread2();
+                pauseThread3();
+                pauseThread4();
+                pauseThread5();
+                pauseThread6();
+                pauseThread7();
+                pauseThread8();
+                pauseThread11();
+                先暂停 = 1;
+            } catch (e) {
+            }
         }
         var shut第二类 = 第二类弹窗.parent().child(第二类弹窗.indexInParent() + 1);
         if (shut第二类) {
@@ -1710,17 +1719,20 @@ function xx() {
         lloogg("检测到金币箱弹窗");
         lloogg("先暂停");
         if (currentThread !== 100) {
-            先暂停 = 1;
-            pauseThread10();
-            pauseThread1();
-            pauseThread2();
-            pauseThread3();
-            pauseThread4();
-            pauseThread5();
-            pauseThread6();
-            pauseThread7();
-            pauseThread8();
-            pauseThread11();
+            try {
+                pauseThread10();
+                pauseThread1();
+                pauseThread2();
+                pauseThread3();
+                pauseThread4();
+                pauseThread5();
+                pauseThread6();
+                pauseThread7();
+                pauseThread8();
+                pauseThread11();
+                先暂停 = 1;
+            } catch (e) {
+            }
         };
         try {
             var chahcakan = 金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).child(金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).children().length - 1);
@@ -1765,17 +1777,20 @@ function xx() {
         lloogg("检测到邀请新用户弹窗");
         lloogg("先暂停");
         if (currentThread !== 100) {
-            先暂停 = 1;
-            pauseThread10();
-            pauseThread1();
-            pauseThread2();
-            pauseThread3();
-            pauseThread4();
-            pauseThread5();
-            pauseThread6();
-            pauseThread7();
-            pauseThread8();
-            pauseThread11();
+            try {
+                pauseThread10();
+                pauseThread1();
+                pauseThread2();
+                pauseThread3();
+                pauseThread4();
+                pauseThread5();
+                pauseThread6();
+                pauseThread7();
+                pauseThread8();
+                pauseThread11();
+                先暂停 = 1;
+            } catch (e) {
+            }
         }
         try {
             var shut新用户 = 邀请新用户.parent().child(邀请新用户.parent().children().length - 1);

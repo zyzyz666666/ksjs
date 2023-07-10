@@ -240,7 +240,11 @@ function 签到() {
                         GG = G33;
                     };
             //log(GG);
-            var 签到条 = GG.parent().parent().parent().parent();
+            try {
+                var 签到条 = GG.parent().parent().parent().parent();
+            } catch (e) {
+                lloogg("No 签到条")
+            }
             if (签到条) {
                 log("签到条");
                 var aa = Number;
@@ -250,7 +254,11 @@ function 签到() {
                 } else if (bb >= 0) {
                     aa = 1;
                 };
-                var 领签到 = 签到条.parent();
+                try {
+                    var 领签到 = 签到条.parent();
+                } catch (e) {
+                    lloogg("No 领签到")
+                }
                 if (领签到) {
                     log("正在判断签到");
                     if (领签到.children().length > 1) {
@@ -403,8 +411,13 @@ function 重置ksapp() {
 重置ksapp();
 停留x秒倒计时(20);
 重置ksapp();
-停留x秒倒计时(0);
-log(currentThread); xx
+停留x秒倒计时(10);
+threads.start(function () {
+    setInterval(xx, 1000); // run the task every 5 second
+    lloogg("xx")
+
+});
+log(currentThread);
 var ISLOGIN = -1;
 var earnmoney = text("去赚钱").findOne();
 var a = earnmoney.bounds().centerX();
@@ -589,7 +602,11 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
             // 线程2的逻辑
             var 宝箱 = text("treasurebox").findOne(2000);
             if (宝箱) {
-                var 宝箱下 = 宝箱.parent().child(宝箱.indexInParent() + 1);
+                try {
+                    var 宝箱下 = 宝箱.parent().child(宝箱.indexInParent() + 1);
+                } catch (e) {
+                    lloogg("No 宝箱下")
+                }
                 if (宝箱下 && 宝箱下.text().includes("开宝箱")) {
                     lloogg("🈶 开宝箱✅");
                     click(宝箱.bounds().centerX(), 宝箱.bounds().centerY());
@@ -630,9 +647,21 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                         var 金币300 = text("300金币").findOne(500);
                         var 金币500 = text("500金币").findOne(500);
                         var 金币1200 = text("1200金币").findOne(500);
-                        var 完成3个 = 金币300.parent().child(金币300.indexInParent() + 1);
-                        var 完成5个 = 金币500.parent().child(金币500.indexInParent() + 1);
-                        var 完成7个 = 金币1200.parent().child(金币1200.indexInParent() + 1);
+                        try {
+                            var 完成3个 = 金币300.parent().child(金币300.indexInParent() + 1);
+                        } catch (e) {
+                            lloogg("No 300")
+                        };
+                        try {
+                            var 完成5个 = 金币500.parent().child(金币500.indexInParent() + 1);
+                        } catch (e) {
+                            lloogg("No 500")
+                        };
+                        try {
+                            var 完成7个 = 金币1200.parent().child(金币1200.indexInParent() + 1);
+                        } catch (e) {
+                            lloogg("No 1200")
+                        };
                         if (金币300 && 金币500 && 金币1200 && 完成3个.visibleToUser() === true && 完成5个.visibleToUser() === true && 完成7个.visibleToUser() === true) {
                             lloogg("判断每日挑战");
                             列表_每日挑战 = 1;
@@ -641,13 +670,21 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                                 lloogg("尚未完成3个");
                             } else if (完成3个.text() === "点击领取") {
                                 for (dd3 = 1; dd3 > 0; dd3++) {
-                                    完成3个.parent().click();
+                                    try {
+                                        完成3个.parent().click();
+                                    } catch (e) {
+                                    }
                                     lloogg("正在领取300金币");
                                     停留x秒倒计时(3);
                                     back();
                                     goandearn();
                                     停留x秒倒计时(2);
-                                    var pdd3 = text("300金币").findOne(600).parent().child(金币300.indexInParent() + 1);
+                                    try {
+                                        var pdd3 = text("300金币").findOne(600).parent().child(金币300.indexInParent() + 1);
+                                    } catch (e) {
+                                        lloogg("300已不在");
+                                    };
+
                                     if (pdd3 && pdd3.text() == "已领取") {
                                         pd3 = 1;
                                         lloogg("已经领取300金币");
@@ -664,13 +701,20 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                                 lloogg("尚未完成5个");
                             } else if (完成5个.text() === "点击领取") {
                                 for (dd5 = 1; dd5 > 0; dd5++) {
-                                    完成5个.parent().click();
+                                    try {
+                                        完成5个.parent().click();
+                                    } catch (e) {
+                                    }
                                     lloogg("正在领取500金币");
                                     停留x秒倒计时(3);
                                     back();
                                     goandearn();
                                     停留x秒倒计时(2);
-                                    var pdd5 = text("500金币").findOne(600).parent().child(金币500.indexInParent() + 1);
+                                    try {
+                                        var pdd5 = text("500金币").findOne(600).parent().child(金币500.indexInParent() + 1);
+                                    } catch (e) {
+                                        lloogg("500已不在");
+                                    };
                                     if (pdd5 && pdd5.text() == "已领取") {
                                         pd5 = 1;
                                         lloogg("已经领取500金币");
@@ -687,13 +731,20 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                                 lloogg("尚未完成7个");
                             } else if (完成7个.text() === "点击领取") {
                                 for (dd7 = 1; dd7 > 0; dd7++) {
-                                    完成7个.parent().click();
+                                    try {
+                                        完成7个.parent().click();
+                                    } catch (e) {
+                                    }
                                     lloogg("正在领取1200金币");
                                     停留x秒倒计时(3);
                                     back();
                                     goandearn();
                                     停留x秒倒计时(2);
-                                    var pdd7 = text("1200金币").findOne(600).parent().child(金币1200.indexInParent() + 1);
+                                    try {
+                                        var pdd7 = text("1200金币").findOne(600).parent().child(金币1200.indexInParent() + 1);
+                                    } catch (e) {
+                                        lloogg("1200已不在");
+                                    };
                                     if (pdd7 && pdd7.text() == "已领取") {
                                         pd7 = 1;
                                         lloogg("已经领取1200金币");
@@ -770,14 +821,20 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                                 };
                             };
                             if (领取饭补) {
-                                var dian领取饭补 = 领取饭补.parent();
+                                try {
+                                    var dian领取饭补 = 领取饭补.parent();
+                                } catch (e) {
+                                }
                                 if (dian领取饭补) {
                                     for (ffd = 1; ffd > 0; ffd++) {
                                         dian领取饭补.click();
                                         var 饭补领取 = textContains("恭喜获得").findOne(3000);
                                         if (饭补领取) {
                                             log("饭补领取");
-                                            var 恭喜获得视频 = 饭补领取.parent().child(饭补领取.parent().children().length - 2);
+                                            try {
+                                                var 恭喜获得视频 = 饭补领取.parent().child(饭补领取.parent().children().length - 2);
+                                            } catch (e) {
+                                            }
                                             if (恭喜获得视频) {
                                                 log("正在去看恭喜获得视频");
                                                 click(恭喜获得视频.bounds().centerX(), 恭喜获得视频.bounds().centerY());
@@ -1052,7 +1109,10 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                                 var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
                                 if (逛街) {
                                     if (逛街.visibleToUser() === true) {
-                                        var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
+                                        try {
+                                            var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
+                                        } catch (e) {
+                                        }
                                         if (逛完了.text() !== "去逛街") {
                                             lloogg("逛完了");
                                             break;
@@ -1176,10 +1236,16 @@ if (earnmoney && earnmoney.visibleToUser() === true) {
                                 };
                                 lloogg(bta)
                                 if (bta == 1) {
-                                    var array = [可见表态.indexInParent() + 2, 可见表态.indexInParent() + 3, 可见表态.indexInParent() + 4];
+                                    try {
+                                        var array = [可见表态.indexInParent() + 2, 可见表态.indexInParent() + 3, 可见表态.indexInParent() + 4];
+                                    } catch (e) {
+                                    }
                                     var randomIndex = Math.floor(Math.random() * array.length);
                                     var randomElement = array[randomIndex];
-                                    click(可见表态.parent().child(randomElement).bounds().centerX(), 可见表态.parent().child(randomElement).bounds().centerY())
+                                    try {
+                                        click(可见表态.parent().child(randomElement).bounds().centerX(), 可见表态.parent().child(randomElement).bounds().centerY())
+                                    } catch (e) {
+                                    }
                                     sleep(1000);
                                 };
                                 upslide();
@@ -1432,7 +1498,10 @@ function xx() {
             pauseThread11();
         }
         var dkh = textContains("将从第一天开始签到").findOne(1500);
-        var but = dkh.parent().child(dkh.parent().children().length - 2);
+        try {
+            var but = dkh.parent().child(dkh.parent().children().length - 2);
+        } catch (e) {
+        }
         log(but);
         log(but.visibleToUser())
         log(but.child(0));
@@ -1623,7 +1692,11 @@ function xx() {
             pauseThread8();
             pauseThread11();
         }
-        var shut新用户 = 邀请新用户.parent().child(邀请新用户.parent().children().length - 1);
+        try {
+            var shut新用户 = 邀请新用户.parent().child(邀请新用户.parent().children().length - 1);
+        } catch (e) {
+            lloogg("No shut新用户")
+        }
         shut新用户.click();
         回顶();
         if (先暂停 == 1) {
@@ -1656,11 +1729,7 @@ function xx() {
 };
 
 
-threads.start(function () {
-    setInterval(xx, 1000); // run the task every 5 second
-    lloogg("xx")
 
-});
 
 ///////////////////////////////////////////////////////
 function runThreads() {

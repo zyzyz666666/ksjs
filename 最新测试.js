@@ -400,7 +400,7 @@ function 八秒倒计时() {
 //停留30秒倒计时
 function 停留x秒倒计时(x) {
     for (ggdjs = 0; ggdjs < x; ggdjs++) {
-        lloogg("等待" + (x - ggdjs) + "秒后返回");
+        lloogg("等待" + (x - ggdjs) + "秒");
         sleep(1000);
     };
     // back();
@@ -1613,6 +1613,7 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
+                停留x秒倒计时(63);
             }
         }
         var dkh = textContains("将从第一天开始签到").findOne(1500);
@@ -1670,6 +1671,7 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
+                停留x秒倒计时(63);
             }
         }
         var 惊喜 = text("恭喜获得看视频惊喜红包").findOne(1000);
@@ -1710,6 +1712,7 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
+                停留x秒倒计时(63);
             }
         }
         var shut第二类 = 第二类弹窗.parent().child(第二类弹窗.indexInParent() + 1);
@@ -1762,6 +1765,7 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
+                停留x秒倒计时(63);
             }
         };
         try {
@@ -1820,6 +1824,7 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
+                停留x秒倒计时(63);
             }
         }
         try {

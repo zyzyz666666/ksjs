@@ -961,7 +961,7 @@ if (earnmoney && c === true) {
                         if (ffdbt) {
                             log("正在去领取饭点补贴");
                             列表_饭点补贴 = 1;
-                            for (ff = 1; ff > 0; ff++) {
+                            for (ff = 1; ff < 60; ff++) {
                                 var 饭补 = textContains("到饭点领饭补").findOne(1000);
                                 try {
                                     var fbb = 饭补.visibleToUser()

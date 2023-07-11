@@ -480,7 +480,7 @@ if (earnmoney && c === true) {
 
         });
         threads.start(function () {
-            setInterval(yy, 1000); // run the task every 5 second
+            setInterval(yy, 20*60*1000); // run the task every 5 second
             lloogg("YY")
 
         });

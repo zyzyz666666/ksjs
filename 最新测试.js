@@ -479,6 +479,11 @@ if (earnmoney && c === true) {
             lloogg("xx")
 
         });
+        threads.start(function () {
+            setInterval(yy, 1000); // run the task every 5 second
+            lloogg("YY")
+
+        });
         八秒倒计时();
         签到();
         八秒倒计时();
@@ -1576,6 +1581,11 @@ lloogg("已完成");
 //exit();
 
 ///////////////////////////////////////////////////////////////////////////////
+function yy() {
+
+    engines.stopAll();
+    engines.execScriptFile("/sdcard/脚本/快手极速版/git.js");
+};
 
 function xx() {
     lloogg("xx");

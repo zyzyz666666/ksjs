@@ -480,7 +480,7 @@ if (earnmoney && c === true) {
 
         });
         threads.start(function () {
-            setInterval(yy, 20*60*1000); // run the task every 5 second
+            setInterval(yy, 1000); // run the task every 5 second
             lloogg("YY")
 
         });
@@ -915,9 +915,12 @@ if (earnmoney && c === true) {
                             lloogg("每日挑战进度条不在视野内");
                             upslide();
                         };
-                        if (n == 10) {
+                        if (n % 10 === 0) {
                             回顶();
                             n = 0;
+                            if (n == 25) {
+                                yy();
+                            }
                         };
                     } else {
                         lloogg("每日挑战不在视野内");
@@ -1117,9 +1120,12 @@ if (earnmoney && c === true) {
                             log("饭补不在视野内");
                             upslide();
                         };
-                        if (n == 10) {
+                        if (n % 10 === 0) {
                             回顶();
                             n = 0;
+                            if (n == 25) {
+                                yy();
+                            }
                         };
                     }
 
@@ -1174,9 +1180,12 @@ if (earnmoney && c === true) {
                             log("奖励翻倍不在视野内");
                             upslide();
                         };
-                        if (n == 10) {
+                        if (n % 10 === 0) {
                             回顶();
                             n = 0;
+                            if (n == 25) {
+                                yy();
+                            }
                         };
                     }
 
@@ -1257,9 +1266,12 @@ if (earnmoney && c === true) {
                         log("看视频赚得金币不在视野内");
                         upslide();
                     };
-                    if (n == 10) {
+                    if (n % 10 === 0) {
                         回顶();
                         n = 0;
+                        if (n == 25) {
+                            yy();
+                        }
                     };
 
 
@@ -1333,9 +1345,12 @@ if (earnmoney && c === true) {
                             lloogg("逛街不在视野内");
                             upslide();
                         };
-                        if (n == 10) {
+                        if (n % 10 === 0) {
                             回顶();
                             n = 0;
+                            if (n == 25) {
+                                yy();
+                            }
                         };
                     };
 
@@ -1465,9 +1480,12 @@ if (earnmoney && c === true) {
                         lloogg("给视频表态不在视野内");
                         upslide();
                     };
-                    if (n == 10) {
+                    if (n % 10 === 0) {
                         回顶();
                         n = 0;
+                        if (n == 25) {
+                            yy();
+                        }
                     };
 
                 };
@@ -1582,7 +1600,6 @@ lloogg("已完成");
 
 ///////////////////////////////////////////////////////////////////////////////
 function yy() {
-
     engines.stopAll();
     engines.execScriptFile("git.js");
 };

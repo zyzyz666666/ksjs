@@ -801,107 +801,117 @@ if (earnmoney && c === true) {
                             lloogg("判断每日挑战");
                             列表_每日挑战 = 1;
                             //300
-                            if (完成3个.text() == "完成3个") {
-                                lloogg("尚未完成3个");
-                            } else if (完成3个.text() === "点击领取") {
-                                for (dd3 = 1; dd3 > 0; dd3++) {
-                                    try {
-                                        完成3个.parent().click();
-                                    } catch (e) {
-                                    }
-                                    lloogg("正在领取300金币");
-                                    停留x秒倒计时(3);
-                                    back();
-                                    goandearn();
-                                    停留x秒倒计时(2);
-                                    try {
-                                        var pdd3 = text("300金币").findOne(600).parent().child(金币300.indexInParent() + 1);
-                                    } catch (e) {
-                                        lloogg("300已不在");
-                                    };
+                            if (完成3个) {
+                                if (完成3个.text() == "完成3个") {
+                                    lloogg("尚未完成3个");
+                                } else if (完成3个.text() === "点击领取") {
+                                    for (dd3 = 1; dd3 > 0; dd3++) {
+                                        try {
+                                            完成3个.parent().click();
+                                        } catch (e) {
+                                        }
+                                        lloogg("正在领取300金币");
+                                        停留x秒倒计时(3);
+                                        back();
+                                        goandearn();
+                                        停留x秒倒计时(2);
+                                        try {
+                                            var pdd3 = text("300金币").findOne(600).parent().child(金币300.indexInParent() + 1);
+                                        } catch (e) {
+                                            lloogg("300已不在");
+                                        };
 
-                                    if (pdd3 && pdd3.text() == "已领取") {
-                                        pd3 = 1;
-                                        lloogg("已经领取300金币");
-                                        break;
-                                    };
+                                        if (pdd3 && pdd3.text() == "已领取") {
+                                            pd3 = 1;
+                                            lloogg("已经领取300金币");
+                                            break;
+                                        };
 
+                                    };
+                                } else if (完成3个.text() == "已领取") {
+                                    pd3 = 1;
+                                    lloogg("300金币已经领取");
                                 };
-                            } else if (完成3个.text() == "已领取") {
-                                pd3 = 1;
-                                lloogg("300金币已经领取");
-                            };
+                            }
                             //500
-                            if (完成5个.text() == "完成5个") {
-                                lloogg("尚未完成5个");
-                            } else if (完成5个.text() === "点击领取") {
-                                for (dd5 = 1; dd5 > 0; dd5++) {
-                                    try {
-                                        完成5个.parent().click();
-                                    } catch (e) {
-                                    }
-                                    lloogg("正在领取500金币");
-                                    停留x秒倒计时(3);
-                                    back();
-                                    goandearn();
-                                    停留x秒倒计时(2);
-                                    try {
-                                        var pdd5 = text("500金币").findOne(600).parent().child(金币500.indexInParent() + 1);
-                                    } catch (e) {
-                                        lloogg("500已不在");
-                                    };
-                                    if (pdd5 && pdd5.text() == "已领取") {
-                                        pd5 = 1;
-                                        lloogg("已经领取500金币");
-                                        break;
-                                    };
+                            if (完成5个) {
+                                if (完成5个.text() == "完成5个") {
+                                    lloogg("尚未完成5个");
+                                } else if (完成5个.text() === "点击领取") {
+                                    for (dd5 = 1; dd5 > 0; dd5++) {
+                                        try {
+                                            完成5个.parent().click();
+                                        } catch (e) {
+                                        }
+                                        lloogg("正在领取500金币");
+                                        停留x秒倒计时(3);
+                                        back();
+                                        goandearn();
+                                        停留x秒倒计时(2);
+                                        try {
+                                            var pdd5 = text("500金币").findOne(600).parent().child(金币500.indexInParent() + 1);
+                                        } catch (e) {
+                                            lloogg("500已不在");
+                                        };
+                                        if (pdd5 && pdd5.text() == "已领取") {
+                                            pd5 = 1;
+                                            lloogg("已经领取500金币");
+                                            break;
+                                        };
 
+                                    };
+                                } else if (完成5个.text() == "已领取") {
+                                    pd5 = 1;
+                                    lloogg("500金币已经领取");
                                 };
-                            } else if (完成5个.text() == "已领取") {
-                                pd5 = 1;
-                                lloogg("500金币已经领取");
-                            };
+                            }
                             //1200F
-                            if (完成7个.text() == "完成7个") {
-                                lloogg("尚未完成7个");
-                            } else if (完成7个.text() === "点击领取") {
-                                for (dd7 = 1; dd7 > 0; dd7++) {
-                                    try {
-                                        完成7个.parent().click();
-                                    } catch (e) {
-                                    }
-                                    lloogg("正在领取1200金币");
-                                    停留x秒倒计时(3);
-                                    back();
-                                    goandearn();
-                                    停留x秒倒计时(2);
-                                    try {
-                                        var pdd7 = text("1200金币").findOne(600).parent().child(金币1200.indexInParent() + 1);
-                                    } catch (e) {
-                                        lloogg("1200已不在");
-                                    };
-                                    if (pdd7 && pdd7.text() == "已领取") {
-                                        pd7 = 1;
-                                        lloogg("已经领取1200金币");
-                                        break;
-                                    };
+                            if (完成7个) {
+                                if (完成7个.text() == "完成7个") {
+                                    lloogg("尚未完成7个");
+                                } else if (完成7个.text() === "点击领取") {
+                                    for (dd7 = 1; dd7 > 0; dd7++) {
+                                        try {
+                                            完成7个.parent().click();
+                                        } catch (e) {
+                                        }
+                                        lloogg("正在领取1200金币");
+                                        停留x秒倒计时(3);
+                                        back();
+                                        goandearn();
+                                        停留x秒倒计时(2);
+                                        try {
+                                            var pdd7 = text("1200金币").findOne(600).parent().child(金币1200.indexInParent() + 1);
+                                        } catch (e) {
+                                            lloogg("1200已不在");
+                                        };
+                                        if (pdd7 && pdd7.text() == "已领取") {
+                                            pd7 = 1;
+                                            lloogg("已经领取1200金币");
+                                            break;
+                                        };
 
+                                    };
+                                } else if (完成7个.text() == "已领取") {
+                                    pd7 = 1;
+                                    lloogg("1200金币已经领取");
                                 };
-                            } else if (完成7个.text() == "已领取") {
-                                pd7 = 1;
-                                lloogg("1200金币已经领取");
-                            };
-                            //mrtz
-                            if (pd3 == 1 && pd5 == 1 && pd7 == 1) {
-                                mrtz = 1;
-                                lloogg("每日挑战全部完成");
-                            } else {
-                                lloogg("继续每日挑战");
+                                //mrtz
+                                if (pd3 == 1 && pd5 == 1 && pd7 == 1) {
+                                    mrtz = 1;
+                                    lloogg("每日挑战全部完成");
+                                } else {
+                                    lloogg("继续每日挑战");
+                                }
                             }
 
                         } else {
                             lloogg("每日挑战进度条不在视野内");
                             upslide();
+                        };
+                        if (n == 10) {
+                            回顶();
+                            n = 0;
                         };
                     } else {
                         lloogg("每日挑战不在视野内");
@@ -1101,6 +1111,10 @@ if (earnmoney && c === true) {
                             log("饭补不在视野内");
                             upslide();
                         };
+                        if (n == 10) {
+                            回顶();
+                            n = 0;
+                        };
                     }
 
                 }
@@ -1153,6 +1167,10 @@ if (earnmoney && c === true) {
                         } else {
                             log("奖励翻倍不在视野内");
                             upslide();
+                        };
+                        if (n == 10) {
+                            回顶();
+                            n = 0;
                         };
                     }
 
@@ -1233,6 +1251,10 @@ if (earnmoney && c === true) {
                         log("看视频赚得金币不在视野内");
                         upslide();
                     };
+                    if (n == 10) {
+                        回顶();
+                        n = 0;
+                    };
 
 
                 }
@@ -1304,6 +1326,10 @@ if (earnmoney && c === true) {
                         } else {
                             lloogg("逛街不在视野内");
                             upslide();
+                        };
+                        if (n == 10) {
+                            回顶();
+                            n = 0;
                         };
                     };
 
@@ -1431,7 +1457,11 @@ if (earnmoney && c === true) {
 
                     } else {
                         lloogg("给视频表态不在视野内");
-                        //upslide();
+                        upslide();
+                    };
+                    if (n == 10) {
+                        回顶();
+                        n = 0;
                     };
 
                 };

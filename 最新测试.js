@@ -487,6 +487,7 @@ if (earnmoney && c === true) {
 
 
         ////////////////////////////////////////////////////
+        var 线 = 0;
         var thread10Paused = false;
         var thread1Paused = false;
         var thread2Paused = false;
@@ -1552,12 +1553,14 @@ if (earnmoney && c === true) {
 
 
         /////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        runThreads();
-
-        // 主线程暂停一段时间
-        sleep(5000);
+        for (n = 0; n > -1; n++) {
+            if (线 == 1) {
+                线 = 0;
+                runThreads();
+                sleep(5000);
+                break;
+            };
+        };
 
 
 
@@ -1613,9 +1616,9 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
-
+                线 = 0;
             }
-            停留x秒倒计时(70);
+
         }
         var dkh = textContains("将从第一天开始签到").findOne(1500);
         try {
@@ -1672,9 +1675,9 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
-
+                线 = 0;
             }
-            停留x秒倒计时(70);
+
         }
         var 惊喜 = text("恭喜获得看视频惊喜红包").findOne(1000);
         var dian继续观看 = 惊喜.parent().child(惊喜.parent().children().length - 2);
@@ -1714,9 +1717,9 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
-
+                线 = 0;
             }
-            停留x秒倒计时(70);
+
         }
         var shut第二类 = 第二类弹窗.parent().child(第二类弹窗.indexInParent() + 1);
         if (shut第二类) {
@@ -1768,9 +1771,9 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
-
+                线 = 0;
             }
-            停留x秒倒计时(70);
+
         };
         try {
             var chahcakan = 金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).child(金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).children().length - 1);
@@ -1828,9 +1831,9 @@ function xx() {
                 pauseThread11();
                 先暂停 = 1;
             } catch (e) {
-
+                线 = 0;
             }
-            停留x秒倒计时(70);
+
         }
         try {
             var shut新用户 = 邀请新用户.parent().child(邀请新用户.parent().children().length - 1);
@@ -1866,6 +1869,8 @@ function xx() {
     };
 
     sleep(1000);
+    //xx完了
+    线 = 1;
 };
 
 

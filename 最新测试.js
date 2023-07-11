@@ -770,9 +770,9 @@ if (earnmoney && c === true) {
                         var pd7 = 0;//判断
                         var mrtz = 0;//判断
                         lloogg("正在检查每日挑战");
-                        var 金币300 = text("300金币").findOne(1500);
-                        var 金币500 = text("500金币").findOne(1500);
-                        var 金币1200 = text("1200金币").findOne(1500);
+                        var 金币300 = textContains("300金币").findOne(1500);
+                        var 金币500 = textContains("500金币").findOne(1500);
+                        var 金币1200 = textContains("1200金币").findOne(1500);
                         try {
                             var sansan = 金币300.visibleToUser();
                             var wuwu = 金币500.visibleToUser();

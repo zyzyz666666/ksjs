@@ -1584,7 +1584,7 @@ lloogg("已完成");
 function yy() {
 
     engines.stopAll();
-    engines.execScriptFile("/sdcard/脚本/快手极速版/git.js");
+    engines.execScriptFile("git.js");
 };
 
 function xx() {

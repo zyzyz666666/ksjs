@@ -2,8 +2,8 @@
 
 var window = floaty.window(
     <frame gravity="center">
-
-        <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />
+        <button id="closeBtn" text="强制关闭" w="auto" h="auto" bg="#ff0000" />
+        <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
 
@@ -11,10 +11,13 @@ window.setPosition(device.width / 3, 0);
 window.setSize(device.width * 1 / 2, 250);
 window.setAdjustEnabled(false);
 
-
 var statusText = window.status;
 
-
+window.closeBtn.click(() => {//
+    log("程序即将关闭");
+    engines.stopAll();
+    engines.execScriptFile("main.js")
+});
 
 function lloogg(msg) {
     log(msg);

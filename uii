@@ -1,4 +1,4 @@
-"ui";
+"uii";
 
 var window = floaty.window(
     <frame gravity="center">

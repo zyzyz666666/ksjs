@@ -1,17 +1,55 @@
-"ui";
-ui.layout(
-    <vertical>
-        <text textSize="20sp" textColor="#000000" text="这是一个UI"/>
-        <button id="button1" text="按钮1" w="auto" h="auto"/>
-        <button id="button2" text="按钮2" w="auto" h="auto"/>
-    </vertical>
-);
+function 下载ui() {
+    let url = [
+        'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/uii',
+    ];
+    for (var i = 0; i < 10; i++) {
+        try {
+            let res = http.get(url[i], {
+                timeout: 10000 // 设置超时时间为10秒
+            });
+            console.log(res.statusCode);
+            if (res.statusCode == 200) {
+                var UI = res.body.string();
+                if (UI.indexOf('"ui";') == 0) {
+                    toastLog('UI' + '加载成功');
+                    log("开始加载UI");
+                    engines.execScript("UI", UI);
+                    break;
+                };
+            } else {
+                toastLog('UI' + '下载失败');
+            }
+        } catch (error) {
+            if (error instanceof java.net.SocketTimeoutException) {
+                toastLog('UI' + '加载超时');
+                continue; // 继续下一次循环请求
+            } else {
+                toastLog('UI' + '请求失败')//，错误：' + error);
+            }
+        }
+        if (i == 9) {
+            toastLog("请关闭App后重新打开或联系管理员");
+            alert("请关闭App后重新打开或联系管理员");
+        }
+    }
 
-// 设置按钮点击事件
-ui.button1.click(function() {
-    toast("按钮1被点击了");
-});
+};
 
-ui.button2.click(function() {
-    toast("按钮2被点击了");
-});
+var isConnected;
+
+function checkNetworkState() {
+    var cm = context.getSystemService(context.CONNECTIVITY_SERVICE);
+    var activeNetwork = cm.getActiveNetworkInfo();
+
+    if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+        isConnected = true;
+        toastLog("手机已联网-正在加载界面");
+        下载ui();
+    } else {
+        isConnected = false;
+        toastLog("手机未联网");
+        alert("请检查网络！");
+    }
+}
+
+checkNetworkState();

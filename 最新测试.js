@@ -446,6 +446,16 @@ var earnmoney = text("去赚钱").findOne();
 var a = earnmoney.bounds().centerX();
 var b = earnmoney.bounds().centerY();
 log((a, b));
+threads.start(function () {
+    setInterval(xx, 1000); // run the task every 5 second
+    lloogg("xx")
+
+});
+threads.start(function () {
+    setInterval(yy, 18 * 60 * 1000); // run the task every 5 second
+    lloogg("YY")
+
+});
 八秒倒计时();
 try {
     var c = earnmoney.visibleToUser()
@@ -477,16 +487,7 @@ if (earnmoney && c === true) {
 
     if (ISLOGIN == 1) {
         lloogg("开始任务,正在检测可做任务……");
-        threads.start(function () {
-            setInterval(xx, 1000); // run the task every 5 second
-            lloogg("xx")
 
-        });
-        threads.start(function () {
-            setInterval(yy, 18 * 60 * 1000); // run the task every 5 second
-            lloogg("YY")
-
-        });
         八秒倒计时();
         签到();
         八秒倒计时();

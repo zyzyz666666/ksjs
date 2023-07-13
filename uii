@@ -1,0 +1,17 @@
+"ui";
+ui.layout(
+    <vertical>
+        <text textSize="20sp" textColor="#000000" text="这是一个UI"/>
+        <button id="button1" text="按钮1" w="auto" h="auto"/>
+        <button id="button2" text="按钮2" w="auto" h="auto"/>
+    </vertical>
+);
+
+// 设置按钮点击事件
+ui.button1.click(function() {
+    toast("按钮1被点击了");
+});
+
+ui.button2.click(function() {
+    toast("按钮2被点击了");
+});

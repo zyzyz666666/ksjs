@@ -26,7 +26,7 @@ ui.layout(
                             <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
                                 <horizontal gravity="center_vertical">
                                     <vertical padding="10 8" h="auto" w="0" layout_weight="1">
-                                        <img src="http://shengzhou.sq.cn/images/head/logo.png" />
+                                        <img src="https://s2-10623.kwimgs.com/kos/nlav10623/vision_images/topBannerx1.png" />
                                     </vertical>
                                 </horizontal>
                             </card>
@@ -37,7 +37,7 @@ ui.layout(
                                         <text text="   KS选择" textColor="#222222" textSize="18sp" maxLines="1" />
                                         <text text="   设置配置内容" textColor="#999999" textSize="15sp" maxLines="1" />
                                     </vertical>
-                                    <spinner id="script_chosen" marginLeft="10" marginRight="10" entries="KS|ks|KkSs" />
+                                    <spinner id="script_chosen" marginLeft="10" marginRight="10" entries="快手|快手极速帮|互切时间" />
                                 </horizontal>
                             </card>
                             <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
@@ -67,16 +67,17 @@ ui.layout(
                             </card>
                             <horizontal gravity="center_vertical">
                                 <vertical padding="10 8" h="auto" w="0" layout_weight="1">
-                                    <text text="运行前将所有悬浮窗置于屏幕右侧" textColor="#222222" textSize="15sp" maxLines="1" />
-                                    <text text="修复bug或添加新功能请联系作者，QQ：2254464797" textColor="#222222" textSize="15sp" maxLines="1" />
-                                    <text text="QQ：2254464797" textColor="#222222" textSize="15sp" maxLines="1" />
+                                    <text text="Q2254464797" textColor="#222222" textSize="15sp" maxLines="1" />
 
                                 </vertical>
                             </horizontal>
 
                         </vertical>
                         <button h="60" layout_gravity="center" id="log" textSize="18sp" text="日志" />
+                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
                         <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#2E8B57" foreground="?selectableItemBackground" />
+                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
+                        <button id="exit" text="退  出" textSize="25sp" color="#ffffff" bg="#2E8B57" foreground="?selectableItemBackground" />
                     </vertical>
                 </frame>
                 <ScrollView>

@@ -43,6 +43,7 @@ ui.layout(
                         <button id="start" w="*" h="100" text="开始运行" textSize="30" />
                         <button id="startrz" w="*" h="100" text=" 日 志 " textSize="30" />
                         <button id="startgb" w="*" h="100" text=" 关 闭 " textSize="30" />
+                        <button id="ksjsbst" w="*" h="100" text=" 开始运行快手极速版 " textSize="30" />
                     </vertical>
                 </ScrollView>
                 {/* <ScrollView>//

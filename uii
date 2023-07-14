@@ -68,7 +68,16 @@ ui.layout(
                             <horizontal gravity="center_vertical">
                                 <vertical padding="10 8" h="auto" w="0" layout_weight="1">
                                     <text text="Q2254464797" textColor="#222222" textSize="15sp" maxLines="1" />
-
+                                    <linear>
+                                        <button> 下载 快手 脚本</button>
+                                        <text id="ksyes" text="已下载✅" />
+                                        <text id="ksno" text="未下载❌" />
+                                    </linear>
+                                    <linear>
+                                        <button> 下载 快手极速版 脚本</button>
+                                        <text id="ksjsyes" text="已下载✅" />
+                                        <text id="ksjsno" text="未下载❌" />
+                                    </linear>
                                 </vertical>
                             </horizontal>
 
@@ -114,7 +123,9 @@ ui.layout(
                                     <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
                                 </vertical>
                             </ScrollView>
-
+                            <linear>
+                                <button text="保存 快手 脚本" id="save ks" textSize="18" />
+                            </linear>
                         </vertical>
 
 
@@ -144,6 +155,9 @@ ui.layout(
                                     <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
                                 </vertical>
                             </ScrollView>
+                            <linear>
+                                <button text="保存 快手极速 脚本" id="save ksjs" textSize="18" />
+                            </linear>
                         </vertical>
 
                         <vertical id="互切set" gravity="center">
@@ -158,12 +172,18 @@ ui.layout(
                         </vertical>
                     </frame>
                 </ScrollView>
-            </viewpager>
-        </vertical>
-    </drawer>
+            </viewpager >
+        </vertical >
+    </drawer >
 );
 
+// 设置文本元素可见
+ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
 
+// 设置文本元素不可见
+ui.ksno.setVisibility(android.view.View.VISIBLE);
+ui.ksjsno.setVisibility(android.view.View.VISIBLE);
 
 
 // 创建选项菜单(右上角)
@@ -268,6 +288,12 @@ ui.start.on("click", function () {
         toast("请先开启无障碍服务！");
         return;
     } else {
-        engines.execScriptFile("main.js")
+        //engines.execScriptFile("main.js")
+        var filePath = '/sdcard/ksjs.js';
+        if (files.exists(filePath)) {
+            engines.execScriptFile(filePath);
+        } else {
+            alert("请先下载脚本")
+        };
     };
 });

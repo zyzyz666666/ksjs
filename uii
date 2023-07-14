@@ -77,6 +77,7 @@ ui.layout(
                                         <button text="下载 快手极速 脚本" id="downksjs" />
                                         <text id="ksjsyes" text="已下载✅" />
                                         <text id="ksjsno" text="未下载❌" />
+                                        <button text="刷新" id="downksjsf5" />
                                     </linear>
                                 </vertical>
                             </horizontal>
@@ -366,6 +367,12 @@ ui.downksjs.on("click", function () {
         };
         files.write(filePath, KSJS);
         toastLog("快手极速版 已保存");
+        ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
+    };
+});
+ui.downksjsf5.on("click", function () {
+    if (KSJSi == 1) {
         ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
         ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
     };

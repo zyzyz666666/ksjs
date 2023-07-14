@@ -290,8 +290,10 @@ ui.start.on("click", function () {
     } else {
         //engines.execScriptFile("main.js")
         var filePath = '/sdcard/ksjs.js';
-        if (files.exists(filePath)) {
+        if (script_chosen_Listener == 1 && files.exists(filePath)) {
             engines.execScriptFile(filePath);
+        } else if (script_chosen_Listener == 0) {
+            log("wait")
         } else {
             alert("请先下载脚本")
         };

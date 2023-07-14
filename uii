@@ -37,7 +37,7 @@ ui.layout(
                                         <text text="   KS选择" textColor="#222222" textSize="18sp" maxLines="1" />
                                         <text text="   设置配置内容" textColor="#999999" textSize="15sp" maxLines="1" />
                                     </vertical>
-                                    <spinner id="script_chosen" marginLeft="10" marginRight="10" entries="快手|快手极速帮|互切时间" />
+                                    <spinner id="script_chosen" marginLeft="10" marginRight="10" entries="互切时间|快手极速帮|快手" />
                                 </horizontal>
                             </card>
                             <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
@@ -72,12 +72,15 @@ ui.layout(
                                         <button text="下载 快手 脚本" id="downks" />
                                         <text id="ksyes" text="已下载✅" />
                                         <text id="ksno" text="未下载❌" />
+                                        <button text="刷新" id="downksf5" />
+                                        <button text="卸载" id="deleteks" />
                                     </linear>
                                     <linear>
                                         <button text="下载 快手极速 脚本" id="downksjs" />
                                         <text id="ksjsyes" text="已下载✅" />
                                         <text id="ksjsno" text="未下载❌" />
                                         <button text="刷新" id="downksjsf5" />
+                                        <button text="卸载" id="deleteksjs" />
                                     </linear>
                                 </vertical>
                             </horizontal>
@@ -170,6 +173,9 @@ ui.layout(
                                     <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
                                 </vertical>
                             </ScrollView>
+                            <linear>
+                                <button text="保存 互切时间" id="save time" textSize="18" />
+                            </linear>
                         </vertical>
                     </frame>
                 </ScrollView>
@@ -215,7 +221,7 @@ ui.tabs.setupWithViewPager(ui.viewpager);
 var script_chosen_Listener = new android.widget.AdapterView.OnItemSelectedListener({
     onItemSelected: function (parent, view, position, id) {
         toastLog('选择脚本：' + ui.script_chosen.getSelectedItem());
-        if (ui.script_chosen.getSelectedItemPosition() == 0) {
+        if (ui.script_chosen.getSelectedItemPosition() == 2) {
             ui.快手set.visibility = 0;
             ui.快手极速set.visibility = 8;
             ui.互切set.visibility = 8;
@@ -226,7 +232,7 @@ var script_chosen_Listener = new android.widget.AdapterView.OnItemSelectedListen
             ui.快手极速set.visibility = 0;
             ui.互切set.visibility = 8;
 
-        } else if (ui.script_chosen.getSelectedItemPosition() == 2) {
+        } else if (ui.script_chosen.getSelectedItemPosition() == 0) {
             ui.快手set.visibility = 8;
             ui.快手极速set.visibility = 8;
             ui.互切set.visibility = 0;
@@ -309,9 +315,12 @@ ui.exit.on("click", function () {
     home();
 });
 
+////////////////////////////////////////////////////////////////////////////ksjs
 var KSJSi = 0;
 var KSJS;
+var filePathksjs = '/sdcard/ksjs.js';
 ui.downksjs.on("click", function () {
+    toastLog("开始下载KSJS脚本");
     //
     function 下载KSJS() {
         let url = [
@@ -328,23 +337,23 @@ ui.downksjs.on("click", function () {
                     if (KSJS.indexOf('"uii"') == 0) {
                         KSJSi = 1;
                         toastLog('快手极速版' + '下载成功✅');
-                        alert("''快手极速版' + '下载成功✅''")
+                        alert('快手极速版' + '下载成功✅')
                         //log("开始加载KSJS");
                         //engines.execScript("KSJS", KSJS);
                         break;
                     };
                 } else {
                     toastLog('快手极速版' + '下载链接失败❌');
-                    alert("'快手极速版' + '下载链接失败❌'")
+                    alert('快手极速版' + '下载链接失败❌')
                 }
             } catch (error) {
                 if (error instanceof java.net.SocketTimeoutException) {
                     toastLog('快手极速版' + '下载超时❌');
-                    alert("'快手极速版' + '下载超时❌'")
+                    alert('快手极速版' + '下载超时❌')
                     continue; // 继续下一次循环请求
                 } else {
                     toastLog('快手极速版' + '下载失败❌' + error)//，错误：' + error);
-                    alert("'快手极速版' + '下载失败❌'")
+                    alert('快手极速版' + '下载失败❌')
                 };
             };
             if (i == 9) {
@@ -361,9 +370,8 @@ ui.downksjs.on("click", function () {
     //
     if (KSJSi == 1) {
         toastLog("正在保存快手极速版");
-        var filePath = '/sdcard/ksjs.js';
-        if (files.exists(filePath)) {
-            files.remove(filePath);
+        if (files.exists(filePathksjs)) {
+            files.remove(filePathksjs);
         };
         files.write(filePath, KSJS);
         toastLog("快手极速版 已保存");
@@ -375,5 +383,62 @@ ui.downksjsf5.on("click", function () {
     if (KSJSi == 1) {
         ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
         ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
+    } else if (KSJSi == 0) {
+        ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+        ui.ksjsno.setVisibility(android.view.View.VISIBLE);
     };
+});
+ui.deleteksjs.on("click", function () {
+    if (files.exists(filePathksjs)) {
+        files.remove(filePathksjs);
+    };
+    alert('快手极速版' + '已卸载')
+    KSJSi = 0;
+    ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+    ui.ksjsno.setVisibility(android.view.View.VISIBLE);
+});
+
+/////////////////////////////////////////////////////////////////////////////ks
+var KSi = 0;
+var KS;
+var filePathks = '/sdcard/ks.js';
+ui.downks.on("click", function () {
+    toastLog("开始下载KS脚本");
+    //
+    function 下载KS() {
+        //
+    };
+
+    threads.start(function () { // 创建新的子线程
+        下载KS();
+    });
+    //
+    if (KSi == 1) {
+        toastLog("正在保存快手极速版");
+        if (files.exists(filePathks)) {
+            files.remove(filePathks);
+        };
+        files.write(filePath, KS);
+        toastLog("快手极速版 已保存");
+        ui.ksyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksno.setVisibility(android.view.View.INVISIBLE);
+    };
+});
+ui.downksf5.on("click", function () {
+    if (KSi == 1) {
+        ui.ksyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksno.setVisibility(android.view.View.INVISIBLE);
+    } else if (KSi == 0) {
+        ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+        ui.ksno.setVisibility(android.view.View.VISIBLE);
+    };
+});
+ui.deleteks.on("click", function () {
+    if (files.exists(filePathks)) {
+        files.remove(filePathks);
+    };
+    alert('快手极速版' + '已卸载')
+    KSJSi = 0;
+    ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+    ui.ksno.setVisibility(android.view.View.VISIBLE);
 });

@@ -86,8 +86,6 @@ ui.layout(
                             </horizontal>
 
                         </vertical>
-                        <button h="60" layout_gravity="center" id="log" textSize="18sp" text="日志" />
-                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
                         <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#2E8B57" foreground="?selectableItemBackground" />
                         <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
                         <button id="exit" text="退  出" textSize="25sp" color="#ffffff" bg="#2E8B57" foreground="?selectableItemBackground" />
@@ -289,9 +287,9 @@ ui.consoleshow.on("check", function (checked) {
     }
 });
 
-ui.log.on("click", function () {
-    app.startActivity("console");
-});
+// ui.log.on("click", function () {
+//     app.startActivity("console");
+// });//删掉了
 
 ui.start.on("click", function () {
     //程序开始运行之前判断无障碍服务

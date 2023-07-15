@@ -93,7 +93,11 @@ ui.layout(
                             </horizontal>
 
                         </vertical>
-                        <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#FF6600" foreground="?selectableItemBackground" />
+                        <horizontal>
+                            <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#FF6600" foreground="?selectableItemBackground" />
+                            <vertical w="1sp" h="*" margin="10 0 0 0" bg="#E2E2E2"></vertical>     //透明条
+                            <button id="exit" text="退 出" textSize="25sp" color="#ffffff" bg="#FF6600" foreground="?selectableItemBackground" />
+                        </horizontal>
                         <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
                     </vertical>
                 </frame>
@@ -188,6 +192,8 @@ ui.layout(
     </drawer >
 );
 
+ui.start.setWidth(device.width / 2);
+ui.exit.setWidth(device.width / 2);
 // 设置文本元素可见
 ui.ksyes.setVisibility(android.view.View.INVISIBLE);
 ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
@@ -217,6 +223,7 @@ ui.emitter.on("options_item_selected", (e, item) => {
             break;
         case "退出":
             home();
+            engines.stopAll();
             break;
     }
     e.consumed = true;
@@ -394,9 +401,10 @@ ui.start.on("click", function () {
     };
 });
 
-// ui.exit.on("click", function () {
-//     home();
-// });//删掉了
+ui.exit.on("click", function () {
+    home();
+    engines.stopAll();
+});
 
 ////////////////////////////////////////////////////////////////////////////ksjs
 var KSJSi = 0;

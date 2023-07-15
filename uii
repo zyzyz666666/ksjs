@@ -496,7 +496,7 @@ ui.downks.on("click", function () {
     function 下载KS() {
         //
         let url = [
-            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/测试文件',
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/次新更新',
         ];
         for (var i = 0; i < 2; i++) {
             try {

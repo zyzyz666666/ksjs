@@ -241,11 +241,81 @@ var script_chosen_Listener = new android.widget.AdapterView.OnItemSelectedListen
 })
 ui.script_chosen.setOnItemSelectedListener(script_chosen_Listener);
 
+////////////////////
+var ksjsset = storages.create("ksjsset");
+var ksset = storages.create("ksset");
+var timeset = storages.create("timeset");
+Initialize();
+///////////////////////////////////保存
+
+ui.saveksjs.click(function () {
+    ksjsset.put("选择框_开宝箱", ui.选择框_开宝箱.isChecked());
+    ksjsset.put("选择框_每日挑战", ui.选择框_每日挑战.isChecked());
+    ksjsset.put("选择框_饭饭补贴", ui.选择框_饭饭补贴.isChecked());
+    ksjsset.put("选择框_奖励翻倍", ui.选择框_奖励翻倍.isChecked());
+    ksjsset.put("选择框_看视频赚金币", ui.选择框_看视频赚金币.isChecked());
+    ksjsset.put("选择框_逛街", ui.选择框_逛街.isChecked());
+    ksjsset.put("选择框_表态", ui.选择框_表态.isChecked());
+    //ksjsset.put("选择框_自检测", ui.选择框_自检测.isChecked());
+    toastLog("快手极速 脚本设置 保存成功！");
+});
+
+///////////////////////////
+ui.saveks.click(function () {
+    ksset.put("选择框_切换账号", ui.选择框_切换账号.isChecked());
+    ksset.put("输入框分钟", ui.输入框分钟.text());
+    ksset.put("输入框1", ui.输入框1.text());
+    ksset.put("输入框11", ui.输入框11.text());
+    ksset.put("输入框3", ui.输入框3.text());
+    ksset.put("输入框速度调节", ui.输入框速度调节.text());
+    ksset.put("选择框_悬赏任务", ui.选择框_悬赏任务.isChecked());
+    ksset.put("选择框_逛街任务", ui.选择框_逛街任务.isChecked());
+    ksset.put("选择框_点赞任务", ui.选择框_点赞任务.isChecked());
+    ksset.put("选择框_评论任务", ui.选择框_评论任务.isChecked());
+    ksset.put("选择框_看视频任务", ui.选择框_看视频任务.isChecked());
+    //ksjsset.put("选择框_自检测", ui.选择框_自检测.isChecked());
+    toastLog("快手 脚本设置 保存成功！");
+});
+/////////////////////////////////////////
+ui.savetime.click(function () {
+    timeset.put("输入框互切", ui.输入框互切.text());
+    //
+    toastLog("互切 时间设置 保存成功！");
+});
+// 保存脚本设置
+// ui.saveks.click(function () {
+//     cmCONFIG0.put("ad_randomsetting", ui.ad_randomsetting.getText() + "");
+//     toastLog("快手 脚本设置 保存成功！");
+// });
 
 
 
+// 读取脚本设置
+function Initialize() {
+    if (ksjsset.get("选择框_开宝箱") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_开宝箱")) }
+    if (ksjsset.get("选择框_每日挑战") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_每日挑战")) }
+    if (ksjsset.get("选择框_饭饭补贴") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_饭饭补贴")) }
+    if (ksjsset.get("选择框_奖励翻倍") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_奖励翻倍")) }
+    if (ksjsset.get("选择框_看视频赚金币") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_看视频赚金币")) }
+    if (ksjsset.get("选择框_逛街") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_逛街")) }
+    if (ksjsset.get("选择框_表态") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_表态")) }
 
 
+    if (ksset.get("选择框_切换账号") != null) { ui.选择框_切换账号.setChecked(ksset.get("选择选择框_切换账号框_表态")) }
+    if (ksset.get("输入框分钟") != undefined) { ui.输入框分钟.setText(ksset.get("输入框分钟")) }
+    if (ksset.get("输入框1") != undefined) { ui.输入框1.setText(ksset.get("输入框1")) }
+    if (ksset.get("输入框11") != undefined) { ui.输入框11.setText(ksset.get("输入框11")) }
+    if (ksset.get("输入框3") != undefined) { ui.输入框3.setText(ksset.get("输入框3")) }
+    if (ksset.get("输入框速度调节") != undefined) { ui.输入框速度调节.setText(ksset.get("输入框速度调节")) }
+    if (ksset.get("选择框_悬赏任务") != null) { ui.选择框_悬赏任务.setChecked(ksset.get("选择框_悬赏任务")) }
+    if (ksset.get("选择框_逛街任务") != null) { ui.选择框_逛街任务.setChecked(ksset.get("选择框_逛街任务")) }
+    if (ksset.get("选择框_点赞任务") != null) { ui.选择框_点赞任务.setChecked(ksset.get("选择框_点赞任务")) }
+    if (ksset.get("选择框_评论任务") != null) { ui.选择框_评论任务.setChecked(ksset.get("选择框_评论任务")) }
+    if (ksset.get("选择框_看视频任务") != null) { ui.选择框_看视频任务.setChecked(ksset.get("选择框_看视频任务")) }
+
+
+    if (timeset.get("输入框互切") != undefined) { ui.输入框互切.setText(timeset.get("输入框互切")) }
+};
 
 
 
@@ -451,14 +521,8 @@ ui.deleteks.on("click", function () {
 });
 
 
-///////////////////////////////////保存
-// 保存脚本设置
-ui.saveks.click(function () {
-    cmCONFIG0.put("ad_randomsetting", ui.ad_randomsetting.getText() + "");
-    toastLog("快手 脚本设置 保存成功！");
-});
 
-ui.saveksjs.click(function () {
-    cmCONFIG0.put("ad_randomsetting", ui.ad_randomsetting.getText() + "");
-    toastLog("快手极速 脚本设置 保存成功！");
-});
+
+
+
+

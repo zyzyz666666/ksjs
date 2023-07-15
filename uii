@@ -506,7 +506,7 @@ ui.downks.on("click", function () {
                 //console.log(res.statusCode);
                 if (resks.statusCode == 200) {
                     KS = resks.body.string();
-                    if (KS.indexOf('"uui"') == 0) {
+                    if (KS.indexOf('"uuii"') == 0) {
                         KSi = 1;
                         toastLog('快手' + '下载成功✅');
                         alert('快手' + '下载成功✅')

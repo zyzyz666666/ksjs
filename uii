@@ -1,1468 +1,671 @@
-"uuii"
+"ui";
+importClass(java.net.HttpURLConnection);
+importClass(java.net.URL);
+importClass(java.io.File);
+importClass(java.io.FileOutputStream);
+importClass(android.graphics.Color);
 
-///////////////
+//++++++++++++++++++++++++++++++++++++++++++++++++++
+//首页配置
+
+var color = "#FF6600"
+
+ui.statusBarColor("#FF6600")
+ui.layout(
+    <drawer id="drawer">
+        <vertical>
+            <appbar>
+                <toolbar id="toolbar" bg="#FF6600" title="KS小帮手" />
+                <tabs id="tabs" bg="#FF6600" />
+            </appbar>
+            <viewpager id="viewpager" >
+                <frame>
+
+                    <vertical>
+                        <vertical gravity="center" layout_weight="1">
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <img src="https://s2-10623.kwimgs.com/kos/nlav10623/vision_images/topBannerx1.png" />
+                                    </vertical>
+                                </horizontal>
+                            </card>
+
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <text text="   KS选择" textColor="#222222" textSize="18sp" maxLines="1" />
+                                        <text text="   设置配置内容" textColor="#999999" textSize="15sp" maxLines="1" />
+                                    </vertical>
+                                    <spinner id="script_chosen" marginLeft="10" marginRight="10" entries="互切|快手极速帮|快手" />
+                                </horizontal>
+                            </card>
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <text text="   无障碍服务" textColor="#222222" textSize="18sp" maxLines="1" />
+                                        <text text="    确保开启" textColor="#999999" textSize="15sp" maxLines="1" />
+                                    </vertical>
+                                    <Switch id="autoService" marginLeft="10" marginRight="20" checked="{{auto.service != null}}" />
+                                </horizontal>
+                            </card>
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <text text="   悬浮窗权限" textColor="#222222" textSize="18sp" maxLines="1" />
+                                        <text text="    确保开启" textColor="#999999" textSize="15sp" maxLines="1" />
+                                    </vertical>
+                                    <Switch id="consoleshow" marginLeft="10" marginRight="20" checked="{{floaty.checkPermission()}}" />
+                                </horizontal>
+                            </card>
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="5000dp" cardElevation="1000p" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <text text="               按下音量上键可以停止KS" textColor="#222222" textSize="18sp" maxLines="1" />
+                                    </vertical>
+                                </horizontal>
+                            </card>
+                            <horizontal gravity="center_vertical">
+                                <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                    <text text="Q2254464797" textColor="#222222" textSize="15sp" maxLines="1" />
+                                    <linear>
+                                        <button text="快手 脚本下载" id="downks" />
+                                        <text id="ksyes" text="已下载✅" />
+                                        <text id="ksno" text="未下载❌" />
+                                        <button text="刷新" id="downksf5" />
+                                        <button text="卸载" id="deleteks" />
+                                    </linear>
+                                    <linear>
+                                        <button text="快手极速 脚本下载" id="downksjs" />
+                                        <text id="ksjsyes" text="已下载✅" />
+                                        <text id="ksjsno" text="未下载❌" />
+                                        <button text="刷新" id="downksjsf5" />
+                                        <button text="卸载" id="deleteksjs" />
+                                    </linear>
+                                    <linear>
+                                        <button text="互切 脚本下载" id="downtime" />
+                                        <text id="timeyes" text="已下载✅" />
+                                        <text id="timeno" text="未下载❌" />
+                                        <button text="刷新" id="downtimef5" />
+                                        <button text="卸载" id="deletetime" />
+                                    </linear>
+                                </vertical>
+                            </horizontal>
+
+                        </vertical>
+                        <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#FF6600" foreground="?selectableItemBackground" />
+                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
+                    </vertical>
+                </frame>
+                <ScrollView>
+                    <frame>
+                        <vertical id="快手set" gravity="center">
+
+                            <ScrollView>
+                                <vertical>
+                                    <linear>
+                                        <checkbox id="选择框_切换账号" text="切换账号:" textColor="black" textStyle="bold" checked='false' />
+                                        <input id="输入框分钟" text="60" hint="请输分钟" /><text textSize="16sp" textColor="black" text="分钟" />
+                                    </linear>
+
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="滑动间隔(秒):" /> <input id="输入框1" text="6" hint="请输秒" />
+                                        <text textSize="16sp" textColor="black" text=" ~ " /> <input id="输入框11" text="10" hint="请输秒" />
+                                    </linear>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="强制返回(分钟):" /> <input id="输入框3" text="10" hint="请输分钟" />
+                                    </linear>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="速度调节:" /> <input id="输入框速度调节" text="1.8" hint="数值" />
+                                        <text textSize="16sp" textColor="black" text=" 数值越小速度越快(最低不低于1.2) " />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_悬赏任务" text="悬赏任务" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_逛街任务" text="逛街任务" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_点赞任务" text="点赞任务" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_评论任务" text="评论任务" textColor="black" textStyle="bold" checked='fales' />
+                                        <checkbox id="选择框_看视频任务" text="看视频任务" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
+                                </vertical>
+                            </ScrollView>
+                            <linear>
+                                <button text="保存 快手 脚本" id="saveks" textSize="18" />
+                            </linear>
+                        </vertical>
+
+
+                        <vertical id="快手极速set" gravity="center">
+                            <ScrollView>
+                                <vertical>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="滑动间隔(秒)[此输入框不可输入]:" /> <input id="输入框1" text="6" hint="请输秒" inputType="none" />
+                                    </linear>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="自动重启(分钟)[此输入框不可输入]:" /> <input id="输入框3" text="16" hint="请输分钟" inputType="none" />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_自检测" text="*必选*自检测" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_开宝箱" text="开宝箱" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_每日挑战" text="每日挑战" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_饭饭补贴" text="饭饭补贴" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_奖励翻倍" text="奖励翻倍" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_看视频赚金币" text="看视频赚金币" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_逛街" text="逛街" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_表态" text="表态" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
+                                </vertical>
+                            </ScrollView>
+                            <linear>
+                                <button text="保存 快手极速 脚本" id="saveksjs" textSize="18" />
+                            </linear>
+                        </vertical>
+
+                        <vertical id="互切set" gravity="center">
+                            <ScrollView>
+                                <vertical>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="互切间隔(分钟):" /><input id="输入框互切" text="60" hint="请输分钟" /><text textSize="16sp" textColor="black" text="分钟" />
+                                    </linear>
+                                    <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
+                                </vertical>
+                            </ScrollView>
+                            <linear>
+                                <button text="保存 互切时间" id="savetime" textSize="18" />
+                            </linear>
+                        </vertical>
+                    </frame>
+                </ScrollView>
+            </viewpager >
+        </vertical >
+    </drawer >
+);
+
+// 设置文本元素可见
+ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+
+// 设置文本元素不可见
+ui.ksno.setVisibility(android.view.View.VISIBLE);
+ui.ksjsno.setVisibility(android.view.View.VISIBLE);
+ui.timeno.setVisibility(android.view.View.VISIBLE);
+
+
+// 创建选项菜单(右上角)
+ui.emitter.on("create_options_menu", menu => {
+    menu.add("日志");
+    menu.add("关于");
+    menu.add("退出");
+});
+
+// 监听选项菜单点击
+ui.emitter.on("options_item_selected", (e, item) => {
+    switch (item.getTitle()) {
+        case "日志":
+            app.startActivity("console");
+            break;
+        case "关于":
+            alert("关于", "KS小帮手 v1.0.0");
+            break;
+        case "退出":
+            home();
+            break;
+    }
+    e.consumed = true;
+});
+activity.setSupportActionBar(ui.toolbar);
+
+// 设置滑动页面的标题
+ui.viewpager.setTitles(["首页", "KS Setting"]);
+// 让滑动页面和标签栏联动
+ui.tabs.setupWithViewPager(ui.viewpager);
+
+var script_chosen_Listener = new android.widget.AdapterView.OnItemSelectedListener({
+    onItemSelected: function (parent, view, position, id) {
+        toastLog('选择脚本：' + ui.script_chosen.getSelectedItem());
+        if (ui.script_chosen.getSelectedItemPosition() == 2) {
+            ui.快手set.visibility = 0;
+            ui.快手极速set.visibility = 8;
+            ui.互切set.visibility = 8;
+
+        }
+        else if (ui.script_chosen.getSelectedItemPosition() == 1) {
+            ui.快手set.visibility = 8;
+            ui.快手极速set.visibility = 0;
+            ui.互切set.visibility = 8;
+
+        } else if (ui.script_chosen.getSelectedItemPosition() == 0) {
+            ui.快手set.visibility = 8;
+            ui.快手极速set.visibility = 8;
+            ui.互切set.visibility = 0;
+
+        }
+        //GLOBAL_CONFIG.put("script_chosen", ui.script_chosen.getSelectedItemPosition());
+    }
+})
+ui.script_chosen.setOnItemSelectedListener(script_chosen_Listener);
+
+////////////////////
+var ksjsset = storages.create("ksjsset");
 var ksset = storages.create("ksset");
+var timeset = storages.create("timeset");
+///////////////////////////////////保存
 
-var 选择框_切换账号 = ksset.get("选择框_切换账号");
-var 输入框分钟 = ksset.get("输入框分钟");
-var 输入框1 = ksset.get("输入框1");
-var 输入框11 = ksset.get("输入框11");
-var 输入框3 = ksset.get("输入框3");
-var 输入框速度调节 = ksset.get("输入框速度调节");
-var 选择框_悬赏任务 = ksset.get("选择框_悬赏任务");
-var 选择框_逛街任务 = ksset.get("选择框_逛街任务");
-var 选择框_点赞任务 = ksset.get("选择框_点赞任务");
-var 选择框_评论任务 = ksset.get("选择框_评论任务");
-var 选择框_看视频任务 = ksset.get("选择框_看视频任务");
+ui.saveksjs.click(function () {
+    ksjsset.put("选择框_开宝箱", ui.选择框_开宝箱.isChecked());
+    ksjsset.put("选择框_每日挑战", ui.选择框_每日挑战.isChecked());
+    ksjsset.put("选择框_饭饭补贴", ui.选择框_饭饭补贴.isChecked());
+    ksjsset.put("选择框_奖励翻倍", ui.选择框_奖励翻倍.isChecked());
+    ksjsset.put("选择框_看视频赚金币", ui.选择框_看视频赚金币.isChecked());
+    ksjsset.put("选择框_逛街", ui.选择框_逛街.isChecked());
+    ksjsset.put("选择框_表态", ui.选择框_表态.isChecked());
+    //ksjsset.put("选择框_自检测", ui.选择框_自检测.isChecked());
+    Initialize();
+    toastLog("快手极速 脚本设置 保存成功！");
+});
 
-if (选择框_切换账号 == undefined) {
-    选择框_切换账号 == false;
-};
-if (输入框分钟 == undefined) {
-    输入框分钟 == "60";
-};
-if (输入框1 == undefined) {
-    输入框1 == "6";
-};
-if (输入框11 == undefined) {
-    输入框11 == "10";
-};
-if (输入框3 == undefined) {
-    输入框3 == "10";
-};
-if (输入框速度调节 == undefined) {
-    输入框速度调节 == "1.8";
-};
-if (选择框_逛街任务 == undefined) {
-    选择框_逛街任务 == true;
-};
-if (选择框_悬赏任务 == undefined) {
-    选择框_悬赏任务 == true;
-};
-if (选择框_点赞任务 == undefined) {
-    选择框_点赞任务 == true;
-};
-if (选择框_评论任务 == undefined) {
-    选择框_评论任务 == false;
-};
-if (选择框_看视频任务 == undefined) {
-    选择框_看视频任务 == true;
-};
-/////////////////////
+///////////////////////////
+ui.saveks.click(function () {
+    ksset.put("选择框_切换账号", ui.选择框_切换账号.isChecked());
+    ksset.put("输入框分钟", ui.输入框分钟.text());
+    ksset.put("输入框1", ui.输入框1.text());
+    ksset.put("输入框11", ui.输入框11.text());
+    ksset.put("输入框3", ui.输入框3.text());
+    ksset.put("输入框速度调节", ui.输入框速度调节.text());
+    ksset.put("选择框_悬赏任务", ui.选择框_悬赏任务.isChecked());
+    ksset.put("选择框_逛街任务", ui.选择框_逛街任务.isChecked());
+    ksset.put("选择框_点赞任务", ui.选择框_点赞任务.isChecked());
+    ksset.put("选择框_评论任务", ui.选择框_评论任务.isChecked());
+    ksset.put("选择框_看视频任务", ui.选择框_看视频任务.isChecked());
+    //ksjsset.put("选择框_自检测", ui.选择框_自检测.isChecked());
+    Initialize();
+    toastLog("快手 脚本设置 保存成功！");
+});
+/////////////////////////////////////////
+ui.savetime.click(function () {
+    timeset.put("输入框互切", ui.输入框互切.text());
+    //
+    Initialize();
+    toastLog("互切 时间设置 保存成功！");
+});
+// 保存脚本设置
+// ui.saveks.click(function () {
+//     cmCONFIG0.put("ad_randomsetting", ui.ad_randomsetting.getText() + "");
+//     toastLog("快手 脚本设置 保存成功！");
+// });
 
-let 是否root = false
-let 浮窗开过了 = false
-let 是否暂停 = false
-let arrr = []
-var w = device.width;
-var h = device.height;
-var 是否运行过 = false
-var 当前包名 = null
-var 异常app = ""
 
-function main() {
-    // 这里写脚本的主逻辑
-    // home();
-    // threads.start(开启脚本)
-    threads.start(function () {
-        home();
-        if (浮窗开过了 == false) {
-            threads.start(悬浮);
-            浮窗开过了 = true
-        }
-    });
-}
-function 悬浮() {
-    var window = floaty.window(
-        <frame>
-            <button id="action" text="开始" w="40" h="40" bg="#00FA9A" />
-        </frame>
-    );
-    window.exitOnClose()
 
-    setInterval(() => { }, 1000);
-    ui.run(() => { window.setPosition(w * 0.7, 1) })
-    var execution = null;
-    //记录按键被按下时的触摸坐标
-    var x = 0, y = 0;
-    //记录按键被按下时的悬浮窗位置
-    var windowX, windowY;
-    //记录按键被按下的时间以便判断长按等动作
-    var downTime;
-    window.action.setOnTouchListener(function (view, event) {
-        switch (event.getAction()) {
-            case event.ACTION_DOWN:
-                x = event.getRawX();
-                y = event.getRawY();
-                windowX = window.getX();
-                windowY = window.getY();
-                downTime = new Date().getTime();
-                return true;
-            case event.ACTION_MOVE:
-                //移动手指时调整悬浮窗位置
-                window.setPosition(windowX + (event.getRawX() - x),
-                    windowY + (event.getRawY() - y));
-                //如果按下的时间超过1.5秒判断为长按，退出脚本
-                if (new Date().getTime() - downTime > 1500) {
-                    exit();
-                }
-                return true;
-            case event.ACTION_UP:
-                //手指弹起时如果偏移很小则判断为点击
-                if (Math.abs(event.getRawY() - y) < 5 && Math.abs(event.getRawX() - x) < 5) {
-                    onClick();
-                }
-                return true;
-        }
-        return true;
-    });
-    function onClick() {
-        if (window.action.getText() == '开始') {
-            threads.start(开启脚本)
-            window.action.setText('暂停');
-            log("已开");
-            是否暂停 = false
-        } else if (window.action.getText() == '继续') {
-            是否暂停 = false
-            log("已暂停");
-            window.action.setText('暂停');
+// 读取脚本设置
+function Initialize() {
+    if (ksjsset.get("选择框_开宝箱") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_开宝箱")) }
+    if (ksjsset.get("选择框_每日挑战") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_每日挑战")) }
+    if (ksjsset.get("选择框_饭饭补贴") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_饭饭补贴")) }
+    if (ksjsset.get("选择框_奖励翻倍") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_奖励翻倍")) }
+    if (ksjsset.get("选择框_看视频赚金币") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_看视频赚金币")) }
+    if (ksjsset.get("选择框_逛街") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_逛街")) }
+    if (ksjsset.get("选择框_表态") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_表态")) }
+
+
+    if (ksset.get("选择框_切换账号") != null) { ui.选择框_切换账号.setChecked(ksset.get("选择框_切换账号")) }
+    if (ksset.get("输入框分钟") != undefined) { ui.输入框分钟.setText(ksset.get("输入框分钟")) }
+    if (ksset.get("输入框1") != undefined) { ui.输入框1.setText(ksset.get("输入框1")) }
+    if (ksset.get("输入框11") != undefined) { ui.输入框11.setText(ksset.get("输入框11")) }
+    if (ksset.get("输入框3") != undefined) { ui.输入框3.setText(ksset.get("输入框3")) }
+    if (ksset.get("输入框速度调节") != undefined) { ui.输入框速度调节.setText(ksset.get("输入框速度调节")) }
+    if (ksset.get("选择框_悬赏任务") != null) { ui.选择框_悬赏任务.setChecked(ksset.get("选择框_悬赏任务")) }
+    if (ksset.get("选择框_逛街任务") != null) { ui.选择框_逛街任务.setChecked(ksset.get("选择框_逛街任务")) }
+    if (ksset.get("选择框_点赞任务") != null) { ui.选择框_点赞任务.setChecked(ksset.get("选择框_点赞任务")) }
+    if (ksset.get("选择框_评论任务") != null) { ui.选择框_评论任务.setChecked(ksset.get("选择框_评论任务")) }
+    if (ksset.get("选择框_看视频任务") != null) { ui.选择框_看视频任务.setChecked(ksset.get("选择框_看视频任务")) }
+
+
+    if (timeset.get("输入框互切") != undefined) { ui.输入框互切.setText(timeset.get("输入框互切")) }
+};
+
+
+
+
+
+
+
+
+
+
+//***************************************************************** */
+
+// 用户勾选无障碍服务的选项时，跳转到页面让用户去开启 
+// android.permission.SYSTEM_ALERT_WINDOW
+ui.autoService.on("check", function (checked) {
+    if (checked && auto.service == null) {
+        app.startActivity({
+            action: "android.settings.ACCESSIBILITY_SETTINGS"
+        });
+    }
+    if (!checked && auto.service != null) {
+        auto.service.disableSelf();
+    }
+});
+// 当用户回到本界面时，resume事件会被触发
+ui.emitter.on("resume", function () {
+    // 此时根据无障碍服务的开启情况，同步开关的状态
+    ui.autoService.checked = auto.service != null;
+});
+
+// 悬浮窗权限
+ui.consoleshow.on("check", function (checked) {
+    if (checked && !floaty.checkPermission()) {
+        app.startActivity({
+            packageName: "com.android.settings",
+            className: "com.android.settings.Settings$AppDrawOverlaySettingsActivity",
+            data: "package:" + context.getPackageName(),
+        });
+    }
+});
+
+// ui.log.on("click", function () {
+//     app.startActivity("console");
+// });//删掉了
+
+ui.start.on("click", function () {
+    //程序开始运行之前判断无障碍服务
+    if (auto.service == null) {
+        toast("请先开启无障碍服务！");
+        return;
+    } else {
+        //engines.execScriptFile("main.js")
+        if (ui.script_chosen.getSelectedItemPosition() == 1 && files.exists(filePathksjs)) {
+            engines.execScriptFile(filePathksjs); // 快手极速
+        } else if (ui.script_chosen.getSelectedItemPosition() == 2 && files.exists(filePathks)) {
+            engines.execScriptFile(filePathks); // 快手
+        } else if (ui.script_chosen.getSelectedItemPosition() == 0 && files.exists(filePathksjs) && files.exists(filePathks) && files.exists(filePathtime)) {
+            engines.execScriptFile(filePathtime); // 互切
         } else {
-            // if(execution){
-            log("停止脚本");
-            // threads.shutDownAll();
-            // exit()//停止脚本
-            //  execution.getEngine().forceStop();
-            //   }
-            是否暂停 = true
-            window.action.setText('继续');
-
-        }
-    }
-
-}
-
-
-
-//--------------编辑代码区域-----------------
-function 开启脚本() {
-    sleep(1000)
-    whetherRoot()
-    if (是否运行过 == false) {
-        // if (!requestScreenCapture()) {
-        //     toast("请求截图失败");
-        //     sleep(2000)
-        //     exit();
-        // }
-        // events.observeKey();
-        // events.onKeyDown("volume_down", function (event) {
-        //     toast("脚本停止");
-        //     threads.shutDownAll();//停止所有线程
-        //     engines.stopAll();
-        // });
-        是否运行过 = true
-        floatyLogInit(6, 0, device.height + 10, true)//
-    }
-
-    var state = true, statey = true
-    var 缓存 = storages.create("输入框1")
-    var 开始的 = 缓存.get("输入框1") * 1
-    var 结束的 = 缓存.get("输入框11") * 1
-    var 速度 = 缓存.get("输入框速度调节") * 1
-    var 等待2 = 缓存.get("输入框分钟") * 1
-    // var 刷新 = 缓存.get("输入框3") * 1
-    // var 点击红包次数 = 缓存.get("输入框33") * 1
-    var 用户名 = 缓存.get("激活码")
-    // if (!验证用户("290930233", "雅视分身阅读", 用户名)) {
-    //     alert('用户名有误或超过最大使用设备数!')
-    //     exit() //如果验证不通过 退出脚本
-    // }
-    toastLog("--开始运行--")
-    sleep(2000)
-    aw缓存配置("广告高度", false)
-    var 这次随机2, 当前点击红包次数 = 0, 最后达标 = 0
-    // if (选择框_记忆.isChecked() == true && aw缓存配置("记忆") != undefined) { 顺序 = aw缓存配置("记忆") }
-
-    while (true) {
-        aw打开app("快手")
-        sleep(7000)
-        关闭其他应用()
-        sleep(2000)
-        toastLog("--先强关一次快手--")
-        aw打开app("快手")
-        sleep(7000)
-        if (选择框_切换账号.isChecked()) {
-            快手切换账号()
-            运行阅读(等待2)
-        } else {
-            运行阅读(null)
-        }
-
-        home()
-        sleep(2000)
-    }
-
-    // aw打开app("ks7天任务")
-    alert('今日任务已完成!')
-    exit() //如果验证不通过 退出脚本
-
-}
-
-
-function 快手切换账号() {
-    toast("快手切号")//显示
-    aw打开app("快手")
-    sleep(8000)
-    app.startActivity({
-        data: "kwai://settings"
-    })//快手设置
-    sleep(8000)
-    全能滑动(w * 0.5, h * 0.8, w * 0.5, h * 0.1, 1000)
-    sleep(1000)
-    全能滑动(w * 0.5, h * 0.8, w * 0.5, h * 0.1, 1000)
-    sleep(1000)
-    全能滑动(w * 0.5, h * 0.8, w * 0.5, h * 0.1, 1000)
-    sleep(4000)
-    awcontrol(/切换帐号|切换账号/, 0) && sleep(2000)//
-    if (awcontrol(/当前使用/, 1)) {
-        var 位置 = awcontrol(/当前使用/, 2)
-        if (位置) {
-            if (位置[0] > w * 0.5) {
-                全能点击(w * 0.3, 位置[1] - 150)
-            } else {
-                全能点击(w * 0.7, 位置[1] - 150)
-            }
-        }
-    }
-    sleep(8000)
-    app.startActivity({
-        data: "kwai://home"
-    })//快手主页
-    sleep(3000)
-
-}
-
-function 返回首页() {
-    for (let index = 0; index < 6; index++) {
-        if (awcontrol(/首页/, 1, 2000)) {
-            break
-        } else if (awcontrol(/放弃奖励/, 0)) {
-            sleep(2000)
-        } else {
-            back()
-            sleep(2000)
-        }
-    }
-}
-
-
-function 运行阅读(参数1) {
-    var 缓存 = storages.create("输入框1")
-    var 开始的 = 缓存.get("输入框1") * 1
-    var 结束的 = 缓存.get("输入框11") * 1
-    var 分钟 = 缓存.get("输入框3") * 60
-    var 速度 = 缓存.get("输入框速度调节") * 1
-    var statey = true, 是否签到了 = false, 卡秒 = 0, 滑动次数 = 0, 最后看一次 = false
-    var 悬赏任务 = true, 逛街任务 = true, 点赞任务 = true, 评论任务 = true, 看视频任务 = true
-    if (选择框_悬赏任务.isChecked() == false) {
-        悬赏任务 = false
-    }
-    if (选择框_逛街任务.isChecked() == false) {
-        逛街任务 = false
-    }
-    if (选择框_点赞任务.isChecked() == false) {
-        点赞任务 = false
-    }
-    if (选择框_评论任务.isChecked() == false) {
-        评论任务 = false
-    }
-    if (选择框_看视频任务.isChecked() == false) {
-        看视频任务 = false
-    }
-    var 看下视频 = 0
-    sleep(8000)//
-    返回首页()
-    aw定时判断("强制返回")
-    aw定时判断("识别")
-    aw定时判断("点击了广告")
-    aw定时判断("运行切换账号")
-    var 点击了广告 = false, 连续性 = 0, 签到 = true, 去看视频任务 = true, 立即领取点击 = true
-    var 连续识别不到 = 0, 连续识别不到1 = 0, 定位 = false, 连续拉倒页数 = 0
-    while (statey) {
-        if (参数1 != null) {
-            if (aw定时判断("运行切换账号", 参数1 * 60)) {
-                toast("运行时间到,快手切号")//显示
-                floatyLog("运行时间到,快手切号")
-                aw打开app("快手")
-                sleep(8000)
-                返回首页()
-                if (aw找文字节点("首页", 0)) {
-                    sleep(3000 * 速度)
-                    if (awcontrol("com.smile.gifmaker:id/close_btn", 0, "id")) {  //红包
-                        sleep(3000 * 速度)
-                    } else if (awcontrol("com.smile.gifmaker:id/pendant_mask_bg", 0, "id")) {  //红包
-                        sleep(3000 * 速度)
-                    } else {
-                        toastLog("盲点")
-                        全能点击(w * 0.1, h * 0.22)
-                        sleep(3000 * 速度)
-                    }
-                }
-                if (awcontrol(/日常任务|详情|新手任务/, 1, 3000)) {
-                    floatyLog("日常任务")
-                    全能滑动(w * 0.3, h * 0.3, w * 0.3, h * 0.8, 800)
-                    sleep(1000)
-                    全能滑动(w * 0.3, h * 0.3, w * 0.3, h * 0.8, 800)
-                    sleep(1000)
-                    awcontrol(/点击领取/, 0) && sleep(4000 * 速度)
-                    awcontrol(/点击领取/, 0) && sleep(4000 * 速度)
-                    awcontrol(/点击领取/, 0) && sleep(4000 * 速度)//
-                    for (let index = 0; index < 3; index++) {
-                        全能滑动(w * 0.3, h * 0.7, w * 0.3, h * 0.4, 800)
-                        sleep(1000)
-                        awcontrol(/立即领取|点击领取/, 0, 1000) && sleep(3000 * 速度)
-                        awcontrol(/知道了/, 0) && sleep(3000 * 速度)
-                    }
-                    home()
-                    sleep(3000 * 速度)
-                }
-                floatyLog("结束")
-                return true
-            }
-        }
-        if (aw定时判断("强制返回", 分钟)) {
-            返回首页()
-            关闭其他应用()
-            aw打开app("快手")
-            sleep(8000)
-            aw定时判断("强制返回")
-            去看视频任务 = true
-            立即领取点击 = true
-        }
-        var 什么都识别不到 = false
-        if (aw找文字节点("知道了", 0)) {
-            sleep(1000 * 速度)
-        } else if (aw找文字节点("允许", 0)) {
-            sleep(1000 * 速度)
-        } else if (aw找文字节点("同意并继续", 0)) {
-            sleep(1000 * 速度)
-        } else if (awcontrol(/请完成安全验证/, 1)) {
-            返回首页()
-            关闭其他应用()
-            aw打开app("快手")
-            sleep(8000)
-        } else if (awcontrol(/喜欢就给格好评吧/, 1)) {
-            log("返回喜欢给好评")
-            back()
-            sleep(3000 * 速度)//
-        } else if (awcontrol(/立即签到|立刻领.*金币/, 0)) {
-            sleep(3000 * 速度)
-            if (awcontrol(/立即领取/, 0)) {
-                sleep(3000 * 速度)//
-            }
-            if (awcontrol(/立即领取/, 0, 1)) {
-                sleep(3000 * 速度)//
-            }
-            if (awcontrol(/立即签到/, 0)) {
-                sleep(3000 * 速度)//
-            }
-            if (awcontrol(/提醒我明日来领/, 1)) {
-                back()
-                sleep(3000 * 速度)//
-            }
-            if (awcontrol(/看完视频再领.*金币|继续观看|一键领取|立即解锁章节|看精彩视频.*赚更多|继续看视频赚更多|看精彩视频.*金币|继续逛街|领金币|再看一个.*金币|以后再说|始终允许|观看广告最高可得.*金币|再看一个|看视频赚更多金币|看视频赚.*金币/, 0)) {
-                sleep(3000 * 速度)
-                if (awcontrol(/领金币/, 1)) {
-                    sml_move(w * 0.3, h * 0.8, w * 0.3, h * 0.5, aw随机(700, 1200));
-                    sleep(3000 * 速度)
-                    awcontrol(/领金币/, 0) && sleep(3000 * 速度)//
-                }
-            }
-        } else if (awcontrol(/看完视频再领.*金币|继续观看|一键领取|立即解锁章节|看精彩视频.*赚更多|继续看视频赚更多|看精彩视频.*金币|继续逛街|领金币|再看一个.*金币|以后再说|始终允许|观看广告最高可得.*金币|再看一个|看视频赚更多金币|看视频赚.*金币/, 0)) {
-            sleep(3000 * 速度)
-            if (awcontrol(/领金币/, 1)) {
-                sml_move(w * 0.3, h * 0.8, w * 0.3, h * 0.5, aw随机(700, 1200));
-                sleep(3000 * 速度)
-                awcontrol(/领金币/, 0) && sleep(3000 * 速度)//
-            }
-        } else if (awcontrol(/限时奖励开启/, 1)) {
-            全能点击(w * 0.5, h * 0.57)
-            sleep(3000 * 速度)
-        } else if (去看视频任务 && awcontrol(/去看视频/, 0)) {
-            sleep(10000 * 速度)
-            去看视频任务 = false
-        } else if (awcontrol(/看视频领取每日金币奖励/, "+0,-110")) {
-            sleep(3000 * 速度)
-        } else if (aw找文字节点("立即获取", 1)) {
-            定位 = aw找文字节点("立即获取", 1)
-            if (定位) {
-                aw缓存配置("广告高度", 定位[1])
-            }
-            sleep(1000)//
-        } else if (awcontrol(/客服|发条有爱评论.*/, 1)) {
-            back()
-            sleep(2000)//
-        } else if (awcontrol(/点击进入直播间|点击查看/, 1)) {
-            sml_move(w * 0.3, h * 0.8, w * 0.3, h * 0.2, aw随机(700, 1200));
-            sleep(3000)
-        } else if (awcontrol(/逛逛街.*多赚钱|浏览.*秒可领.*金币|更多商品/, 1)) {
-            sml_move(w * 0.3, h * 0.8, w * 0.3, h * 0.1, aw随机(700, 1200));
-            sleep(1000 * aw随机(开始的, 结束的))
-            sml_move(w * 0.3, h * 0.8, w * 0.3, h * 0.2, aw随机(700, 1200));
-            sleep(1000 * aw随机(开始的, 结束的))
-            if (awcontrol(/浏览10秒.*/, 0)) {
-                sleep(13000 * 速度)
-                if (aw随机(0, 2) == 1) {
-                    sml_move(w * 0.3, h * 0.8, w * 0.3, h * 0.2, aw随机(700, 1200));
-                    sleep(1000 * aw随机(开始的, 结束的))
-                }
-
-            }
-
-        } else if (awcontrol(/.*后可领取奖励/, 1)) {
-            log("后可领取奖励,再等等")
-            sleep(3000 * 速度)
-        } else if (awcontrol("com.smile.gifmaker.neo_video:id/video_countdown_end_icon", 0, "id")) {
-            log("快手广告")
-            sleep(3000 * 速度)
-
-
-        } else if (awcontrol(/日常任务|详情|新手任务/, 1)) {
-            if (悬赏任务 && awcontrol(/.*金币悬赏任务|最高.*金币悬赏/, 1)) {
-                if (任务是否完成(/.*金币悬赏任务|最高.*金币悬赏/)) {
-                    悬赏任务 = false
-                } else {
-                    awcontrol(/.*金币悬赏任务|最高.*金币悬赏/, 0) && sleep(4000 * 速度)
-                }
-            } else if (点赞任务 && awcontrol(/点赞.*个作品/, 1)) {
-                if (任务是否完成(/点赞.*个作品/)) {
-                    点赞任务 = false
-                } else {
-                    awcontrol(/点赞.*个作品/, 0) && sleep(4000 * 速度)
-                    if (awcontrol(/精选/, 0)) {
-                        sleep(2000)
-                        全能滑动(w * 0.3, h * 0.8, w * 0.3, h * 0.2, 800)
-                        sleep(1000 * aw随机(开始的, 结束的))
-                        awcontrol("com.smile.gifmaker:id/like_icon", 0, "id") && sleep(3000 * 速度)
-                    }
-                }
-            } else if (评论任务 && awcontrol(/评论.*个作品/, 1)) {
-                if (任务是否完成(/评论.*个作品/)) {
-                    评论任务 = false
-                } else {
-                    awcontrol(/评论.*个作品/, 0) && sleep(4000 * 速度)
-                    var 是否又领金币 = awcontrol(/评论.*个作品/, 2)
-                    if (是否又领金币) {
-                        全能点击(w * 0.95, 是否又领金币[1])
-                        sleep(4000 * 速度)
-                    }
-                    if (awcontrol(/精选/, 0)) {
-                        sleep(2000)
-                        全能滑动(w * 0.3, h * 0.8, w * 0.3, h * 0.2, 800)
-                        sleep(3000 * 速度)
-                        sleep(1000 * aw随机(开始的, 结束的))
-                        awcontrol("com.smile.gifmaker:id/comment_icon", 0, "id") && sleep(3000 * 速度)
-                        awcontrol(/发条有爱评论.*/, 0) && sleep(3000 * 速度)
-                        awcontrol("com.smile.gifmaker:id/emoji", 0, aw随机(1, 5), "id") && sleep(3000 * 速度)
-                        awcontrol(/发送/, 0) && sleep(3000 * 速度)
-                        awcontrol(/发送/, 0, "desc") && sleep(3000 * 速度)
-                        back()
-                        sleep(2000)//
-                        awcontrol(/发送/, 0) && sleep(3000 * 速度)
-                        awcontrol(/发送/, 0, "desc") && sleep(3000 * 速度)
-                    }
-                }
-            } else if (逛街任务 && awcontrol(/逛街领.*金币/, 1)) {
-                if (任务是否完成(/逛街领.*金币/)) {
-                    逛街任务 = false
-                } else {
-                    awcontrol(/逛街领.*金币/, 0) && sleep(4000 * 速度)
-                }
-            } else if (逛街任务 == false && 看视频任务 && awcontrol(/看视频.*赚金币/, 1)) {
-                if (任务是否完成(/看视频.*赚金币/)) {
-                    看视频任务 = false
-                } else {
-                    awcontrol(/看视频.*赚金币/, 0) && sleep(4000 * 速度)
-                    if (awcontrol(/精选/, 1)) {
-                        var 精选位置 = awcontrol(/精选/, 2)
-                        if (精选位置) {
-                            全能点击(精选位置[0], 精选位置[1])
-                            sleep(100)
-                            全能点击(精选位置[0], 精选位置[1])
-                            sleep(3500)
-                        }
-                        for (let index = 0; index < aw随机(10, 20); index++) {
-                            sml_move(w * 0.1, h * 0.85, w * 0.1, h * 0.1, aw随机(700, 1200));
-                            sleep(1000)
-                            if (awcontrol(/点击进入直播间|点击查看/, 1)) {
-                                sml_move(w * 0.1, h * 0.85, w * 0.1, h * 0.1, aw随机(700, 1200));
-                                sleep(1000)
-                            } else if (awcontrol(/请完成安全验证/, 1)) {
-                                break
-                            } else {
-                                sleep(1000 * aw随机(开始的, 结束的))
-                            }
-
-                        }
-                    }
-                }
-            } else if (立即领取点击 && awcontrol(/立即领取/, 0)) {
-                log("立即领取")
-                sleep(3000 * 速度)
-                立即领取点击 = false
-            } else {
-                全能滑动(w * 0.3, h * 0.8, w * 0.3, h * 0.2, 800)
-                sleep(3000 * 速度)
-                连续拉倒页数 = 连续拉倒页数 + 1
-                if (连续拉倒页数 >= 5) {
-                    back()
-                    sleep(3000 * 速度)
-                    连续拉倒页数 = 0
-                    关闭其他应用()
-                }
-                if (悬赏任务 == false && 逛街任务 == false && 点赞任务 == false && 看视频任务 == false && 评论任务 == false) {
-                    if (awcontrol(/明日领.*金币/, 1)) {
-                        for (let index = 0; index < 3; index++) {
-                            全能滑动(w * 0.3, h * 0.3, w * 0.3, h * 0.8, 800)
-                            sleep(1000)
-                            awcontrol(/立即领取/, 0, 1000) && sleep(3000 * 速度)
-                            awcontrol(/知道了/, 0) && sleep(3000 * 速度)
-                        }
-                        全能滑动(w * 0.3, h * 0.3, w * 0.3, h * 0.8, 800)
-                        sleep(1000)
-                        全能滑动(w * 0.3, h * 0.8, w * 0.3, h * 0.3, 800)
-                        sleep(1000)
-                        awcontrol(/点击领取/, 0) && sleep(4000 * 速度)
-                        awcontrol(/点击领取/, 0) && sleep(4000 * 速度)
-                        awcontrol(/点击领取/, 0) && sleep(4000 * 速度)
-                        home()
-                        sleep(3000 * 速度)
-                        关闭其他应用()
-                        return true
-                    } else {
-                        toastLog("--等宝箱--")
-                        sleep(30000)
-                    }
-
-                }
-            }
-        } else if (awcontrol(/去赚钱|关闭应用/, 0)) {
-            sleep(3000 * 速度)
-        } else if (awcontrol(/首页/, 1) == false && awcontrol(/返回|取消|否/, 0)) {
-            sleep(3000 * 速度)
-        } else if (awcontrol(/首页/, 1) == false && awcontrol(/返回|取消|否/, 0, "desc")) {
-            sleep(3000 * 速度)
-            if (aw找文字节点("首页", 0)) {
-                sleep(3000 * 速度)
-                if (awcontrol("com.smile.gifmaker:id/close_btn", 0, "id")) {  //红包
-                    sleep(3000 * 速度)
-                } else if (awcontrol("com.smile.gifmaker:id/pendant_mask_bg", 0, "id")) {  //红包
-                    sleep(3000 * 速度)
-                } else {
-                    toastLog("盲点")
-                    全能点击(w * 0.1, h * 0.22)
-                    sleep(3000 * 速度)
-                }
-            }
-        } else if (awcontrol(/立即领取/, 0)) {
-            log("立即领取")
-            sleep(3000 * 速度)
-
-            // } else if (签到 && awcontrol("com.kuaishou.nebula:id/circular_progress_bar", 0, "id")) {
-            //     log("点红包")
-            //     签到 = false
-            //     sleep(3000 * 速度)
-
-        } else if (awcontrol("com.smile.gifmaker:id/kem_normal_pendant", 0, "id")) {
-            sleep(3000 * 速度)
-
-        } else if (awcontrol(/.*条评论/, 1)) {
-            back()
-            sleep(3000 * 速度)
-        } else if (aw找文字节点("首页", 0)) {
-            sleep(3000 * 速度)
-            if (awcontrol("com.smile.gifmaker:id/close_btn", 0, "id")) {  //红包
-                sleep(3000 * 速度)
-            } else if (awcontrol("com.smile.gifmaker:id/pendant_mask_bg", 0, "id")) {  //红包
-                sleep(3000 * 速度)
-            } else {
-                toastLog("盲点")
-                全能点击(w * 0.1, h * 0.22)
-                sleep(3000 * 速度)
-            }
-            // if (aw找文字节点("首页", 1)) {
-
-            // }
-
-        } else if (awcontrol(/说点什么/, 1)) {
-            back()
-            sleep(3000 * 速度)
-            aw找文字节点("首页", 0)
-            sleep(3000 * 速度)
-        } else if (aw找文字节点("我的", 0)) {
-            sleep(1000 * 速度)
-
-        } else if (awcontrol(/继续阅读下一页|看广告免.*分钟广告.*/, "+0,-50")) {
-            log("继续阅读下一页")
-            sleep(3000 * 速度)
-            awcontrol(/继续阅读下一页|看广告免.*分钟广告.*/, 0) && sleep(3000 * 速度)
-            if (awcontrol(/限时福利/, 1)) {
-                全能点击(w * 0.5, h * 0.67)
-                sleep(3000 * 速度)
-            }
-        } else if (awcontrol(/最近阅读|每读.*分|每读.*章/, 1)) {
-            sleep(1000 * 速度)
-            var 随机划 = aw随机(0, 10)
-            for (let index = 0; index < 随机划; index++) {
-                全能滑动(w * 0.4, h * 0.8, w * 0.4, h * 0.1, 800)
-                sleep(1500 * 速度)
-            }
-            awcontrol(/最近阅读|每读.*分|每读.*章/, "+0,+150") && sleep(3000 * 速度)
-        } else if (aw找文字节点("快手", 0)) {
-            sleep(1000 * 速度)
-        } else {
-            什么都识别不到 = true
-        }
-        if (什么都识别不到 && aw定时判断("识别", 20)) {
-            back();//返回//
-            sleep(3000 * 速度)
-            关闭其他应用()
-            aw打开app("快手")
-            sleep(8000)
-            aw定时判断("识别")
-        } else if (什么都识别不到 == false) {
-            aw定时判断("识别")
-            连续识别不到 = 0
-        }
-
-    }
-
-}
-
-function 任务是否完成(参数1) {
-    var 控件 = awcontrol(参数1, 5)
-    if (控件) {
-        控件 = 控件.parent().parent()
-        log(控件)
-        var 结果 = 控件.findOne(text('已完成')) || 控件.findOne(text('今日任务已完成，明日赚更多'))
-        if (结果) {
-            log("任务已完成")
-            return true
-        }
-    }
-    return false
-}
-
-//此代码由飞云脚本圈整理提供（www.feiyunjs.com）
-function bezier_curves(cp, t) {
-    cx = 3.0 * (cp[1].x - cp[0].x);
-    bx = 3.0 * (cp[2].x - cp[1].x) - cx;
-    ax = cp[3].x - cp[0].x - cx - bx;
-    cy = 3.0 * (cp[1].y - cp[0].y);
-    by = 3.0 * (cp[2].y - cp[1].y) - cy;
-    ay = cp[3].y - cp[0].y - cy - by;
-    tSquared = t * t;
-    tCubed = tSquared * t;
-    result = {
-        "x": 0,
-        "y": 0
-    };
-    result.x = (ax * tCubed) + (bx * tSquared) + (cx * t) + cp[0].x;
-    result.y = (ay * tCubed) + (by * tSquared) + (cy * t) + cp[0].y;
-    return result;
-};
-
-//仿真随机带曲线滑动  
-//qx, qy, zx, zy, time 代表起点x,起点y,终点x,终点y,过程耗时单位毫秒
-function sml_move(qx, qy, zx, zy, time) {
-    var xxy = [time];
-    var point = [];
-    var dx0 = {
-        "x": qx,
-        "y": qy
-    };
-
-    var dx1 = {
-        "x": random(qx - 100, qx + 100),
-        "y": random(qy, qy + 50)
-    };
-    var dx2 = {
-        "x": random(zx - 100, zx + 100),
-        "y": random(zy, zy + 50),
-    };
-    var dx3 = {
-        "x": zx,
-        "y": zy
-    };
-    for (var i = 0; i < 4; i++) {
-
-        eval("point.push(dx" + i + ")");
-
-    };
-    // log(point[3].x)
-
-    for (let i = 0; i < 1; i += 0.08) {
-        xxyy = [parseInt(bezier_curves(point, i).x), parseInt(bezier_curves(point, i).y)]
-
-        xxy.push(xxyy);
-
-    }
-
-    // log(xxy);
-    gesture.apply(null, xxy);
-};
-
-
-function 区域找第一个节点(x, y) {
-    var 点击次 = 0
-    for (let index = 1; index < 50; index++) {
-        var 增加 = 5 * index
-        var 范围 = boundsInside(x * 1 - 增加, y * 1 - 增加, x * 1 + 增加, y * 1 + 增加).visibleToUser(true).find()
-        for (let item of 范围) {
-            log(item)
-            全能点击(item.bounds().centerX(), item.bounds().centerY());
-            sleep(1000)
-            // if (awcontrol(/任务中心/, 1, 2000)) {
-            return
-            // } else if (点击次 >= 1) {
-            // return
-            // }
-            // 点击次 = 点击次 + 1
-        }
-    }
-}
-
-function kuaishou_blackScreen() {
-
-    for (let i = 0; i < 5; i++) {
-        scrollDown(i)
-    }
-
-}
-
-
-function 关闭其他应用() {
-    home();//home
-    sleep(2500)
-    log("--清应用--")
-    recents();//任务管理
-    sleep(3500)
-    switch (true) {
-        case aw找id("com.huawei.android.launcher:id/clear_all_recents_image_button", 0, 0.2):
-            break;
-        case aw找id("com.android.systemui:id/recent_igmbutton_clear_all", 0, 0.2):
-            break;
-        case aw找id("com.android.systemui:id/clear_button", 0, 0.2):
-            break;
-        case aw找id("com.android.systemui:id/clearAnimView", 0, 0.2):
-            break;
-        case aw找文字节点("关闭全部", 0):
-            break;
-        case aw找文字节点("清除", 0):
-            break;
-        case aw找文字节点("全部清除", 0):
-            break;
-        case aw找文字节点("全部清理", 0):
-            break;
-        case aw找文字节点("全部清理", 0):
-            break;
-        case aw找文字节点("可用", 0, 0, false):
-            break;
-        case aw找文字节点("释放内存", 0, 0, false):
-            break;
-        case aw找文字节点("清除全部", 0, 0, false):
-            break;
-        default:
-            全能点击(w * 0.5, h * 0.8)
-            全能点击(w * 0.5, h * 0.9)
-    }
-    sleep(3000)
-    home();//home
-    sleep(2500)
-}
-function awcontrol() {
-
-    try {
-        var 方式, 查找位数, 找秒方式 = false
-        if (isNaN(arguments[2]) == false) {
-            if (arguments[2] < 100) {
-                找秒方式 = false
-                查找位数 = arguments[2]
-                if (arguments[3] != "id" && arguments[3] != "text" && arguments[3] != "desc") {
-                    方式 = "text"
-                } else {
-                    方式 = arguments[3]
-                }
-            } else {
-                找秒方式 = true
-                查找位数 = arguments[2]
-                if (arguments[3] != "id" && arguments[3] != "text" && arguments[3] != "desc") {
-                    方式 = "text"
-                } else {
-                    方式 = arguments[3]
-                }
-            }
-        } else {
-            找秒方式 = false
-            查找位数 = 0
-            if (arguments[2] != "id" && arguments[2] != "text" && arguments[2] != "desc") {
-                方式 = "text"
-            } else {
-                方式 = arguments[2]
-            }
-        }
-        var 内容分析 = arguments[0]
-        var 控件
-        log("查找:" + arguments[0])
-        if (找秒方式 == false) {
-            if (方式 == "id") {
-                控件 = idMatches(内容分析).visibleToUser(true).findOnce(查找位数);
-            } else if (方式 == "desc") {
-                控件 = descMatches(内容分析).visibleToUser(true).findOnce(查找位数);
-            } else {
-                控件 = textMatches(内容分析).visibleToUser(true).findOnce(查找位数);
-            }
-        } else {
-            // log("查找位数:" + 查找位数)
-            if (方式 == "id") {
-                控件 = idMatches(内容分析).visibleToUser(true).findOne(查找位数);
-            } else if (方式 == "desc") {
-                控件 = descMatches(内容分析).visibleToUser(true).findOne(查找位数);
-            } else {
-                控件 = textMatches(内容分析).visibleToUser(true).findOne(查找位数);
-            }
-        }
-
-        if (控件) {
-            let t = 控件.text()
-            let tid = 控件.id()
-            let x = 控件.bounds().centerX()
-            let y = 控件.bounds().centerY()
-            switch (true) {
-                case arguments[1] == 0:
-                    全能点击(x, y);
-                    return true
-                case arguments[1] == 1:
-                    log(x, y);
-                    return true
-                case arguments[1] == 2:
-                    return [x, y]
-                case arguments[1] == 3:
-                    return t
-                case arguments[1] == 4:
-                    return tid
-                case arguments[1] == 5:
-                    return 控件
-                case arguments[1] == 6:
-                    let pNode = 控件.parent()
-                    return pNode
-                default:
-                    var aw数据后 = arguments[1].split(",");
-                    全能点击(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
-                    return true
-            }
-        } else {
-            return false
-        }
-    } catch (error) {
-        log("识别失败，错误原因：" + error);
-        return false
-    }
-}
-/**
- * 悬浮输出日志
- * @Autor: 白丁
- * @QQ: 479360791
- * @param {number} linesCount - 显示日志行数,默认6行
- * @param {number} x - 悬浮窗左上角位置x,默认0
- * @param {number} y - 悬浮窗左上角位置y,默认10
- * @param {boolean} islog - 是否打印到控制台,默认打印
- * @example 使用前调用 floatylogInit(linesCount,x,y,islog) 初始化配置
- *          用floatylog()输出日志
- */
-function floatyLogInit(linesCount, x, y, islog) {
-    linesCount = linesCount || 6;
-    if (typeof linesCount != 'number') linesCount = 6;
-    if (typeof x != 'number') x = 0;
-    if (typeof y != 'number') y = 10;
-    if (typeof islog != 'boolean') islog = true;
-
-    ww = floaty.rawWindow(
-        <horizontal id='move' background='#FFFF0000' paddingLeft="10" paddingRight="10" w="*">
-            <button id='log' textSize="13dp" textColor="white" style="Widget/AppCompat.Button.Borderless" text='[开始运行]' textStyle='bold'
-                layout_gravity="right" layout_weight='5' layout_width="wrap_content" layout_height="wrap_content" />
-        </horizontal>
-    );
-    ww.setTouchable(false);
-    ui.run(() => { ww.setPosition(x, y) })
-
-    let nowlogArr = [];
-    floatyLog = function () {
-        let s = '[' + dateFormat(new Date(), "hh:mm:ss") + '] '
-        for (let param of arguments) s += param + ' ';
-        nowlogArr.push(s);
-
-        if (nowlogArr.length > linesCount) nowlogArr.shift();
-        let printContent = nowlogArr.join('\n');
-        ui.run(() => { ww.log.text(printContent) })
-        if (islog) log(s);
-    }
-
-    floatyShow = function (x, y) {
-        let _x = x || 0
-        let _y = y || 10
-        ui.run(() => { ww.setPosition(_x, _y) })
-    }
-
-    floatyHide = function () {
-        ui.run(() => { ww.setPosition(3000, 3000) })
-    }
-
-
-    function dateFormat(date, fmt) {
-        let o = {
-            "M+": date.getMonth() + 1,
-            "d+": date.getDate(),
-            "h+": date.getHours(),
-            "m+": date.getMinutes(),
-            "s+": date.getSeconds(),
-            "S": date.getMilliseconds()
+            alert("请先下载脚本");
         };
-        if (/(y+)/.test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-        }
-
-        for (var k in o) {
-            if (new RegExp("(" + k + ")").test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            }
-        }
-        return fmt;
-    }
-}
-function 滑块处理() {
-    var startX = 121
-    var startY = 977
-    var dx = 60
-    var refreshX = 100
-    var refreshY = 100
-    if (device.width == 720) {
-        startX = 80
-        startY = 630
-        dx = 40
-        refreshX = 100
-        refreshY = 765
-    }
-    for (var i = 0; i < 10; i++) {
-        if (text("加载中...").findOnce() == null) { break }
-        sleep(1000)
-    }
-    sleep(2000)
-    while (text("拖动滑块").findOnce()) {
-        try {
-            var img = images.clip(images.captureScreen(), 0, 0, device.width, device.height * 0.6)
-            if (img) {
-                var x = 缺口识别(img)
-                if (x > 100) {
-                    x = x + dx + random(10, 15)
-                    if (device.sdkInt < 24) {
-                        Swipe(startX, startY, x, startY, 1800)
-                    } else {
-                        过滑块_Android7(startX, startY, x, startY, random(1200, 1500))
-                    }
-                } else {
-                    log('识别失败')
-                }
-                sleep(4000)
-                全能点击(refreshX, refreshY)
-            } else {
-
-            }
-        } catch (e) { log(e) }
-        sleep(3000)
-    }
-}
-
-function 缺口识别(img) {
-    var temp, temp2, x, y, num, color, p, temp3, arr1;
-    var tb = [0, 0, img.getWidth(), img.getHeight(), device.width / 8.64]
-    num = Math.ceil(tb[4] / 3.3 - 4);
-    for (var k = 29; k <= 40; k++) {
-        temp2 = "";
-        color = "#" + k + "" + k + "" + k + "";
-        for (var i = 1; i <= num; i++) {
-            temp2 = temp2 + "0|" + i + "|" + color + ",";
-            temp2 = temp2 + i + "|0|" + color + ",";
-            temp2 = temp2 + "1|" + i + "|" + color + ",";
-            temp2 = temp2 + i + "|1|" + color + ",";
-            temp2 = temp2 + "2|" + i + "|" + color + ",";
-            temp2 = temp2 + i + "|2|" + color + ",";
-        }
-        x = 0;
-        while (x > -2) {
-            y = 0;
-            while (y > -2) {
-                temp = "";
-                for (var i = 1; i <= num; i += 2) {
-                    temp = temp + "0|" + (tb[4] + y - i - 1) + "|" + color + ",";
-                    temp = temp + (tb[4] + x) + "|" + i + "|" + color + ",";
-                    temp = temp + (tb[4] + x) + "|" + (tb[4] + y - i - 1) + "|" + color + ",";
-                    temp = temp + (tb[4] + x - i - 1) + "|0|" + color + ",";
-                    temp = temp + i + "|" + (tb[4] + y) + "|" + color + ",";
-                    temp = temp + (tb[4] + x - i - 1) + "|" + (tb[4] + y) + "|" + color + ",";
-                    temp = temp + "1|" + (tb[4] + y - i - 1) + "|" + color + ",";
-                    temp = temp + (tb[4] + x - 1) + "|" + i + "|" + color + ",";
-                    temp = temp + (tb[4] + x - 1) + "|" + (tb[4] + y - i - 1) + "|" + color + ",";
-                    temp = temp + (tb[4] + x - i - 1) + "|1|" + color + ",";
-                    temp = temp + i + "|" + (tb[4] + y - 1) + "|" + color + ",";
-                    temp = temp + (tb[4] + x - i - 1) + "|" + (tb[4] + y - 1) + "|" + color + ",";
-                }
-                temp = temp + temp2 + "0|0|" + color;
-                arr1 = temp.split(",");
-                var arr2 = new Array();
-                for (var i = 0; i < arr1.length - 1; i++) {
-                    arr2[i] = new Array();
-                    temp3 = arr1[i].split("|");
-                    arr2[i] = [Number(temp3[0]), Number(temp3[1]), temp3[2]];
-                }
-                try {
-                    p = images.findMultiColors(img, color, arr2, {
-                        region: [tb[0], tb[1], tb[2] - tb[0], tb[3] - tb[1]],
-                        threshold: (Math.floor(k / 10) * 16 + k % 10)
-                    });
-                    if (p) {
-                        img.recycle();
-                        return p.x
-                    }
-                } catch (error) {
-                    log("识别失败，错误原因：" + error, true);
-                    return -1;
-                }
-                y = --y;
-            }
-            x = --x;
-        }
-    }
-    try {
-        img.recycle();
-    } catch (error) {
-        log("识别失败，错误原因：" + error, true);
-    }
-    return -1;
-}
-
-function 过滑块_Android7(x1, y1, x2, y2, time) {
-    var obj = {}
-    for (let i = 0; i < 1; i++) {
-        let index = '序号' + i
-        obj[index] = []
-        obj[index].push(0)
-        obj[index].push(time)
-        obj[index].push([x1, y1]);
-        obj[index].push([x2 * 0.8, y1 + random(-20, 20)]);
-        obj[index].push([x2 * 0.99, y2 + random(-20, 20)]);
-        obj[index].push([x2, y2 + random(-20, 20)]);
-        obj[index].push([x2, y2 + 60]);
-    }
-    return gestures(obj['序号0'])
-}
-
-function aw打开app(参数1) {
-    launchApp(参数1)
-    aw找文字节点(参数1, 0)
-}
-function aw点击输入(password, 参数2) {
-    let strArr = password.replace(/(.)(?=[^$])/g, "$1,").split(",");
-    for (let item of strArr) {
-        log(item)
-        var 我的
-        我的 = text(item).visibleToUser(true).findOne(600);
-        if (我的 != null) {
-            全能点击(我的.bounds().centerX(), 我的.bounds().centerY());
-            sleep(参数2);
-        }
-
-    }
-}
-
-function whetherRoot() {
-    threads.start(function () {
-        log('判断是否root')
-        try {
-            click(2000, 2500)
-            是否root = false
-            log('安卓7+')
-        } catch (error) {
-            是否root = true
-            log(error)
-            log('安卓7-')
-        }
-    })
-}
-function 全能滑动(参数1, 参数2, 参数3, 参数4, 参数5) {
-    if (是否root == true) {
-        Swipe(参数1, 参数2, 参数3, 参数4, 参数5)
-    } else {
-        swipe(参数1, 参数2, 参数3, 参数4, 参数5)
-    }
-}
-function 全能点击(参数1, 参数2) {
-    if (是否root == true) {
-        Tap(参数1, 参数2)
-    } else {
-        click(参数1, 参数2)
-    }
-}
-
-function aw找点(参数1, 参数2, 参数3) {
-    var 我的
-    if (参数3 < 1) {
-        我的 = text(参数1).visibleToUser(true).findOne(600);
-    } else {
-        我的 = text(参数1).visibleToUser(true).findOne(参数3 * 1000);
-    }
-    if (我的 != null) {
-        switch (true) {
-            case 参数2 == 0:
-                全能点击(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 1:
-                log(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 2:
-                return [我的.bounds().centerX(), 我的.bounds().centerY()]
-            default:
-                var aw数据后 = 参数2.split(",");
-                全能点击(我的.bounds().centerX() + (aw数据后[0] * 1), 我的.bounds().centerY() + (aw数据后[1] * 1));
-                return true
-        }
-    } else {
-        return false
-
-    }
-}
-
-function aw找desc(参数1, 参数2, 参数3) {
-    var 我的
-    if (参数3 < 1) {
-        我的 = desc(参数1).visibleToUser(true).findOne(600);
-    } else {
-        我的 = desc(参数1).visibleToUser(true).findOne(参数3 * 1000);
-    }
-    if (我的 != null) {
-        switch (true) {
-            case 参数2 == 0:
-                全能点击(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 1:
-                log(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 2:
-                return [我的.bounds().centerX(), 我的.bounds().centerY()]
-            default:
-                var aw数据后 = 参数2.split(",");
-                全能点击(我的.bounds().centerX() + (aw数据后[0] * 1), 我的.bounds().centerY() + (aw数据后[1] * 1));
-                return true
-        }
-    } else {
-        return false
-
-    }
-}
-
-
-function aw找id(参数1, 参数2, 参数3) {
-    var 我的
-    if (参数3 < 1) {
-        我的 = id(参数1).visibleToUser(true).findOne(600);
-    } else {
-        我的 = id(参数1).visibleToUser(true).findOne(参数3 * 1000);
-    }
-    if (我的 != null) {
-        switch (true) {
-            case 参数2 == 0:
-                全能点击(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 1:
-                log(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 2:
-                return [我的.bounds().centerX(), 我的.bounds().centerY()]
-            default:
-                var aw数据后 = 参数2.split(",");
-                全能点击(我的.bounds().centerX() + (aw数据后[0] * 1), 我的.bounds().centerY() + (aw数据后[1] * 1));
-                return true
-        }
-
-    } else {
-        return false
-    }
-}
-/*
-var 位置 = 找文字节点("关注", 2,0)
-log(位置[1])
-log(找文字节点("抖音", 1, 0,false))//模糊查找
-*/
-function aw找文字节点() {
-    if (是否暂停) {
-        var statey = true
-        while (statey) {
-            if (是否暂停 == false) {
-                return false
-            } else {
-                toast("暂停中")//显示
-                log(是否暂停)
-                sleep(3000)
-            }
-        }
-    }
-    let arr = packageNameMatches(/.*/).visibleToUser(true).find()
-    let 数量 = 0
-    let regexp = '/^' + arguments[0] + '$/';
-    log("aw找文字节点:" + arguments[0])
-    if (arguments.length - 1 >= 3) {
-        if (arguments[3] == false) { regexp = '/.*' + arguments[0] + '.*/' }
-    }
-    if (!arr.empty()) {
-        for (let item of arr) {
-            let t = item.text() || item.desc()
-            if (eval(regexp).test(t)) {
-                let t = item.text()
-                let x = item.bounds().centerX()
-                let y = item.bounds().centerY()
-                if (arguments.length - 1 == 2) {
-                    if (数量 >= arguments[2]) {
-                        switch (true) {
-                            case arguments[1] == 0:
-                                全能点击(x, y);
-                                return true
-                            case arguments[1] == 1:
-                                log(x, y);
-                                return true
-                            case arguments[1] == 2:
-                                return [x, y]
-                            default:
-                                var aw数据后 = 参数2.split(",");
-                                全能点击(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
-                                return true
-                        }
-                    } else {
-                        数量 = 数量 + 1
-                    }
-                } else {
-                    switch (true) {
-                        case arguments[1] == 0:
-                            全能点击(x, y);
-                            return true
-                        case arguments[1] == 1:
-                            log(x, y);
-                            return true
-                        case arguments[1] == 2:
-                            return [x, y]
-                        default:
-                            var aw数据后 = arguments[1].split(",");
-                            全能点击(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
-                            return true
-                    }
-                }
-
-            }
-        }
-    }
-    return false
-}
-
-
-/*
-log(文件写入("/sdcard/测试.txt",123));  //输入文本
-*/
-function aw文件写入() {
-    if (arguments.length - 1 == 1) {
-        if (files.createWithDirs(arguments[0])) {
-            files.append(arguments[0], arguments[1]);
-        } else {
-            files.append(arguments[0], "\r\n" + arguments[1]);
-        }
-        return true
-    } else {
-        toastLog("参数错误")
-        return false
-    }
-}
-/*
-log(缓存配置("t"))//读出
- 缓存配置("t",1)//写入
-*/
-function aw缓存配置() {
-    var storag = storages.create("配置参数")
-    if (arguments.length - 1 == 1) {
-        storag.put(arguments[0], arguments[1]);
-        return true
-    } else {
-        return storag.get(arguments[0])
-    }
-}
-
-//md5加密
-function getMd5(string) {
-    return java.math.BigInteger(1, java.security.MessageDigest.getInstance("MD5").digest(java.lang.String(string).getBytes())).toString(16);
-};
-/*
-    log(定时判断("t")) //初始
-    log(定时判断("t",120)) //定时判断
-*/
-function aw定时判断() {
-    var t = +new Date() / 1000
-    if (arguments.length - 1 == 1) {
-        if (+new Date() / 1000 - aw缓存配置(arguments[0] + "定时") * 1 >= arguments[1] * 1) {
-            if (arguments[0] == "app定时") { aw缓存配置("还剩时间", 0) }
-            toastLog(arguments[0] + "已超时")
-            // floatyLog(arguments[0] + "已超时")
-            return true
-        } else {
-            var 取整 = (+new Date() / 1000 - aw缓存配置(arguments[0] + "定时") * 1) / 60
-            var 刚刚 = ~~取整
-            if (aw缓存配置(arguments[0] + "刚刚定时") != 刚刚) {
-                aw缓存配置(arguments[0] + "刚刚定时", 刚刚)
-                取整 = arguments[1] / 60 - 刚刚
-                if (arguments[0] == "app定时") { aw缓存配置("还剩时间", 取整) }
-                // floatyLog(arguments[0] + ":" + ~~取整 + "分钟")
-                toastLog(arguments[0] + ":" + ~~取整 + "分钟")
-            }
-            return false
-        }
-    } else {
-        aw缓存配置(arguments[0] + "刚刚定时", 0)
-        aw缓存配置(arguments[0] + "定时", t)
-        return true
-    }
-}
-
-function aw随机(参数1, 参数2) { return random(参数1, 参数2) }
-function aw数组长度(参数1) { return Object.keys(参数1).length - 1 }
-//log(查找字符串("zxcv","xc"))
-function aw查找字符串(参数1, 参数2) { return 参数1.indexOf(参数2) }
-//log(替换字符串("asdfgas","as","ss"))//原字符串,查找字符串,替换字符串
-function aw替换字符串() {
-    var w = arguments[0]
-    let regexp = '/' + arguments[1] + '/g';
-    return w.replace(eval(regexp), arguments[2])
-}
-//log(删除第一行("/sdcard/测试.txt"))//路径
-function aw删除第一行() {
-    //删除第一行
-    var path = arguments[0];//txt文本路径
-    var reg = /^\s+|s+$/g; //匹配无效空白行
-    var txt = files.read(path).replace(reg, "").split("\n");
-    let ret_text = txt[0];
-    log(ret_text.length);
-    if (txt != "") {
-        txt.splice(0, 1); //删除
-        files.write(path, txt.join("\n"));
-        if (ret_text.length > 0) {
-            return true
-        };
-    } else {
-        return false
     };
-    file.close();
-};
-/**
- * 获取随机字符串
- * @param {number} count 随机字符个数
- * @param {number} mode 1:0-9   2:a-z   4:A-Z       (默认1+2+4)
- * @return {string} 返回字符串
- */
-function RndStr(count, mode) {
-    if (Number(count) <= 0) { return null }
-    if (mode == undefined) {
-        mode = 7
-    }
-    var str = ""
-    var numarr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    var lowarr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    var upparr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    switch (mode) {
-        case 1:
-            for (let i = 0; i < count; i++) {
-                let pos = random(0, numarr.length - 1)
-                str += numarr[pos]
-            }
-            break;
-        case 2:
-            for (let i = 0; i < count; i++) {
-                let pos = random(0, lowarr.length - 1)
-                str += lowarr[pos]
-            }
-            break;
-        case 4:
-            for (let i = 0; i < count; i++) {
-                let pos = random(0, upparr.length - 1)
-                str += upparr[pos]
-            }
-            break;
-        case 3:
-            var arr = numarr.concat(lowarr);
-            for (let i = 0; i < count; i++) {
-                let pos = random(0, arr.length - 1)
-                str += arr[pos]
-            }
-            break;
-        case 5:
-            var arr = numarr.concat(upparr);
-            for (let i = 0; i < count; i++) {
-                let pos = random(0, arr.length - 1)
-                str += arr[pos]
-            }
-            break;
-        case 6:
-            var arr = lowarr.concat(upparr);
-            for (let i = 0; i < count; i++) {
-                let pos = random(0, arr.length - 1)
-                str += arr[pos]
-            }
-            break;
-        case 7:
-            var arr = lowarr.concat(upparr);
-            var arr2 = arr.concat(numarr);
-            for (let i = 0; i < count; i++) {
-                let pos = random(0, arr2.length - 1)
-                str += arr2[pos]
-            }
-            break;
-        default:
-            str = null;
-            break;
-    }
-    return str;
-}
+});
 
-/*
-var 作者账号 = '白丁专用'
-var 软件名 = '快手极速版'
-var 用户名 = '971434'
-if (!验证用户(作者账号, 软件名, 用户名)) {
-    alert('用户名有误或超过最大使用设备数!')
-    exit() //如果验证不通过 退出脚本
-}
-*/
-function 验证用户(参数1, 参数2, 参数3) {
-    var 机器码 = device.getAndroidId();
-    for (let i = 0; i < 3; i++) {
-        try {
-            let url = 'http://139.196.222.31:8068/sms/token.php?users=' + encodeURI(参数1) + '&user=' + encodeURI(参数3) + '&soft=' + encodeURI(参数2) + '&text=' + 机器码
-            var r = http.get(url);
-            if (r.statusCode == 200) {
-                let response = r.body.string()
-                log(response)
-                if (response == 'error') return false;
-                return response != '0'
+// ui.exit.on("click", function () {
+//     home();
+// });//删掉了
+
+////////////////////////////////////////////////////////////////////////////ksjs
+var KSJSi = 0;
+var KSJS;
+var filePathksjs = '/sdcard/ksjs.js';
+ui.downksjs.on("click", function () {
+    toastLog("开始下载KSJS脚本");
+    //
+    function 下载KSJS() {
+        let url = [
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/最新测试.js',
+        ];
+        for (var i = 0; i < 2; i++) {
+            try {
+                let res = http.get(url[i], {
+                    timeout: 10000 // 设置超时时间为10秒
+                });
+                console.log(res.statusCode);
+                if (res.statusCode == 200) {
+                    KSJS = res.body.string();
+                    if (KSJS.indexOf('"uii"') == 0) {
+                        KSJSi = 1;
+                        toastLog('快手极速版' + '下载成功✅');
+                        alert('快手极速版' + '下载成功✅')
+                        //log("开始加载KSJS");
+                        //engines.execScript("KSJS", KSJS);
+                        break;
+                    };
+                } else {
+                    toastLog('快手极速版' + '下载链接失败❌');
+                    alert('快手极速版' + '下载链接失败❌')
+                }
+            } catch (error) {
+                if (error instanceof java.net.SocketTimeoutException) {
+                    toastLog('快手极速版' + '下载超时❌');
+                    alert('快手极速版' + '下载超时❌')
+                    continue; // 继续下一次循环请求
+                } else {
+                    toastLog('快手极速版' + '下载失败❌' + error)//，错误：' + error);
+                    alert('快手极速版' + '下载失败❌')
+                };
+            };
+            if (i == 9) {
+                toastLog("请重新下载");
+
             }
-        } catch (error) {
-            log(error)
         }
-        sleep(3000)
-    }
-}
+
+    };
+
+    threads.start(function () { // 创建新的子线程
+        下载KSJS();
+    });
+    //
+    if (KSJSi == 1) {
+        toastLog("正在保存快手极速版");
+        if (files.exists(filePathksjs)) {
+            files.remove(filePathksjs);
+        };
+        files.write(filePathksjs, KSJS);
+        toastLog("快手极速版 已保存");
+        ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
+    };
+});
+ui.downksjsf5.on("click", function () {
+    if (KSJSi == 1) {
+        if (files.exists(filePathksjs)) {
+            files.remove(filePathksjs);
+        };
+        files.write(filePathksjs, KSJS);
+        toastLog("快手极速版 已保存");
+        ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
+    } else if (KSJSi == 0) {
+        ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+        ui.ksjsno.setVisibility(android.view.View.VISIBLE);
+    };
+});
+ui.deleteksjs.on("click", function () {
+    if (files.exists(filePathksjs)) {
+        files.remove(filePathksjs);
+    };
+    alert('快手极速版' + '已卸载')
+    KSJSi = 0;
+    ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+    ui.ksjsno.setVisibility(android.view.View.VISIBLE);
+});
+
+/////////////////////////////////////////////////////////////////////////////ks
+var KSi = 0;
+var KS;
+var filePathks = '/sdcard/ks.js';
+ui.downks.on("click", function () {
+    toastLog("开始下载KS脚本");
+    //
+    function 下载KS() {
+        //
+        let url = [
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/次新更新',
+        ];
+        for (var i = 0; i < 2; i++) {
+            try {
+                let resks = http.get(url[i], {
+                    timeout: 10000 // 设置超时时间为10秒
+                });
+                //console.log(res.statusCode);
+                if (resks.statusCode == 200) {
+                    KS = resks.body.string();
+                    if (KS.indexOf('"uuii"') == 0) {
+                        KSi = 1;
+                        toastLog('快手' + '下载成功✅');
+                        alert('快手' + '下载成功✅')
+                        //log("开始加载KS");
+                        //engines.execScript("KS", KS);
+                        break;
+                    };
+                } else {
+                    toastLog('快手' + '下载链接失败❌');
+                    alert('快手' + '下载链接失败❌')
+                }
+            } catch (error) {
+                if (error instanceof java.net.SocketTimeoutException) {
+                    toastLog('快手' + '下载超时❌');
+                    alert('快手' + '下载超时❌')
+                    continue; // 继续下一次循环请求
+                } else {
+                    toastLog('快手' + '下载失败❌' + error)//，错误：' + error);
+                    alert('快手' + '下载失败❌')
+                };
+            };
+            if (i == 9) {
+                toastLog("请重新下载");
+
+            }
+        }
+
+    };
+
+    threads.start(function () { // 创建新的子线程
+        下载KS();
+    });
+    //
+    if (KSi == 1) {
+        toastLog("正在保存快手");
+        if (files.exists(filePathks)) {
+            files.remove(filePathks);
+        };
+        files.write(filePathks, KS);
+        toastLog("快手 已保存");
+        ui.ksyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksno.setVisibility(android.view.View.INVISIBLE);
+    };
+});
+ui.downksf5.on("click", function () {
+    if (KSi == 1) {
+        if (files.exists(filePathks)) {
+            files.remove(filePathks);
+        };
+        files.write(filePathks, KS);
+        toastLog("快手 已保存");
+        ui.ksyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksno.setVisibility(android.view.View.INVISIBLE);
+    } else if (KSi == 0) {
+        ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+        ui.ksno.setVisibility(android.view.View.VISIBLE);
+    };
+});
+ui.deleteks.on("click", function () {
+    if (files.exists(filePathks)) {
+        files.remove(filePathks);
+    };
+    alert('快手' + '已卸载')
+    KSi = 0;
+    ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+    ui.ksno.setVisibility(android.view.View.VISIBLE);
+});
+
+/////////////////////////////////////////////////////////////////////////////time
+var TIMEi = 0;
+var TIME;
+var filePathtime = '/sdcard/time.js';
+ui.downtime.on("click", function () {
+    toastLog("开始下载互切脚本");
+    //
+    function 下载TIME() {
+        //
+        let url = [
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/测试文件',
+        ];
+        for (var i = 0; i < 2; i++) {
+            try {
+                let restime = http.get(url[i], {
+                    timeout: 10000 // 设置超时时间为10秒
+                });
+                //console.log(res.statusCode);
+                if (restime.statusCode == 200) {
+                    TIME = restime.body.string();
+                    if (TIME.indexOf('"uui"') == 0) {
+                        TIMEi = 1;
+                        toastLog('互切' + '下载成功✅');
+                        alert('互切' + '下载成功✅')
+                        //log("开始加载TIME");
+                        //engines.execScript("TIME", TIME);
+                        break;
+                    };
+                } else {
+                    toastLog('互切' + '下载链接失败❌');
+                    alert('互切' + '下载链接失败❌')
+                }
+            } catch (error) {
+                if (error instanceof java.net.SocketTimeoutException) {
+                    toastLog('互切' + '下载超时❌');
+                    alert('互切' + '下载超时❌')
+                    continue; // 继续下一次循环请求
+                } else {
+                    toastLog('互切' + '下载失败❌' + error)//，错误：' + error);
+                    alert('互切' + '下载失败❌')
+                };
+            };
+            if (i == 9) {
+                toastLog("请重新下载");
+
+            }
+        }
+
+    };
+
+    threads.start(function () { // 创建新的子线程
+        下载TIME();
+    });
+    //
+    if (TIMEi == 1) {
+        toastLog("正在保存互切");
+        if (files.exists(filePathtime)) {
+            files.remove(filePathtime);
+        };
+        files.write(filePathtime, TIME);
+        toastLog("互切 已保存");
+        ui.timeyes.setVisibility(android.view.View.VISIBLE);
+        ui.timeno.setVisibility(android.view.View.INVISIBLE);
+    };
+});
+ui.downtimef5.on("click", function () {
+    if (TIMEi == 1) {
+        if (files.exists(filePathtime)) {
+            files.remove(filePathtime);
+        };
+        files.write(filePathtime, TIME);
+        toastLog("互切 已保存");
+        ui.timeyes.setVisibility(android.view.View.VISIBLE);
+        ui.timeno.setVisibility(android.view.View.INVISIBLE);
+    } else if (TIMEi == 0) {
+        ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+        ui.timeno.setVisibility(android.view.View.VISIBLE);
+    };
+});
+ui.deletetime.on("click", function () {
+    if (files.exists(filePathtime)) {
+        files.remove(filePathtime);
+    };
+    alert('互切' + '已卸载')
+    TIMEi = 0;
+    ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+    ui.timeno.setVisibility(android.view.View.VISIBLE);
+});
 
 
-main();
+
+
+
+

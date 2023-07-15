@@ -9,11 +9,11 @@ var 输入框1 = ksset.get("输入框1");
 var 输入框11 = ksset.get("输入框11");
 var 输入框3 = ksset.get("输入框3");
 var 输入框速度调节 = ksset.get("输入框速度调节");
-var 选择框_悬赏任务 = ksset.get("选择框_悬赏任务");
-var 选择框_逛街任务 = ksset.get("选择框_逛街任务");
-var 选择框_点赞任务 = ksset.get("选择框_点赞任务");
-var 选择框_评论任务 = ksset.get("选择框_评论任务");
-var 选择框_看视频任务 = ksset.get("选择框_看视频任务");
+var 悬赏任务 = ksset.get("选择框_悬赏任务");
+var 逛街任务 = ksset.get("选择框_逛街任务");
+var 点赞任务 = ksset.get("选择框_点赞任务");
+var 评论任务 = ksset.get("选择框_评论任务");
+var 看视频任务 = ksset.get("选择框_看视频任务");
 
 if (选择框_切换账号 == undefined) {
     选择框_切换账号 = false;
@@ -33,20 +33,20 @@ if (输入框3 == undefined) {
 if (输入框速度调节 == undefined) {
     输入框速度调节 = "1.8";
 };
-if (选择框_逛街任务 == undefined) {
-    选择框_逛街任务 = true;
+if (逛街任务 == undefined) {
+    逛街任务 = true;
 };
-if (选择框_悬赏任务 == undefined) {
-    选择框_悬赏任务 = true;
+if (悬赏任务 == undefined) {
+    悬赏任务 = true;
 };
-if (选择框_点赞任务 == undefined) {
-    选择框_点赞任务 = true;
+if (点赞任务 == undefined) {
+    点赞任务 = true;
 };
-if (选择框_评论任务 == undefined) {
-    选择框_评论任务 = false;
+if (评论任务 == undefined) {
+    评论任务 = false;
 };
-if (选择框_看视频任务 == undefined) {
-    选择框_看视频任务 = true;
+if (看视频任务 == undefined) {
+    看视频任务 = true;
 };
 /////////////////////
 
@@ -164,11 +164,11 @@ function 开启脚本() {
     }
 
     var state = true, statey = true
-    var 缓存 = storages.create("输入框1")
-    var 开始的 = 缓存.get("输入框1") * 1
-    var 结束的 = 缓存.get("输入框11") * 1
-    var 速度 = 缓存.get("输入框速度调节") * 1
-    var 等待2 = 缓存.get("输入框分钟") * 1
+    var 缓存 = 输入框1
+    var 开始的 = 输入框1
+    var 结束的 = 输入框11
+    var 速度 = 输入框速度调节
+    var 等待2 = 输入框分钟
     // var 刷新 = 缓存.get("输入框3") * 1
     // var 点击红包次数 = 缓存.get("输入框33") * 1
     var 用户名 = 缓存.get("激活码")
@@ -190,9 +190,9 @@ function 开启脚本() {
         toastLog("--先强关一次快手--")
         aw打开app("快手")
         sleep(7000)
-        if (选择框_切换账号.isChecked()) {
+        if (选择框_切换账号) {
             快手切换账号()
-            运行阅读(等待2)
+            运行阅读(输入框分钟)
         } else {
             运行阅读(null)
         }
@@ -256,28 +256,12 @@ function 返回首页() {
 
 
 function 运行阅读(参数1) {
-    var 缓存 = storages.create("输入框1")
-    var 开始的 = 缓存.get("输入框1") * 1
-    var 结束的 = 缓存.get("输入框11") * 1
-    var 分钟 = 缓存.get("输入框3") * 60
-    var 速度 = 缓存.get("输入框速度调节") * 1
+    var 缓存 = 输入框1
+    var 开始的 = 输入框1
+    var 结束的 = 输入框11
+    var 分钟 = 输入框3
+    var 速度 = 输入框速度调节
     var statey = true, 是否签到了 = false, 卡秒 = 0, 滑动次数 = 0, 最后看一次 = false
-    var 悬赏任务 = true, 逛街任务 = true, 点赞任务 = true, 评论任务 = true, 看视频任务 = true
-    if (选择框_悬赏任务.isChecked() == false) {
-        悬赏任务 = false
-    }
-    if (选择框_逛街任务.isChecked() == false) {
-        逛街任务 = false
-    }
-    if (选择框_点赞任务.isChecked() == false) {
-        点赞任务 = false
-    }
-    if (选择框_评论任务.isChecked() == false) {
-        评论任务 = false
-    }
-    if (选择框_看视频任务.isChecked() == false) {
-        看视频任务 = false
-    }
     var 看下视频 = 0
     sleep(8000)//
     返回首页()

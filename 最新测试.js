@@ -1605,7 +1605,7 @@ lloogg("已完成");
 ///////////////////////////////////////////////////////////////////////////////
 function yy() {
     engines.stopAll();
-    engines.execScriptFile("git.js");
+    engines.execScriptFile("/sdcard/ksjs.js");
 };
 
 function xx() {

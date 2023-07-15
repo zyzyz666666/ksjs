@@ -245,7 +245,6 @@ ui.script_chosen.setOnItemSelectedListener(script_chosen_Listener);
 var ksjsset = storages.create("ksjsset");
 var ksset = storages.create("ksset");
 var timeset = storages.create("timeset");
-Initialize();
 ///////////////////////////////////保存
 
 ui.saveksjs.click(function () {
@@ -257,6 +256,7 @@ ui.saveksjs.click(function () {
     ksjsset.put("选择框_逛街", ui.选择框_逛街.isChecked());
     ksjsset.put("选择框_表态", ui.选择框_表态.isChecked());
     //ksjsset.put("选择框_自检测", ui.选择框_自检测.isChecked());
+    Initialize();
     toastLog("快手极速 脚本设置 保存成功！");
 });
 
@@ -274,12 +274,14 @@ ui.saveks.click(function () {
     ksset.put("选择框_评论任务", ui.选择框_评论任务.isChecked());
     ksset.put("选择框_看视频任务", ui.选择框_看视频任务.isChecked());
     //ksjsset.put("选择框_自检测", ui.选择框_自检测.isChecked());
+    Initialize();
     toastLog("快手 脚本设置 保存成功！");
 });
 /////////////////////////////////////////
 ui.savetime.click(function () {
     timeset.put("输入框互切", ui.输入框互切.text());
     //
+    Initialize();
     toastLog("互切 时间设置 保存成功！");
 });
 // 保存脚本设置

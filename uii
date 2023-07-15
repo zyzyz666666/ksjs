@@ -298,7 +298,7 @@ ui.start.on("click", function () {
         return;
     } else {
         //engines.execScriptFile("main.js")
-        if (ui.script_chosen.getSelectedItemPosition() == 1 && files.exists(filePath)) {
+        if (ui.script_chosen.getSelectedItemPosition() == 1 && files.exists(filePathksjs)) {
             engines.execScriptFile(filePathksjs); // 快手极速
         } else if (script_chosen_Listener == 0) {
             alert("wait")

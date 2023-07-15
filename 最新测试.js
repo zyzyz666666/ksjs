@@ -430,12 +430,37 @@ function 重置ksapp() {
 //看视频赚金币() == thread6
 //逛街() == thread7
 //表态() == thread8
+var ksjsset = storages.create("ksjsset");
 
+var 选择框_开宝箱 = ksjsset.get("选择框_开宝箱");
+var 选择框_每日挑战 = ksjsset.get("选择框_每日挑战");
+var 选择框_饭饭补贴 = ksjsset.get("选择框_饭饭补贴");
+var 选择框_奖励翻倍 = ksjsset.get("选择框_奖励翻倍");
+var 选择框_看视频赚金币 = ksjsset.get("选择框_看视频赚金币");
+var 选择框_逛街 = ksjsset.get("选择框_逛街");
+var 选择框_表态 = ksjsset.get("选择框_表态");
 
-
-
-
-
+if (选择框_开宝箱 == undefined) {
+    选择框_开宝箱 == true;
+};
+if (选择框_每日挑战 == undefined) {
+    选择框_每日挑战 == true;
+};
+if (选择框_饭饭补贴 == undefined) {
+    选择框_饭饭补贴 == true;
+};
+if (选择框_奖励翻倍 == undefined) {
+    选择框_奖励翻倍 == true;
+};
+if (选择框_看视频赚金币 == undefined) {
+    选择框_看视频赚金币 == true;
+};
+if (选择框_逛街 == undefined) {
+    选择框_逛街 == true;
+};
+if (选择框_表态 == undefined) {
+    选择框_表态 == true;
+};
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -741,7 +766,7 @@ if (earnmoney && c === true) {
             currentThread = 2;
             // 线程2的逻辑
             var 宝箱 = text("treasurebox").findOne(2000);
-            if (宝箱) {
+            if (宝箱 && 选择框_开宝箱) {
                 try {
                     var 宝箱下 = 宝箱.parent().child(宝箱.indexInParent() + 1);
                 } catch (e) {
@@ -776,164 +801,167 @@ if (earnmoney && c === true) {
             for (n = 0; n > -1; n++) {
 
                 if (列表_每日挑战 == 0) {
-                    var xhpd = text("每日挑战").findOne(3500);
-                    if (xhpd) {
-                        //列表_每日挑战 = 1;
-                        var pd3 = 0;//判断
-                        var pd5 = 0;//判断
-                        var pd7 = 0;//判断
-                        var mrtz = 0;//判断
-                        lloogg("正在检查每日挑战");
-                        var 金币300 = textContains("300").findOne(1500);
-                        var 金币500 = textContains("500").findOne(1500);
-                        var 金币1200 = textContains("1200").findOne(1500);
-                        try {
-                            var sansan = 金币300.visibleToUser();
-                            var wuwu = 金币500.visibleToUser();
-                            var qiqi = 金币1200.visibleToUser();
-                        } catch (e) {
-                            sansan = false;
-                            wuwu = false;
-                            qiqi = false;
-                        }
-                        try {
-                            var 完成3个 = 金币300.parent().child(金币300.indexInParent() + 1);
-                        } catch (e) {
-                            lloogg("No 300")
-                        };
-                        try {
-                            var 完成5个 = 金币500.parent().child(金币500.indexInParent() + 1);
-                        } catch (e) {
-                            lloogg("No 500")
-                        };
-                        try {
-                            var 完成7个 = 金币1200.parent().child(金币1200.indexInParent() + 1);
-                        } catch (e) {
-                            lloogg("No 1200")
-                        };
-                        if ((金币300 && sansan === true) || (金币500 && wuwu === true) || (金币1200 && qiqi === true)) {
-                            lloogg("判断每日挑战");
-                            列表_每日挑战 = 1;
-                            //300
-                            if (完成3个) {
-                                if (完成3个.text() == "完成3个") {
-                                    lloogg("尚未完成3个");
-                                } else if (完成3个.text() === "点击领取") {
-                                    for (dd3 = 1; dd3 > 0; dd3++) {
-                                        try {
-                                            完成3个.parent().click();
-                                        } catch (e) {
-                                        }
-                                        lloogg("正在领取300金币");
-                                        停留x秒倒计时(3);
-                                        back();
-                                        goandearn();
-                                        停留x秒倒计时(2);
-                                        try {
-                                            var pdd3 = text("300金币").findOne(600).parent().child(金币300.indexInParent() + 1);
-                                        } catch (e) {
-                                            lloogg("300已不在");
-                                        };
-
-                                        if (pdd3 && pdd3.text() == "已领取") {
-                                            pd3 = 1;
-                                            lloogg("已经领取300金币");
-                                            break;
-                                        };
-
-                                    };
-                                } else if (完成3个.text() == "已领取") {
-                                    pd3 = 1;
-                                    lloogg("300金币已经领取");
-                                };
+                    if (选择框_每日挑战) {
+                        var xhpd = text("每日挑战").findOne(3500);
+                        if (xhpd) {
+                            //列表_每日挑战 = 1;
+                            var pd3 = 0;//判断
+                            var pd5 = 0;//判断
+                            var pd7 = 0;//判断
+                            var mrtz = 0;//判断
+                            lloogg("正在检查每日挑战");
+                            var 金币300 = textContains("300").findOne(1500);
+                            var 金币500 = textContains("500").findOne(1500);
+                            var 金币1200 = textContains("1200").findOne(1500);
+                            try {
+                                var sansan = 金币300.visibleToUser();
+                                var wuwu = 金币500.visibleToUser();
+                                var qiqi = 金币1200.visibleToUser();
+                            } catch (e) {
+                                sansan = false;
+                                wuwu = false;
+                                qiqi = false;
                             }
-                            //500
-                            if (完成5个) {
-                                if (完成5个.text() == "完成5个") {
-                                    lloogg("尚未完成5个");
-                                } else if (完成5个.text() === "点击领取") {
-                                    for (dd5 = 1; dd5 > 0; dd5++) {
-                                        try {
-                                            完成5个.parent().click();
-                                        } catch (e) {
-                                        }
-                                        lloogg("正在领取500金币");
-                                        停留x秒倒计时(3);
-                                        back();
-                                        goandearn();
-                                        停留x秒倒计时(2);
-                                        try {
-                                            var pdd5 = text("500金币").findOne(600).parent().child(金币500.indexInParent() + 1);
-                                        } catch (e) {
-                                            lloogg("500已不在");
-                                        };
-                                        if (pdd5 && pdd5.text() == "已领取") {
-                                            pd5 = 1;
-                                            lloogg("已经领取500金币");
-                                            break;
-                                        };
+                            try {
+                                var 完成3个 = 金币300.parent().child(金币300.indexInParent() + 1);
+                            } catch (e) {
+                                lloogg("No 300")
+                            };
+                            try {
+                                var 完成5个 = 金币500.parent().child(金币500.indexInParent() + 1);
+                            } catch (e) {
+                                lloogg("No 500")
+                            };
+                            try {
+                                var 完成7个 = 金币1200.parent().child(金币1200.indexInParent() + 1);
+                            } catch (e) {
+                                lloogg("No 1200")
+                            };
+                            if ((金币300 && sansan === true) || (金币500 && wuwu === true) || (金币1200 && qiqi === true)) {
+                                lloogg("判断每日挑战");
+                                列表_每日挑战 = 1;
+                                //300
+                                if (完成3个) {
+                                    if (完成3个.text() == "完成3个") {
+                                        lloogg("尚未完成3个");
+                                    } else if (完成3个.text() === "点击领取") {
+                                        for (dd3 = 1; dd3 > 0; dd3++) {
+                                            try {
+                                                完成3个.parent().click();
+                                            } catch (e) {
+                                            }
+                                            lloogg("正在领取300金币");
+                                            停留x秒倒计时(3);
+                                            back();
+                                            goandearn();
+                                            停留x秒倒计时(2);
+                                            try {
+                                                var pdd3 = text("300金币").findOne(600).parent().child(金币300.indexInParent() + 1);
+                                            } catch (e) {
+                                                lloogg("300已不在");
+                                            };
 
-                                    };
-                                } else if (完成5个.text() == "已领取") {
-                                    pd5 = 1;
-                                    lloogg("500金币已经领取");
-                                };
-                            }
-                            //1200F
-                            if (完成7个) {
-                                if (完成7个.text() == "完成7个") {
-                                    lloogg("尚未完成7个");
-                                } else if (完成7个.text() === "点击领取") {
-                                    for (dd7 = 1; dd7 > 0; dd7++) {
-                                        try {
-                                            完成7个.parent().click();
-                                        } catch (e) {
-                                        }
-                                        lloogg("正在领取1200金币");
-                                        停留x秒倒计时(3);
-                                        back();
-                                        goandearn();
-                                        停留x秒倒计时(2);
-                                        try {
-                                            var pdd7 = text("1200金币").findOne(600).parent().child(金币1200.indexInParent() + 1);
-                                        } catch (e) {
-                                            lloogg("1200已不在");
-                                        };
-                                        if (pdd7 && pdd7.text() == "已领取") {
-                                            pd7 = 1;
-                                            lloogg("已经领取1200金币");
-                                            break;
-                                        };
+                                            if (pdd3 && pdd3.text() == "已领取") {
+                                                pd3 = 1;
+                                                lloogg("已经领取300金币");
+                                                break;
+                                            };
 
+                                        };
+                                    } else if (完成3个.text() == "已领取") {
+                                        pd3 = 1;
+                                        lloogg("300金币已经领取");
                                     };
-                                } else if (完成7个.text() == "已领取") {
-                                    pd7 = 1;
-                                    lloogg("1200金币已经领取");
-                                };
-                                //mrtz
-                                if (pd3 == 1 && pd5 == 1 && pd7 == 1) {
-                                    mrtz = 1;
-                                    lloogg("每日挑战全部完成");
-                                } else {
-                                    lloogg("继续每日挑战");
                                 }
-                            }
+                                //500
+                                if (完成5个) {
+                                    if (完成5个.text() == "完成5个") {
+                                        lloogg("尚未完成5个");
+                                    } else if (完成5个.text() === "点击领取") {
+                                        for (dd5 = 1; dd5 > 0; dd5++) {
+                                            try {
+                                                完成5个.parent().click();
+                                            } catch (e) {
+                                            }
+                                            lloogg("正在领取500金币");
+                                            停留x秒倒计时(3);
+                                            back();
+                                            goandearn();
+                                            停留x秒倒计时(2);
+                                            try {
+                                                var pdd5 = text("500金币").findOne(600).parent().child(金币500.indexInParent() + 1);
+                                            } catch (e) {
+                                                lloogg("500已不在");
+                                            };
+                                            if (pdd5 && pdd5.text() == "已领取") {
+                                                pd5 = 1;
+                                                lloogg("已经领取500金币");
+                                                break;
+                                            };
 
+                                        };
+                                    } else if (完成5个.text() == "已领取") {
+                                        pd5 = 1;
+                                        lloogg("500金币已经领取");
+                                    };
+                                }
+                                //1200F
+                                if (完成7个) {
+                                    if (完成7个.text() == "完成7个") {
+                                        lloogg("尚未完成7个");
+                                    } else if (完成7个.text() === "点击领取") {
+                                        for (dd7 = 1; dd7 > 0; dd7++) {
+                                            try {
+                                                完成7个.parent().click();
+                                            } catch (e) {
+                                            }
+                                            lloogg("正在领取1200金币");
+                                            停留x秒倒计时(3);
+                                            back();
+                                            goandearn();
+                                            停留x秒倒计时(2);
+                                            try {
+                                                var pdd7 = text("1200金币").findOne(600).parent().child(金币1200.indexInParent() + 1);
+                                            } catch (e) {
+                                                lloogg("1200已不在");
+                                            };
+                                            if (pdd7 && pdd7.text() == "已领取") {
+                                                pd7 = 1;
+                                                lloogg("已经领取1200金币");
+                                                break;
+                                            };
+
+                                        };
+                                    } else if (完成7个.text() == "已领取") {
+                                        pd7 = 1;
+                                        lloogg("1200金币已经领取");
+                                    };
+                                    //mrtz
+                                    if (pd3 == 1 && pd5 == 1 && pd7 == 1) {
+                                        mrtz = 1;
+                                        lloogg("每日挑战全部完成");
+                                    } else {
+                                        lloogg("继续每日挑战");
+                                    }
+                                }
+
+                            } else {
+                                lloogg("每日挑战进度条不在视野内");
+                                upslide();
+                            };
+                            if (n % 10 === 0) {
+                                回顶();
+                                n = 0;
+                                if (n == 25) {
+                                    yy();
+                                }
+                            };
                         } else {
-                            lloogg("每日挑战进度条不在视野内");
-                            upslide();
-                        };
-                        if (n % 10 === 0) {
-                            回顶();
-                            n = 0;
-                            if (n == 25) {
-                                yy();
-                            }
+                            lloogg("每日挑战不在视野内");
                         };
                     } else {
-                        lloogg("每日挑战不在视野内");
+                        列表_每日挑战 = 1;
                     };
-
                 };
                 if (列表_每日挑战 == 1) {
                     break;
@@ -958,201 +986,204 @@ if (earnmoney && c === true) {
             // 线程2的逻辑
             for (n = 0; n > -1; n++) {
                 if (列表_饭点补贴 == 0) {
-                    var fdbt = text("到饭点领饭补").findOne(3500);
-                    if (fdbt) {
-                        lloogg("到饭点领饭补")
-                        try {
-                            var ffdbt = fdbt.visibleToUser();
-                        } catch (e) {
-                            ffdbt = false;
-                        }
-                        if (ffdbt) {
-                            log("正在去领取饭点补贴");
-                            列表_饭点补贴 = 1;
-                            for (ff = 1; ff < 60; ff++) {
-                                var 饭补 = textContains("到饭点领饭补").findOne(1000);
-                                try {
-                                    var fbb = 饭补.visibleToUser()
-                                } catch (e) {
-                                    fbb = false;
-                                }
-                                if (饭补 && fbb) {
-                                    log("正在进领取饭补界面");
-                                    click(饭补.bounds().centerX(), 饭补.bounds().centerY());
-                                    sleep(500);
-                                } else {
-                                    var 领取饭补 = text("领取饭补").findOne(1000);
-                                    var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(1000);
-                                    if (领取饭补) {
-                                        log("领取饭补");
-                                        break;
-                                    } else if (领过了) {
-                                        log("领过了");
-                                        break;
+                    if (选择框_饭饭补贴) {
+                        var fdbt = text("到饭点领饭补").findOne(3500);
+                        if (fdbt) {
+                            lloogg("到饭点领饭补")
+                            try {
+                                var ffdbt = fdbt.visibleToUser();
+                            } catch (e) {
+                                ffdbt = false;
+                            }
+                            if (ffdbt) {
+                                log("正在去领取饭点补贴");
+                                列表_饭点补贴 = 1;
+                                for (ff = 1; ff < 60; ff++) {
+                                    var 饭补 = textContains("到饭点领饭补").findOne(1000);
+                                    try {
+                                        var fbb = 饭补.visibleToUser()
+                                    } catch (e) {
+                                        fbb = false;
+                                    }
+                                    if (饭补 && fbb) {
+                                        log("正在进领取饭补界面");
+                                        click(饭补.bounds().centerX(), 饭补.bounds().centerY());
+                                        sleep(500);
+                                    } else {
+                                        var 领取饭补 = text("领取饭补").findOne(1000);
+                                        var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(1000);
+                                        if (领取饭补) {
+                                            log("领取饭补");
+                                            break;
+                                        } else if (领过了) {
+                                            log("领过了");
+                                            break;
+                                        };
                                     };
                                 };
-                            };
-                            if (领取饭补) {
-                                try {
-                                    var dian领取饭补 = 领取饭补.parent();
-                                } catch (e) {
-                                }
-                                if (dian领取饭补) {
-                                    for (ffd = 1; ffd > 0; ffd++) {
-                                        dian领取饭补.click();
-                                        var 饭补领取 = textContains("恭喜获得").findOne(3000);
-                                        if (饭补领取) {
-                                            log("饭补领取");
-                                            try {
-                                                var 恭喜获得视频 = 饭补领取.parent().child(饭补领取.parent().children().length - 2);
-                                            } catch (e) {
-                                            }
-                                            if (恭喜获得视频) {
-                                                log("正在去看恭喜获得视频");
-                                                click(恭喜获得视频.bounds().centerX(), 恭喜获得视频.bounds().centerY());
-                                                var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                                if (广子倒计时) {
-                                                    log("正在看广告");
-                                                    停留30秒倒计时();
-                                                    var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(1000);
-                                                    if (还没看完.text() !== "去完成任务") {
-                                                        log("还没看完,继续等待30秒");
-                                                        var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
-                                                        还没看完button.click();
+                                if (领取饭补) {
+                                    try {
+                                        var dian领取饭补 = 领取饭补.parent();
+                                    } catch (e) {
+                                    }
+                                    if (dian领取饭补) {
+                                        for (ffd = 1; ffd > 0; ffd++) {
+                                            dian领取饭补.click();
+                                            var 饭补领取 = textContains("恭喜获得").findOne(3000);
+                                            if (饭补领取) {
+                                                log("饭补领取");
+                                                try {
+                                                    var 恭喜获得视频 = 饭补领取.parent().child(饭补领取.parent().children().length - 2);
+                                                } catch (e) {
+                                                }
+                                                if (恭喜获得视频) {
+                                                    log("正在去看恭喜获得视频");
+                                                    click(恭喜获得视频.bounds().centerX(), 恭喜获得视频.bounds().centerY());
+                                                    var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                                    if (广子倒计时) {
+                                                        log("正在看广告");
                                                         停留30秒倒计时();
-                                                    } else {
-                                                        log("额外任务");
-                                                        var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
-                                                        放弃button.click();
+                                                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(1000);
+                                                        if (还没看完.text() !== "去完成任务") {
+                                                            log("还没看完,继续等待30秒");
+                                                            var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                                            还没看完button.click();
+                                                            停留30秒倒计时();
+                                                        } else {
+                                                            log("额外任务");
+                                                            var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                                            放弃button.click();
+                                                        };
                                                     };
                                                 };
-                                            };
-                                            // back();
-                                            break;
-                                        } else {
-                                            log("没有领");
-                                        };
-                                    };
-                                };
-
-                            } else if (领过了) {
-                                log("领过饭补了或不在饭补时间");
-                            } else {
-                                log("饭补异常");
-                                //back();
-                            };
-
-
-                            ////////、、、、、、、、、、、、、、、、、、、、、、、、、
-                            //////////////补签/////////////
-                            log("开始寻找补签");
-                            for (dbqys = 1; dbqys > 0; dbqys++) {
-                                var 待补签元素 = textMatches(/(.*待补签$)/).find();
-                                if (待补签元素 && 待补签元素.length !== 0) {
-                                    log("正在补签");
-                                    log("等待补签数量:" + 待补签元素.length);
-                                    for (dbq = 0; dbq < 待补签元素.length; dbq++) {
-                                        click(待补签元素[dbq].bounds().centerX(), 待补签元素[dbq].bounds().centerY());
-                                        sleep(300);
-                                        var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                        if (广子倒计时) {
-                                            log("正在看广告");
-                                            停留30秒倒计时();
-                                            sleep(300)
-                                            var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                            if (还没看完.text() !== "去完成任务") {
-                                                log("还没看完,继续等待30秒");
-                                                var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
-                                                还没看完button.click();
-                                                停留30秒倒计时();
+                                                // back();
+                                                break;
                                             } else {
-                                                log("额外任务");
-                                                var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
-                                                放弃button.click();
+                                                log("没有领");
                                             };
                                         };
-
                                     };
-                                } else if (待补签元素.length == 0) {
-                                    log("无补待签元素");
-                                    break;
+
+                                } else if (领过了) {
+                                    log("领过饭补了或不在饭补时间");
+                                } else {
+                                    log("饭补异常");
+                                    //back();
                                 };
-                            };
-                            //////////////补签/////////////
-                            /////////////////看视频////////////
 
-                            log("开始看视频");
-                            var 饭补视频 = text("看视频").findOne(1000);
-                            if (饭补视频) {
-                                log("正在去看饭补视频");
-                                for (fbsp = 1; fbsp > 0; fbsp++) {
-                                    var 饭补视频 = text("看视频").findOne();
-                                    click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
-                                    var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                    var toast窗 = id("com.kuaishou.nebula:id/toast_text").findOne(1000);
-                                    var 今日饭补广告看完了 = textContains("已完成").findOne(800) || textContains("明天再来").findOne(800) || text("任务已完成，明天再来吧～").findOne(800);
-                                    var 领取饭补 = text("领取饭补").findOne(500);
-                                    var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(500);
-                                    if (toast窗) {
-                                        log(toast窗.text())
-                                    };
-                                    if (今日饭补广告看完了) {
-                                        log("今日饭补广告看完了");
+
+                                ////////、、、、、、、、、、、、、、、、、、、、、、、、、
+                                //////////////补签/////////////
+                                log("开始寻找补签");
+                                for (dbqys = 1; dbqys > 0; dbqys++) {
+                                    var 待补签元素 = textMatches(/(.*待补签$)/).find();
+                                    if (待补签元素 && 待补签元素.length !== 0) {
+                                        log("正在补签");
+                                        log("等待补签数量:" + 待补签元素.length);
+                                        for (dbq = 0; dbq < 待补签元素.length; dbq++) {
+                                            click(待补签元素[dbq].bounds().centerX(), 待补签元素[dbq].bounds().centerY());
+                                            sleep(300);
+                                            var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                            if (广子倒计时) {
+                                                log("正在看广告");
+                                                停留30秒倒计时();
+                                                sleep(300)
+                                                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
+                                                if (还没看完.text() !== "去完成任务") {
+                                                    log("还没看完,继续等待30秒");
+                                                    var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                                    还没看完button.click();
+                                                    停留30秒倒计时();
+                                                } else {
+                                                    log("额外任务");
+                                                    var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                                    放弃button.click();
+                                                };
+                                            };
+
+                                        };
+                                    } else if (待补签元素.length == 0) {
+                                        log("无补待签元素");
                                         break;
+                                    };
+                                };
+                                //////////////补签/////////////
+                                /////////////////看视频////////////
+
+                                log("开始看视频");
+                                var 饭补视频 = text("看视频").findOne(1000);
+                                if (饭补视频) {
+                                    log("正在去看饭补视频");
+                                    for (fbsp = 1; fbsp > 0; fbsp++) {
+                                        var 饭补视频 = text("看视频").findOne();
+                                        click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
+                                        var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                        var toast窗 = id("com.kuaishou.nebula:id/toast_text").findOne(1000);
+                                        var 今日饭补广告看完了 = textContains("已完成").findOne(800) || textContains("明天再来").findOne(800) || text("任务已完成，明天再来吧～").findOne(800);
+                                        var 领取饭补 = text("领取饭补").findOne(500);
+                                        var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(500);
+                                        if (toast窗) {
+                                            log(toast窗.text())
+                                        };
+                                        if (今日饭补广告看完了) {
+                                            log("今日饭补广告看完了");
+                                            break;
+                                        };
+                                        if (广告倒计时) {
+                                            log("正在看广告——停留30秒")
+                                            break;
+                                        };
+                                        if (!广告倒计时 && !今日饭补广告看完了 && !领取饭补 && !领取饭补) {
+                                            log("饭补卡住了");
+                                            停留x秒倒计时(50);
+                                            sleep(300);
+                                            break;
+                                        };
                                     };
                                     if (广告倒计时) {
-                                        log("正在看广告——停留30秒")
-                                        break;
-                                    };
-                                    if (!广告倒计时 && !今日饭补广告看完了 && !领取饭补 && !领取饭补) {
-                                        log("饭补卡住了");
-                                        停留x秒倒计时(50);
-                                        sleep(300);
-                                        break;
-                                    };
-                                };
-                                if (广告倒计时) {
-                                    停留30秒倒计时();
-                                    sleep(300);
-                                    var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                    if (还没看完.text() !== "去完成任务") {
-                                        log("还没看完,继续等待30秒");
-                                        var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
-                                        还没看完button.click();
                                         停留30秒倒计时();
-                                    } else {
-                                        log("额外任务");
-                                        var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
-                                        放弃button.click();
+                                        sleep(300);
+                                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
+                                        if (还没看完.text() !== "去完成任务") {
+                                            log("还没看完,继续等待30秒");
+                                            var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                            还没看完button.click();
+                                            停留30秒倒计时();
+                                        } else {
+                                            log("额外任务");
+                                            var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                            放弃button.click();
+                                        };
                                     };
                                 };
+                                sleep(3000);
+
+
+                                /////////////////看视频////////////
+
+
+                                back();
+
+
+                            } else {
+                                log("饭补不在视野内");
+                                upslide();
                             };
-                            sleep(3000);
-
-
-                            /////////////////看视频////////////
-
-
-                            back();
-
-
-                        } else {
-                            log("饭补不在视野内");
-                            upslide();
-                        };
-                        if (n % 10 === 0) {
-                            回顶();
-                            n = 0;
-                            if (n == 25) {
-                                yy();
-                            }
-                        };
-                    }
-
+                            if (n % 10 === 0) {
+                                回顶();
+                                n = 0;
+                                if (n == 25) {
+                                    yy();
+                                }
+                            };
+                        }
+                    } else {
+                        列表_饭点补贴 = 1;
+                    };
                 }
                 if (列表_饭点补贴 == 1) {
                     break;
-                }
+                };
             };
 
             lloogg(currentThread + "thread已经结束,正在回顶");
@@ -1171,50 +1202,52 @@ if (earnmoney && c === true) {
             // 线程2的逻辑
             for (n = 0; n > -1; n++) {
                 if (列表_奖励翻倍 == 0) {
-                    var jlfb = textContains("看视频奖励翻倍特权").findOne(3500);
-                    if (jlfb) {
-                        lloogg("看视频奖励翻倍特权")
-                        if (jlfb.visibleToUser() === true) {
-                            列表_奖励翻倍 = 1;
-                            log("正在翻倍奖励");
-                            for (ble = 0; ble < 5; ble++) {
-                                var 翻倍 = textContains("看视频奖励翻倍特权").findOne(1000);
-                                var 翻倍中 = 翻倍.parent().parent().child(翻倍.parent().parent().children().length - 1);
-                                try {
-                                    var ffb = 翻倍.visibleToUser()
-                                } catch (e) {
-                                    ffb = false;
-                                }
-                                if (翻倍 && ffb) {
-                                    click(翻倍.bounds().centerX(), 翻倍.bounds().centerY());
-                                    sleep(500);
+                    if (选择框_奖励翻倍) {
+                        var jlfb = textContains("看视频奖励翻倍特权").findOne(3500);
+                        if (jlfb) {
+                            lloogg("看视频奖励翻倍特权")
+                            if (jlfb.visibleToUser() === true) {
+                                列表_奖励翻倍 = 1;
+                                log("正在翻倍奖励");
+                                for (ble = 0; ble < 5; ble++) {
+                                    var 翻倍 = textContains("看视频奖励翻倍特权").findOne(1000);
+                                    var 翻倍中 = 翻倍.parent().parent().child(翻倍.parent().parent().children().length - 1);
+                                    try {
+                                        var ffb = 翻倍.visibleToUser()
+                                    } catch (e) {
+                                        ffb = false;
+                                    }
+                                    if (翻倍 && ffb) {
+                                        click(翻倍.bounds().centerX(), 翻倍.bounds().centerY());
+                                        sleep(500);
+                                    };
+                                    // if (翻倍中.text() !== "点击翻倍") {
+                                    //     log("翻倍中")
+                                    //     break;
+                                    // } else {
+                                    //     continue;
+                                    // };
                                 };
-                                // if (翻倍中.text() !== "点击翻倍") {
-                                //     log("翻倍中")
-                                //     break;
-                                // } else {
-                                //     continue;
-                                // };
+                            } else {
+                                log("奖励翻倍不在视野内");
+                                upslide();
                             };
-                        } else {
-                            log("奖励翻倍不在视野内");
-                            upslide();
-                        };
-                        if (n % 10 === 0) {
-                            回顶();
-                            n = 0;
-                            if (n == 25) {
-                                yy();
-                            }
-                        };
-                    }
-
-
+                            if (n % 10 === 0) {
+                                回顶();
+                                n = 0;
+                                if (n == 25) {
+                                    yy();
+                                }
+                            };
+                        }
+                    } else {
+                        列表_奖励翻倍 = 1;
+                    };
                 }
                 if (列表_奖励翻倍 == 1) {
                     log("已翻倍");
                     break;
-                }
+                };
 
             };
 
@@ -1236,70 +1269,73 @@ if (earnmoney && c === true) {
             for (n = 0; n > -1; n++) {
 
                 if (列表_看视频赚得金币 == 0) {
-                    var kspzdjb = textMatches(/(看视频[得赚].*金币$)/).findOne(3500);
-                    try {
-                        var kksbz = kspzdjb.visibleToUser()
-                    } catch (e) {
-                        kksbz = false;
-                    }
-                    if (kspzdjb && kksbz === true) {
-                        列表_看视频赚得金币 = 1;
-                        log("正在看视频赚得金币-停留2分钟");
-                        for (ksp = 1; ksp < 5; ksp++) {
-                            var 明天再来 = text("明天再来").findOne(1000);
-                            var 看视频 = textMatches(/(看视频[得赚].*金币$)/).findOne(1000);
-                            var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
-                            try {
-                                var lknlks = 看视频.visibleToUser()
-                            } catch (e) {
-                                lknlks = false;
-                            }
-                            if (明天再来) {
-                                log("明天再来");
-                                break;
-                            } else if (看视频 && lknlks === true) {
-                                click(看视频.bounds().centerX(), 看视频.bounds().centerY());
-                                sleep(500);
+                    if (选择框_看视频赚金币) {
+                        var kspzdjb = textMatches(/(看视频[得赚].*金币$)/).findOne(3500);
+                        try {
+                            var kksbz = kspzdjb.visibleToUser()
+                        } catch (e) {
+                            kksbz = false;
+                        }
+                        if (kspzdjb && kksbz === true) {
+                            列表_看视频赚得金币 = 1;
+                            log("正在看视频赚得金币-停留2分钟");
+                            for (ksp = 1; ksp < 5; ksp++) {
+                                var 明天再来 = text("明天再来").findOne(1000);
+                                var 看视频 = textMatches(/(看视频[得赚].*金币$)/).findOne(1000);
+                                var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
+                                try {
+                                    var lknlks = 看视频.visibleToUser()
+                                } catch (e) {
+                                    lknlks = false;
+                                }
+                                if (明天再来) {
+                                    log("明天再来");
+                                    break;
+                                } else if (看视频 && lknlks === true) {
+                                    click(看视频.bounds().centerX(), 看视频.bounds().centerY());
+                                    sleep(500);
+                                };
+                                if (广告倒计时) {
+                                    log("正在看广告——停留30秒")
+                                    break;
+                                } else {
+                                    continue;
+                                };
                             };
-                            if (广告倒计时) {
-                                log("正在看广告——停留30秒")
-                                break;
-                            } else {
-                                continue;
-                            };
-                        };
 
-                        if (广告倒计时) {
-                            停留30秒倒计时();
-                            sleep(300);
-                            var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                            if (还没看完.text() !== "去完成任务") {
-                                log("还没看完,继续等待30秒");
-                                var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
-                                还没看完button.click();
+                            if (广告倒计时) {
                                 停留30秒倒计时();
+                                sleep(300);
+                                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
+                                if (还没看完.text() !== "去完成任务") {
+                                    log("还没看完,继续等待30秒");
+                                    var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                    还没看完button.click();
+                                    停留30秒倒计时();
+                                } else {
+                                    log("额外任务");
+                                    var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                    放弃button.click();
+                                };
                             } else {
-                                log("额外任务");
-                                var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
-                                放弃button.click();
+                                goandearn();
                             };
                         } else {
-                            goandearn();
+                            log("看视频赚得金币不在视野内");
+                            upslide();
                         };
+                        if (n % 10 === 0) {
+                            回顶();
+                            n = 0;
+                            if (n == 25) {
+                                yy();
+                            }
+                        };
+
                     } else {
-                        log("看视频赚得金币不在视野内");
-                        upslide();
+                        列表_看视频赚得金币 = 1;
                     };
-                    if (n % 10 === 0) {
-                        回顶();
-                        n = 0;
-                        if (n == 25) {
-                            yy();
-                        }
-                    };
-
-
-                }
+                };
                 if (列表_看视频赚得金币 == 1) {
                     break;
                 };
@@ -1323,62 +1359,65 @@ if (earnmoney && c === true) {
             // 线程2的逻辑
             for (n = 0; n > -1; n++) {
                 if (列表_逛街金币 == 0) {
-                    var gjljb = text("逛街领金币").findOne(3500);
-                    if (gjljb) {
-                        if (gjljb.visibleToUser() === true) {
-                            列表_逛街金币 = 1;
-                            lloogg("正在逛街");
-                            for (gj = 1; gj > 0; gj++) {
-                                var 逛街 = text("逛街领金币").findOne(1000);
-                                var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
-                                if (逛街) {
-                                    if (逛街.visibleToUser() === true) {
-                                        try {
-                                            var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
-                                        } catch (e) {
-                                        }
-                                        if (逛完了.text() !== "去逛街") {
-                                            lloogg("逛完了");
-                                            break;
-                                        } else {
-                                            click(逛街.bounds().centerX(), 逛街.bounds().centerY());
-                                            sleep(500);
-                                        }
+                    if (选择框_逛街) {
+                        var gjljb = text("逛街领金币").findOne(3500);
+                        if (gjljb) {
+                            if (gjljb.visibleToUser() === true) {
+                                列表_逛街金币 = 1;
+                                lloogg("正在逛街");
+                                for (gj = 1; gj > 0; gj++) {
+                                    var 逛街 = text("逛街领金币").findOne(1000);
+                                    var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
+                                    if (逛街) {
+                                        if (逛街.visibleToUser() === true) {
+                                            try {
+                                                var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
+                                            } catch (e) {
+                                            }
+                                            if (逛完了.text() !== "去逛街") {
+                                                lloogg("逛完了");
+                                                break;
+                                            } else {
+                                                click(逛街.bounds().centerX(), 逛街.bounds().centerY());
+                                                sleep(500);
+                                            }
+                                        };
                                     };
+                                    if (逛街倒计时) {
+                                        lloogg("正在逛街逛街——滑动停留100秒")
+                                        break;
+                                    } else {
+                                        continue;
+                                    };
+
                                 };
                                 if (逛街倒计时) {
-                                    lloogg("正在逛街逛街——滑动停留100秒")
-                                    break;
-                                } else {
-                                    continue;
-                                };
-
-                            };
-                            if (逛街倒计时) {
-                                停留100秒滑动();
-                                back();
-                                var 继续逛街 = text("继续逛街").findOne(10000);
-                                if (继续逛街) {
-                                    lloogg("还没逛完,继续等待100秒");
-                                    var 继续逛街but = text("继续逛街").findOne();
-                                    click(继续逛街but.bounds().centerX(), 继续逛街but.bounds().centerY());
                                     停留100秒滑动();
+                                    back();
+                                    var 继续逛街 = text("继续逛街").findOne(10000);
+                                    if (继续逛街) {
+                                        lloogg("还没逛完,继续等待100秒");
+                                        var 继续逛街but = text("继续逛街").findOne();
+                                        click(继续逛街but.bounds().centerX(), 继续逛街but.bounds().centerY());
+                                        停留100秒滑动();
+                                    };
                                 };
+                            } else {
+                                lloogg("逛街不在视野内");
+                                upslide();
                             };
-                        } else {
-                            lloogg("逛街不在视野内");
-                            upslide();
+                            if (n % 10 === 0) {
+                                回顶();
+                                n = 0;
+                                if (n == 25) {
+                                    yy();
+                                }
+                            };
                         };
-                        if (n % 10 === 0) {
-                            回顶();
-                            n = 0;
-                            if (n == 25) {
-                                yy();
-                            }
-                        };
+                    } else {
+                        列表_逛街金币 = 1;
                     };
-
-                }
+                };
                 if (列表_逛街金币 == 1) {
                     break;
                 };
@@ -1404,114 +1443,117 @@ if (earnmoney && c === true) {
 
                 var 在视频页 = 0;
                 if (列表_给视频表态 == 0) {
-                    var gspbt = textContains("给视频表态").findOne(3500);
-                    try {
-                        var ads = gspbt.visibleToUser()
-                    } catch (e) {
-                        ads = false;
-                    }
-                    if (gspbt && ads === true) {
-                        列表_给视频表态 = 1;
-                        lloogg("正在给视频表态");
-                        for (bt = 1; bt > 0; bt++) {
-                            var 明日再来 = text("明日再来").findOne(1000);
-                            var 表态 = textContains("给视频表态").findOne();
-                            try {
-                                var bbtt = 表态.visibleToUser()
-                            } catch (e) {
-                                bbtt = false;
-                            }
-                            if (明日再来) {
-                                lloogg("明日再来");
-                                break;
-                            } else if (表态 && bbtt === true) {
-                                click(表态.bounds().centerX(), 表态.bounds().centerY());
-                                sleep(500);
-
-                                function if视频() {
-                                    var 视频 = id("com.kuaishou.nebula:id/nasa_groot_view_pager").findOne(3000);
-                                    try {
-                                        var qdss = 视频.visibleToUser()
-                                    } catch (e) {
-                                        qdss = false;
-                                    }
-                                    if (视频 && qdss === true) {
-                                        toast("在视频页");
-                                        在视频页 = 1;
-                                    } else {
-                                        toast("🙅‍视频页");
-                                    };
-                                };
-
-                                for (n = 0; n < 10; n++) {
-                                    if视频();
-                                    sleep(1000);
-                                    if (在视频页 == 1) {
-                                        lloogg("√视频页√");
-                                        break;
-                                    }
-                                    sleep(1000);
-                                };
-
-                                if (在视频页 == 1) {
-                                    lloogg("开始表态");
-                                    break;
-                                };
-
-                            };
-
-                            ////////////刷视频+表态/////////////////////
-                            for (pbt = 0; pbt < 35; pbt++) {
-                                lloogg("正在评论第" + (pbt + 1) + "/50 条视频");
-                                var bta = 0;
-                                for (qbt = 0; qbt > -1; qbt++) {
-                                    var 表态 = text("你对此条视频是否满意？").find().filter(function (element) {
-                                        return element.visibleToUser();
-                                    });
-                                    lloogg(表态);
-
-                                    if (表态.length > 0) {
-                                        var 可见表态 = 表态[0];
-                                        bta = 1;
-                                        lloogg("正在表态");
-                                    } else {
-                                        lloogg("不可表态");
-                                    };
-                                    break;
-
-                                };
-                                lloogg(bta)
-                                if (bta == 1) {
-                                    try {
-                                        var array = [可见表态.indexInParent() + 2, 可见表态.indexInParent() + 3, 可见表态.indexInParent() + 4];
-                                    } catch (e) {
-                                    }
-                                    var randomIndex = Math.floor(Math.random() * array.length);
-                                    var randomElement = array[randomIndex];
-                                    try {
-                                        click(可见表态.parent().child(randomElement).bounds().centerX(), 可见表态.parent().child(randomElement).bounds().centerY())
-                                    } catch (e) {
-                                    }
-                                    sleep(1000);
-                                };
-                                upslide();
-                                sleep(3500)
-                            };
-                        };
-
-
-                    } else {
-                        lloogg("给视频表态不在视野内");
-                        upslide();
-                    };
-                    if (n % 10 === 0) {
-                        回顶();
-                        n = 0;
-                        if (n == 25) {
-                            yy();
+                    if (选择框_表态) {
+                        var gspbt = textContains("给视频表态").findOne(3500);
+                        try {
+                            var ads = gspbt.visibleToUser()
+                        } catch (e) {
+                            ads = false;
                         }
-                    };
+                        if (gspbt && ads === true) {
+                            列表_给视频表态 = 1;
+                            lloogg("正在给视频表态");
+                            for (bt = 1; bt > 0; bt++) {
+                                var 明日再来 = text("明日再来").findOne(1000);
+                                var 表态 = textContains("给视频表态").findOne();
+                                try {
+                                    var bbtt = 表态.visibleToUser()
+                                } catch (e) {
+                                    bbtt = false;
+                                }
+                                if (明日再来) {
+                                    lloogg("明日再来");
+                                    break;
+                                } else if (表态 && bbtt === true) {
+                                    click(表态.bounds().centerX(), 表态.bounds().centerY());
+                                    sleep(500);
 
+                                    function if视频() {
+                                        var 视频 = id("com.kuaishou.nebula:id/nasa_groot_view_pager").findOne(3000);
+                                        try {
+                                            var qdss = 视频.visibleToUser()
+                                        } catch (e) {
+                                            qdss = false;
+                                        }
+                                        if (视频 && qdss === true) {
+                                            toast("在视频页");
+                                            在视频页 = 1;
+                                        } else {
+                                            toast("🙅‍视频页");
+                                        };
+                                    };
+
+                                    for (n = 0; n < 10; n++) {
+                                        if视频();
+                                        sleep(1000);
+                                        if (在视频页 == 1) {
+                                            lloogg("√视频页√");
+                                            break;
+                                        }
+                                        sleep(1000);
+                                    };
+
+                                    if (在视频页 == 1) {
+                                        lloogg("开始表态");
+                                        break;
+                                    };
+
+                                };
+
+                                ////////////刷视频+表态/////////////////////
+                                for (pbt = 0; pbt < 35; pbt++) {
+                                    lloogg("正在评论第" + (pbt + 1) + "/50 条视频");
+                                    var bta = 0;
+                                    for (qbt = 0; qbt > -1; qbt++) {
+                                        var 表态 = text("你对此条视频是否满意？").find().filter(function (element) {
+                                            return element.visibleToUser();
+                                        });
+                                        lloogg(表态);
+
+                                        if (表态.length > 0) {
+                                            var 可见表态 = 表态[0];
+                                            bta = 1;
+                                            lloogg("正在表态");
+                                        } else {
+                                            lloogg("不可表态");
+                                        };
+                                        break;
+
+                                    };
+                                    lloogg(bta)
+                                    if (bta == 1) {
+                                        try {
+                                            var array = [可见表态.indexInParent() + 2, 可见表态.indexInParent() + 3, 可见表态.indexInParent() + 4];
+                                        } catch (e) {
+                                        }
+                                        var randomIndex = Math.floor(Math.random() * array.length);
+                                        var randomElement = array[randomIndex];
+                                        try {
+                                            click(可见表态.parent().child(randomElement).bounds().centerX(), 可见表态.parent().child(randomElement).bounds().centerY())
+                                        } catch (e) {
+                                        }
+                                        sleep(1000);
+                                    };
+                                    upslide();
+                                    sleep(3500)
+                                };
+                            };
+
+
+                        } else {
+                            lloogg("给视频表态不在视野内");
+                            upslide();
+                        };
+                        if (n % 10 === 0) {
+                            回顶();
+                            n = 0;
+                            if (n == 25) {
+                                yy();
+                            }
+                        };
+                    } else {
+                        列表_给视频表态 = 1;
+                    };
                 };
                 if (列表_给视频表态 == 1) {
                     break;

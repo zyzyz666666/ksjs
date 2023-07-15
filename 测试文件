@@ -1,0 +1,33 @@
+var ksjsset = storages.create("ksjsset");
+var ksset = storages.create("ksset");
+var timeset = storages.create("timeset");
+
+var 选择框_开宝箱 = ksjsset.get("选择框_开宝箱");
+var 选择框_每日挑战 = ksjsset.get("选择框_每日挑战");
+var 选择框_饭饭补贴 = ksjsset.get("选择框_饭饭补贴");
+var 选择框_奖励翻倍 = ksjsset.get("选择框_奖励翻倍");
+var 选择框_看视频赚金币 = ksjsset.get("选择框_看视频赚金币");
+var 选择框_逛街 = ksjsset.get("选择框_逛街");
+var 选择框_表态 = ksjsset.get("选择框_表态");
+
+var 选择框_切换账号 = ksset.get("选择框_切换账号");
+var 输入框分钟 = ksset.get("输入框分钟");
+var 输入框1 = ksset.get("输入框1");
+var 输入框11 = ksset.get("输入框11");
+var 输入框3 = ksset.get("输入框3");
+var 输入框速度调节 = ksset.get("输入框速度调节");
+var 选择框_悬赏任务 = ksset.get("选择框_悬赏任务");
+var 选择框_逛街任务 = ksset.get("选择框_逛街任务");
+var 选择框_点赞任务 = ksset.get("选择框_点赞任务");
+var 选择框_评论任务 = ksset.get("选择框_评论任务");
+var 选择框_看视频任务 = ksset.get("选择框_看视频任务");
+
+var 输入框互切 = timeset.get("输入框互切");
+
+log("ks:" + 选择框_切换账号 + 输入框分钟 + 输入框1
+    + 输入框11 + 输入框3 + 输入框速度调节
+    + 选择框_悬赏任务 + 选择框_逛街任务 + 选择框_点赞任务
+    + 选择框_评论任务 + 选择框_看视频任务);
+log("ksjs:" + 选择框_开宝箱 + 选择框_每日挑战 + 选择框_饭饭补贴
+    + 选择框_奖励翻倍 + 选择框_看视频赚金币 + 选择框_逛街 + 选择框_表态)
+log("time:" + 输入框互切)

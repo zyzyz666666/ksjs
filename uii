@@ -95,7 +95,6 @@ ui.layout(
                         </vertical>
                         <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#2E8B57" foreground="?selectableItemBackground" />
                         <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-                        <button id="exit" text="退  出" textSize="25sp" color="#ffffff" bg="#2E8B57" foreground="?selectableItemBackground" />
                     </vertical>
                 </frame>
                 <ScrollView>
@@ -204,6 +203,7 @@ ui.timeno.setVisibility(android.view.View.VISIBLE);
 ui.emitter.on("create_options_menu", menu => {
     menu.add("日志");
     menu.add("关于");
+    menu.add("退出");
 });
 
 // 监听选项菜单点击
@@ -214,6 +214,9 @@ ui.emitter.on("options_item_selected", (e, item) => {
             break;
         case "关于":
             alert("关于", "KS小帮手 v1.0.0");
+            break;
+        case "退出":
+            home();
             break;
     }
     e.consumed = true;
@@ -391,9 +394,9 @@ ui.start.on("click", function () {
     };
 });
 
-ui.exit.on("click", function () {
-    home();
-});
+// ui.exit.on("click", function () {
+//     home();
+// });//删掉了
 
 ////////////////////////////////////////////////////////////////////////////ksjs
 var KSJSi = 0;

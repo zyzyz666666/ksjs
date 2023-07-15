@@ -1,208 +1,54 @@
-"ui";
+"uuii"
 
-ui.layout(
-    <frame>
-        <vertical bg="#eef2fb">
-            <appbar>
-                <toolbar id="toolbar" bg="#01C7FE" title="ks7天任务(v10.6.10)" />
-                {/* <tabs id="tabs" bg="#01C7FE" /> */}
-            </appbar>
-            <horizontal >
-                <Switch id="autoService" text="无障碍服务" checked="{{auto.service != null}}" textSize="15sp" />
-                <Switch margin="12 0" id="floatyService" text="悬浮窗权限" checked="{{(new android.provider.Settings).canDrawOverlays(context)}}" />
-            </horizontal>
-            <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
-            <viewpager id="viewpager">
-                <ScrollView>
-                    <vertical>
-                        <linear>
-                            <checkbox id="选择框_切换账号" text="切换账号:" textColor="black" textStyle="bold" checked='true' />
-                            <input id="输入框分钟" text="60" hint="请输分钟" /><text textSize="16sp" textColor="black" text="分钟" />
-                        </linear>
+///////////////
+var ksset = storages.create("ksset");
 
-                        <linear>
-                            <text textSize="16sp" textColor="black" text="滑动间隔(秒):" /> <input id="输入框1" text="6" hint="请输秒" />
-                            <text textSize="16sp" textColor="black" text=" ~ " /> <input id="输入框11" text="10" hint="请输秒" />
-                        </linear>
-                        <linear>
-                            <text textSize="16sp" textColor="black" text="强制返回(分钟):" /> <input id="输入框3" text="10" hint="请输分钟" />
-                        </linear>
-                        <linear>
-                            <text textSize="16sp" textColor="black" text="速度调节:" /> <input id="输入框速度调节" text="1.8" hint="数值" />
-                            <text textSize="16sp" textColor="black" text=" 数值越小速度越快(最低不低于1.2) " />
-                        </linear>
-                        <linear>
-                            <checkbox id="选择框_悬赏任务" text="悬赏任务" textColor="black" textStyle="bold" checked='true' />
-                            <checkbox id="选择框_逛街任务" text="逛街任务" textColor="black" textStyle="bold" checked='true' />
-                            <checkbox id="选择框_点赞任务" text="点赞任务" textColor="black" textStyle="bold" checked='true' />
-                        </linear>
-                        <linear>
-                            <checkbox id="选择框_评论任务" text="评论任务" textColor="black" textStyle="bold" checked='fales' />
-                            <checkbox id="选择框_看视频任务" text="看视频任务" textColor="black" textStyle="bold" checked='true' />
-                        </linear>
-                        <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
-                        <button id="start" w="*" h="100" text="开始运行" textSize="30" />
-                        <button id="startrz" w="*" h="100" text=" 日 志 " textSize="30" />
-                        <button id="startgb" w="*" h="100" text=" 关 闭 " textSize="30" />
-                        <button id="ksjsbst" w="*" h="100" text=" 开始运行快手极速版 " textSize="30" />
-                    </vertical>
-                </ScrollView>
-                {/* <ScrollView>//
-                <vertical padding="16">
-                    <frame height="200" gravity="center">
-                        <linear>
-                            <text textSize="16sp" textColor="black" text="账号文本: " /> <input id="账号文本" text="" hint="账号----密码" />
-                        </linear>
-                    </frame>
-                </vertical>
-            </ScrollView> */}
+var 选择框_切换账号 = ksset.get("选择框_切换账号");
+var 输入框分钟 = ksset.get("输入框分钟");
+var 输入框1 = ksset.get("输入框1");
+var 输入框11 = ksset.get("输入框11");
+var 输入框3 = ksset.get("输入框3");
+var 输入框速度调节 = ksset.get("输入框速度调节");
+var 悬赏任务 = ksset.get("选择框_悬赏任务");
+var 逛街任务 = ksset.get("选择框_逛街任务");
+var 点赞任务 = ksset.get("选择框_点赞任务");
+var 评论任务 = ksset.get("选择框_评论任务");
+var 看视频任务 = ksset.get("选择框_看视频任务");
 
-            </viewpager>
-        </vertical>
-        <fab id="add" w="auto" h="auto" src="@drawable/ic_vpn_key_black_48dp"
-            margin="16" layout_gravity="bottom|right" tint="#ffffff" />
-    </frame>
-);
-ui.startrz.on("click", function () {
-    app.startActivity("console")
-});
-ui.emitter.on("back_pressed", function (event) {
-    toastLog("请点中间[关闭脚本]");
-    event.consumed = true;
-})
-ui.startgb.on("click", function () {
-    exit() //如果验证不通过 退出脚本
-});
-
-ui.ksjsbst.on("click", function () {
-    //开始运行快手极速版
-});
-// var color = "#009688";
-// ui.statusBarColor("#01C7FE") //最上层颜色
-// ui.viewpager.setTitles(["阅读设置", "账号设置"]);  //设置滑动页面的标题
-// ui.tabs.setupWithViewPager(ui.viewpager);//让滑动页面和标签栏联动
-// 屏蔽输入法弹出
-importClass('android.view.WindowManager');
-activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-auto.setWindowFilter(function (window) { return true })
-ui.run(() => {
-    var 缓存 = storages.create("输入框1")
-    if (缓存.get("输入框1") != undefined) { ui.输入框1.setText(缓存.get("输入框1")) }
-    if (缓存.get("输入框11") != undefined) { ui.输入框11.setText(缓存.get("输入框11")) }
-    // if (缓存.get("输入框2") != undefined) { ui.输入框2.setText(缓存.get("输入框2")) }
-    // if (缓存.get("输入框22") != undefined) { ui.输入框22.setText(缓存.get("输入框22")) }
-    if (缓存.get("输入框3") != undefined) { ui.输入框3.setText(缓存.get("输入框3")) }
-    if (缓存.get("输入框分钟") != undefined) { ui.输入框分钟.setText(缓存.get("输入框分钟")) }
-    if (缓存.get("输入框速度调节") != undefined) { ui.输入框速度调节.setText(缓存.get("输入框速度调节")) }
-
-    // if (缓存.get("快手极速版输入框5") != undefined) { ui.快手极速版输入框5.setText(缓存.get("快手极速版输入框5")) }
-    // if (缓存.get("快手极速版输入框6") != undefined) { ui.快手极速版输入框6.setText(缓存.get("快手极速版输入框6")) }
-
-    // if (缓存.get("账号文本") != undefined) { ui.账号文本.setText(缓存.get("账号文本")) }
-
-    // if (缓存.get("输入框7") != undefined) { ui.输入框7.setText(缓存.get("输入框7")) }
-    // if (缓存.get("激活码") != undefined) { ui.激活码.setText(缓存.get("激活码")) }
-
-    if (缓存.get("选择框_悬赏任务") != null) { ui.选择框_悬赏任务.setChecked(缓存.get("选择框_悬赏任务")) }
-    if (缓存.get("选择框_逛街任务") != null) { ui.选择框_逛街任务.setChecked(缓存.get("选择框_逛街任务")) }
-    if (缓存.get("选择框_点赞任务") != null) { ui.选择框_点赞任务.setChecked(缓存.get("选择框_点赞任务")) }
-    if (缓存.get("选择框_评论任务") != null) { ui.选择框_评论任务.setChecked(缓存.get("选择框_评论任务")) }
-    if (缓存.get("选择框_看视频任务") != null) { ui.选择框_看视频任务.setChecked(缓存.get("选择框_看视频任务")) }
-    if (缓存.get("选择框_切换账号") != null) { ui.选择框_切换账号.setChecked(缓存.get("选择框_切换账号")) }
-
-})
-ui.add.on("click", () => {
-    dialogs.rawInput("请输入激活码")
-        .then(title => {
-            if (!title) {
-                return;
-            }
-            log(title)
-            var 缓存 = storages.create("输入框1")
-            缓存.put("激活码", title);
-        })
-});
-
-ui.autoService.on("check", function (checked) {
-    // 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
-    if (checked && auto.service == null) {
-        app.startActivity({
-            action: "android.settings.ACCESSIBILITY_SETTINGS"
-        });
-    }
-    if (!checked && auto.service != null) {
-        auto.service.disableSelf();
-    }
-});
-
-ui.floatyService.on("check", function (checked) {
-    // 用户勾选悬浮窗权限的选项时，跳转到页面让用户去开启
-    try {
-        app.startActivity({
-            action: "android.settings.action.MANAGE_OVERLAY_PERMISSION",
-        });
-    } catch (error) {
-        toast('当前设备不支持跳转设置,请手动开启权限!')
-    }
-});
-
-// 当用户回到本界面时，resume事件会被触发
-ui.emitter.on("resume", function () {
-    // 此时根据无障碍服务的开启情况，同步开关的状态
-    ui.autoService.checked = auto.service != null;
-    // try {
-    //     ui.floatyService.checked = (new android.provider.Settings).canDrawOverlays(context)
-    // } catch (error) {
-    //     ui.floatyService.checked = true
-    // }
-});
-
-
-// 当用户回到本界面时，resume事件会被触发
-ui.emitter.on("resume", function () {
-    // 此时根据无障碍服务的开启情况，同步开关的状态
-    ui.autoService.checked = auto.service != null;
-});
-
-ui.start.on("click", function () {
-    //程序开始运行之前判断无障碍服务
-
-    if (auto.service == null) {
-        toast("请先开启无障碍服务！");
-        return;
-    } else {
-        var 缓存 = storages.create("输入框1")
-        缓存.put("输入框11", ui.输入框11.text());
-        缓存.put("输入框1", ui.输入框1.text());
-        // 缓存.put("输入框2", ui.输入框2.text());
-        // 缓存.put("输入框22", ui.输入框22.text());
-        缓存.put("输入框3", ui.输入框3.text());
-        // 缓存.put("输入框33", ui.输入框33.text());
-        缓存.put("输入框分钟", ui.输入框分钟.text());
-
-        缓存.put("输入框速度调节", ui.输入框速度调节.text());
-        // 缓存.put("快手极速版输入框6", ui.快手极速版输入框6.text());
-
-        // 缓存.put("账号文本", ui.账号文本.text());
-
-        // 缓存.put("输入框7", ui.输入框7.text());
-        // 缓存.put("激活码", ui.激活码.text());
-        缓存.put("选择框_看视频任务", ui.选择框_看视频任务.isChecked());
-        缓存.put("选择框_评论任务", ui.选择框_评论任务.isChecked());
-        缓存.put("选择框_点赞任务", ui.选择框_点赞任务.isChecked());
-        缓存.put("选择框_逛街任务", ui.选择框_逛街任务.isChecked());
-        缓存.put("选择框_悬赏任务", ui.选择框_悬赏任务.isChecked());
-        缓存.put("选择框_切换账号", ui.选择框_切换账号.isChecked());
-
-        main();
-    }
-
-});
-
-
-
-
+if (选择框_切换账号 == undefined) {
+    选择框_切换账号 = false;
+};
+if (输入框分钟 == undefined) {
+    输入框分钟 = "60";
+};
+if (输入框1 == undefined) {
+    输入框1 = "6";
+};
+if (输入框11 == undefined) {
+    输入框11 = "10";
+};
+if (输入框3 == undefined) {
+    输入框3 = "10";
+};
+if (输入框速度调节 == undefined) {
+    输入框速度调节 = "1.8";
+};
+if (逛街任务 == undefined) {
+    逛街任务 = true;
+};
+if (悬赏任务 == undefined) {
+    悬赏任务 = true;
+};
+if (点赞任务 == undefined) {
+    点赞任务 = true;
+};
+if (评论任务 == undefined) {
+    评论任务 = false;
+};
+if (看视频任务 == undefined) {
+    看视频任务 = true;
+};
+/////////////////////
 
 let 是否root = false
 let 浮窗开过了 = false
@@ -318,14 +164,14 @@ function 开启脚本() {
     }
 
     var state = true, statey = true
-    var 缓存 = storages.create("输入框1")
-    var 开始的 = 缓存.get("输入框1") * 1
-    var 结束的 = 缓存.get("输入框11") * 1
-    var 速度 = 缓存.get("输入框速度调节") * 1
-    var 等待2 = 缓存.get("输入框分钟") * 1
+    //var 缓存 = 输入框1
+    var 开始的 = 输入框1
+    var 结束的 = 输入框11
+    var 速度 = 输入框速度调节
+    var 等待2 = 输入框分钟
     // var 刷新 = 缓存.get("输入框3") * 1
     // var 点击红包次数 = 缓存.get("输入框33") * 1
-    var 用户名 = 缓存.get("激活码")
+    //var 用户名 = 缓存.get("激活码")
     // if (!验证用户("290930233", "雅视分身阅读", 用户名)) {
     //     alert('用户名有误或超过最大使用设备数!')
     //     exit() //如果验证不通过 退出脚本
@@ -334,7 +180,7 @@ function 开启脚本() {
     sleep(2000)
     aw缓存配置("广告高度", false)
     var 这次随机2, 当前点击红包次数 = 0, 最后达标 = 0
-    // if (ui.选择框_记忆.isChecked() == true && aw缓存配置("记忆") != undefined) { 顺序 = aw缓存配置("记忆") }
+    // if (选择框_记忆.isChecked() == true && aw缓存配置("记忆") != undefined) { 顺序 = aw缓存配置("记忆") }
 
     while (true) {
         aw打开app("快手")
@@ -344,9 +190,9 @@ function 开启脚本() {
         toastLog("--先强关一次快手--")
         aw打开app("快手")
         sleep(7000)
-        if (ui.选择框_切换账号.isChecked()) {
+        if (选择框_切换账号) {
             快手切换账号()
-            运行阅读(等待2)
+            运行阅读(输入框分钟)
         } else {
             运行阅读(null)
         }
@@ -410,29 +256,14 @@ function 返回首页() {
 
 
 function 运行阅读(参数1) {
-    var 缓存 = storages.create("输入框1")
-    var 开始的 = 缓存.get("输入框1") * 1
-    var 结束的 = 缓存.get("输入框11") * 1
-    var 分钟 = 缓存.get("输入框3") * 60
-    var 速度 = 缓存.get("输入框速度调节") * 1
+    //var 缓存 = 输入框1
+    var 开始的 = 输入框1
+    var 结束的 = 输入框11
+    var 分钟 = 输入框3 * 60
+    var 速度 = 输入框速度调节
     var statey = true, 是否签到了 = false, 卡秒 = 0, 滑动次数 = 0, 最后看一次 = false
-    var 悬赏任务 = true, 逛街任务 = true, 点赞任务 = true, 评论任务 = true, 看视频任务 = true
-    if (ui.选择框_悬赏任务.isChecked() == false) {
-        悬赏任务 = false
-    }
-    if (ui.选择框_逛街任务.isChecked() == false) {
-        逛街任务 = false
-    }
-    if (ui.选择框_点赞任务.isChecked() == false) {
-        点赞任务 = false
-    }
-    if (ui.选择框_评论任务.isChecked() == false) {
-        评论任务 = false
-    }
-    if (ui.选择框_看视频任务.isChecked() == false) {
-        看视频任务 = false
-    }
     var 看下视频 = 0
+    var 悬赏任务 = 悬赏任务, 逛街任务 = 逛街任务, 点赞任务 = 点赞任务, 评论任务 = 评论任务, 看视频任务 = 看视频任务;
     sleep(8000)//
     返回首页()
     aw定时判断("强制返回")
@@ -1618,3 +1449,5 @@ function 验证用户(参数1, 参数2, 参数3) {
     }
 }
 
+
+main();

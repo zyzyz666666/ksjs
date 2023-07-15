@@ -370,8 +370,8 @@ ui.start.on("click", function () {
         //engines.execScriptFile("main.js")
         if (ui.script_chosen.getSelectedItemPosition() == 1 && files.exists(filePathksjs)) {
             engines.execScriptFile(filePathksjs); // 快手极速
-        } else if (script_chosen_Listener == 0) {
-            alert("wait")
+        } else if (script_chosen_Listener == 2 && files.exists(filePathks)) {
+            engines.execScriptFile(filePathks); // 快手极速
         } else {
             alert("请先下载脚本")
         };
@@ -494,7 +494,6 @@ ui.downks.on("click", function () {
                         KSi = 1;
                         toastLog('快手' + '下载成功✅');
                         alert('快手' + '下载成功✅')
-                        log(KS)
                         //log("开始加载KS");
                         //engines.execScript("KS", KS);
                         break;

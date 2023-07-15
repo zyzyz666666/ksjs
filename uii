@@ -126,7 +126,7 @@ ui.layout(
                                 </vertical>
                             </ScrollView>
                             <linear>
-                                <button text="保存 快手 脚本" id="save ks" textSize="18" />
+                                <button text="保存 快手 脚本" id="saveks" textSize="18" />
                             </linear>
                         </vertical>
 
@@ -158,7 +158,7 @@ ui.layout(
                                 </vertical>
                             </ScrollView>
                             <linear>
-                                <button text="保存 快手极速 脚本" id="save ksjs" textSize="18" />
+                                <button text="保存 快手极速 脚本" id="saveksjs" textSize="18" />
                             </linear>
                         </vertical>
 
@@ -172,7 +172,7 @@ ui.layout(
                                 </vertical>
                             </ScrollView>
                             <linear>
-                                <button text="保存 互切时间" id="save time" textSize="18" />
+                                <button text="保存 互切时间" id="savetime" textSize="18" />
                             </linear>
                         </vertical>
                     </frame>
@@ -298,9 +298,8 @@ ui.start.on("click", function () {
         return;
     } else {
         //engines.execScriptFile("main.js")
-        var filePath = '/sdcard/ksjs.js';
         if (ui.script_chosen.getSelectedItemPosition() == 1 && files.exists(filePath)) {
-            engines.execScriptFile(filePath); // 快手极速
+            engines.execScriptFile(filePathksjs); // 快手极速
         } else if (script_chosen_Listener == 0) {
             alert("wait")
         } else {
@@ -416,7 +415,7 @@ ui.downks.on("click", function () {
         if (files.exists(filePathks)) {
             files.remove(filePathks);
         };
-        files.write(filePath, KS);
+        files.write(filePathks, KS);
         toastLog("快手极速版 已保存");
         ui.ksyes.setVisibility(android.view.View.VISIBLE);
         ui.ksno.setVisibility(android.view.View.INVISIBLE);
@@ -439,4 +438,17 @@ ui.deleteks.on("click", function () {
     KSJSi = 0;
     ui.ksyes.setVisibility(android.view.View.INVISIBLE);
     ui.ksno.setVisibility(android.view.View.VISIBLE);
+});
+
+
+///////////////////////////////////保存
+// 保存脚本设置
+ui.saveks.click(function () {
+    cmCONFIG0.put("ad_randomsetting", ui.ad_randomsetting.getText() + "");
+    toastLog("快手 脚本设置 保存成功！");
+});
+
+ui.saveksjs.click(function () {
+    cmCONFIG0.put("ad_randomsetting", ui.ad_randomsetting.getText() + "");
+    toastLog("快手极速 脚本设置 保存成功！");
 });

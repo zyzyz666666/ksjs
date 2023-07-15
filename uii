@@ -479,6 +479,46 @@ ui.downks.on("click", function () {
     //
     function 下载KS() {
         //
+        let url = [
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/KS/main/测试文件.js',
+        ];
+        for (var i = 0; i < 2; i++) {
+            try {
+                let res = http.get(url[i], {
+                    timeout: 10000 // 设置超时时间为10秒
+                });
+                console.log(res.statusCode);
+                if (res.statusCode == 200) {
+                    KS = res.body.string();
+                    if (KS.indexOf('"uii"') == 0) {
+                        KSi = 1;
+                        toastLog('快手' + '下载成功✅');
+                        alert('快手' + '下载成功✅')
+                        log(KS)
+                        //log("开始加载KS");
+                        //engines.execScript("KS", KS);
+                        break;
+                    };
+                } else {
+                    toastLog('快手' + '下载链接失败❌');
+                    alert('快手' + '下载链接失败❌')
+                }
+            } catch (error) {
+                if (error instanceof java.net.SocketTimeoutException) {
+                    toastLog('快手' + '下载超时❌');
+                    alert('快手' + '下载超时❌')
+                    continue; // 继续下一次循环请求
+                } else {
+                    toastLog('快手' + '下载失败❌' + error)//，错误：' + error);
+                    alert('快手' + '下载失败❌')
+                };
+            };
+            if (i == 9) {
+                toastLog("请重新下载");
+
+            }
+        }
+
     };
 
     threads.start(function () { // 创建新的子线程

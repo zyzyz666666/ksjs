@@ -378,6 +378,11 @@ ui.downksjs.on("click", function () {
 });
 ui.downksjsf5.on("click", function () {
     if (KSJSi == 1) {
+        if (files.exists(filePathksjs)) {
+            files.remove(filePathksjs);
+        };
+        files.write(filePathksjs, KSJS);
+        toastLog("快手极速版 已保存");
         ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
         ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
     } else if (KSJSi == 0) {
@@ -423,6 +428,11 @@ ui.downks.on("click", function () {
 });
 ui.downksf5.on("click", function () {
     if (KSi == 1) {
+        if (files.exists(filePathks)) {
+            files.remove(filePathks);
+        };
+        files.write(filePathks, KS);
+        toastLog("快手极速版 已保存");
         ui.ksyes.setVisibility(android.view.View.VISIBLE);
         ui.ksno.setVisibility(android.view.View.INVISIBLE);
     } else if (KSi == 0) {

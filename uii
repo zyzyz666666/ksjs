@@ -301,7 +301,7 @@ function Initialize() {
     if (ksjsset.get("选择框_表态") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_表态")) }
 
 
-    if (ksset.get("选择框_切换账号") != null) { ui.选择框_切换账号.setChecked(ksset.get("选择选择框_切换账号框_表态")) }
+    if (ksset.get("选择框_切换账号") != null) { ui.选择框_切换账号.setChecked(ksset.get("选择框_切换账号")) }
     if (ksset.get("输入框分钟") != undefined) { ui.输入框分钟.setText(ksset.get("输入框分钟")) }
     if (ksset.get("输入框1") != undefined) { ui.输入框1.setText(ksset.get("输入框1")) }
     if (ksset.get("输入框11") != undefined) { ui.输入框11.setText(ksset.get("输入框11")) }

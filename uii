@@ -371,7 +371,7 @@ ui.start.on("click", function () {
         if (ui.script_chosen.getSelectedItemPosition() == 1 && files.exists(filePathksjs)) {
             engines.execScriptFile(filePathksjs); // 快手极速
         } else if (ui.script_chosen.getSelectedItemPosition() == 2 && files.exists(filePathks)) {
-            engines.execScriptFile(filePathks); // 快手极速
+            engines.execScriptFile(filePathks); // 快手
         } else {
             alert("请先下载脚本")
         };
@@ -484,12 +484,12 @@ ui.downks.on("click", function () {
         ];
         for (var i = 0; i < 2; i++) {
             try {
-                let res = http.get(url[i], {
+                let resks = http.get(url[i], {
                     timeout: 10000 // 设置超时时间为10秒
                 });
-                console.log(res.statusCode);
-                if (res.statusCode == 200) {
-                    KS = res.body.string();
+                //console.log(res.statusCode);
+                if (resks.statusCode == 200) {
+                    KS = resks.body.string();
                     if (KS.indexOf('"uui"') == 0) {
                         KSi = 1;
                         toastLog('快手' + '下载成功✅');
@@ -541,7 +541,7 @@ ui.downksf5.on("click", function () {
             files.remove(filePathks);
         };
         files.write(filePathks, KS);
-        toastLog("快手极速版 已保存");
+        toastLog("快手 已保存");
         ui.ksyes.setVisibility(android.view.View.VISIBLE);
         ui.ksno.setVisibility(android.view.View.INVISIBLE);
     } else if (KSi == 0) {

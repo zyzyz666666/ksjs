@@ -370,7 +370,7 @@ ui.downksjs.on("click", function () {
         if (files.exists(filePathksjs)) {
             files.remove(filePathksjs);
         };
-        files.write(filePath, KSJS);
+        files.write(filePathksjs, KSJS);
         toastLog("快手极速版 已保存");
         ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
         ui.ksjsno.setVisibility(android.view.View.INVISIBLE);

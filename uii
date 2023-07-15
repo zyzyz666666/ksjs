@@ -8,15 +8,15 @@ importClass(android.graphics.Color);
 //++++++++++++++++++++++++++++++++++++++++++++++++++
 //首页配置
 
-var color = "#2E8B57"
+var color = "#FF6600"
 
-ui.statusBarColor("#2E8B57")
+ui.statusBarColor("#FF6600")
 ui.layout(
     <drawer id="drawer">
         <vertical>
             <appbar>
-                <toolbar id="toolbar" bg="#2E8B57" title="KS小帮手" />
-                <tabs id="tabs" bg="#2E8B57" />
+                <toolbar id="toolbar" bg="#FF6600" title="KS小帮手" />
+                <tabs id="tabs" bg="#FF6600" />
             </appbar>
             <viewpager id="viewpager" >
                 <frame>
@@ -93,7 +93,7 @@ ui.layout(
                             </horizontal>
 
                         </vertical>
-                        <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#2E8B57" foreground="?selectableItemBackground" />
+                        <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#FF6600" foreground="?selectableItemBackground" />
                         <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
                     </vertical>
                 </frame>

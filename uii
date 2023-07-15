@@ -370,7 +370,7 @@ ui.start.on("click", function () {
         //engines.execScriptFile("main.js")
         if (ui.script_chosen.getSelectedItemPosition() == 1 && files.exists(filePathksjs)) {
             engines.execScriptFile(filePathksjs); // 快手极速
-        } else if (script_chosen_Listener == 2 && files.exists(filePathks)) {
+        } else if (ui.script_chosen.getSelectedItemPosition() == 2 && files.exists(filePathks)) {
             engines.execScriptFile(filePathks); // 快手极速
         } else {
             alert("请先下载脚本")

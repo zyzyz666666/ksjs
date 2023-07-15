@@ -180,7 +180,7 @@ function 开启脚本() {
     sleep(2000)
     aw缓存配置("广告高度", false)
     var 这次随机2, 当前点击红包次数 = 0, 最后达标 = 0
-    // if (ui.选择框_记忆.isChecked() == true && aw缓存配置("记忆") != undefined) { 顺序 = aw缓存配置("记忆") }
+    // if (选择框_记忆.isChecked() == true && aw缓存配置("记忆") != undefined) { 顺序 = aw缓存配置("记忆") }
 
     while (true) {
         aw打开app("快手")
@@ -190,7 +190,7 @@ function 开启脚本() {
         toastLog("--先强关一次快手--")
         aw打开app("快手")
         sleep(7000)
-        if (ui.选择框_切换账号.isChecked()) {
+        if (选择框_切换账号.isChecked()) {
             快手切换账号()
             运行阅读(等待2)
         } else {
@@ -263,19 +263,19 @@ function 运行阅读(参数1) {
     var 速度 = 缓存.get("输入框速度调节") * 1
     var statey = true, 是否签到了 = false, 卡秒 = 0, 滑动次数 = 0, 最后看一次 = false
     var 悬赏任务 = true, 逛街任务 = true, 点赞任务 = true, 评论任务 = true, 看视频任务 = true
-    if (ui.选择框_悬赏任务.isChecked() == false) {
+    if (选择框_悬赏任务.isChecked() == false) {
         悬赏任务 = false
     }
-    if (ui.选择框_逛街任务.isChecked() == false) {
+    if (选择框_逛街任务.isChecked() == false) {
         逛街任务 = false
     }
-    if (ui.选择框_点赞任务.isChecked() == false) {
+    if (选择框_点赞任务.isChecked() == false) {
         点赞任务 = false
     }
-    if (ui.选择框_评论任务.isChecked() == false) {
+    if (选择框_评论任务.isChecked() == false) {
         评论任务 = false
     }
-    if (ui.选择框_看视频任务.isChecked() == false) {
+    if (选择框_看视频任务.isChecked() == false) {
         看视频任务 = false
     }
     var 看下视频 = 0

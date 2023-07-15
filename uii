@@ -37,7 +37,7 @@ ui.layout(
                                         <text text="   KS选择" textColor="#222222" textSize="18sp" maxLines="1" />
                                         <text text="   设置配置内容" textColor="#999999" textSize="15sp" maxLines="1" />
                                     </vertical>
-                                    <spinner id="script_chosen" marginLeft="10" marginRight="10" entries="互切时间|快手极速帮|快手" />
+                                    <spinner id="script_chosen" marginLeft="10" marginRight="10" entries="互切|快手极速帮|快手" />
                                 </horizontal>
                             </card>
                             <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
@@ -69,18 +69,25 @@ ui.layout(
                                 <vertical padding="10 8" h="auto" w="0" layout_weight="1">
                                     <text text="Q2254464797" textColor="#222222" textSize="15sp" maxLines="1" />
                                     <linear>
-                                        <button text="下载 快手 脚本" id="downks" />
+                                        <button text="快手 脚本下载" id="downks" />
                                         <text id="ksyes" text="已下载✅" />
                                         <text id="ksno" text="未下载❌" />
                                         <button text="刷新" id="downksf5" />
                                         <button text="卸载" id="deleteks" />
                                     </linear>
                                     <linear>
-                                        <button text="下载 快手极速 脚本" id="downksjs" />
+                                        <button text="快手极速 脚本下载" id="downksjs" />
                                         <text id="ksjsyes" text="已下载✅" />
                                         <text id="ksjsno" text="未下载❌" />
                                         <button text="刷新" id="downksjsf5" />
                                         <button text="卸载" id="deleteksjs" />
+                                    </linear>
+                                    <linear>
+                                        <button text="互切 脚本下载" id="downtime" />
+                                        <text id="timeyes" text="已下载✅" />
+                                        <text id="timeno" text="未下载❌" />
+                                        <button text="刷新" id="downtimef5" />
+                                        <button text="卸载" id="deletetime" />
                                     </linear>
                                 </vertical>
                             </horizontal>
@@ -185,10 +192,12 @@ ui.layout(
 // 设置文本元素可见
 ui.ksyes.setVisibility(android.view.View.INVISIBLE);
 ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+ui.timeyes.setVisibility(android.view.View.INVISIBLE);
 
 // 设置文本元素不可见
 ui.ksno.setVisibility(android.view.View.VISIBLE);
 ui.ksjsno.setVisibility(android.view.View.VISIBLE);
+ui.timeno.setVisibility(android.view.View.VISIBLE);
 
 
 // 创建选项菜单(右上角)
@@ -374,8 +383,10 @@ ui.start.on("click", function () {
             engines.execScriptFile(filePathksjs); // 快手极速
         } else if (ui.script_chosen.getSelectedItemPosition() == 2 && files.exists(filePathks)) {
             engines.execScriptFile(filePathks); // 快手
+        } else if (ui.script_chosen.getSelectedItemPosition() == 0 && files.exists(filePathksjs) && files.exists(filePathks) && files.exists(filePathtime)) {
+            engines.execScriptFile(filePathtime); // 互切
         } else {
-            alert("请先下载脚本")
+            alert("请先下载脚本");
         };
     };
 });
@@ -527,12 +538,12 @@ ui.downks.on("click", function () {
     });
     //
     if (KSi == 1) {
-        toastLog("正在保存快手极速版");
+        toastLog("正在保存快手");
         if (files.exists(filePathks)) {
             files.remove(filePathks);
         };
         files.write(filePathks, KS);
-        toastLog("快手极速版 已保存");
+        toastLog("快手 已保存");
         ui.ksyes.setVisibility(android.view.View.VISIBLE);
         ui.ksno.setVisibility(android.view.View.INVISIBLE);
     };
@@ -555,12 +566,100 @@ ui.deleteks.on("click", function () {
     if (files.exists(filePathks)) {
         files.remove(filePathks);
     };
-    alert('快手极速版' + '已卸载')
-    KSJSi = 0;
+    alert('快手' + '已卸载')
+    KSi = 0;
     ui.ksyes.setVisibility(android.view.View.INVISIBLE);
     ui.ksno.setVisibility(android.view.View.VISIBLE);
 });
 
+/////////////////////////////////////////////////////////////////////////////time
+var TIMEi = 0;
+var TIME;
+var filePathtime = '/sdcard/time.js';
+ui.downtime.on("click", function () {
+    toastLog("开始下载互切脚本");
+    //
+    function 下载TIME() {
+        //
+        let url = [
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/测试文件',
+        ];
+        for (var i = 0; i < 2; i++) {
+            try {
+                let restime = http.get(url[i], {
+                    timeout: 10000 // 设置超时时间为10秒
+                });
+                //console.log(res.statusCode);
+                if (restime.statusCode == 200) {
+                    TIME = restime.body.string();
+                    if (TIME.indexOf('"uui"') == 0) {
+                        TIMEi = 1;
+                        toastLog('互切' + '下载成功✅');
+                        alert('互切' + '下载成功✅')
+                        //log("开始加载TIME");
+                        //engines.execScript("TIME", TIME);
+                        break;
+                    };
+                } else {
+                    toastLog('互切' + '下载链接失败❌');
+                    alert('互切' + '下载链接失败❌')
+                }
+            } catch (error) {
+                if (error instanceof java.net.SocketTimeoutException) {
+                    toastLog('互切' + '下载超时❌');
+                    alert('互切' + '下载超时❌')
+                    continue; // 继续下一次循环请求
+                } else {
+                    toastLog('互切' + '下载失败❌' + error)//，错误：' + error);
+                    alert('互切' + '下载失败❌')
+                };
+            };
+            if (i == 9) {
+                toastLog("请重新下载");
+
+            }
+        }
+
+    };
+
+    threads.start(function () { // 创建新的子线程
+        下载TIME();
+    });
+    //
+    if (TIMEi == 1) {
+        toastLog("正在保存互切");
+        if (files.exists(filePathtime)) {
+            files.remove(filePathtime);
+        };
+        files.write(filePathtime, TIME);
+        toastLog("互切 已保存");
+        ui.timeyes.setVisibility(android.view.View.VISIBLE);
+        ui.timeno.setVisibility(android.view.View.INVISIBLE);
+    };
+});
+ui.downtimef5.on("click", function () {
+    if (TIMEi == 1) {
+        if (files.exists(filePathtime)) {
+            files.remove(filePathtime);
+        };
+        files.write(filePathtime, TIME);
+        toastLog("互切 已保存");
+        ui.timeyes.setVisibility(android.view.View.VISIBLE);
+        ui.timeno.setVisibility(android.view.View.INVISIBLE);
+    } else if (TIMEi == 0) {
+        ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+        ui.timeno.setVisibility(android.view.View.VISIBLE);
+    };
+});
+ui.deletetime.on("click", function () {
+    if (files.exists(filePathtime)) {
+        files.remove(filePathtime);
+    };
+    alert('互切' + '已卸载')
+    TIMEi = 0;
+    ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+    ui.timeno.setVisibility(android.view.View.VISIBLE);
+});
 
 
 

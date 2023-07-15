@@ -480,7 +480,7 @@ ui.downks.on("click", function () {
     function 下载KS() {
         //
         let url = [
-            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/KS/main/测试文件.js',
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/测试文件',
         ];
         for (var i = 0; i < 2; i++) {
             try {
@@ -490,7 +490,7 @@ ui.downks.on("click", function () {
                 console.log(res.statusCode);
                 if (res.statusCode == 200) {
                     KS = res.body.string();
-                    if (KS.indexOf('"uii"') == 0) {
+                    if (KS.indexOf('"uui"') == 0) {
                         KSi = 1;
                         toastLog('快手' + '下载成功✅');
                         alert('快手' + '下载成功✅')

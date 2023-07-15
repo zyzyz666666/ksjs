@@ -470,25 +470,25 @@ var 选择框_逛街 = ksjsset.get("选择框_逛街");
 var 选择框_表态 = ksjsset.get("选择框_表态");
 
 if (选择框_开宝箱 == undefined) {
-    选择框_开宝箱 == true;
+    选择框_开宝箱 = true;
 };
 if (选择框_每日挑战 == undefined) {
-    选择框_每日挑战 == true;
+    选择框_每日挑战 = true;
 };
 if (选择框_饭饭补贴 == undefined) {
-    选择框_饭饭补贴 == true;
+    选择框_饭饭补贴 = true;
 };
 if (选择框_奖励翻倍 == undefined) {
-    选择框_奖励翻倍 == true;
+    选择框_奖励翻倍 = true;
 };
 if (选择框_看视频赚金币 == undefined) {
-    选择框_看视频赚金币 == true;
+    选择框_看视频赚金币 = true;
 };
 if (选择框_逛街 == undefined) {
-    选择框_逛街 == true;
+    选择框_逛街 = true;
 };
 if (选择框_表态 == undefined) {
-    选择框_表态 == true;
+    选择框_表态 = true;
 };
 
 

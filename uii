@@ -26,7 +26,7 @@ ui.layout(
                             <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
                                 <horizontal gravity="center_vertical">
                                     <vertical padding="10 8" h="auto" w="0" layout_weight="1">
-                                        <img src="https://s2-10623.kwimgs.com/kos/nlav10623/vision_images/topBannerx1.png" />
+                                        <img src="https://s2-10623.kwimgs.com/kos/nlav10623/vision_images/topBannerx1.png" id="kslogo" />
                                     </vertical>
                                 </horizontal>
                             </card>
@@ -378,9 +378,9 @@ ui.consoleshow.on("check", function (checked) {
     }
 });
 
-// ui.log.on("click", function () {
-//     app.startActivity("console");
-// });//删掉了
+ui.kslogo.on("click", function () {
+    app.startActivity("console");
+});//删掉了
 
 ui.start.on("click", function () {
     //程序开始运行之前判断无障碍服务

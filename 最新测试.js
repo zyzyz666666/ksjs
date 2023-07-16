@@ -343,12 +343,12 @@ function 签到() {
                                             };
                                             if (hmkw !== "去完成任务") {
                                                 log("还没看完,继续等待30秒");
-                                                var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                                var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                                                 还没看完button.click();
                                                 停留30秒倒计时();
                                             } else {
                                                 log("额外任务");
-                                                var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                                var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                                                 放弃button.click();
                                             };
                                         };
@@ -372,12 +372,12 @@ function 签到() {
                                                 };
                                                 if (hmkw !== "去完成任务") {
                                                     log("还没看完,继续等待30秒");
-                                                    var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                                                     还没看完button.click();
                                                     停留30秒倒计时();
                                                 } else {
                                                     log("额外任务");
-                                                    var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                                                     放弃button.click();
                                                 };
                                             };
@@ -1091,12 +1091,12 @@ if (earnmoney && c === true) {
                                                         };
                                                         if (hmkw !== "去完成任务") {
                                                             log("还没看完,继续等待30秒");
-                                                            var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                                            var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                                                             还没看完button.click();
                                                             停留30秒倒计时();
                                                         } else {
                                                             log("额外任务");
-                                                            var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                                            var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                                                             放弃button.click();
                                                         };
                                                     };
@@ -1141,12 +1141,12 @@ if (earnmoney && c === true) {
                                                 };
                                                 if (hmkw !== "去完成任务") {
                                                     log("还没看完,继续等待30秒");
-                                                    var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                                                     还没看完button.click();
                                                     停留30秒倒计时();
                                                 } else {
                                                     log("额外任务");
-                                                    var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                                                     放弃button.click();
                                                 };
                                             };
@@ -1201,12 +1201,12 @@ if (earnmoney && c === true) {
                                         };
                                         if (hmkw !== "去完成任务") {
                                             log("还没看完,继续等待30秒");
-                                            var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                            var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                                             还没看完button.click();
                                             停留30秒倒计时();
                                         } else {
                                             log("额外任务");
-                                            var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                            var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                                             放弃button.click();
                                         };
                                     };
@@ -1371,12 +1371,12 @@ if (earnmoney && c === true) {
                                 };
                                 if (hmkw !== "去完成任务") {
                                     log("还没看完,继续等待30秒");
-                                    var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                                     还没看完button.click();
                                     停留30秒倒计时();
                                 } else {
                                     log("额外任务");
-                                    var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                                     放弃button.click();
                                 };
                             } else {
@@ -1800,12 +1800,12 @@ function xx() {
             };
             if (hmkw !== "去完成任务") {
                 log("还没看完,继续等待30秒");
-                var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                 还没看完button.click();
                 停留30秒倒计时();
             } else {
                 log("额外任务");
-                var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                 放弃button.click();
             };
         };
@@ -1904,12 +1904,12 @@ function xx() {
                 };
                 if (hmkw !== "去完成任务") {
                     log("还没看完,继续等待30秒");
-                    var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                     还没看完button.click();
                     停留30秒倒计时();
                 } else {
                     log("额外任务");
-                    var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                     放弃button.click();
                 };
             };
@@ -1972,12 +1972,12 @@ function xx() {
                 };
                 if (hmkw !== "去完成任务") {
                     log("还没看完,继续等待30秒");
-                    var 还没看完button = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_button").findOne();
+                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000*20);
                     还没看完button.click();
                     停留30秒倒计时();
                 } else {
                     log("额外任务");
-                    var 放弃button = id("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon_button").findOne();
+                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000*20);
                     放弃button.click();
                 };
             };

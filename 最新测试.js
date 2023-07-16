@@ -1790,6 +1790,7 @@ function xx() {
     var 金币箱弹窗 = text("nebula-box-jinbi").findOne(100);
     var 第一类弹窗 = text("恭喜获得看视频惊喜红包").findOne(100);
     var 第二类弹窗 = text("popup_icon").findOne(100) || id("com.kuaishou.nebula.neo_video:id/again_dialog_image").findOne(100);
+    var 第三类额外弹窗 = id("com.kuaishou.nebula.neo_video:id/close_dialog_logo").findOne(100);
     var 弹窗 = textContains("签到领取").findOne(100) || textContains("恭喜你获得").findOne(100) || text("早起打卡瓜分金币").findOne(100) || text("恭喜获得金币大礼包").findOne(100)//|| textContains("限时福利").findOne(500); 
     var 邀请新用户 = textContains("邀请新用户").findOne(100);
     var 青少年模式 = id("com.kuaishou.nebula:id/set_teenage_mode").findOne(100);
@@ -1994,6 +1995,51 @@ function xx() {
             runThreads();
         }
     };
+    if (第三类额外弹窗 && 第三类额外弹窗.visibleToUser() === true) {
+        lloogg("检测到额外弹窗");
+        lloogg("先暂停");
+        if (currentThread !== 100) {
+            try {
+                pauseThread10();
+                pauseThread1();
+                pauseThread2();
+                pauseThread3();
+                pauseThread4();
+                pauseThread5();
+                pauseThread6();
+                pauseThread7();
+                pauseThread8();
+                pauseThread11();
+                先暂停 = 1;
+            } catch (e) {
+                线 = 0;
+            }
+
+        };
+        try {
+            var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
+            放弃button.click();
+        } catch (error) {
+            lloogg("额外弹窗error");
+        };
+        goandearn();
+        回顶();
+        if (先暂停 == 1) {
+            先暂停 = 0;
+            resumeThread10();
+            resumeThread1();
+            resumeThread2();
+            resumeThread3();
+            resumeThread4();
+            resumeThread5();
+            resumeThread6();
+            resumeThread7();
+            resumeThread8();
+            resumeThread11();
+            runThreads();
+        };
+    };
+
     if (金币箱弹窗 && 金币箱弹窗.visibleToUser() === true) {
         lloogg("检测到金币箱弹窗");
         lloogg("先暂停");

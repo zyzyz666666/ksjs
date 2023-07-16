@@ -1,6 +1,6 @@
 "uuii"
 
-///////////////
+///////////////新ui的参数设置
 var ksset = storages.create("ksset");
 
 var 选择框_切换账号 = ksset.get("选择框_切换账号");
@@ -48,29 +48,29 @@ if (评论任务 == undefined) {
 if (看视频任务 == undefined) {
     看视频任务 = true;
 };
-/////////////////////
-var 缓存 = storages.create("输入框1")
-缓存.put("输入框11", 输入框11);
-缓存.put("输入框1", 输入框1);
-// 缓存.put("输入框2", ui.输入框2.text());
-// 缓存.put("输入框22", ui.输入框22.text());
-缓存.put("输入框3", 输入框3);
-// 缓存.put("输入框33", ui.输入框33.text());
-缓存.put("输入框分钟", 输入框分钟);
+/////////////////////直接放进老ui参数设置
+var global = storages.create("输入框1")
+global.put("输入框11", 输入框11);
+global.put("输入框1", 输入框1);
+// global.put("输入框2", ui.输入框2.text());
+// global.put("输入框22", ui.输入框22.text());
+global.put("输入框3", 输入框3);
+// global.put("输入框33", ui.输入框33.text());
+global.put("输入框分钟", 输入框分钟);
 
-缓存.put("输入框速度调节", 输入框速度调节);
-// 缓存.put("快手极速版输入框6", ui.快手极速版输入框6.text());
+global.put("输入框速度调节", 输入框速度调节);
+// global.put("快手极速版输入框6", ui.快手极速版输入框6.text());
 
-// 缓存.put("账号文本", ui.账号文本.text());
+// global.put("账号文本", ui.账号文本.text());
 
-// 缓存.put("输入框7", ui.输入框7.text());
-// 缓存.put("激活码", ui.激活码.text());
-缓存.put("选择框_看视频任务", 看视频任务);
-缓存.put("选择框_评论任务", 评论任务);
-缓存.put("选择框_点赞任务", 点赞任务);
-缓存.put("选择框_逛街任务", 逛街任务);
-缓存.put("选择框_悬赏任务", 悬赏任务);
-缓存.put("选择框_切换账号", 选择框_切换账号);
+// global.put("输入框7", ui.输入框7.text());
+// global.put("激活码", ui.激活码.text());
+global.put("选择框_看视频任务", 看视频任务);
+global.put("选择框_评论任务", 评论任务);
+global.put("选择框_点赞任务", 点赞任务);
+global.put("选择框_逛街任务", 逛街任务);
+global.put("选择框_悬赏任务", 悬赏任务);
+global.put("选择框_切换账号", 选择框_切换账号);
 //////////////////
 
 let 是否root = false
@@ -187,23 +187,23 @@ function 开启脚本() {
     }
 
     var state = true, statey = true
-    var 缓存 = storages.create("输入框1")
-    var 开始的 = 缓存.get("输入框1") * 1
-    var 结束的 = 缓存.get("输入框11") * 1
-    var 速度 = 缓存.get("输入框速度调节") * 1
-    var 等待2 = 缓存.get("输入框分钟") * 1
-    // var 刷新 = 缓存.get("输入框3") * 1
-    // var 点击红包次数 = 缓存.get("输入框33") * 1
-    var 用户名 = 缓存.get("激活码")
+    var global = storages.create("输入框1")
+    var 开始的 = global.get("输入框1") * 1
+    var 结束的 = global.get("输入框11") * 1
+    var 速度 = global.get("输入框速度调节") * 1
+    var 等待2 = global.get("输入框分钟") * 1
+    // var 刷新 = global.get("输入框3") * 1
+    // var 点击红包次数 = global.get("输入框33") * 1
+    var 用户名 = global.get("激活码")
     // if (!验证用户("290930233", "雅视分身阅读", 用户名)) {
     //     alert('用户名有误或超过最大使用设备数!')
     //     exit() //如果验证不通过 退出脚本
     // }
     toastLog("--开始运行--")
     sleep(2000)
-    aw缓存配置("广告高度", false)
+    awglobal配置("广告高度", false)
     var 这次随机2, 当前点击红包次数 = 0, 最后达标 = 0
-    // if (ui.选择框_记忆.isChecked() == true && aw缓存配置("记忆") != undefined) { 顺序 = aw缓存配置("记忆") }
+    // if (ui.选择框_记忆.isChecked() == true && awglobal配置("记忆") != undefined) { 顺序 = awglobal配置("记忆") }
 
     while (true) {
         aw打开app("快手")
@@ -213,7 +213,7 @@ function 开启脚本() {
         toastLog("--先强关一次快手--")
         aw打开app("快手")
         sleep(7000)
-        if (缓存.get("选择框_切换账号")) {
+        if (global.get("选择框_切换账号")) {
             快手切换账号()
             运行阅读(等待2)
         } else {
@@ -279,26 +279,26 @@ function 返回首页() {
 
 
 function 运行阅读(参数1) {
-    var 缓存 = storages.create("输入框1")
-    var 开始的 = 缓存.get("输入框1") * 1
-    var 结束的 = 缓存.get("输入框11") * 1
-    var 分钟 = 缓存.get("输入框3") * 60
-    var 速度 = 缓存.get("输入框速度调节") * 1
+    var global = storages.create("输入框1")
+    var 开始的 = global.get("输入框1") * 1
+    var 结束的 = global.get("输入框11") * 1
+    var 分钟 = global.get("输入框3") * 60
+    var 速度 = global.get("输入框速度调节") * 1
     var statey = true, 是否签到了 = false, 卡秒 = 0, 滑动次数 = 0, 最后看一次 = false
     var 悬赏任务 = true, 逛街任务 = true, 点赞任务 = true, 评论任务 = true, 看视频任务 = true
-    if (缓存.get("选择框_悬赏任务") == false) {
+    if (global.get("选择框_悬赏任务") == false) {
         悬赏任务 = false
     }
-    if (缓存.get("选择框_逛街任务") == false) {
+    if (global.get("选择框_逛街任务") == false) {
         逛街任务 = false
     }
-    if (缓存.get("选择框_点赞任务") == false) {
+    if (global.get("选择框_点赞任务") == false) {
         点赞任务 = false
     }
-    if (缓存.get("选择框_评论任务") == false) {
+    if (global.get("选择框_评论任务") == false) {
         评论任务 = false
     }
-    if (缓存.get("选择框_看视频任务") == false) {
+    if (global.get("选择框_看视频任务") == false) {
         看视频任务 = false
     }
     var 看下视频 = 0
@@ -418,7 +418,7 @@ function 运行阅读(参数1) {
         } else if (aw找文字节点("立即获取", 1)) {
             定位 = aw找文字节点("立即获取", 1)
             if (定位) {
-                aw缓存配置("广告高度", 定位[1])
+                awglobal配置("广告高度", 定位[1])
             }
             sleep(1000)//
         } else if (awcontrol(/客服|发条有爱评论.*/, 1)) {
@@ -1312,10 +1312,10 @@ function aw文件写入() {
     }
 }
 /*
-log(缓存配置("t"))//读出
- 缓存配置("t",1)//写入
+log(global配置("t"))//读出
+ global配置("t",1)//写入
 */
-function aw缓存配置() {
+function awglobal配置() {
     var storag = storages.create("配置参数")
     if (arguments.length - 1 == 1) {
         storag.put(arguments[0], arguments[1]);
@@ -1336,26 +1336,26 @@ function getMd5(string) {
 function aw定时判断() {
     var t = +new Date() / 1000
     if (arguments.length - 1 == 1) {
-        if (+new Date() / 1000 - aw缓存配置(arguments[0] + "定时") * 1 >= arguments[1] * 1) {
-            if (arguments[0] == "app定时") { aw缓存配置("还剩时间", 0) }
+        if (+new Date() / 1000 - awglobal配置(arguments[0] + "定时") * 1 >= arguments[1] * 1) {
+            if (arguments[0] == "app定时") { awglobal配置("还剩时间", 0) }
             toastLog(arguments[0] + "已超时")
             // floatyLog(arguments[0] + "已超时")
             return true
         } else {
-            var 取整 = (+new Date() / 1000 - aw缓存配置(arguments[0] + "定时") * 1) / 60
+            var 取整 = (+new Date() / 1000 - awglobal配置(arguments[0] + "定时") * 1) / 60
             var 刚刚 = ~~取整
-            if (aw缓存配置(arguments[0] + "刚刚定时") != 刚刚) {
-                aw缓存配置(arguments[0] + "刚刚定时", 刚刚)
+            if (awglobal配置(arguments[0] + "刚刚定时") != 刚刚) {
+                awglobal配置(arguments[0] + "刚刚定时", 刚刚)
                 取整 = arguments[1] / 60 - 刚刚
-                if (arguments[0] == "app定时") { aw缓存配置("还剩时间", 取整) }
+                if (arguments[0] == "app定时") { awglobal配置("还剩时间", 取整) }
                 // floatyLog(arguments[0] + ":" + ~~取整 + "分钟")
                 toastLog(arguments[0] + ":" + ~~取整 + "分钟")
             }
             return false
         }
     } else {
-        aw缓存配置(arguments[0] + "刚刚定时", 0)
-        aw缓存配置(arguments[0] + "定时", t)
+        awglobal配置(arguments[0] + "刚刚定时", 0)
+        awglobal配置(arguments[0] + "定时", t)
         return true
     }
 }

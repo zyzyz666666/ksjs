@@ -614,7 +614,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t10 = 1;
-            if (!thread10Paused && t10 == 1) {
+            if (!thread10Paused && t10 == 1 && currentThread == 10) {
                 setTimeout(thread1, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -811,7 +811,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t1 = 1;
-            if (!thread1Paused && t1 == 1) {
+            if (!thread1Paused && t1 == 1 && currentThread == 1) {
                 setTimeout(thread2, 1000);  // 延迟1秒调用线程2
             }
         }
@@ -844,7 +844,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t2 = 1;
-            if (!thread2Paused && t2 == 1) {
+            if (!thread2Paused && t2 == 1 && currentThread == 2) {
                 setTimeout(thread3, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1030,7 +1030,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t3 = 1;
-            if (!thread3Paused && t3 == 1) {
+            if (!thread3Paused && t3 == 1 && currentThread == 3) {
                 setTimeout(thread4, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1286,7 +1286,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t4 = 1;
-            if (!thread4Paused && t4 == 1) {
+            if (!thread4Paused && t4 == 1 && currentThread == 4) {
                 setTimeout(thread5, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1353,7 +1353,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t5 = 1;
-            if (!thread5Paused && t5 == 1) {
+            if (!thread5Paused && t5 == 1 && currentThread == 5) {
                 setTimeout(thread6, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1458,7 +1458,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t6 = 1;
-            if (!thread6Paused && t6 == 1) {
+            if (!thread6Paused && t6 == 1 && currentThread == 6) {
                 setTimeout(thread7, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1541,7 +1541,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t7 = 1;
-            if (!thread7Paused && t7 == 1) {
+            if (!thread7Paused && t7 == 1 && currentThread == 7) {
                 setTimeout(thread8, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1679,7 +1679,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t8 = 1;
-            if (!thread8Paused && t8 == 1) {
+            if (!thread8Paused && t8 == 1 && currentThread == 8) {
                 setTimeout(thread11, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1732,7 +1732,7 @@ if (earnmoney && c === true) {
             回顶();
             sleep(1000);
             t11 = 1;
-            if (!thread11Paused && t11 == 1) {
+            if (!thread11Paused && t11 == 1 && currentThread == 11) {
                 setTimeout(thread10, 1000);  // 延迟1秒调用线程3
             }
         }

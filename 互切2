@@ -1357,6 +1357,15 @@ threads.start(function () {
                 var newtimeout = origintimeout + elapsedTime;
                 timeset.put("timeout", newtimeout);
                 log(newtimeout);
+                if (newtimeout > duration) {
+                    threads.shutDownAll();
+                    log(a);
+                    origintimeout = 0;
+                    timeset.put("timeout", origintimeout);
+                    home();
+                    sleep(1500);
+                    engines.execScriptFile(filePathtime);
+                };
                 return true
             } else {
                 var 取整 = (+new Date() / 1000 - awglobal配置(arguments[0] + "定时") * 1) / 60
@@ -1508,12 +1517,3 @@ threads.start(function () {
     //
 });
 
-if (origintimeout > duration) {
-    threads.shutDownAll();
-    log(a);
-    origintimeout = 0;
-    timeset.put("timeout", origintimeout);
-    home();
-    sleep(1500);
-    engines.execScriptFile(filePathtime);
-};

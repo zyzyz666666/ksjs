@@ -1,16 +1,23 @@
 "uuvii1"
 var timeset = storages.create("timeset");
+var origintimeout = timeset.get("timeout");
 var 输入框互切 = timeset.get("输入框互切");
 if (输入框互切 == undefined) {
-    输入框互切 =  60;
+    输入框互切 = 60;
 };
+if (origintimeout == undefined) {
+    origintimeout = 0;
+};
+log(输入框互切, origintimeout)
+var filePathtime = '/sdcard/time.js';
 var filePathtime2 = '/sdcard/time2.js';
 var duration = 输入框互切 * 1000 * 60; // 脚本执行的时间，单位为毫秒
 var a = "正在切换2";
 
 log("这是1")
 threads.start(function () {
-    //
+    var startTime = new Date().getTime(); // 记录脚本开始时间4
+    log("现在是" + startTime)
     var window = floaty.window(
         <frame gravity="center">
             <button id="closeBtn" text="强制关闭" w="auto" h="auto" bg="#ff0000" />
@@ -547,7 +554,7 @@ threads.start(function () {
 
     });
     threads.start(function () {
-        setInterval(yy, 18 * 60 * 1000); // run the task every 5 second
+        setInterval(yy, 15 * 60 * 1000); // run the task every 5 second
         lloogg("YY")
 
     });
@@ -1790,8 +1797,16 @@ threads.start(function () {
 
     ///////////////////////////////////////////////////////////////////////////////
     function yy() {
+        var currentTime = new Date().getTime(); // 获取当前时间
+        log("现在:" + currentTime)
+        var elapsedTime = currentTime - startTime; // 计算已经过去的时间
+        log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
+        var newtimeout = origintimeout + elapsedTime;
+        timeset.put("timeout", newtimeout);
+        log(newtimeout);
+        sleep(3000);
         engines.stopAll();
-        engines.execScriptFile("/sdcard/ksjs.js");
+        engines.execScriptFile(filePathtime);
     };
 
     function xx() {
@@ -2206,8 +2221,9 @@ threads.start(function () {
     //
 });
 
-setTimeout(function () {
+if (origintimeout > duration) {
     threads.shutDownAll();
     log(a);
+    origintimeout = 0;
     engines.execScriptFile(filePathtime2);
-}, duration);
+};

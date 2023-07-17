@@ -402,7 +402,7 @@ ui.start.on("click", function () {
         } else if (ui.script_chosen.getSelectedItemPosition() == 2 && files.exists(filePathks)) {
             engines.execScriptFile(filePathks); // 快手
         } else if (ui.script_chosen.getSelectedItemPosition() == 0 && files.exists(filePathtime) && files.exists(filePathtime2)) {
-            engines.execScriptFile(filePathtime); // 互切
+            engines.execScriptFile(filePathtime2); // 互切
         } else {
             alert("请先下载脚本");
         };

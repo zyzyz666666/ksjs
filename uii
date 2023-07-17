@@ -83,7 +83,8 @@ ui.layout(
                                         <button text="卸载" id="deleteksjs" />
                                     </linear>
                                     <linear>
-                                        <button text="互切 脚本下载" id="downtime" />
+<button text="互切1" id="downtime" />
+                                        <button text="互切2" id="downtime" />
                                         <text id="timeyes" text="已下载✅" />
                                         <text id="timeno" text="未下载❌" />
                                         <button text="刷新" id="downtimef5" />

@@ -2225,5 +2225,8 @@ if (origintimeout > duration) {
     threads.shutDownAll();
     log(a);
     origintimeout = 0;
+    timeset.put("timeout", origintimeout);
+    home();
+    sleep(1500);
     engines.execScriptFile(filePathtime2);
 };

@@ -647,12 +647,15 @@ ui.downtime1.on("click", function () {
     };
 });
 ui.downtimef5.on("click", function () {
-    if (TIMEi == 1) {
+    if (TIMEi == 1 && time2i == 1) {
         if (files.exists(filePathtime)) {
             files.remove(filePathtime);
         };
         files.write(filePathtime, TIME);
-        toastLog("互切1 已保存");
+        if (files.exists(filePathtime2)) {
+            files.remove(filePathtime2);
+        };
+        toastLog("互切2 已保存");
         ui.timeyes.setVisibility(android.view.View.VISIBLE);
         ui.timeno.setVisibility(android.view.View.INVISIBLE);
     } else if (TIMEi == 0) {
@@ -731,29 +734,6 @@ ui.downtime2.on("click", function () {
         ui.time2yes.setVisibility(android.view.View.VISIBLE);
         ui.time2no.setVisibility(android.view.View.INVISIBLE);
     };
-});
-ui.downtime2f5.on("click", function () {
-    if (time2i == 1) {
-        if (files.exists(filePathtime2)) {
-            files.remove(filePathtime2);
-        };
-        files.write(filePathtime2, time2);
-        toastLog("互切2 已保存");
-        ui.time2yes.setVisibility(android.view.View.VISIBLE);
-        ui.time2no.setVisibility(android.view.View.INVISIBLE);
-    } else if (time2i == 0) {
-        ui.time2yes.setVisibility(android.view.View.INVISIBLE);
-        ui.time2no.setVisibility(android.view.View.VISIBLE);
-    };
-});
-ui.deletetime2.on("click", function () {
-    if (files.exists(filePathtime2)) {
-        files.remove(filePathtime2);
-    };
-    alert('互切2' + '已卸载')
-    time2i = 0;
-    ui.time2yes.setVisibility(android.view.View.INVISIBLE);
-    ui.time2no.setVisibility(android.view.View.VISIBLE);
 });
 
 // /////////////////////////////////////////////////////////////////////////////测试文件

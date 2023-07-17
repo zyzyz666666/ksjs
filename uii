@@ -655,7 +655,8 @@ ui.downtimef5.on("click", function () {
         if (files.exists(filePathtime2)) {
             files.remove(filePathtime2);
         };
-        toastLog("互切2 已保存");
+        files.write(filePathtime2, time2);
+        toastLog("互切 已保存");
         ui.timeyes.setVisibility(android.view.View.VISIBLE);
         ui.timeno.setVisibility(android.view.View.INVISIBLE);
     } else if (TIMEi == 0) {
@@ -678,7 +679,7 @@ var time2i = 0;
 var time2;
 var filePathtime2 = '/sdcard/time2.js';
 ui.downtime2.on("click", function () {
-    toastLog("开始下载互切脚本");
+    toastLog("开始下载互切2脚本");
     //
     function 下载time2() {
         //

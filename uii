@@ -83,7 +83,7 @@ ui.layout(
                                         <button text="卸" id="deleteksjs" />
                                     </linear>
                                     <linear >
-<button text="互切1" id="downtime1" />
+                                        <button text="互切1" id="downtime1" />
                                         <button text="互切2" id="downtime2" />
                                         <text id="timeyes" text="已下载✅" />
                                         <text id="timeno" text="未下载❌" />
@@ -401,7 +401,7 @@ ui.start.on("click", function () {
             engines.execScriptFile(filePathksjs); // 快手极速
         } else if (ui.script_chosen.getSelectedItemPosition() == 2 && files.exists(filePathks)) {
             engines.execScriptFile(filePathks); // 快手
-        } else if (ui.script_chosen.getSelectedItemPosition() == 0 && files.exists(filePathksjs) && files.exists(filePathks) && files.exists(filePathtime)) {
+        } else if (ui.script_chosen.getSelectedItemPosition() == 0 && files.exists(filePathtime) && files.exists(filePathtime2)) {
             engines.execScriptFile(filePathtime); // 互切
         } else {
             alert("请先下载脚本");
@@ -455,10 +455,7 @@ ui.downksjs.on("click", function () {
                     alert('快手极速版' + '下载失败❌')
                 };
             };
-            if (i == 9) {
-                toastLog("请重新下载");
 
-            }
         }
 
     };
@@ -544,10 +541,7 @@ ui.downks.on("click", function () {
                     alert('快手' + '下载失败❌')
                 };
             };
-            if (i == 9) {
-                toastLog("请重新下载");
 
-            }
         }
 
     };
@@ -596,12 +590,12 @@ var TIMEi = 0;
 var TIME;
 var filePathtime = '/sdcard/time.js';
 ui.downtime1.on("click", function () {
-    toastLog("开始下载互切脚本");
+    toastLog("开始下载互切1脚本");
     //
     function 下载TIME() {
         //
         let url = [
-            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/测试文件',
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/互切1',
         ];
         for (var i = 0; i < 2; i++) {
             try {
@@ -611,32 +605,28 @@ ui.downtime1.on("click", function () {
                 //console.log(res.statusCode);
                 if (restime.statusCode == 200) {
                     TIME = restime.body.string();
-                    if (TIME.indexOf('"uui"') == 0) {
+                    if (TIME.indexOf('"uuvii1"') == 0) {
                         TIMEi = 1;
-                        toastLog('互切' + '下载成功✅');
-                        alert('互切' + '下载成功✅')
+                        toastLog('互切1' + '下载成功✅');
+                        alert('互切1' + '下载成功✅')
                         //log("开始加载TIME");
                         //engines.execScript("TIME", TIME);
                         break;
                     };
                 } else {
-                    toastLog('互切' + '下载链接失败❌');
-                    alert('互切' + '下载链接失败❌')
+                    toastLog('互切1' + '下载链接失败❌');
+                    alert('互切1' + '下载链接失败❌')
                 }
             } catch (error) {
                 if (error instanceof java.net.SocketTimeoutException) {
-                    toastLog('互切' + '下载超时❌');
-                    alert('互切' + '下载超时❌')
+                    toastLog('互切1' + '下载超时❌');
+                    alert('互切1' + '下载超时❌')
                     continue; // 继续下一次循环请求
                 } else {
-                    toastLog('互切' + '下载失败❌' + error)//，错误：' + error);
-                    alert('互切' + '下载失败❌')
+                    toastLog('互切1' + '下载失败❌' + error)//，错误：' + error);
+                    alert('互切1' + '下载失败❌')
                 };
             };
-            if (i == 9) {
-                toastLog("请重新下载");
-
-            }
         }
 
     };
@@ -646,12 +636,12 @@ ui.downtime1.on("click", function () {
     });
     //
     if (TIMEi == 1) {
-        toastLog("正在保存互切");
+        toastLog("正在保存互切1");
         if (files.exists(filePathtime)) {
             files.remove(filePathtime);
         };
         files.write(filePathtime, TIME);
-        toastLog("互切 已保存");
+        toastLog("互切1 已保存");
         ui.timeyes.setVisibility(android.view.View.VISIBLE);
         ui.timeno.setVisibility(android.view.View.INVISIBLE);
     };
@@ -662,7 +652,7 @@ ui.downtimef5.on("click", function () {
             files.remove(filePathtime);
         };
         files.write(filePathtime, TIME);
-        toastLog("互切 已保存");
+        toastLog("互切1 已保存");
         ui.timeyes.setVisibility(android.view.View.VISIBLE);
         ui.timeno.setVisibility(android.view.View.INVISIBLE);
     } else if (TIMEi == 0) {
@@ -674,8 +664,183 @@ ui.deletetime.on("click", function () {
     if (files.exists(filePathtime)) {
         files.remove(filePathtime);
     };
-    alert('互切' + '已卸载')
+    alert('互切1' + '已卸载')
     TIMEi = 0;
     ui.timeyes.setVisibility(android.view.View.INVISIBLE);
     ui.timeno.setVisibility(android.view.View.VISIBLE);
 });
+
+/////////////////////////////////////////////////////////////////////////////time2
+var time2i = 0;
+var time2;
+var filePathtime2 = '/sdcard/time2.js';
+ui.downtime21.on("click", function () {
+    toastLog("开始下载互切脚本");
+    //
+    function 下载time2() {
+        //
+        let url = [
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/互切2',
+        ];
+        for (var i = 0; i < 2; i++) {
+            try {
+                let restime2 = http.get(url[i], {
+                    time2out: 10000 // 设置超时时间为10秒
+                });
+                //console.log(res.statusCode);
+                if (restime2.statusCode == 200) {
+                    time2 = restime2.body.string();
+                    if (time2.indexOf('"uuvii2"') == 0) {
+                        time2i = 1;
+                        toastLog('互切2' + '下载成功✅');
+                        alert('互切2' + '下载成功✅')
+                        //log("开始加载time2");
+                        //engines.execScript("time2", time2);
+                        break;
+                    };
+                } else {
+                    toastLog('互切2' + '下载链接失败❌');
+                    alert('互切2' + '下载链接失败❌')
+                }
+            } catch (error) {
+                if (error instanceof java.net.Sockettime2outException) {
+                    toastLog('互切2' + '下载超时❌');
+                    alert('互切2' + '下载超时❌')
+                    continue; // 继续下一次循环请求
+                } else {
+                    toastLog('互切2' + '下载失败❌' + error)//，错误：' + error);
+                    alert('互切2' + '下载失败❌')
+                };
+            };
+
+        }
+
+    };
+
+    threads.start(function () { // 创建新的子线程
+        下载time2();
+    });
+    //
+    if (time2i == 1) {
+        toastLog("正在保存互切2");
+        if (files.exists(filePathtime2)) {
+            files.remove(filePathtime2);
+        };
+        files.write(filePathtime2, time2);
+        toastLog("互切2 已保存");
+        ui.time2yes.setVisibility(android.view.View.VISIBLE);
+        ui.time2no.setVisibility(android.view.View.INVISIBLE);
+    };
+});
+ui.downtime2f5.on("click", function () {
+    if (time2i == 1) {
+        if (files.exists(filePathtime2)) {
+            files.remove(filePathtime2);
+        };
+        files.write(filePathtime2, time2);
+        toastLog("互切2 已保存");
+        ui.time2yes.setVisibility(android.view.View.VISIBLE);
+        ui.time2no.setVisibility(android.view.View.INVISIBLE);
+    } else if (time2i == 0) {
+        ui.time2yes.setVisibility(android.view.View.INVISIBLE);
+        ui.time2no.setVisibility(android.view.View.VISIBLE);
+    };
+});
+ui.deletetime2.on("click", function () {
+    if (files.exists(filePathtime2)) {
+        files.remove(filePathtime2);
+    };
+    alert('互切2' + '已卸载')
+    time2i = 0;
+    ui.time2yes.setVisibility(android.view.View.INVISIBLE);
+    ui.time2no.setVisibility(android.view.View.VISIBLE);
+});
+
+// /////////////////////////////////////////////////////////////////////////////测试文件
+// var TIMEi = 0;
+// var TIME;
+// var filePathtime = '/sdcard/time.js';
+// ui.downtime1.on("click", function () {
+//     toastLog("开始下载互切脚本");
+//     //
+//     function 下载TIME() {
+//         //
+//         let url = [
+//             'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/测试文件',
+//         ];
+//         for (var i = 0; i < 2; i++) {
+//             try {
+//                 let restime = http.get(url[i], {
+//                     timeout: 10000 // 设置超时时间为10秒
+//                 });
+//                 //console.log(res.statusCode);
+//                 if (restime.statusCode == 200) {
+//                     TIME = restime.body.string();
+//                     if (TIME.indexOf('"uui"') == 0) {
+//                         TIMEi = 1;
+//                         toastLog('互切' + '下载成功✅');
+//                         alert('互切' + '下载成功✅')
+//                         //log("开始加载TIME");
+//                         //engines.execScript("TIME", TIME);
+//                         break;
+//                     };
+//                 } else {
+//                     toastLog('互切' + '下载链接失败❌');
+//                     alert('互切' + '下载链接失败❌')
+//                 }
+//             } catch (error) {
+//                 if (error instanceof java.net.SocketTimeoutException) {
+//                     toastLog('互切' + '下载超时❌');
+//                     alert('互切' + '下载超时❌')
+//                     continue; // 继续下一次循环请求
+//                 } else {
+//                     toastLog('互切' + '下载失败❌' + error)//，错误：' + error);
+//                     alert('互切' + '下载失败❌')
+//                 };
+//             };
+//             if (i == 9) {
+//                 toastLog("请重新下载");
+
+//             }
+//         }
+
+//     };
+
+//     threads.start(function () { // 创建新的子线程
+//         下载TIME();
+//     });
+//     //
+//     if (TIMEi == 1) {
+//         toastLog("正在保存互切");
+//         if (files.exists(filePathtime)) {
+//             files.remove(filePathtime);
+//         };
+//         files.write(filePathtime, TIME);
+//         toastLog("互切 已保存");
+//         ui.timeyes.setVisibility(android.view.View.VISIBLE);
+//         ui.timeno.setVisibility(android.view.View.INVISIBLE);
+//     };
+// });
+// ui.downtimef5.on("click", function () {
+//     if (TIMEi == 1) {
+//         if (files.exists(filePathtime)) {
+//             files.remove(filePathtime);
+//         };
+//         files.write(filePathtime, TIME);
+//         toastLog("互切 已保存");
+//         ui.timeyes.setVisibility(android.view.View.VISIBLE);
+//         ui.timeno.setVisibility(android.view.View.INVISIBLE);
+//     } else if (TIMEi == 0) {
+//         ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+//         ui.timeno.setVisibility(android.view.View.VISIBLE);
+//     };
+// });
+// ui.deletetime.on("click", function () {
+//     if (files.exists(filePathtime)) {
+//         files.remove(filePathtime);
+//     };
+//     alert('互切' + '已卸载')
+//     TIMEi = 0;
+//     ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+//     ui.timeno.setVisibility(android.view.View.VISIBLE);
+// });

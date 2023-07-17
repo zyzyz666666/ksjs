@@ -731,8 +731,6 @@ ui.downtime2.on("click", function () {
         };
         files.write(filePathtime2, time2);
         toastLog("互切2 已保存");
-        ui.time2yes.setVisibility(android.view.View.VISIBLE);
-        ui.time2no.setVisibility(android.view.View.INVISIBLE);
     };
 });
 

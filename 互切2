@@ -1365,8 +1365,9 @@ threads.start(function () {
                     origintimeout = 0;
                     timeset.put("timeout", origintimeout);
                     home();
-                    sleep(1500);
+                    var filePathtime = '/sdcard/time.js';
                     engines.execScriptFile(filePathtime);
+                    log("这是启动测试1")
                 };
                 return true
             } else {
@@ -1519,13 +1520,3 @@ threads.start(function () {
     //
 });
 
-if (ksss == 1) {
-    threads.shutDownAll();
-    log(a);
-    ksss = 0;
-    origintimeout = 0;
-    timeset.put("timeout", origintimeout);
-    home();
-    sleep(1500);
-    engines.execScriptFile(filePathtime);
-};

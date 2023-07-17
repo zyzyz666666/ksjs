@@ -1,15 +1,23 @@
 "uuvii2"
 var timeset = storages.create("timeset");
+var origintimeout = timeset.get("timeout");
 var 输入框互切 = timeset.get("输入框互切");
 if (输入框互切 == undefined) {
     输入框互切 = 60;
 };
+if (origintimeout == undefined) {
+    origintimeout = 0;
+};
+log(输入框互切, origintimeout)
 var filePathtime = '/sdcard/time.js';
+var filePathtime2 = '/sdcard/time2.js';
 var duration = 输入框互切 * 1000 * 60; // 脚本执行的时间，单位为毫秒
 var a = "正在切换1";
 
 log("这是2")
 threads.start(function () {
+    var startTime = new Date().getTime(); // 记录脚本开始时间4
+    log("现在是" + startTime);
     //
     ////////////////////////
     ///////////////新ui的参数设置
@@ -1342,6 +1350,13 @@ threads.start(function () {
                 if (arguments[0] == "app定时") { awglobal配置("还剩时间", 0) }
                 toastLog(arguments[0] + "已超时")
                 // floatyLog(arguments[0] + "已超时")
+                var currentTime = new Date().getTime(); // 获取当前时间
+                log("现在:" + currentTime)
+                var elapsedTime = currentTime - startTime; // 计算已经过去的时间
+                log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
+                var newtimeout = origintimeout + elapsedTime;
+                timeset.put("timeout", newtimeout);
+                log(newtimeout);
                 return true
             } else {
                 var 取整 = (+new Date() / 1000 - awglobal配置(arguments[0] + "定时") * 1) / 60
@@ -1493,8 +1508,9 @@ threads.start(function () {
     //
 });
 
-setTimeout(function () {
+if (origintimeout > duration) {
     threads.shutDownAll();
     log(a);
+    origintimeout = 0;
     engines.execScriptFile(filePathtime);
-}, duration);
+};

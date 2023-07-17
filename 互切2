@@ -1360,11 +1360,11 @@ threads.start(function () {
                 log(newtimeout);
                 if (newtimeout > duration) {
                     ksss = 1;
-                    threads.shutDownAll();
-                    log(a);
-                    origintimeout = 0;
+origintimeout = 0;
                     timeset.put("timeout", origintimeout);
                     home();
+                    threads.shutDownAll();
+                    log(a);
                     var filePathtime = '/sdcard/time.js';
                     engines.execScriptFile(filePathtime);
                     log("这是启动测试1")

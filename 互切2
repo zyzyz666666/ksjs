@@ -5,7 +5,7 @@ if (输入框互切 == undefined) {
     输入框互切 = 60;
 };
 var filePathtime = '/sdcard/time.js';
-var duration = 输入框互切; // 脚本执行的时间，单位为毫秒
+var duration = 输入框互切 * 1000 * 60; // 脚本执行的时间，单位为毫秒
 var a = "正在切换1";
 
 log("这是2")

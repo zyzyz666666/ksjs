@@ -72,23 +72,23 @@ ui.layout(
                                         <button text="快手 脚本下载" id="downks" />
                                         <text id="ksyes" text="已下载✅" />
                                         <text id="ksno" text="未下载❌" />
-                                        <button text="刷新" id="downksf5" />
-                                        <button text="卸载" id="deleteks" />
+                                        <button text="刷" id="downksf5" />
+                                        <button text="卸" id="deleteks" />
                                     </linear>
                                     <linear>
-                                        <button text="快手极速 脚本下载" id="downksjs" />
+                                        <button text="快手极速 下载" id="downksjs" />
                                         <text id="ksjsyes" text="已下载✅" />
                                         <text id="ksjsno" text="未下载❌" />
-                                        <button text="刷新" id="downksjsf5" />
-                                        <button text="卸载" id="deleteksjs" />
+                                        <button text="刷" id="downksjsf5" />
+                                        <button text="卸" id="deleteksjs" />
                                     </linear>
                                     <linear >
-<button text="互切1" id="downtime" />
-                                        <button text="互切2" id="downtime" />
+<button text="互切1" id="downtime1" />
+                                        <button text="互切2" id="downtime2" />
                                         <text id="timeyes" text="已下载✅" />
                                         <text id="timeno" text="未下载❌" />
-                                        <button text="刷新" id="downtimef5" />
-                                        <button text="卸载" id="deletetime" />
+                                        <button text="刷" id="downtimef5" />
+                                        <button text="卸" id="deletetime" />
                                     </linear>
                                 </vertical>
                             </horizontal>
@@ -195,6 +195,13 @@ ui.layout(
 
 ui.start.setWidth(device.width / 2);
 ui.exit.setWidth(device.width / 2);
+
+ui.downtime1.setWidth(device.width / 9);
+ui.downtime2.setWidth(device.width / 9);
+ui.downtimef5.setWidth(device.width / 9);
+ui.deletetime.setWidth(device.width / 9);
+
+
 // 设置文本元素可见
 ui.ksyes.setVisibility(android.view.View.INVISIBLE);
 ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
@@ -588,7 +595,7 @@ ui.deleteks.on("click", function () {
 var TIMEi = 0;
 var TIME;
 var filePathtime = '/sdcard/time.js';
-ui.downtime.on("click", function () {
+ui.downtime1.on("click", function () {
     toastLog("开始下载互切脚本");
     //
     function 下载TIME() {
@@ -672,9 +679,3 @@ ui.deletetime.on("click", function () {
     ui.timeyes.setVisibility(android.view.View.INVISIBLE);
     ui.timeno.setVisibility(android.view.View.VISIBLE);
 });
-
-
-
-
-
-

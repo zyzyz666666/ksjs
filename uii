@@ -82,7 +82,7 @@ ui.layout(
                                         <button text="刷新" id="downksjsf5" />
                                         <button text="卸载" id="deleteksjs" />
                                     </linear>
-                                    <linear>
+                                    <linear w = "*">
 <button text="互切1" id="downtime" />
                                         <button text="互切2" id="downtime" />
                                         <text id="timeyes" text="已下载✅" />

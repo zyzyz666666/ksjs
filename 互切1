@@ -2,7 +2,7 @@
 var timeset = storages.create("timeset");
 var 输入框互切 = timeset.get("输入框互切");
 if (输入框互切 == undefined) {
-    输入框互切 = 60;
+    输入框互切 = 1000 * 60 * 60;
 };
 var filePathtime2 = '/sdcard/time2.js';
 var duration = 输入框互切; // 脚本执行的时间，单位为毫秒

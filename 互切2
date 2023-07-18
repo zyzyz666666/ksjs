@@ -1511,7 +1511,8 @@ threads.start(function () {
     //
 });
 
-if (newtimeout > duration) {
+var anewtimeout = timeset.get("timeout")
+if (anewtimeout > duration) {
     origintimeout = 0;
     timeset.put("timeout", origintimeout);
     home();

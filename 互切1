@@ -20,7 +20,7 @@ threads.start(function () {
     log("现在是" + startTime);
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="强制关闭" w="auto" h="auto" bg="#ff0000" />
+            <button id="closeBtn" text="关闭" w="40" h="40" bg="#ff0000" />
             <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
         </frame>
     );
@@ -433,6 +433,69 @@ threads.start(function () {
                     log("未找到签到条");
                 };
             }
+        };
+    };
+
+
+    function 日历签到() {
+        try {
+            var 日历 = textContains("calendar").findOne(1000) || textContains("日历").findOne(1000);
+            if (日历) {
+                log("签到日历");
+                try {
+                    var parentj1 = 日历.parent().parent();
+                    if (parentj1) {
+                        try {
+                            var listqian = parentj1.parent().child(parentj1.indexInParent() + 1);
+                            if (listqian) {
+                                log("有日历list");
+                                try {
+                                    var 签到target = listqian.child(0).child(1);
+                                    if (签到target) {
+                                        click(签到target.button().centerX(), 签到target.button().centerY());
+                                        var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                        if (广子倒计时) {
+                                            log("正在看广告");
+                                            停留30秒倒计时();
+                                            var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
+                                            try {
+                                                var hmkw = 还没看完.text();
+                                            } catch (error) {
+                                                var hmkw = null || undefined;
+                                            };
+                                            if (hmkw !== "去完成任务") {
+                                                log("还没看完,继续等待30秒");
+                                                try {
+                                                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
+                                                    还没看完button.click();
+                                                } catch (error) {
+                                                    log("还没看完buttonz找不到");
+                                                };
+                                                停留30秒倒计时();
+                                            } else {
+                                                log("额外任务");
+                                                try {
+                                                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
+                                                    放弃button.click();
+                                                } catch (error) {
+                                                    log("放弃buttonz找不到");
+                                                };
+                                            };
+                                        };
+                                    };
+                                } catch (error) {
+                                    log("找不到日历签到button")
+                                };
+                            };
+                        } catch (error) {
+                            log("无日历list")
+                        }
+                    }
+                } catch (error) {
+                    log("只有日历无签到啊？")
+                };
+            };
+        } catch (error) {
         };
     };
 

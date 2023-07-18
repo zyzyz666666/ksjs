@@ -234,9 +234,6 @@ threads.start(function () {
             home()
             sleep(2000)
         }
-        var filePathtime = '/sdcard/time.js';
-        engines.execScriptFile(filePathtime);
-        log("这是启动测试1");
         // aw打开app("ks7天任务")
         log('今日任务已完成!')
         exit(); //如果验证不通过 退出脚本

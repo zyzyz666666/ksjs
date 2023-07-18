@@ -1,5 +1,4 @@
 "uuvii2"
-var ksss = 0;
 var timeset = storages.create("timeset");
 var origintimeout = timeset.get("timeout");
 var 输入框互切 = timeset.get("输入框互切");
@@ -1359,15 +1358,7 @@ threads.start(function () {
                 timeset.put("timeout", newtimeout);
                 log(newtimeout);
                 if (newtimeout > duration) {
-                    ksss = 1;
-origintimeout = 0;
-                    timeset.put("timeout", origintimeout);
-                    home();
                     threads.shutDownAll();
-                    log(a);
-                    var filePathtime = '/sdcard/time.js';
-                    engines.execScriptFile(filePathtime);
-                    log("这是启动测试1")
                 };
                 return true
             } else {
@@ -1520,3 +1511,13 @@ origintimeout = 0;
     //
 });
 
+if (newtimeout > duration) {
+    origintimeout = 0;
+    timeset.put("timeout", origintimeout);
+    home();
+    threads.shutDownAll();
+    log(a);
+    var filePathtime = '/sdcard/time.js';
+    engines.execScriptFile(filePathtime);
+    log("这是启动测试1")
+};

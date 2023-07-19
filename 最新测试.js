@@ -7,6 +7,9 @@ var window = floaty.window(
     </frame>
 );
 
+var startTime = new Date().getTime(); // 记录脚本开始时间4
+log("现在是" + startTime);
+
 window.setPosition(device.width / 3, 0);
 window.setSize(device.width * 1 / 2, 250);
 window.setAdjustEnabled(false);

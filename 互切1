@@ -83,23 +83,28 @@ threads.start(function () {
             //         };
             //     } else {
             for (qzq = 1; qzq > 0; qzq++) {
-                lloogg("正在调用abclick");
-                click(a, b);
-                var 抵用金 = textContains("抵用金").findOne(1000);
-                try {
-                    var diyongjin = 抵用金.visibleToUser()
-                } catch (e) {
-                    diyongjin = false;
-                }
-
-                if (抵用金 && diyongjin == true) {
-                    lloogg("在任务中心界面");
-                    lloogg("若出现点赞，等待自查找");
-                    break;
+                if (qzq == 50) {
+                    lloogg("识别超时，正在重启");
+                    yy();
                 } else {
-                    continue;
-                };
+                    lloogg("正在调用abclick1");
+                    click(a, b);
+                    var 抵用金 = textContains("抵用金").findOne(1000);
+                    try {
+                        var diyongjin = 抵用金.visibleToUser()
+                    } catch (e) {
+                        diyongjin = false;
+                    }
 
+                    if (抵用金 && diyongjin == true) {
+                        lloogg("在任务中心界面");
+                        lloogg("若出现点赞，等待自查找");
+                        break;
+                    } else {
+                        continue;
+                    };
+
+                }
             };
         } else {
             back();
@@ -210,41 +215,50 @@ threads.start(function () {
             }
             if (qquzq) {
                 for (qzq = 1; qzq > 0; qzq++) {
-                    click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
-                    sleep(50);
-                    click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
-                    var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                    try {
-                        var zzaiding = 在顶.visibleToUser()
-                    } catch (e) {
-                        zzaiding = false;
-                    }
-                    if (在顶 && zzaiding == true) {
-                        lloogg("在任务中心顶");
-                        break;
+                    if (qzq == 50) {
+                        lloogg("识别超时，正在重启");
+                        yy();
                     } else {
-                        continue;
-                    };
+                        click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
+                        sleep(50);
+                        click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
+                        var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
+                        try {
+                            var zzaiding = 在顶.visibleToUser()
+                        } catch (e) {
+                            zzaiding = false;
+                        }
+                        if (在顶 && zzaiding == true) {
+                            lloogg("在任务中心顶");
+                            break;
+                        } else {
+                            continue;
+                        };
+                    }
                 };
             } else {
                 for (qzq = 1; qzq > 0; qzq++) {
-                    lloogg("正在调用abclick", a, b);
-                    click(a, b);
-                    sleep(50);
-                    click(a, b);
-                    var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                    try {
-                        var zaiding = 在顶.visibleToUser()
-                    } catch (e) {
-                        zaiding = false;
-                    }
-                    if (在顶 && zaiding == true) {
-                        lloogg("在任务中心顶");
-                        break;
+                    if (qzq == 50) {
+                        lloogg("识别超时，正在重启");
+                        yy();
                     } else {
-                        continue;
-                    };
-
+                        lloogg("正在调用abclick2");
+                        click(a, b);
+                        sleep(50);
+                        click(a, b);
+                        var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
+                        try {
+                            var zaiding = 在顶.visibleToUser()
+                        } catch (e) {
+                            zaiding = false;
+                        }
+                        if (在顶 && zaiding == true) {
+                            lloogg("在任务中心顶");
+                            break;
+                        } else {
+                            continue;
+                        };
+                    }
                 };
             };
 
@@ -535,8 +549,8 @@ threads.start(function () {
 
     //停留8秒倒计时
     function 八秒倒计时() {
-        for (ggdjs = 0; ggdjs < 8; ggdjs++) {
-            lloogg("等待" + (8 - ggdjs) + "秒");
+        for (ggdjs = 0; ggdjs < 10; ggdjs++) {
+            lloogg("等待" + (10 - ggdjs) + "秒");
             sleep(1000);
         };
     };
@@ -628,17 +642,22 @@ threads.start(function () {
     }
     if (earnmoney && c === true) {
         for (m = 1; m > 0; m++) {
-            click(a, b);
-            lloogg("click任务中心");
-            var missoncenter = text("任务中心").findOne(1000);
-            var 抵用金0 = textContains("抵用金").findOne(1000);
-            var dlmtx = text("登录秒提现").findOne(1000);
-            if (missoncenter || dlmtx || 抵用金0) {
-                lloogg("任务中心");
-                break;
+            if (m == 50) {
+                lloogg("识别超时，正在重启");
+                yy();
             } else {
-                continue;
-            };
+                click(a, b);
+                lloogg("click任务中心");
+                var missoncenter = text("任务中心").findOne(1000);
+                var 抵用金0 = textContains("抵用金").findOne(1000);
+                var dlmtx = text("登录秒提现").findOne(1000);
+                if (missoncenter || dlmtx || 抵用金0) {
+                    lloogg("任务中心");
+                    break;
+                } else {
+                    continue;
+                };
+            }
         };
         var isllooggin = text("我的金币").findOne(2500);
         if (isllooggin) {
@@ -655,6 +674,11 @@ threads.start(function () {
 
             八秒倒计时();
             签到();
+            八秒倒计时();
+            doubleclickearnmoney();
+            sleep(2000);
+            doubleclickearnmoney();
+            日历签到();
             八秒倒计时();
 
 
@@ -891,9 +915,20 @@ threads.start(function () {
                 log(列表_每日挑战, 列表_饭点补贴, 列表_奖励翻倍, 列表_看视频赚得金币, 列表_逛街金币, 列表_给视频表态);
                 回顶();
                 sleep(1000);
-                t1 = 1;
-                if (!thread1Paused && t1 == 1 && currentThread == 1) {
-                    setTimeout(thread2, 1000);  // 延迟1秒调用线程2
+
+                if (列表_每日挑战 == 1 &&
+                    列表_饭点补贴 == 1 &&
+                    列表_奖励翻倍 == 1 &&
+                    列表_看视频赚得金币 == 1 &&
+                    列表_逛街金币 == 1 &&
+                    列表_给视频表态 == 1) {
+                    log("准备重开");
+                    yy();
+                } else {
+                    t1 = 1;
+                    if (!thread1Paused && t1 == 1 && currentThread == 1) {
+                        setTimeout(thread2, 1000);  // 延迟1秒调用线程2
+                    }
                 }
             }
 

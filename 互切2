@@ -215,7 +215,9 @@ threads.start(function () {
         var 这次随机2, 当前点击红包次数 = 0, 最后达标 = 0
         // if (ui.选择框_记忆.isChecked() == true && awglobal配置("记忆") != undefined) { 顺序 = awglobal配置("记忆") }
 
-        while (true){
+        while (true) {
+            /////////
+            log("循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环")
             //////////
             aw打开app("快手")
             sleep(7000)
@@ -234,6 +236,9 @@ threads.start(function () {
             home()
             sleep(2000)
         }
+        var filePathtime = '/sdcard/time.js';
+        engines.execScriptFile(filePathtime);
+        log("这是启动测试1");
         // aw打开app("ks7天任务")
         log('今日任务已完成!')
         exit(); //如果验证不通过 退出脚本
@@ -1350,13 +1355,13 @@ threads.start(function () {
                 if (arguments[0] == "app定时") { awglobal配置("还剩时间", 0) }
                 toastLog(arguments[0] + "已超时")
                 // floatyLog(arguments[0] + "已超时")
-var currentTime = new Date().getTime(); // 获取当前时间
-            log("现在:" + currentTime)
-            var elapsedTime = currentTime - startTime; // 计算已经过去的时间
-            log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
-            var newtimeout = origintimeout + elapsedTime;
-            timeset.put("timeout", newtimeout);
-            log(newtimeout);
+                var currentTime = new Date().getTime(); // 获取当前时间
+                log("现在:" + currentTime)
+                var elapsedTime = currentTime - startTime; // 计算已经过去的时间
+                log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
+                var newtimeout = origintimeout + elapsedTime;
+                timeset.put("timeout", newtimeout);
+                log(newtimeout);
                 return true
             } else {
                 var 取整 = (+new Date() / 1000 - awglobal配置(arguments[0] + "定时") * 1) / 60
@@ -1366,7 +1371,14 @@ var currentTime = new Date().getTime(); // 获取当前时间
                     取整 = arguments[1] / 60 - 刚刚
                     if (arguments[0] == "app定时") { awglobal配置("还剩时间", 取整) }
                     // floatyLog(arguments[0] + ":" + ~~取整 + "分钟")
-                    toastLog(arguments[0] + ":" + ~~取整 + "分钟")
+                    toastLog(arguments[0] + ":" + ~~取整 + "分钟");
+                    var currentTime = new Date().getTime(); // 获取当前时间
+                    log("现在:" + currentTime)
+                    var elapsedTime = currentTime - startTime; // 计算已经过去的时间
+                    log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
+                    var newtimeout = origintimeout + elapsedTime;
+                    timeset.put("timeout", newtimeout);
+                    log(newtimeout);
                 }
                 return false
             }

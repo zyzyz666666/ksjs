@@ -7,8 +7,6 @@ var window = floaty.window(
     </frame>
 );
 
-var startTime = new Date().getTime(); // 记录脚本开始时间4
-log("现在是" + startTime);
 
 window.setPosition(device.width / 3, 0);
 window.setSize(device.width * 1 / 2, 250);
@@ -1880,14 +1878,7 @@ lloogg("已完成");
 
 ///////////////////////////////////////////////////////////////////////////////
 function yy() {
-    var currentTime = new Date().getTime(); // 获取当前时间
-    log("现在:" + currentTime)
-    var elapsedTime = currentTime - startTime; // 计算已经过去的时间
-    log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
-    var newtimeout = origintimeout + elapsedTime;
-    timeset.put("timeout", newtimeout);
-    log(newtimeout);
-    sleep(3000);
+    sleep(1500);
     engines.stopAll();
     engines.execScriptFile(filePathtime);
 };

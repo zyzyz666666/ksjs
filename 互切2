@@ -216,11 +216,9 @@ threads.start(function () {
         // if (ui.选择框_记忆.isChecked() == true && awglobal配置("记忆") != undefined) { 顺序 = awglobal配置("记忆") }
 
         while (true) {
-            /////////
-            log("循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环")
-            var judgetime = timeset.get("timeout");
-            log("judgetime:" + judgetime)
             //////////
+
+            ///
             aw打开app("快手")
             sleep(7000)
             关闭其他应用()
@@ -296,6 +294,11 @@ threads.start(function () {
 
 
     function 运行阅读(参数1) {
+        ///
+        log("循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环")
+        var judgetime = timeset.get("timeout");
+        log("judgetime:" + judgetime)
+        ///
         var global = storages.create("输入框1")
         var 开始的 = global.get("输入框1") * 1
         var 结束的 = global.get("输入框11") * 1

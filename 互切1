@@ -101,6 +101,7 @@ threads.start(function () {
                         lloogg("若出现点赞，等待自查找");
                         break;
                     } else {
+                        toastLog(qzq);
                         continue;
                     };
 
@@ -232,6 +233,7 @@ threads.start(function () {
                             lloogg("在任务中心顶");
                             break;
                         } else {
+                            toastLog(qzq);
                             continue;
                         };
                     }
@@ -256,6 +258,7 @@ threads.start(function () {
                             lloogg("在任务中心顶");
                             break;
                         } else {
+                            toastLog(qzq);
                             continue;
                         };
                     }

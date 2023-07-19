@@ -65,23 +65,28 @@ function goandearn() {
         //         };
         //     } else {
         for (qzq = 1; qzq > 0; qzq++) {
-            lloogg("正在调用abclick");
-            click(a, b);
-            var 抵用金 = textContains("抵用金").findOne(1000);
-            try {
-                var diyongjin = 抵用金.visibleToUser()
-            } catch (e) {
-                diyongjin = false;
-            }
-
-            if (抵用金 && diyongjin == true) {
-                lloogg("在任务中心界面");
-                lloogg("若出现点赞，等待自查找");
-                break;
+            if (qzq == 50) {
+                lloogg("识别超时，正在重启");
+                yy();
             } else {
-                continue;
-            };
+                lloogg("正在调用abclick1");
+                click(a, b);
+                var 抵用金 = textContains("抵用金").findOne(1000);
+                try {
+                    var diyongjin = 抵用金.visibleToUser()
+                } catch (e) {
+                    diyongjin = false;
+                }
 
+                if (抵用金 && diyongjin == true) {
+                    lloogg("在任务中心界面");
+                    lloogg("若出现点赞，等待自查找");
+                    break;
+                } else {
+                    continue;
+                };
+
+            }
         };
     } else {
         back();
@@ -192,41 +197,50 @@ function doubleclickearnmoney() {
         }
         if (qquzq) {
             for (qzq = 1; qzq > 0; qzq++) {
-                click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
-                sleep(50);
-                click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
-                var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                try {
-                    var zzaiding = 在顶.visibleToUser()
-                } catch (e) {
-                    zzaiding = false;
-                }
-                if (在顶 && zzaiding == true) {
-                    lloogg("在任务中心顶");
-                    break;
+                if (qzq == 50) {
+                    lloogg("识别超时，正在重启");
+                    yy();
                 } else {
-                    continue;
-                };
+                    click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
+                    sleep(50);
+                    click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
+                    var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
+                    try {
+                        var zzaiding = 在顶.visibleToUser()
+                    } catch (e) {
+                        zzaiding = false;
+                    }
+                    if (在顶 && zzaiding == true) {
+                        lloogg("在任务中心顶");
+                        break;
+                    } else {
+                        continue;
+                    };
+                }
             };
         } else {
             for (qzq = 1; qzq > 0; qzq++) {
-                lloogg("正在调用abclick", a, b);
-                click(a, b);
-                sleep(50);
-                click(a, b);
-                var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                try {
-                    var zaiding = 在顶.visibleToUser()
-                } catch (e) {
-                    zaiding = false;
-                }
-                if (在顶 && zaiding == true) {
-                    lloogg("在任务中心顶");
-                    break;
+                if (qzq == 50) {
+                    lloogg("识别超时，正在重启");
+                    yy();
                 } else {
-                    continue;
-                };
-
+                    lloogg("正在调用abclick2");
+                    click(a, b);
+                    sleep(50);
+                    click(a, b);
+                    var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
+                    try {
+                        var zaiding = 在顶.visibleToUser()
+                    } catch (e) {
+                        zaiding = false;
+                    }
+                    if (在顶 && zaiding == true) {
+                        lloogg("在任务中心顶");
+                        break;
+                    } else {
+                        continue;
+                    };
+                }
             };
         };
 
@@ -419,6 +433,69 @@ function 签到() {
 };
 
 
+function 日历签到() {
+    try {
+        var 日历 = textContains("calendar").findOne(1000) || textContains("日历").findOne(1000);
+        if (日历) {
+            log("签到日历");
+            try {
+                var parentj1 = 日历.parent().parent();
+                if (parentj1) {
+                    try {
+                        var listqian = parentj1.parent().child(parentj1.indexInParent() + 1);
+                        if (listqian) {
+                            log("有日历list");
+                            try {
+                                var 签到target = listqian.child(0).child(1);
+                                if (签到target) {
+                                    click(签到target.button().centerX(), 签到target.button().centerY());
+                                    var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                    if (广子倒计时) {
+                                        log("正在看广告");
+                                        停留30秒倒计时();
+                                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
+                                        try {
+                                            var hmkw = 还没看完.text();
+                                        } catch (error) {
+                                            var hmkw = null || undefined;
+                                        };
+                                        if (hmkw !== "去完成任务") {
+                                            log("还没看完,继续等待30秒");
+                                            try {
+                                                var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
+                                                还没看完button.click();
+                                            } catch (error) {
+                                                log("还没看完buttonz找不到");
+                                            };
+                                            停留30秒倒计时();
+                                        } else {
+                                            log("额外任务");
+                                            try {
+                                                var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
+                                                放弃button.click();
+                                            } catch (error) {
+                                                log("放弃buttonz找不到");
+                                            };
+                                        };
+                                    };
+                                };
+                            } catch (error) {
+                                log("找不到日历签到button")
+                            };
+                        };
+                    } catch (error) {
+                        log("无日历list")
+                    }
+                }
+            } catch (error) {
+                log("只有日历无签到啊？")
+            };
+        };
+    } catch (error) {
+    };
+};
+
+
 
 //停留100秒滑动倒计时
 function 停留100秒滑动() {
@@ -454,8 +531,8 @@ function 停留30秒倒计时() {
 
 //停留8秒倒计时
 function 八秒倒计时() {
-    for (ggdjs = 0; ggdjs < 8; ggdjs++) {
-        lloogg("等待" + (8 - ggdjs) + "秒");
+    for (ggdjs = 0; ggdjs < 10; ggdjs++) {
+        lloogg("等待" + (10 - ggdjs) + "秒");
         sleep(1000);
     };
 };
@@ -536,7 +613,7 @@ threads.start(function () {
 
 });
 threads.start(function () {
-    setInterval(yy, 18 * 60 * 1000); // run the task every 5 second
+    setInterval(yy, 15 * 60 * 1000); // run the task every 5 second
     lloogg("YY")
 
 });
@@ -547,17 +624,22 @@ try {
 }
 if (earnmoney && c === true) {
     for (m = 1; m > 0; m++) {
-        click(a, b);
-        lloogg("click任务中心");
-        var missoncenter = text("任务中心").findOne(1000);
-        var 抵用金0 = textContains("抵用金").findOne(1000);
-        var dlmtx = text("登录秒提现").findOne(1000);
-        if (missoncenter || dlmtx || 抵用金0) {
-            lloogg("任务中心");
-            break;
+        if (m == 50) {
+            lloogg("识别超时，正在重启");
+            yy();
         } else {
-            continue;
-        };
+            click(a, b);
+            lloogg("click任务中心");
+            var missoncenter = text("任务中心").findOne(1000);
+            var 抵用金0 = textContains("抵用金").findOne(1000);
+            var dlmtx = text("登录秒提现").findOne(1000);
+            if (missoncenter || dlmtx || 抵用金0) {
+                lloogg("任务中心");
+                break;
+            } else {
+                continue;
+            };
+        }
     };
     var isllooggin = text("我的金币").findOne(2500);
     if (isllooggin) {
@@ -574,6 +656,11 @@ if (earnmoney && c === true) {
 
         八秒倒计时();
         签到();
+        八秒倒计时();
+        doubleclickearnmoney();
+        sleep(2000);
+        doubleclickearnmoney();
+        日历签到();
         八秒倒计时();
 
 
@@ -810,9 +897,20 @@ if (earnmoney && c === true) {
             log(列表_每日挑战, 列表_饭点补贴, 列表_奖励翻倍, 列表_看视频赚得金币, 列表_逛街金币, 列表_给视频表态);
             回顶();
             sleep(1000);
-            t1 = 1;
-            if (!thread1Paused && t1 == 1 && currentThread == 1) {
-                setTimeout(thread2, 1000);  // 延迟1秒调用线程2
+
+            if (列表_每日挑战 == 1 &&
+                列表_饭点补贴 == 1 &&
+                列表_奖励翻倍 == 1 &&
+                列表_看视频赚得金币 == 1 &&
+                列表_逛街金币 == 1 &&
+                列表_给视频表态 == 1) {
+                log("准备重开");
+                yy();
+            } else {
+                t1 = 1;
+                if (!thread1Paused && t1 == 1 && currentThread == 1) {
+                    setTimeout(thread2, 1000);  // 延迟1秒调用线程2
+                }
             }
         }
 
@@ -1779,8 +1877,16 @@ lloogg("已完成");
 
 ///////////////////////////////////////////////////////////////////////////////
 function yy() {
+    var currentTime = new Date().getTime(); // 获取当前时间
+    log("现在:" + currentTime)
+    var elapsedTime = currentTime - startTime; // 计算已经过去的时间
+    log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
+    var newtimeout = origintimeout + elapsedTime;
+    timeset.put("timeout", newtimeout);
+    log(newtimeout);
+    sleep(3000);
     engines.stopAll();
-    engines.execScriptFile("/sdcard/ksjs.js");
+    engines.execScriptFile(filePathtime);
 };
 
 function xx() {
@@ -2191,3 +2297,5 @@ function 回顶() {
         doubleclickearnmoney();
     };
 };
+
+//

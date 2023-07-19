@@ -1,5 +1,7 @@
 "uii"
 
+var filePathksjs = '/sdcard/ksjs.js';
+
 var window = floaty.window(
     <frame gravity="center">
         <button id="closeBtn" text="强制关闭" w="auto" h="auto" bg="#ff0000" />
@@ -1880,7 +1882,7 @@ lloogg("已完成");
 function yy() {
     sleep(1500);
     engines.stopAll();
-    engines.execScriptFile(filePathtime);
+    engines.execScriptFile(filePathksjs);
 };
 
 function xx() {

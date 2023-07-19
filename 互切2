@@ -2,6 +2,7 @@
 var timeset = storages.create("timeset");
 var origintimeout = timeset.get("timeout");
 var 输入框互切 = timeset.get("输入框互切");
+var stoploop = 0;
 if (输入框互切 == undefined) {
     输入框互切 = 60;
 };
@@ -15,86 +16,87 @@ var duration = 输入框互切 * 1000 * 60; // 脚本执行的时间，单位为
 var a = "正在切换1";
 
 log("这是2")
+//
+////////////////////////
+///////////////新ui的参数设置
+var ksset = storages.create("ksset");
+
+var 选择框_切换账号 = ksset.get("选择框_切换账号");
+var 输入框分钟 = ksset.get("输入框分钟");
+var 输入框1 = ksset.get("输入框1");
+var 输入框11 = ksset.get("输入框11");
+var 输入框3 = ksset.get("输入框3");
+var 输入框速度调节 = ksset.get("输入框速度调节");
+var 悬赏任务 = ksset.get("选择框_悬赏任务");
+var 逛街任务 = ksset.get("选择框_逛街任务");
+var 点赞任务 = ksset.get("选择框_点赞任务");
+var 评论任务 = ksset.get("选择框_评论任务");
+var 看视频任务 = ksset.get("选择框_看视频任务");
+
+if (选择框_切换账号 == undefined) {
+    选择框_切换账号 = false;
+};
+if (输入框分钟 == undefined) {
+    输入框分钟 = "60";
+};
+if (输入框1 == undefined) {
+    输入框1 = "6";
+};
+if (输入框11 == undefined) {
+    输入框11 = "10";
+};
+if (输入框3 == undefined) {
+    输入框3 = "10";
+};
+if (输入框速度调节 == undefined) {
+    输入框速度调节 = "1.8";
+};
+if (逛街任务 == undefined) {
+    逛街任务 = true;
+};
+if (悬赏任务 == undefined) {
+    悬赏任务 = true;
+};
+if (点赞任务 == undefined) {
+    点赞任务 = true;
+};
+if (评论任务 == undefined) {
+    评论任务 = false;
+};
+if (看视频任务 == undefined) {
+    看视频任务 = true;
+};
+/////////////////////直接放进老ui参数设置
+var global = storages.create("输入框1")
+global.put("输入框11", 输入框11);
+global.put("输入框1", 输入框1);
+// global.put("输入框2", ui.输入框2.text());
+// global.put("输入框22", ui.输入框22.text());
+global.put("输入框3", 输入框3);
+// global.put("输入框33", ui.输入框33.text());
+global.put("输入框分钟", 输入框分钟);
+
+global.put("输入框速度调节", 输入框速度调节);
+// global.put("快手极速版输入框6", ui.快手极速版输入框6.text());
+
+// global.put("账号文本", ui.账号文本.text());
+
+// global.put("输入框7", ui.输入框7.text());
+// global.put("激活码", ui.激活码.text());
+global.put("选择框_看视频任务", 看视频任务);
+global.put("选择框_评论任务", 评论任务);
+global.put("选择框_点赞任务", 点赞任务);
+global.put("选择框_逛街任务", 逛街任务);
+global.put("选择框_悬赏任务", 悬赏任务);
+global.put("选择框_切换账号", 选择框_切换账号);
+//////////////////
+
+////////////
 threads.start(function () {
     var startTime = new Date().getTime(); // 记录脚本开始时间4
     log("现在是" + startTime);
-    //
-    ////////////////////////
-    ///////////////新ui的参数设置
-    var ksset = storages.create("ksset");
 
-    var 选择框_切换账号 = ksset.get("选择框_切换账号");
-    var 输入框分钟 = ksset.get("输入框分钟");
-    var 输入框1 = ksset.get("输入框1");
-    var 输入框11 = ksset.get("输入框11");
-    var 输入框3 = ksset.get("输入框3");
-    var 输入框速度调节 = ksset.get("输入框速度调节");
-    var 悬赏任务 = ksset.get("选择框_悬赏任务");
-    var 逛街任务 = ksset.get("选择框_逛街任务");
-    var 点赞任务 = ksset.get("选择框_点赞任务");
-    var 评论任务 = ksset.get("选择框_评论任务");
-    var 看视频任务 = ksset.get("选择框_看视频任务");
-
-    if (选择框_切换账号 == undefined) {
-        选择框_切换账号 = false;
-    };
-    if (输入框分钟 == undefined) {
-        输入框分钟 = "60";
-    };
-    if (输入框1 == undefined) {
-        输入框1 = "6";
-    };
-    if (输入框11 == undefined) {
-        输入框11 = "10";
-    };
-    if (输入框3 == undefined) {
-        输入框3 = "10";
-    };
-    if (输入框速度调节 == undefined) {
-        输入框速度调节 = "1.8";
-    };
-    if (逛街任务 == undefined) {
-        逛街任务 = true;
-    };
-    if (悬赏任务 == undefined) {
-        悬赏任务 = true;
-    };
-    if (点赞任务 == undefined) {
-        点赞任务 = true;
-    };
-    if (评论任务 == undefined) {
-        评论任务 = false;
-    };
-    if (看视频任务 == undefined) {
-        看视频任务 = true;
-    };
-    /////////////////////直接放进老ui参数设置
-    var global = storages.create("输入框1")
-    global.put("输入框11", 输入框11);
-    global.put("输入框1", 输入框1);
-    // global.put("输入框2", ui.输入框2.text());
-    // global.put("输入框22", ui.输入框22.text());
-    global.put("输入框3", 输入框3);
-    // global.put("输入框33", ui.输入框33.text());
-    global.put("输入框分钟", 输入框分钟);
-
-    global.put("输入框速度调节", 输入框速度调节);
-    // global.put("快手极速版输入框6", ui.快手极速版输入框6.text());
-
-    // global.put("账号文本", ui.账号文本.text());
-
-    // global.put("输入框7", ui.输入框7.text());
-    // global.put("激活码", ui.激活码.text());
-    global.put("选择框_看视频任务", 看视频任务);
-    global.put("选择框_评论任务", 评论任务);
-    global.put("选择框_点赞任务", 点赞任务);
-    global.put("选择框_逛街任务", 逛街任务);
-    global.put("选择框_悬赏任务", 悬赏任务);
-    global.put("选择框_切换账号", 选择框_切换账号);
-    //////////////////
-
-    ////////////
-
+    ////
     let 是否root = false
     let 浮窗开过了 = false
     let 是否暂停 = false
@@ -227,16 +229,26 @@ threads.start(function () {
             aw打开app("快手")
             sleep(7000)
             if (global.get("选择框_切换账号")) {
-                快手切换账号()
+                快手切换账号();
                 运行阅读(等待2)
+                log("stop1")
             } else {
-                运行阅读(null)
+                运行阅读(null);
+                log("stop2")
+                log(stoploop);
             }
 
-            home()
-            sleep(2000)
+            if (stoploop == 1) {
+                log("快手停");
+                var resettime = 0;
+                timeset.put("timeout", resettime);
+                break;
+            } else {
+
+                home()
+                sleep(2000)
+            }
         }
-        var filePathtime = '/sdcard/time.js';
         engines.execScriptFile(filePathtime);
         log("这是启动测试1");
         // aw打开app("ks7天任务")
@@ -295,9 +307,7 @@ threads.start(function () {
 
     function 运行阅读(参数1) {
         ///
-        log("循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环循环")
-        var judgetime = timeset.get("timeout");
-        log("judgetime:" + judgetime)
+
         ///
         var global = storages.create("输入框1")
         var 开始的 = global.get("输入框1") * 1
@@ -378,6 +388,9 @@ threads.start(function () {
                 aw打开app("快手")
                 sleep(8000)
                 aw定时判断("强制返回")
+                ////
+
+                ////
                 去看视频任务 = true
                 立即领取点击 = true
             }
@@ -391,6 +404,9 @@ threads.start(function () {
             } else if (awcontrol(/请完成安全验证/, 1)) {
                 返回首页()
                 关闭其他应用()
+                //
+                log("3")
+                //
                 aw打开app("快手")
                 sleep(8000)
             } else if (awcontrol(/喜欢就给格好评吧/, 1)) {
@@ -561,6 +577,15 @@ threads.start(function () {
                         sleep(3000 * 速度)
                         连续拉倒页数 = 0
                         关闭其他应用()
+                        log("4这里");
+                        var judgetime = timeset.get("timeout");
+                        if (judgetime > duration) {
+                            log("已经：" + judgetime / 60000 + "分钟了");
+                            log("切：" + 输入框互切 + "分钟")
+                            stoploop = 1;
+                            break;
+                        };
+
                     }
                     if (悬赏任务 == false && 逛街任务 == false && 点赞任务 == false && 看视频任务 == false && 评论任务 == false) {
                         if (awcontrol(/明日领.*金币/, 1)) {
@@ -580,6 +605,7 @@ threads.start(function () {
                             home()
                             sleep(3000 * 速度)
                             关闭其他应用()
+                            log("5")
                             return true
                         } else {
                             toastLog("--等宝箱--")
@@ -669,6 +695,12 @@ threads.start(function () {
                 back();//返回//
                 sleep(3000 * 速度)
                 关闭其他应用()
+                log("6这里");
+                var judgetime = timeset.get("timeout");
+                if (judgetime > duration) {
+                    stoploop = 1;
+                    break;
+                };
                 aw打开app("快手")
                 sleep(8000)
                 aw定时判断("识别")

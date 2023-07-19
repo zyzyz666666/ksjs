@@ -384,7 +384,14 @@ threads.start(function () {
             }
             if (aw定时判断("强制返回", 分钟)) {
                 返回首页()
-                关闭其他应用()
+                关闭其他应用();
+                var judgetime = timeset.get("timeout");
+                if (judgetime > duration) {
+                    log("已经：" + judgetime / 60000 + "分钟了");
+                    log("切：" + 输入框互切 + "分钟")
+                    stoploop = 1;
+                    break;
+                };
                 aw打开app("快手")
                 sleep(8000)
                 aw定时判断("强制返回")
@@ -406,6 +413,13 @@ threads.start(function () {
                 关闭其他应用()
                 //
                 log("3")
+                var judgetime = timeset.get("timeout");
+                if (judgetime > duration) {
+                    log("已经：" + judgetime / 60000 + "分钟了");
+                    log("切：" + 输入框互切 + "分钟")
+                    stoploop = 1;
+                    break;
+                };
                 //
                 aw打开app("快手")
                 sleep(8000)
@@ -606,6 +620,13 @@ threads.start(function () {
                             sleep(3000 * 速度)
                             关闭其他应用()
                             log("5")
+                            var judgetime = timeset.get("timeout");
+                            if (judgetime > duration) {
+                                log("已经：" + judgetime / 60000 + "分钟了");
+                                log("切：" + 输入框互切 + "分钟")
+                                stoploop = 1;
+                                break;
+                            };
                             return true
                         } else {
                             toastLog("--等宝箱--")
@@ -1399,6 +1420,7 @@ threads.start(function () {
                 var newtimeout = origintimeout + elapsedTime;
                 timeset.put("timeout", newtimeout);
                 log(newtimeout);
+                toast(newtimeout / 60000 + ":" + duration);
                 return true
             } else {
                 var 取整 = (+new Date() / 1000 - awglobal配置(arguments[0] + "定时") * 1) / 60

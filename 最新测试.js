@@ -1,7 +1,5 @@
 "uii"
 
-var filePathksjs = '/sdcard/ksjs.js';
-
 var window = floaty.window(
     <frame gravity="center">
         <button id="closeBtn" text="强制关闭" w="auto" h="auto" bg="#ff0000" />
@@ -68,7 +66,7 @@ function goandearn() {
         //         };
         //     } else {
         for (qzq = 1; qzq > 0; qzq++) {
-            if (qzq == 50) {
+            if (qzq == 15) {
                 lloogg("识别超时，正在重启");
                 yy();
             } else {
@@ -90,6 +88,7 @@ function goandearn() {
                 };
 
             }
+            toastLog("等待" + (15 - qzq) + "次")
         };
     } else {
         back();
@@ -200,7 +199,7 @@ function doubleclickearnmoney() {
         }
         if (qquzq) {
             for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 50) {
+                if (qzq == 15) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
@@ -219,11 +218,13 @@ function doubleclickearnmoney() {
                     } else {
                         continue;
                     };
+
                 }
+                toastLog("等待" + (15 - qzq) + "次")
             };
         } else {
             for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 50) {
+                if (qzq == 15) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
@@ -244,6 +245,7 @@ function doubleclickearnmoney() {
                         continue;
                     };
                 }
+                toastLog("等待" + (15 - qzq) + "次")
             };
         };
 
@@ -627,7 +629,7 @@ try {
 }
 if (earnmoney && c === true) {
     for (m = 1; m > 0; m++) {
-        if (m == 50) {
+        if (m == 15) {
             lloogg("识别超时，正在重启");
             yy();
         } else {
@@ -643,6 +645,7 @@ if (earnmoney && c === true) {
                 continue;
             };
         }
+        toastLog("等待" + (15 - m) + "次")
     };
     var isllooggin = text("我的金币").findOne(2500);
     if (isllooggin) {
@@ -1791,21 +1794,27 @@ if (earnmoney && c === true) {
 
             lloogg("刷十分钟视频");
             for (sy = 1; sy > 0; sy++) {
-                var 首页 = text("首页").findOne();
-                try {
-                    var sssyy = 首页.visibleToUser()
-                    var ssyyy = 首页.selected()
-                } catch (e) {
-                    sssyy = false;
-                    ssyyy = false;
+                if (sy == 15) {
+                    lloogg("识别超时，正在重启");
+                    yy();
+                } else {
+                    var 首页 = text("首页").findOne();
+                    try {
+                        var sssyy = 首页.visibleToUser()
+                        var ssyyy = 首页.selected()
+                    } catch (e) {
+                        sssyy = false;
+                        ssyyy = false;
+                    }
+                    if (sssyy == true && ssyyy == false) {
+                        click(首页.bounds().centerX(), 首页.bounds().centerY());
+                    };
+                    if (首页.selected() == true) {
+                        lloogg("在首页");
+                        break;
+                    };
                 }
-                if (sssyy == true && ssyyy == false) {
-                    click(首页.bounds().centerX(), 首页.bounds().centerY());
-                };
-                if (首页.selected() == true) {
-                    lloogg("在首页");
-                    break;
-                };
+                toastLog(15 - sy)
             };
 
             function 看视频() {
@@ -1882,7 +1891,7 @@ lloogg("已完成");
 function yy() {
     sleep(1500);
     engines.stopAll();
-    engines.execScriptFile(filePathksjs);
+    engines.execScriptFile(filePathtime);
 };
 
 function xx() {

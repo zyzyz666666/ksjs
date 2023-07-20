@@ -1943,7 +1943,7 @@ function xx() {
         idContains("live_audience").findOne(100) || idContains("svg__icons__dom").findOne(100) ||
         id("com.kuaishou.nebula:id/avatar").findOne(100) || text("距本周活动结束").findOne(100) || text("周周赚金币").findOne(100) ||
         text("赚金小游戏").findOne(100) || text("金币兑换优惠券").findOne(100) || text("我的抽奖码").findOne(100) ||
-        textContains("此图片未加标签").findOne(100) || text("种成后还能换其他水果哦").findOne(100) ||
+         text("种成后还能换其他水果哦").findOne(100) ||
         text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
         textContains("前三次完成先睡觉再起床").findOne(100);
     // if (弹窗 && 弹窗.visibleToUser() === true) {

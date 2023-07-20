@@ -203,18 +203,18 @@ function doubleclickearnmoney() {
             for (qzq = 1; qzq > 0; qzq++) {
                 if (qzq == 25) {
                     lloogg("识别超时，正在重启");
-                    zz();
+                    yy();
                 } else {
                     click(a, b);
                     sleep(50);
                     click(a, b);
                     var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
                     try {
-                        var zzaiding = 在顶.visibleToUser()
+                        var yyaiding = 在顶.visibleToUser()
                     } catch (e) {
-                        zzaiding = false;
+                        yyaiding = false;
                     }
-                    if (在顶 && zzaiding == true) {
+                    if (在顶 && yyaiding == true) {
                         lloogg("在任务中心顶");
                         break;
                     } else {
@@ -228,7 +228,7 @@ function doubleclickearnmoney() {
             for (qzq = 1; qzq > 0; qzq++) {
                 if (qzq == 25) {
                     lloogg("识别超时，正在重启");
-                    zz();
+                    yy();
                 } else {
                     lloogg("正在调用abclick2");
                     click(a, b);
@@ -634,7 +634,7 @@ if (earnmoney && c === true) {
     for (m = 1; m > 0; m++) {
         if (m == 25) {
             lloogg("识别超时，正在重启");
-            zz();
+            yy();
         } else {
             click(a, b);
             lloogg("click任务中心");
@@ -914,7 +914,7 @@ if (earnmoney && c === true) {
                 列表_逛街金币 == 1 &&
                 列表_给视频表态 == 1) {
                 log("准备重开");
-                zz();
+                yy();
             } else {
                 t1 = 1;
                 if (!thread1Paused && t1 == 1 && currentThread == 1) {
@@ -1116,7 +1116,7 @@ if (earnmoney && c === true) {
                                 回顶();
                                 n = 0;
                                 if (n == 25) {
-                                    zz();
+                                    yy();
                                 }
                             };
                         } else {
@@ -1391,7 +1391,7 @@ if (earnmoney && c === true) {
                                 回顶();
                                 n = 0;
                                 if (n == 25) {
-                                    zz();
+                                    yy();
                                 }
                             };
                         }
@@ -1456,7 +1456,7 @@ if (earnmoney && c === true) {
                                 回顶();
                                 n = 0;
                                 if (n == 25) {
-                                    zz();
+                                    yy();
                                 }
                             };
                         }
@@ -1568,7 +1568,7 @@ if (earnmoney && c === true) {
                             回顶();
                             n = 0;
                             if (n == 25) {
-                                zz();
+                                yy();
                             }
                         };
 
@@ -1658,7 +1658,7 @@ if (earnmoney && c === true) {
                                 回顶();
                                 n = 0;
                                 if (n == 25) {
-                                    zz();
+                                    yy();
                                 }
                             };
                         };
@@ -1795,7 +1795,7 @@ if (earnmoney && c === true) {
                             回顶();
                             n = 0;
                             if (n == 25) {
-                                zz();
+                                yy();
                             }
                         };
                     } else {
@@ -1827,7 +1827,7 @@ if (earnmoney && c === true) {
             for (sy = 1; sy > 0; sy++) {
                 if (sy == 25) {
                     lloogg("识别超时，正在重启");
-                    zz();
+                    yy();
                 } else {
                     var 首页 = text("首页").findOne(1500);
                     try {
@@ -1927,7 +1927,7 @@ function yy() {
     exit();
 };
 
-function zz() {
+function yy() {
     lloogg("回退");
     log("奇怪的地方");
     // lloogg("先暂停");
@@ -1949,7 +1949,7 @@ function zz() {
     //     }
 
     // }
-    app.launchApp("快手")
+    app.launchApp("快手极速版")
     back();
     sleep(250);
     var 抵用金 = textContains("抵用金").findOne(250);
@@ -1961,7 +1961,7 @@ function zz() {
     if (抵用金 && 抵用金.visibleToUser() == true) {
         log("mission1")
     } else {
-        app.launchApp("快手")
+        app.launchApp("快手极速版")
         back();
         sleep(250);
         var 抵用金 = textContains("抵用金").findOne(250);
@@ -1973,7 +1973,7 @@ function zz() {
         if (抵用金 && 抵用金.visibleToUser() == true) {
             log("mission2")
         } else {
-            app.launchApp("快手")
+            app.launchApp("快手极速版");
             back();
             sleep(250);
             var 抵用金 = textContains("抵用金").findOne(250);

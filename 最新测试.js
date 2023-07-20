@@ -1753,7 +1753,7 @@ if (earnmoney && c === true) {
                                         var 表态 = text("你对此条视频是否满意？").find().filter(function (element) {
                                             return element.visibleToUser();
                                         });
-                                        lloogg(表态);
+                                        log(表态);
 
                                         if (表态.length > 0) {
                                             var 可见表态 = 表态[0];
@@ -1939,6 +1939,7 @@ function xx() {
     var 邀请新用户 = textContains("邀请新用户").findOne(100);
     var 青少年模式 = id("com.kuaishou.nebula:id/set_teenage_mode").findOne(100);
     var 先暂停 = 0;
+    var 在奇怪的地方 = idContains("com.kuaishou.nebula.live_audience_plugin:id/live").findOne(100) || idContains("svg__icons__dom").findOne(100) || id("com.kuaishou.nebula:id/avatar").findOne(100);
     // if (弹窗 && 弹窗.visibleToUser() === true) {
     //     lloogg("检测到弹窗");
     //     sleep(500);
@@ -2314,6 +2315,11 @@ function xx() {
         lloogg("检测到好评弹窗");
         back();
     };
+    if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
+        lloogg("在奇怪的地方");
+        back();
+    };
+
 
     sleep(1000);
     //xx完了

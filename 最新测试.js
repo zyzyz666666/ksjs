@@ -205,9 +205,9 @@ function doubleclickearnmoney() {
                     lloogg("识别超时，正在重启");
                     zz();
                 } else {
-                    click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
+                    click(a, b);
                     sleep(50);
-                    click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
+                    click(a, b);
                     var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
                     try {
                         var zzaiding = 在顶.visibleToUser()

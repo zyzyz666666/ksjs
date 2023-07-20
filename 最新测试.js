@@ -19,7 +19,7 @@ var statusText = window.status;
 window.closeBtn.click(() => {//
     log("程序即将关闭");
     engines.stopAll();
-    engines.execScriptFile("main.js")
+    engines.execScriptFile("main.js");
 });
 
 function lloogg(msg) {
@@ -1892,8 +1892,9 @@ lloogg("已完成");
 ///////////////////////////////////////////////////////////////////////////////
 function yy() {
     sleep(1500);
-    engines.stopAll();
+    //engines.stopAll();
     engines.execScriptFile(filePathksjs);
+    exit();
 };
 
 function xx() {

@@ -56,14 +56,14 @@ threads.start(function () {
         var c = device.width;
         var b = device.height;
         lloogg("⬆正在滑动向上滑动");
-        swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 660);
+        swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 888);
     };
 
     function downslide() {
         var c = device.width;
         var b = device.height;
         lloogg("↓正在滑动向上滑动");
-        swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 660);
+        swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 888);
     };
 
 
@@ -533,7 +533,7 @@ threads.start(function () {
             } else if (downup == 5 && jos % 2 !== 0) {
                 lloogg("下");
                 upslide();
-sleep(1500);
+                sleep(1500);
                 jos = jos + 1;
                 downup = 0;
             };
@@ -1123,7 +1123,7 @@ sleep(1500);
                                 } else {
                                     lloogg("每日挑战进度条不在视野内");
                                     upslide();
-sleep(1500);
+                                    sleep(1500);
                                 };
                                 if (n % 10 === 0) {
                                     回顶();
@@ -1385,7 +1385,7 @@ sleep(1500);
                                 } else {
                                     log("饭补不在视野内");
                                     upslide();
-sleep(1500);
+                                    sleep(1500);
                                 };
                                 if (n % 10 === 0) {
                                     回顶();
@@ -1450,7 +1450,7 @@ sleep(1500);
                                 } else {
                                     log("奖励翻倍不在视野内");
                                     upslide();
-sleep(1500);
+                                    sleep(1500);
                                 };
                                 if (n % 10 === 0) {
                                     回顶();
@@ -1501,7 +1501,7 @@ sleep(1500);
                                 列表_看视频赚得金币 = 1;
                                 log("正在看视频赚得金币-停留2分钟");
                                 for (ksp = 1; ksp < 5; ksp++) {
-                                    var 明天再来 = text("明天再来").findOne(1000);
+                                    //var 明天再来 = text("明天再来").findOne(1000);
                                     var 看视频 = textMatches(/(看视频[得赚].*金币$)/).findOne(1000);
                                     var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
                                     try {
@@ -1509,10 +1509,7 @@ sleep(1500);
                                     } catch (e) {
                                         lknlks = false;
                                     }
-                                    if (明天再来) {
-                                        log("明天再来");
-                                        break;
-                                    } else if (看视频 && lknlks === true) {
+                                    if (看视频 && lknlks === true) {
                                         click(看视频.bounds().centerX(), 看视频.bounds().centerY());
                                         sleep(500);
                                     };
@@ -1557,7 +1554,7 @@ sleep(1500);
                             } else {
                                 log("看视频赚得金币不在视野内");
                                 upslide();
-sleep(1500);
+                                sleep(1500);
                             };
                             if (n % 10 === 0) {
                                 回顶();
@@ -1641,7 +1638,7 @@ sleep(1500);
                                 } else {
                                     lloogg("逛街不在视野内");
                                     upslide();
-sleep(1500);
+                                    sleep(1500);
                                 };
                                 if (n % 10 === 0) {
                                     回顶();
@@ -1692,17 +1689,14 @@ sleep(1500);
                                 列表_给视频表态 = 1;
                                 lloogg("正在给视频表态");
                                 for (bt = 1; bt < 5; bt++) {
-                                    var 明日再来 = text("明日再来").findOne(1000);
+                                    //var 明日再来 = text("明日再来").findOne(1000);
                                     var 表态 = textContains("给视频表态").findOne(1500);
                                     try {
                                         var bbtt = 表态.visibleToUser()
                                     } catch (e) {
                                         bbtt = false;
                                     }
-                                    if (明日再来) {
-                                        lloogg("明日再来");
-                                        break;
-                                    } else if (表态 && bbtt === true) {
+                                    if (表态 && bbtt === true) {
                                         click(表态.bounds().centerX(), 表态.bounds().centerY());
                                         sleep(500);
 
@@ -1773,7 +1767,7 @@ sleep(1500);
                                             sleep(1000);
                                         };
                                         upslide();
-sleep(1500);
+                                        sleep(1500);
                                         sleep(3500)
                                     };
                                 };
@@ -1782,7 +1776,7 @@ sleep(1500);
                             } else {
                                 lloogg("给视频表态不在视野内");
                                 upslide();
-sleep(1500);
+                                sleep(1500);
                             };
                             if (n % 10 === 0) {
                                 回顶();
@@ -1856,7 +1850,7 @@ sleep(1500);
                         if (downup == 10) {
                             lloogg("看视频");
                             upslide();
-sleep(1500);
+                            sleep(1500);
                             lloogg("继续刷" + (600 - gjdjs) + "秒视频");
                             downup = 0;
                         };

@@ -1939,7 +1939,13 @@ function xx() {
     var 邀请新用户 = textContains("邀请新用户").findOne(100);
     var 青少年模式 = id("com.kuaishou.nebula:id/set_teenage_mode").findOne(100);
     var 先暂停 = 0;
-    var 在奇怪的地方 = idContains("com.kuaishou.nebula.live_audience_plugin:id/live").findOne(100) || idContains("svg__icons__dom").findOne(100) || id("com.kuaishou.nebula:id/avatar").findOne(100);
+    var 在奇怪的地方 = text("邀请好友 必得现金").findOne(100) || textMatches(/(仅差.*成长值升级)/).findOne(100) ||
+        idContains("live_audience").findOne(100) || idContains("svg__icons__dom").findOne(100) ||
+        id("com.kuaishou.nebula:id/avatar").findOne(100) || text("距本周活动结束").findOne(100) || text("周周赚金币").findOne(100) ||
+        text("赚金小游戏").findOne(100) || text("金币兑换优惠券").findOne(100) || text("我的抽奖码").findOne(100) ||
+        textContains("此图片未加标签").findOne(100) || text("种成后还能换其他水果哦").findOne(100) ||
+        text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
+        textContains("前三次完成先睡觉再起床").findOne(100);
     // if (弹窗 && 弹窗.visibleToUser() === true) {
     //     lloogg("检测到弹窗");
     //     sleep(500);
@@ -2317,7 +2323,46 @@ function xx() {
     };
     if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
         lloogg("在奇怪的地方");
-        back();
+        lloogg("先暂停");
+        if (currentThread !== 100) {
+            try {
+                pauseThread10();
+                pauseThread1();
+                pauseThread2();
+                pauseThread3();
+                pauseThread4();
+                pauseThread5();
+                pauseThread6();
+                pauseThread7();
+                pauseThread8();
+                pauseThread11();
+                先暂停 = 1;
+            } catch (e) {
+                线 = 0;
+            }
+
+        }
+        back(); back(); back(); back();
+        sleep(2000);
+        app.launchApp("快手极速版");
+        goandearn();
+        sleep(2000);
+        回顶();
+        sleep(2000);
+        if (先暂停 == 1) {
+            先暂停 = 0;
+            resumeThread10();
+            resumeThread1();
+            resumeThread2();
+            resumeThread3();
+            resumeThread4();
+            resumeThread5();
+            resumeThread6();
+            resumeThread7();
+            resumeThread8();
+            resumeThread11();
+            runThreads();
+        };
     };
 
 

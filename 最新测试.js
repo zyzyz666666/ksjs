@@ -520,6 +520,7 @@ function 停留100秒滑动() {
         } else if (downup == 5 && jos % 2 !== 0) {
             lloogg("下");
             upslide();
+            sleep(1500);
             jos = jos + 1;
             downup = 0;
         };
@@ -1109,6 +1110,7 @@ if (earnmoney && c === true) {
                             } else {
                                 lloogg("每日挑战进度条不在视野内");
                                 upslide();
+                                sleep(1500);
                             };
                             if (n % 10 === 0) {
                                 回顶();
@@ -1369,6 +1371,7 @@ if (earnmoney && c === true) {
                             } else {
                                 log("饭补不在视野内");
                                 upslide();
+                                sleep(1500);
                             };
                             if (n % 10 === 0) {
                                 回顶();
@@ -1433,6 +1436,7 @@ if (earnmoney && c === true) {
                             } else {
                                 log("奖励翻倍不在视野内");
                                 upslide();
+                                sleep(1500);
                             };
                             if (n % 10 === 0) {
                                 回顶();
@@ -1539,6 +1543,7 @@ if (earnmoney && c === true) {
                         } else {
                             log("看视频赚得金币不在视野内");
                             upslide();
+                            sleep(1500);
                         };
                         if (n % 10 === 0) {
                             回顶();
@@ -1622,6 +1627,7 @@ if (earnmoney && c === true) {
                             } else {
                                 lloogg("逛街不在视野内");
                                 upslide();
+                                sleep(1500);
                             };
                             if (n % 10 === 0) {
                                 回顶();
@@ -1753,6 +1759,7 @@ if (earnmoney && c === true) {
                                         sleep(1000);
                                     };
                                     upslide();
+                                    sleep(1500);
                                     sleep(3500)
                                 };
                             };
@@ -1761,6 +1768,7 @@ if (earnmoney && c === true) {
                         } else {
                             lloogg("给视频表态不在视野内");
                             upslide();
+                            sleep(1500);
                         };
                         if (n % 10 === 0) {
                             回顶();
@@ -1782,7 +1790,7 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             // lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
+            回顶();s
             sleep(1000);
             t8 = 1;
             if (!thread8Paused && t8 == 1 && currentThread == 8) {
@@ -1833,6 +1841,7 @@ if (earnmoney && c === true) {
                     if (downup == 10) {
                         lloogg("看视频");
                         upslide();
+                        sleep(1500);
                         lloogg("继续刷" + (600 - gjdjs) + "秒视频");
                         downup = 0;
                     };

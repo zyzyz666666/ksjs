@@ -1729,7 +1729,7 @@ if (earnmoney && c === true) {
                                         };
                                     };
 
-                                    for (n = 0; n < 10; n++) {
+                                    for (n = 0; n < 50; n++) {
                                         if视频();
                                         sleep(1000);
                                         if (在视频页 == 1) {
@@ -1765,7 +1765,7 @@ if (earnmoney && c === true) {
                                         break;
 
                                     };
-                                    lloogg(bta)
+                                    log(bta)
                                     if (bta == 1) {
                                         try {
                                             var array = [可见表态.indexInParent() + 2, 可见表态.indexInParent() + 3, 可见表态.indexInParent() + 4];

@@ -1487,7 +1487,7 @@ if (earnmoney && c === true) {
                             列表_看视频赚得金币 = 1;
                             log("正在看视频赚得金币-停留2分钟");
                             for (ksp = 1; ksp < 5; ksp++) {
-                                var 明天再来 = text("明天再来").findOne(1000);
+                                //var 明天再来 = text("明天再来").findOne(1000);
                                 var 看视频 = textMatches(/(看视频[得赚].*金币$)/).findOne(1000);
                                 var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
                                 try {
@@ -1495,10 +1495,7 @@ if (earnmoney && c === true) {
                                 } catch (e) {
                                     lknlks = false;
                                 }
-                                if (明天再来) {
-                                    log("明天再来");
-                                    break;
-                                } else if (看视频 && lknlks === true) {
+                                if (看视频 && lknlks === true) {
                                     click(看视频.bounds().centerX(), 看视频.bounds().centerY());
                                     sleep(500);
                                 };
@@ -1678,17 +1675,14 @@ if (earnmoney && c === true) {
                             列表_给视频表态 = 1;
                             lloogg("正在给视频表态");
                             for (bt = 1; bt > 0; bt++) {
-                                var 明日再来 = text("明日再来").findOne(1000);
+                                //var 明日再来 = text("明日再来").findOne(1000);
                                 var 表态 = textContains("给视频表态").findOne(1500);
                                 try {
                                     var bbtt = 表态.visibleToUser()
                                 } catch (e) {
                                     bbtt = false;
                                 }
-                                if (明日再来) {
-                                    lloogg("明日再来");
-                                    break;
-                                } else if (表态 && bbtt === true) {
+                                if (表态 && bbtt === true) {
                                     click(表态.bounds().centerX(), 表态.bounds().centerY());
                                     sleep(500);
 
@@ -1790,7 +1784,7 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             // lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();s
+            回顶();
             sleep(1000);
             t8 = 1;
             if (!thread8Paused && t8 == 1 && currentThread == 8) {

@@ -1941,9 +1941,9 @@ function xx() {
     var 先暂停 = 0;
     var 在奇怪的地方 = text("邀请好友 必得现金").findOne(100) || textMatches(/(仅差.*成长值升级)/).findOne(100) ||
         idContains("live_audience").findOne(100) || idContains("svg__icons__dom").findOne(100) ||
-        id("com.kuaishou.nebula:id/avatar").findOne(100) || text("距本周活动结束").findOne(100) || 
+        id("com.kuaishou.nebula:id/avatar").findOne(100) || text("距本周活动结束").findOne(100) ||
         text("赚金小游戏").findOne(100) || text("金币兑换优惠券").findOne(100) || text("我的抽奖码").findOne(100) ||
-         text("种成后还能换其他水果哦").findOne(100) ||
+        text("种成后还能换其他水果哦").findOne(100) ||
         text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
         textContains("前三次完成先睡觉再起床").findOne(100);
     // if (弹窗 && 弹窗.visibleToUser() === true) {
@@ -2324,46 +2324,77 @@ function xx() {
     if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
         lloogg("在奇怪的地方");
         log(在奇怪的地方);
-        lloogg("先暂停");
-        if (currentThread !== 100) {
-            try {
-                pauseThread10();
-                pauseThread1();
-                pauseThread2();
-                pauseThread3();
-                pauseThread4();
-                pauseThread5();
-                pauseThread6();
-                pauseThread7();
-                pauseThread8();
-                pauseThread11();
-                先暂停 = 1;
-            } catch (e) {
-                线 = 0;
-            }
+        // lloogg("先暂停");
+        // if (currentThread !== 100) {
+        //     try {
+        //         pauseThread10();
+        //         pauseThread1();
+        //         pauseThread2();
+        //         pauseThread3();
+        //         pauseThread4();
+        //         pauseThread5();
+        //         pauseThread6();
+        //         pauseThread7();
+        //         pauseThread8();
+        //         pauseThread11();
+        //         先暂停 = 1;
+        //     } catch (e) {
+        //         线 = 0;
+        //     }
 
-        }
-        back(); back(); back(); back();
-        sleep(2000);
-        app.launchApp("快手极速版");
-        goandearn();
-        sleep(2000);
-        回顶();
-        sleep(2000);
-        if (先暂停 == 1) {
-            先暂停 = 0;
-            resumeThread10();
-            resumeThread1();
-            resumeThread2();
-            resumeThread3();
-            resumeThread4();
-            resumeThread5();
-            resumeThread6();
-            resumeThread7();
-            resumeThread8();
-            resumeThread11();
-            runThreads();
+        // }
+        back();
+        sleep(250);
+        var 抵用金 = textContains("抵用金").findOne(250);
+        try {
+            var diyongjin = 抵用金.visibleToUser()
+        } catch (e) {
+            diyongjin = false;
         };
+        if (抵用金) {
+            log("mission1")
+        } else {
+            back();
+            sleep(250);
+            var 抵用金 = textContains("抵用金").findOne(250);
+            try {
+                var diyongjin = 抵用金.visibleToUser()
+            } catch (e) {
+                diyongjin = false;
+            };
+            if (抵用金) {
+                log("mission2")
+            } else {
+                back();
+                sleep(250);
+                var 抵用金 = textContains("抵用金").findOne(250);
+                try {
+                    var diyongjin = 抵用金.visibleToUser()
+                } catch (e) {
+                    diyongjin = false;
+                };
+                if (抵用金) {
+                    log("mission2")
+                } else {
+                    yy();
+                }
+            }
+        }
+
+        // if (先暂停 == 1) {
+        //     先暂停 = 0;
+        //     resumeThread10();
+        //     resumeThread1();
+        //     resumeThread2();
+        //     resumeThread3();
+        //     resumeThread4();
+        //     resumeThread5();
+        //     resumeThread6();
+        //     resumeThread7();
+        //     resumeThread8();
+        //     resumeThread11();
+        //     runThreads();
+        // };
     };
 
 

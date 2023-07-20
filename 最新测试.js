@@ -1145,10 +1145,11 @@ if (earnmoney && c === true) {
 
 
         function thread4() {
+            var 饭补进对了 = 0;
             var t4 = 0;
             currentThread = 4;
             // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 10; n++) {
                 if (列表_饭点补贴 == 0) {
                     if (选择框_饭饭补贴) {
                         var fdbt = text("到饭点领饭补").findOne(3500);
@@ -1178,11 +1179,20 @@ if (earnmoney && c === true) {
                                         var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(1000);
                                         if (领取饭补) {
                                             log("领取饭补");
+                                            饭补进对了 = 1;
                                             break;
                                         } else if (领过了) {
                                             log("领过了");
+                                            饭补进对了 = 1;
                                             break;
                                         };
+                                    };
+                                    if (ff == 9 && !领取饭补 && !领过了) {
+                                        lloogg("饭补进错了");
+                                        back();
+                                        sleep(1500);
+                                        back();
+
                                     };
                                 };
                                 if (领取饭补) {
@@ -1251,121 +1261,125 @@ if (earnmoney && c === true) {
 
                                 ////////、、、、、、、、、、、、、、、、、、、、、、、、、
                                 //////////////补签/////////////
-                                log("开始寻找补签");
-                                for (dbqys = 1; dbqys < 10; dbqys++) {
-                                    var 待补签元素 = textMatches(/(.*待补签$)/).find();
-                                    if (待补签元素 && 待补签元素.length !== 0) {
-                                        log("正在补签");
-                                        log("等待补签数量:" + 待补签元素.length);
-                                        for (dbq = 0; dbq < 待补签元素.length; dbq++) {
-                                            click(待补签元素[dbq].bounds().centerX(), 待补签元素[dbq].bounds().centerY());
-                                            sleep(300);
-                                            var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                            if (广子倒计时) {
-                                                log("正在看广告");
-                                                停留30秒倒计时();
-                                                sleep(300)
-                                                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                                try {
-                                                    var hmkw = 还没看完.text();
-                                                } catch (error) {
-                                                    var hmkw = null || undefined;
-                                                };
-                                                if (hmkw !== "去完成任务") {
-                                                    log("还没看完,继续等待30秒");
-                                                    try {
-                                                        var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                        还没看完button.click();
-                                                    } catch (error) {
-                                                        log("还没看完buttonz找不到");
-                                                    };
+                                if (饭补进对了 == 1) {
+                                    log("开始寻找补签");
+                                    for (dbqys = 1; dbqys < 10; dbqys++) {
+                                        var 待补签元素 = textMatches(/(.*待补签$)/).find();
+                                        if (待补签元素 && 待补签元素.length !== 0) {
+                                            log("正在补签");
+                                            log("等待补签数量:" + 待补签元素.length);
+                                            for (dbq = 0; dbq < 待补签元素.length; dbq++) {
+                                                click(待补签元素[dbq].bounds().centerX(), 待补签元素[dbq].bounds().centerY());
+                                                sleep(300);
+                                                var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                                if (广子倒计时) {
+                                                    log("正在看广告");
                                                     停留30秒倒计时();
-                                                } else {
-                                                    log("额外任务");
+                                                    sleep(300)
+                                                    var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
                                                     try {
-                                                        var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                        放弃button.click();
+                                                        var hmkw = 还没看完.text();
                                                     } catch (error) {
-                                                        log("放弃buttonz找不到");
+                                                        var hmkw = null || undefined;
+                                                    };
+                                                    if (hmkw !== "去完成任务") {
+                                                        log("还没看完,继续等待30秒");
+                                                        try {
+                                                            var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
+                                                            还没看完button.click();
+                                                        } catch (error) {
+                                                            log("还没看完buttonz找不到");
+                                                        };
+                                                        停留30秒倒计时();
+                                                    } else {
+                                                        log("额外任务");
+                                                        try {
+                                                            var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
+                                                            放弃button.click();
+                                                        } catch (error) {
+                                                            log("放弃buttonz找不到");
+                                                        };
                                                     };
                                                 };
+
                                             };
-
-                                        };
-                                    } else if (待补签元素.length == 0) {
-                                        log("无补待签元素");
-                                        break;
-                                    };
-                                };
-                                //////////////补签/////////////
-                                /////////////////看视频////////////
-
-                                log("开始看视频");
-                                var 饭补视频 = text("看视频").findOne(1000);
-                                if (饭补视频) {
-                                    log("正在去看饭补视频");
-                                    for (fbsp = 1; fbsp > 0; fbsp++) {
-                                        var 饭补视频 = text("看视频").findOne(1500);
-                                        click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
-                                        var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                        var toast窗 = id("com.kuaishou.nebula:id/toast_text").findOne(1000);
-                                        var 今日饭补广告看完了 = textContains("已完成").findOne(800) || textContains("明天再来").findOne(800) || text("任务已完成，明天再来吧～").findOne(800);
-                                        var 领取饭补 = text("领取饭补").findOne(500);
-                                        var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(500);
-                                        if (toast窗) {
-                                            log(toast窗.text())
-                                        };
-                                        if (今日饭补广告看完了) {
-                                            log("今日饭补广告看完了");
+                                        } else if (待补签元素.length == 0) {
+                                            log("无补待签元素");
                                             break;
+                                        };
+                                    };
+                                    //////////////补签/////////////
+                                    /////////////////看视频////////////
+
+                                    log("开始看视频");
+                                    var 饭补视频 = text("看视频").findOne(1000);
+                                    if (饭补视频) {
+                                        log("正在去看饭补视频");
+                                        for (fbsp = 1; fbsp > 0; fbsp++) {
+                                            var 饭补视频 = text("看视频").findOne(1500);
+                                            click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
+                                            var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                            var toast窗 = id("com.kuaishou.nebula:id/toast_text").findOne(1000);
+                                            var 今日饭补广告看完了 = textContains("已完成").findOne(800) || textContains("明天再来").findOne(800) || text("任务已完成，明天再来吧～").findOne(800);
+                                            var 领取饭补 = text("领取饭补").findOne(500);
+                                            var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(500);
+                                            if (toast窗) {
+                                                log(toast窗.text())
+                                            };
+                                            if (今日饭补广告看完了) {
+                                                log("今日饭补广告看完了");
+                                                break;
+                                            };
+                                            if (广告倒计时) {
+                                                log("正在看广告——停留30秒")
+                                                break;
+                                            };
+                                            if (!广告倒计时 && !今日饭补广告看完了 && !领取饭补 && !领取饭补) {
+                                                log("饭补卡住了");
+                                                停留x秒倒计时(50);
+                                                sleep(300);
+                                                break;
+                                            };
                                         };
                                         if (广告倒计时) {
-                                            log("正在看广告——停留30秒")
-                                            break;
-                                        };
-                                        if (!广告倒计时 && !今日饭补广告看完了 && !领取饭补 && !领取饭补) {
-                                            log("饭补卡住了");
-                                            停留x秒倒计时(50);
-                                            sleep(300);
-                                            break;
-                                        };
-                                    };
-                                    if (广告倒计时) {
-                                        停留30秒倒计时();
-                                        sleep(300);
-                                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                        try {
-                                            var hmkw = 还没看完.text();
-                                        } catch (error) {
-                                            var hmkw = null || undefined;
-                                        };
-                                        if (hmkw !== "去完成任务") {
-                                            log("还没看完,继续等待30秒");
-                                            try {
-                                                var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                还没看完button.click();
-                                            } catch (error) {
-                                                log("还没看完buttonz找不到");
-                                            };
                                             停留30秒倒计时();
-                                        } else {
-                                            log("额外任务");
+                                            sleep(300);
+                                            var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
                                             try {
-                                                var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                放弃button.click();
+                                                var hmkw = 还没看完.text();
                                             } catch (error) {
-                                                log("放弃buttonz找不到");
+                                                var hmkw = null || undefined;
+                                            };
+                                            if (hmkw !== "去完成任务") {
+                                                log("还没看完,继续等待30秒");
+                                                try {
+                                                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
+                                                    还没看完button.click();
+                                                } catch (error) {
+                                                    log("还没看完buttonz找不到");
+                                                };
+                                                停留30秒倒计时();
+                                            } else {
+                                                log("额外任务");
+                                                try {
+                                                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
+                                                    放弃button.click();
+                                                } catch (error) {
+                                                    log("放弃buttonz找不到");
+                                                };
                                             };
                                         };
                                     };
+                                    sleep(3000);
+
+
+
+                                    /////////////////看视频////////////
+
+
+                                    back();
+
                                 };
-                                sleep(3000);
-
-
-                                /////////////////看视频////////////
-
-
-                                back();
 
 
                             } else {
@@ -1405,7 +1419,7 @@ if (earnmoney && c === true) {
             var t5 = 0;
             currentThread = 5;
             // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 9; n++) {
                 if (列表_奖励翻倍 == 0) {
                     if (选择框_奖励翻倍) {
                         var jlfb = textContains("看视频奖励翻倍特权").findOne(3500);
@@ -1457,6 +1471,7 @@ if (earnmoney && c === true) {
                 };
 
             };
+            back();
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
@@ -1473,7 +1488,7 @@ if (earnmoney && c === true) {
             var t6 = 0;
             currentThread = 6;
             // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 10; n++) {
 
                 if (列表_看视频赚得金币 == 0) {
                     if (选择框_看视频赚金币) {
@@ -1499,12 +1514,19 @@ if (earnmoney && c === true) {
                                     click(看视频.bounds().centerX(), 看视频.bounds().centerY());
                                     sleep(500);
                                 };
+                                if (ksp == 4 && !看视频 && !广告倒计时) {
+                                    lloogg("看视频进错了");
+                                    back();
+                                    sleep(1500);
+                                    back();
+                                };
                                 if (广告倒计时) {
                                     log("正在看广告——停留30秒")
                                     break;
                                 } else {
                                     continue;
                                 };
+
                             };
 
                             if (广告倒计时) {
@@ -1602,6 +1624,12 @@ if (earnmoney && c === true) {
                                             }
                                         };
                                     };
+                                    if (ksp == 9 && !逛街倒计时) {
+                                        lloogg("逛街进错了");
+                                        back();
+                                        sleep(1500);
+                                        back();
+                                    }
                                     if (逛街倒计时) {
                                         lloogg("正在逛街逛街——滑动停留100秒")
                                         break;
@@ -1674,7 +1702,7 @@ if (earnmoney && c === true) {
                         if (gspbt && ads === true) {
                             列表_给视频表态 = 1;
                             lloogg("正在给视频表态");
-                            for (bt = 1; bt > 0; bt++) {
+                            for (bt = 1; bt < 10; bt++) {
                                 //var 明日再来 = text("明日再来").findOne(1000);
                                 var 表态 = textContains("给视频表态").findOne(1500);
                                 try {

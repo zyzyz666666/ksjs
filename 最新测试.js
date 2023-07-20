@@ -960,7 +960,7 @@ if (earnmoney && c === true) {
             var t3 = 0;
             currentThread = 3
             // 线程3的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 5; n++) {
 
                 if (列表_每日挑战 == 0) {
                     if (选择框_每日挑战) {
@@ -1148,7 +1148,7 @@ if (earnmoney && c === true) {
             var t4 = 0;
             currentThread = 4;
             // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 5; n++) {
                 if (列表_饭点补贴 == 0) {
                     if (选择框_饭饭补贴) {
                         var fdbt = text("到饭点领饭补").findOne(3500);
@@ -1162,7 +1162,7 @@ if (earnmoney && c === true) {
                             if (ffdbt) {
                                 log("正在去领取饭点补贴");
                                 列表_饭点补贴 = 1;
-                                for (ff = 1; ff < 60; ff++) {
+                                for (ff = 1; ff < 5; ff++) {
                                     var 饭补 = textContains("到饭点领饭补").findOne(1000);
                                     try {
                                         var fbb = 饭补.visibleToUser()
@@ -1191,7 +1191,7 @@ if (earnmoney && c === true) {
                                     } catch (e) {
                                     }
                                     if (dian领取饭补) {
-                                        for (ffd = 1; ffd < 10; ffd++) {
+                                        for (ffd = 1; ffd < 5; ffd++) {
                                             dian领取饭补.click();
                                             var 饭补领取 = textContains("恭喜获得").findOne(3000);
                                             if (饭补领取) {
@@ -1252,7 +1252,7 @@ if (earnmoney && c === true) {
                                 ////////、、、、、、、、、、、、、、、、、、、、、、、、、
                                 //////////////补签/////////////
                                 log("开始寻找补签");
-                                for (dbqys = 1; dbqys < 10; dbqys++) {
+                                for (dbqys = 1; dbqys < 5; dbqys++) {
                                     var 待补签元素 = textMatches(/(.*待补签$)/).find();
                                     if (待补签元素 && 待补签元素.length !== 0) {
                                         log("正在补签");
@@ -1304,7 +1304,7 @@ if (earnmoney && c === true) {
                                 var 饭补视频 = text("看视频").findOne(1000);
                                 if (饭补视频) {
                                     log("正在去看饭补视频");
-                                    for (fbsp = 1; fbsp > 0; fbsp++) {
+                                    for (fbsp = 0; fbsp < 5; fbsp++) {
                                         var 饭补视频 = text("看视频").findOne(1500);
                                         click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
                                         var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
@@ -1405,7 +1405,7 @@ if (earnmoney && c === true) {
             var t5 = 0;
             currentThread = 5;
             // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 5; n++) {
                 if (列表_奖励翻倍 == 0) {
                     if (选择框_奖励翻倍) {
                         var jlfb = textContains("看视频奖励翻倍特权").findOne(3500);
@@ -1473,7 +1473,7 @@ if (earnmoney && c === true) {
             var t6 = 0;
             currentThread = 6;
             // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 5; n++) {
 
                 if (列表_看视频赚得金币 == 0) {
                     if (选择框_看视频赚金币) {
@@ -1576,7 +1576,7 @@ if (earnmoney && c === true) {
             var t7 = 0;
             currentThread = 7;
             // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 5; n++) {
                 if (列表_逛街金币 == 0) {
                     if (选择框_逛街) {
                         var gjljb = text("逛街领金币").findOne(3500);
@@ -1660,7 +1660,7 @@ if (earnmoney && c === true) {
             var t8 = 0;
             currentThread = 8;
             // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
+            for (n = 0; n < 5; n++) {
 
                 var 在视频页 = 0;
                 if (列表_给视频表态 == 0) {
@@ -1674,7 +1674,7 @@ if (earnmoney && c === true) {
                         if (gspbt && ads === true) {
                             列表_给视频表态 = 1;
                             lloogg("正在给视频表态");
-                            for (bt = 1; bt > 0; bt++) {
+                            for (bt = 0; bt < 5; bt++) {
                                 //var 明日再来 = text("明日再来").findOne(1000);
                                 var 表态 = textContains("给视频表态").findOne(1500);
                                 try {
@@ -1722,7 +1722,7 @@ if (earnmoney && c === true) {
                                 for (pbt = 0; pbt < 35; pbt++) {
                                     lloogg("正在评论第" + (pbt + 1) + "/50 条视频");
                                     var bta = 0;
-                                    for (qbt = 0; qbt > -1; qbt++) {
+                                    for (qbt = 0; qbt < 5; qbt++) {
                                         var 表态 = text("你对此条视频是否满意？").find().filter(function (element) {
                                             return element.visibleToUser();
                                         });

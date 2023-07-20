@@ -68,7 +68,7 @@ function goandearn() {
         //         };
         //     } else {
         for (qzq = 1; qzq > 0; qzq++) {
-            if (qzq == 15) {
+            if (qzq == 25) {
                 lloogg("识别超时，正在重启");
                 yy();
             } else {
@@ -201,7 +201,7 @@ function doubleclickearnmoney() {
         }
         if (qquzq) {
             for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 15) {
+                if (qzq == 25) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
@@ -226,7 +226,7 @@ function doubleclickearnmoney() {
             };
         } else {
             for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 15) {
+                if (qzq == 25) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
@@ -632,7 +632,7 @@ try {
 }
 if (earnmoney && c === true) {
     for (m = 1; m > 0; m++) {
-        if (m == 15) {
+        if (m == 25) {
             lloogg("识别超时，正在重启");
             yy();
         } else {
@@ -1825,7 +1825,7 @@ if (earnmoney && c === true) {
 
             lloogg("刷十分钟视频");
             for (sy = 1; sy > 0; sy++) {
-                if (sy == 15) {
+                if (sy == 25) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {

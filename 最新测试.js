@@ -2323,6 +2323,7 @@ function xx() {
     };
     if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
         lloogg("在奇怪的地方");
+        log(在奇怪的地方);
         lloogg("先暂停");
         if (currentThread !== 100) {
             try {

@@ -1019,7 +1019,7 @@ threads.start(function () {
                                         if (完成3个.text() == "完成3个") {
                                             lloogg("尚未完成3个");
                                         } else if (完成3个.text() === "点击领取") {
-                                            for (dd3 = 1; dd3 > 0; dd3++) {
+                                            for (dd3 = 1; dd3 < 10; dd3++) {
                                                 try {
                                                     完成3个.parent().click();
                                                 } catch (e) {
@@ -1052,7 +1052,7 @@ threads.start(function () {
                                         if (完成5个.text() == "完成5个") {
                                             lloogg("尚未完成5个");
                                         } else if (完成5个.text() === "点击领取") {
-                                            for (dd5 = 1; dd5 > 0; dd5++) {
+                                            for (dd5 = 1; dd5 < 10; dd5++) {
                                                 try {
                                                     完成5个.parent().click();
                                                 } catch (e) {
@@ -1084,7 +1084,7 @@ threads.start(function () {
                                         if (完成7个.text() == "完成7个") {
                                             lloogg("尚未完成7个");
                                         } else if (完成7个.text() === "点击领取") {
-                                            for (dd7 = 1; dd7 > 0; dd7++) {
+                                            for (dd7 = 1; dd7 < 10; dd7++) {
                                                 try {
                                                     完成7个.parent().click();
                                                 } catch (e) {
@@ -1264,7 +1264,7 @@ threads.start(function () {
                                     ////////、、、、、、、、、、、、、、、、、、、、、、、、、
                                     //////////////补签/////////////
                                     log("开始寻找补签");
-                                    for (dbqys = 1; dbqys > 0; dbqys++) {
+                                    for (dbqys = 1; dbqys < 3; dbqys++) {
                                         var 待补签元素 = textMatches(/(.*待补签$)/).find();
                                         if (待补签元素 && 待补签元素.length !== 0) {
                                             log("正在补签");
@@ -1596,7 +1596,7 @@ threads.start(function () {
                                 if (gjljb.visibleToUser() === true) {
                                     列表_逛街金币 = 1;
                                     lloogg("正在逛街");
-                                    for (gj = 1; gj > 0; gj++) {
+                                    for (gj = 0; gj < 3; gj++) {
                                         var 逛街 = text("逛街领金币").findOne(1000);
                                         var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
                                         if (逛街) {
@@ -1685,7 +1685,7 @@ threads.start(function () {
                             if (gspbt && ads === true) {
                                 列表_给视频表态 = 1;
                                 lloogg("正在给视频表态");
-                                for (bt = 1; bt > 0; bt++) {
+                                for (bt = 1; bt < 5; bt++) {
                                     var 明日再来 = text("明日再来").findOne(1000);
                                     var 表态 = textContains("给视频表态").findOne();
                                     try {

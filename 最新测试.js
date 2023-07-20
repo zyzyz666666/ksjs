@@ -7,6 +7,8 @@ var window = floaty.window(
     </frame>
 );
 
+var filePathksjs = '/sdcard/ksjs.js';
+
 
 window.setPosition(device.width / 3, 0);
 window.setSize(device.width * 1 / 2, 250);
@@ -1891,7 +1893,7 @@ lloogg("已完成");
 function yy() {
     sleep(1500);
     engines.stopAll();
-    engines.execScriptFile(filePathtime);
+    engines.execScriptFile(filePathksjs);
 };
 
 function xx() {

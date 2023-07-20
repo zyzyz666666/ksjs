@@ -1912,7 +1912,7 @@ threads.start(function () {
         log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
         var newtimeout = origintimeout + elapsedTime;
         timeset.put("timeout", newtimeout);
-        log(newtimeout);
+        log(newtimeout + "：" + (elapsedTime / 60000) + "分钟");
         sleep(3000);
         engines.stopAll();
         engines.execScriptFile(filePathtime);

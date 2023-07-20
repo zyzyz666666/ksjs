@@ -68,7 +68,7 @@ function goandearn() {
         //         };
         //     } else {
         for (qzq = 1; qzq > 0; qzq++) {
-            if (qzq == 25) {
+            if (qzq == 15) {
                 lloogg("识别超时，正在重启");
                 yy();
             } else {
@@ -201,7 +201,7 @@ function doubleclickearnmoney() {
         }
         if (qquzq) {
             for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 25) {
+                if (qzq == 15) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
@@ -226,7 +226,7 @@ function doubleclickearnmoney() {
             };
         } else {
             for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 25) {
+                if (qzq == 15) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
@@ -632,7 +632,7 @@ try {
 }
 if (earnmoney && c === true) {
     for (m = 1; m > 0; m++) {
-        if (m == 25) {
+        if (m == 15) {
             lloogg("识别超时，正在重启");
             yy();
         } else {
@@ -1115,7 +1115,7 @@ if (earnmoney && c === true) {
                             if (n % 10 === 0) {
                                 回顶();
                                 n = 0;
-                                if (n == 25) {
+                                if (n == 15) {
                                     yy();
                                 }
                             };
@@ -1390,7 +1390,7 @@ if (earnmoney && c === true) {
                             if (n % 10 === 0) {
                                 回顶();
                                 n = 0;
-                                if (n == 25) {
+                                if (n == 15) {
                                     yy();
                                 }
                             };
@@ -1455,7 +1455,7 @@ if (earnmoney && c === true) {
                             if (n % 10 === 0) {
                                 回顶();
                                 n = 0;
-                                if (n == 25) {
+                                if (n == 15) {
                                     yy();
                                 }
                             };
@@ -1567,7 +1567,7 @@ if (earnmoney && c === true) {
                         if (n % 10 === 0) {
                             回顶();
                             n = 0;
-                            if (n == 25) {
+                            if (n == 15) {
                                 yy();
                             }
                         };
@@ -1657,7 +1657,7 @@ if (earnmoney && c === true) {
                             if (n % 10 === 0) {
                                 回顶();
                                 n = 0;
-                                if (n == 25) {
+                                if (n == 15) {
                                     yy();
                                 }
                             };
@@ -1794,7 +1794,7 @@ if (earnmoney && c === true) {
                         if (n % 10 === 0) {
                             回顶();
                             n = 0;
-                            if (n == 25) {
+                            if (n == 15) {
                                 yy();
                             }
                         };
@@ -1825,7 +1825,7 @@ if (earnmoney && c === true) {
 
             lloogg("刷十分钟视频");
             for (sy = 1; sy > 0; sy++) {
-                if (sy == 25) {
+                if (sy == 15) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {

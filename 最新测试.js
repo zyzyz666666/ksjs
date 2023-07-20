@@ -70,7 +70,7 @@ function goandearn() {
         for (qzq = 1; qzq > 0; qzq++) {
             if (qzq == 25) {
                 lloogg("识别超时，正在重启");
-                zz();
+                yy();
             } else {
                 lloogg("正在调用abclick1");
                 click(a, b);
@@ -1949,6 +1949,7 @@ function zz() {
     //     }
 
     // }
+    app.launchApp("快手")
     back();
     sleep(250);
     var 抵用金 = textContains("抵用金").findOne(250);
@@ -1957,9 +1958,10 @@ function zz() {
     } catch (e) {
         diyongjin = false;
     };
-    if (抵用金) {
+    if (抵用金 && 抵用金.visibleToUser() == true) {
         log("mission1")
     } else {
+        app.launchApp("快手")
         back();
         sleep(250);
         var 抵用金 = textContains("抵用金").findOne(250);
@@ -1968,9 +1970,10 @@ function zz() {
         } catch (e) {
             diyongjin = false;
         };
-        if (抵用金) {
+        if (抵用金 && 抵用金.visibleToUser() == true) {
             log("mission2")
         } else {
+            app.launchApp("快手")
             back();
             sleep(250);
             var 抵用金 = textContains("抵用金").findOne(250);
@@ -1979,10 +1982,10 @@ function zz() {
             } catch (e) {
                 diyongjin = false;
             };
-            if (抵用金) {
-                log("mission2")
+            if (抵用金 && 抵用金.visibleToUser() == true) {
+                log("mission3")
             } else {
-                yy();
+                goandearn();
             }
         }
     }

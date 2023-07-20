@@ -1316,8 +1316,8 @@ threads.start(function () {
                                     var 饭补视频 = text("看视频").findOne(1000);
                                     if (饭补视频) {
                                         log("正在去看饭补视频");
-                                        for (fbsp = 1; fbsp > 0; fbsp++) {
-                                            var 饭补视频 = text("看视频").findOne();
+                                        for (fbsp = 1; fbsp < 3; fbsp++) {
+                                            var 饭补视频 = text("看视频").findOne(1000);
                                             click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
                                             var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
                                             var toast窗 = id("com.kuaishou.nebula:id/toast_text").findOne(1000);

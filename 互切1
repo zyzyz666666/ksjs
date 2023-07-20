@@ -101,11 +101,10 @@ threads.start(function () {
                         lloogg("若出现点赞，等待自查找");
                         break;
                     } else {
-                        toastLog(15 - qzq);
                         continue;
                     };
-
                 }
+                toastLog("等待" + (15 - qzq) + "次")
             };
         } else {
             back();
@@ -233,10 +232,10 @@ threads.start(function () {
                             lloogg("在任务中心顶");
                             break;
                         } else {
-                            toastLog(15 - qzq);
                             continue;
                         };
                     }
+                    toastLog("等待" + (15 - qzq) + "次")
                 };
             } else {
                 for (qzq = 1; qzq > 0; qzq++) {
@@ -258,10 +257,10 @@ threads.start(function () {
                             lloogg("在任务中心顶");
                             break;
                         } else {
-                            toastLog(15 - qzq);
                             continue;
                         };
                     }
+                    toastLog("等待" + (15 - qzq) + "次")
                 };
             };
 
@@ -926,7 +925,7 @@ threads.start(function () {
                     列表_看视频赚得金币 == 1 &&
                     列表_逛街金币 == 1 &&
                     列表_给视频表态 == 1) {
-                    log("准备重开");
+                    log("restart重开");
                     yy();
                 } else {
                     t1 = 1;

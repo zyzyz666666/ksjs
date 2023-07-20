@@ -491,9 +491,16 @@ threads.start(function () {
 
                 }
 
-            } else if (awcontrol(/.*后可领取奖励/, 1)) {
+            } else if (awcontrol(/.*后可领取奖励|已成功领取奖励/, 1)) {
                 log("后可领取奖励,再等等")
                 sleep(3000 * 速度)
+                var 领取成功控件 = awcontrol(/已成功领取奖励/, 5)
+                if (领取成功控件) {
+                    let 右x = 领取成功控件.bounds().right
+                    let 右y = 领取成功控件.bounds().centerY()
+                    全能点击(右x - 3, 右y)
+                    sleep(3000)
+                }
             } else if (awcontrol("com.smile.gifmaker.neo_video:id/video_countdown_end_icon", 0, "id")) {
                 log("快手广告")
                 sleep(3000 * 速度)

@@ -1741,7 +1741,6 @@ if (earnmoney && c === true) {
 
                                     if (在视频页 == 1) {
                                         lloogg("开始表态");
-                                        break;
                                     };
 
                                 };

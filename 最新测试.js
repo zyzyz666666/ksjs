@@ -1006,7 +1006,7 @@ if (earnmoney && c === true) {
                                     if (完成3个.text() == "完成3个") {
                                         lloogg("尚未完成3个");
                                     } else if (完成3个.text() === "点击领取") {
-                                        for (dd3 = 1; dd3 > 0; dd3++) {
+                                        for (dd3 = 1; dd3 < 10; dd3++) {
                                             try {
                                                 完成3个.parent().click();
                                             } catch (e) {
@@ -1039,7 +1039,7 @@ if (earnmoney && c === true) {
                                     if (完成5个.text() == "完成5个") {
                                         lloogg("尚未完成5个");
                                     } else if (完成5个.text() === "点击领取") {
-                                        for (dd5 = 1; dd5 > 0; dd5++) {
+                                        for (dd5 = 1; dd5 < 10; dd5++) {
                                             try {
                                                 完成5个.parent().click();
                                             } catch (e) {
@@ -1071,7 +1071,7 @@ if (earnmoney && c === true) {
                                     if (完成7个.text() == "完成7个") {
                                         lloogg("尚未完成7个");
                                     } else if (完成7个.text() === "点击领取") {
-                                        for (dd7 = 1; dd7 > 0; dd7++) {
+                                        for (dd7 = 1; dd7 < 10; dd7++) {
                                             try {
                                                 完成7个.parent().click();
                                             } catch (e) {
@@ -1189,7 +1189,7 @@ if (earnmoney && c === true) {
                                     } catch (e) {
                                     }
                                     if (dian领取饭补) {
-                                        for (ffd = 1; ffd > 0; ffd++) {
+                                        for (ffd = 1; ffd < 10; ffd++) {
                                             dian领取饭补.click();
                                             var 饭补领取 = textContains("恭喜获得").findOne(3000);
                                             if (饭补领取) {
@@ -1250,7 +1250,7 @@ if (earnmoney && c === true) {
                                 ////////、、、、、、、、、、、、、、、、、、、、、、、、、
                                 //////////////补签/////////////
                                 log("开始寻找补签");
-                                for (dbqys = 1; dbqys > 0; dbqys++) {
+                                for (dbqys = 1; dbqys < 10; dbqys++) {
                                     var 待补签元素 = textMatches(/(.*待补签$)/).find();
                                     if (待补签元素 && 待补签元素.length !== 0) {
                                         log("正在补签");
@@ -1303,7 +1303,7 @@ if (earnmoney && c === true) {
                                 if (饭补视频) {
                                     log("正在去看饭补视频");
                                     for (fbsp = 1; fbsp > 0; fbsp++) {
-                                        var 饭补视频 = text("看视频").findOne();
+                                        var 饭补视频 = text("看视频").findOne(1500);
                                         click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
                                         var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
                                         var toast窗 = id("com.kuaishou.nebula:id/toast_text").findOne(1000);
@@ -1582,7 +1582,7 @@ if (earnmoney && c === true) {
                             if (gjljb.visibleToUser() === true) {
                                 列表_逛街金币 = 1;
                                 lloogg("正在逛街");
-                                for (gj = 1; gj > 0; gj++) {
+                                for (gj = 1; gj < 10; gj++) {
                                     var 逛街 = text("逛街领金币").findOne(1000);
                                     var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
                                     if (逛街) {
@@ -1614,7 +1614,7 @@ if (earnmoney && c === true) {
                                     var 继续逛街 = text("继续逛街").findOne(10000);
                                     if (继续逛街) {
                                         lloogg("还没逛完,继续等待100秒");
-                                        var 继续逛街but = text("继续逛街").findOne();
+                                        var 继续逛街but = text("继续逛街").findOne(1500);
                                         click(继续逛街but.bounds().centerX(), 继续逛街but.bounds().centerY());
                                         停留100秒滑动();
                                     };
@@ -1673,7 +1673,7 @@ if (earnmoney && c === true) {
                             lloogg("正在给视频表态");
                             for (bt = 1; bt > 0; bt++) {
                                 var 明日再来 = text("明日再来").findOne(1000);
-                                var 表态 = textContains("给视频表态").findOne();
+                                var 表态 = textContains("给视频表态").findOne(1500);
                                 try {
                                     var bbtt = 表态.visibleToUser()
                                 } catch (e) {
@@ -1800,7 +1800,7 @@ if (earnmoney && c === true) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
-                    var 首页 = text("首页").findOne();
+                    var 首页 = text("首页").findOne(1500);
                     try {
                         var sssyy = 首页.visibleToUser()
                         var ssyyy = 首页.selected()

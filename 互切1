@@ -83,7 +83,7 @@ threads.start(function () {
             //         };
             //     } else {
             for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 50) {
+                if (qzq == 15) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
@@ -101,7 +101,7 @@ threads.start(function () {
                         lloogg("若出现点赞，等待自查找");
                         break;
                     } else {
-                        toastLog(qzq);
+                        toastLog(15 - qzq);
                         continue;
                     };
 
@@ -216,7 +216,7 @@ threads.start(function () {
             }
             if (qquzq) {
                 for (qzq = 1; qzq > 0; qzq++) {
-                    if (qzq == 50) {
+                    if (qzq == 15) {
                         lloogg("识别超时，正在重启");
                         yy();
                     } else {
@@ -233,14 +233,14 @@ threads.start(function () {
                             lloogg("在任务中心顶");
                             break;
                         } else {
-                            toastLog(qzq);
+                            toastLog(15 - qzq);
                             continue;
                         };
                     }
                 };
             } else {
                 for (qzq = 1; qzq > 0; qzq++) {
-                    if (qzq == 50) {
+                    if (qzq == 15) {
                         lloogg("识别超时，正在重启");
                         yy();
                     } else {
@@ -258,7 +258,7 @@ threads.start(function () {
                             lloogg("在任务中心顶");
                             break;
                         } else {
-                            toastLog(qzq);
+                            toastLog(15 - qzq);
                             continue;
                         };
                     }
@@ -645,7 +645,7 @@ threads.start(function () {
     }
     if (earnmoney && c === true) {
         for (m = 1; m > 0; m++) {
-            if (m == 50) {
+            if (m == 15) {
                 lloogg("识别超时，正在重启");
                 yy();
             } else {
@@ -654,6 +654,7 @@ threads.start(function () {
                 var missoncenter = text("任务中心").findOne(1000);
                 var 抵用金0 = textContains("抵用金").findOne(1000);
                 var dlmtx = text("登录秒提现").findOne(1000);
+                toastLog(15 - qzq)
                 if (missoncenter || dlmtx || 抵用金0) {
                     lloogg("任务中心");
                     break;
@@ -1173,7 +1174,7 @@ threads.start(function () {
                                 if (ffdbt) {
                                     log("正在去领取饭点补贴");
                                     列表_饭点补贴 = 1;
-                                    for (ff = 1; ff < 60; ff++) {
+                                    for (ff = 1; ff < 15; ff++) {
                                         var 饭补 = textContains("到饭点领饭补").findOne(1000);
                                         try {
                                             var fbb = 饭补.visibleToUser()
@@ -1195,6 +1196,7 @@ threads.start(function () {
                                                 break;
                                             };
                                         };
+                                        toastLog("等待" + (15 - ff) + "次")
                                     };
                                     if (领取饭补) {
                                         try {
@@ -1809,20 +1811,27 @@ threads.start(function () {
 
                 lloogg("刷十分钟视频");
                 for (sy = 1; sy > 0; sy++) {
-                    var 首页 = text("首页").findOne();
-                    try {
-                        var sssyy = 首页.visibleToUser()
-                        var ssyyy = 首页.selected()
-                    } catch (e) {
-                        sssyy = false;
-                        ssyyy = false;
+                    if (sy == 15) {
+                        lloogg("识别超时，正在重启");
+                        yy();
                     }
-                    if (sssyy == true && ssyyy == false) {
-                        click(首页.bounds().centerX(), 首页.bounds().centerY());
-                    };
-                    if (首页.selected() == true) {
-                        lloogg("在首页");
-                        break;
+                    else {
+                        var 首页 = text("首页").findOne();
+                        try {
+                            var sssyy = 首页.visibleToUser()
+                            var ssyyy = 首页.selected()
+                        } catch (e) {
+                            sssyy = false;
+                            ssyyy = false;
+                        }
+                        if (sssyy == true && ssyyy == false) {
+                            click(首页.bounds().centerX(), 首页.bounds().centerY());
+                        };
+                        if (首页.selected() == true) {
+                            lloogg("在首页");
+                            break;
+                        };
+                        toastLog(15 - sy)
                     };
                 };
 

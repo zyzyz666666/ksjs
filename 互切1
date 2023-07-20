@@ -1628,7 +1628,7 @@ threads.start(function () {
                                         var 继续逛街 = text("继续逛街").findOne(10000);
                                         if (继续逛街) {
                                             lloogg("还没逛完,继续等待100秒");
-                                            var 继续逛街but = text("继续逛街").findOne();
+                                            var 继续逛街but = text("继续逛街").findOne(1500);
                                             click(继续逛街but.bounds().centerX(), 继续逛街but.bounds().centerY());
                                             停留100秒滑动();
                                         };
@@ -1687,7 +1687,7 @@ threads.start(function () {
                                 lloogg("正在给视频表态");
                                 for (bt = 1; bt < 5; bt++) {
                                     var 明日再来 = text("明日再来").findOne(1000);
-                                    var 表态 = textContains("给视频表态").findOne();
+                                    var 表态 = textContains("给视频表态").findOne(1500);
                                     try {
                                         var bbtt = 表态.visibleToUser()
                                     } catch (e) {
@@ -1815,7 +1815,7 @@ threads.start(function () {
                         yy();
                     }
                     else {
-                        var 首页 = text("首页").findOne();
+                        var 首页 = text("首页").findOne(1500);
                         try {
                             var sssyy = 首页.visibleToUser()
                             var ssyyy = 首页.selected()

@@ -1173,7 +1173,12 @@ if (earnmoney && c === true) {
                                     if (饭补 && fbb) {
                                         log("正在进领取饭补界面");
                                         click(饭补.bounds().centerX(), 饭补.bounds().centerY());
-                                        sleep(500);
+                                        奇怪地方返回任务中心();
+                                        if (奇怪 == 1) {
+                                            奇怪 = 0;
+                                            continue;
+                                        }
+                                        sleep(1000);
                                     } else {
                                         var 领取饭补 = text("领取饭补").findOne(1000);
                                         var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(1000);
@@ -1189,8 +1194,6 @@ if (earnmoney && c === true) {
                                     };
                                     if (ff == 9 && !领取饭补 && !领过了) {
                                         lloogg("饭补进错了");
-                                        back();
-                                        sleep(1500);
                                         back();
 
                                     };
@@ -1213,6 +1216,11 @@ if (earnmoney && c === true) {
                                                 if (恭喜获得视频) {
                                                     log("正在去看恭喜获得视频");
                                                     click(恭喜获得视频.bounds().centerX(), 恭喜获得视频.bounds().centerY());
+                                                    奇怪地方返回任务中心();
+                                                    if (奇怪 == 1) {
+                                                        奇怪 = 0;
+                                                        continue;
+                                                    }
                                                     var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
                                                     if (广子倒计时) {
                                                         log("正在看广告");
@@ -1315,10 +1323,15 @@ if (earnmoney && c === true) {
                                     var 饭补视频 = text("看视频").findOne(1000);
                                     if (饭补视频) {
                                         log("正在去看饭补视频");
-                                        for (fbsp = 1; fbsp > 0; fbsp++) {
+                                        for (fbsp = 0; fbsp < 10; fbsp++) {
                                             var 饭补视频 = text("看视频").findOne(1500);
                                             click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
-                                            var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
+                                            奇怪地方返回任务中心();
+                                            if (奇怪 == 1) {
+                                                奇怪 == 0;
+                                                continue;
+                                            }
+                                            var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
                                             var toast窗 = id("com.kuaishou.nebula:id/toast_text").findOne(1000);
                                             var 今日饭补广告看完了 = textContains("已完成").findOne(800) || textContains("明天再来").findOne(800) || text("任务已完成，明天再来吧～").findOne(800);
                                             var 领取饭补 = text("领取饭补").findOne(500);
@@ -1438,6 +1451,11 @@ if (earnmoney && c === true) {
                                     }
                                     if (翻倍 && ffb) {
                                         click(翻倍.bounds().centerX(), 翻倍.bounds().centerY());
+                                        奇怪地方返回任务中心();
+                                        if (奇怪 == 1) {
+                                            奇怪 = 0;
+                                            continue;
+                                        }
                                         sleep(500);
                                     };
                                     // if (翻倍中.text() !== "点击翻倍") {
@@ -1512,6 +1530,11 @@ if (earnmoney && c === true) {
                                 }
                                 if (看视频 && lknlks === true) {
                                     click(看视频.bounds().centerX(), 看视频.bounds().centerY());
+                                    奇怪地方返回任务中心();
+                                    if (奇怪 == 1) {
+                                        奇怪 = 0;
+                                        continue;
+                                    }
                                     sleep(500);
                                 };
                                 if (ksp == 4 && !看视频 && !广告倒计时) {
@@ -1620,6 +1643,11 @@ if (earnmoney && c === true) {
                                                 break;
                                             } else {
                                                 click(逛街.bounds().centerX(), 逛街.bounds().centerY());
+                                                奇怪地方返回任务中心();
+                                                if (奇怪 == 1) {
+                                                    奇怪 = 0;
+                                                    continue;
+                                                }
                                                 sleep(500);
                                             }
                                         };
@@ -1712,6 +1740,11 @@ if (earnmoney && c === true) {
                                 }
                                 if (表态 && bbtt === true) {
                                     click(表态.bounds().centerX(), 表态.bounds().centerY());
+                                    奇怪地方返回任务中心();
+                                    if (奇怪 == 1) {
+                                        奇怪 = 0;
+                                        continue;
+                                    }
                                     sleep(500);
 
                                     function if视频() {
@@ -1839,6 +1872,11 @@ if (earnmoney && c === true) {
                     }
                     if (sssyy == true && ssyyy == false) {
                         click(首页.bounds().centerX(), 首页.bounds().centerY());
+                        奇怪地方返回任务中心();
+                        if (奇怪 == 1) {
+                            奇怪 = 0;
+                            continue;
+                        }
                     };
                     if (首页.selected() == true) {
                         lloogg("在首页");
@@ -1927,84 +1965,39 @@ function yy() {
     exit();
 };
 
-function yy() {
-    lloogg("回退");
-    log("奇怪的地方");
-    // lloogg("先暂停");
-    // if (currentThread !== 100) {
-    //     try {
-    //         pauseThread10();
-    //         pauseThread1();
-    //         pauseThread2();
-    //         pauseThread3();
-    //         pauseThread4();
-    //         pauseThread5();
-    //         pauseThread6();
-    //         pauseThread7();
-    //         pauseThread8();
-    //         pauseThread11();
-    //         先暂停 = 1;
-    //     } catch (e) {
-    //         线 = 0;
-    //     }
 
-    // }
-    app.launchApp("快手极速版")
-    back();
-    sleep(250);
-    var 抵用金 = textContains("抵用金").findOne(250);
-    try {
-        var diyongjin = 抵用金.visibleToUser()
-    } catch (e) {
-        diyongjin = false;
-    };
-    if (抵用金 && 抵用金.visibleToUser() == true) {
-        log("mission1")
-    } else {
-        app.launchApp("快手极速版")
-        back();
-        sleep(250);
-        var 抵用金 = textContains("抵用金").findOne(250);
-        try {
-            var diyongjin = 抵用金.visibleToUser()
-        } catch (e) {
-            diyongjin = false;
+function 返回找任务中心() {
+    for (n = 1; n < 10; n++) {
+        var 抵用金 = textContains("抵用金").findOne(700);
+        // try {
+        //     var diyongjin = 抵用金.visibleToUser()
+        // } catch (e) {
+        //     diyongjin = false;
+        // }
+        sleep(300);
+        if (抵用金) {
+            lloogg("回到了任务中心");
+            break;
         };
-        if (抵用金 && 抵用金.visibleToUser() == true) {
-            log("mission2")
-        } else {
-            app.launchApp("快手极速版");
-            back();
-            sleep(250);
-            var 抵用金 = textContains("抵用金").findOne(250);
-            try {
-                var diyongjin = 抵用金.visibleToUser()
-            } catch (e) {
-                diyongjin = false;
-            };
-            if (抵用金 && 抵用金.visibleToUser() == true) {
-                log("mission3")
-            } else {
-                goandearn();
-            }
-        }
-    }
+    };
+};
 
-    // if (先暂停 == 1) {
-    //     先暂停 = 0;
-    //     resumeThread10();
-    //     resumeThread1();
-    //     resumeThread2();
-    //     resumeThread3();
-    //     resumeThread4();
-    //     resumeThread5();
-    //     resumeThread6();
-    //     resumeThread7();
-    //     resumeThread8();
-    //     resumeThread11();
-    //     runThreads();
-    // };
+var 奇怪 = 0;
+function 奇怪地方返回任务中心() {
+    var 在奇怪的地方 = text("邀请好友 必得现金").findOne(100) || textMatches(/(仅差.*成长值升级)/).findOne(100) ||
+        idContains("live_audience").findOne(100) || idContains("svg__icons__dom").findOne(100) ||
+        id("com.kuaishou.nebula:id/avatar").findOne(100) || text("距本周活动结束").findOne(100) ||
+        text("赚金小游戏").findOne(100) || text("金币兑换优惠券").findOne(100) || text("我的抽奖码").findOne(100) ||
+        text("种成后还能换其他水果哦").findOne(100) ||
+        text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
+        textContains("前三次完成先睡觉再起床").findOne(100);
+    if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
+        奇怪 = 1;
+        返回找任务中心();
+    };
+
 }
+
 
 function xx() {
     lloogg("xx");
@@ -2018,13 +2011,7 @@ function xx() {
     var 邀请新用户 = textContains("邀请新用户").findOne(100);
     var 青少年模式 = id("com.kuaishou.nebula:id/set_teenage_mode").findOne(100);
     var 先暂停 = 0;
-    var 在奇怪的地方 = text("邀请好友 必得现金").findOne(100) || textMatches(/(仅差.*成长值升级)/).findOne(100) ||
-        idContains("live_audience").findOne(100) || idContains("svg__icons__dom").findOne(100) ||
-        id("com.kuaishou.nebula:id/avatar").findOne(100) || text("距本周活动结束").findOne(100) ||
-        text("赚金小游戏").findOne(100) || text("金币兑换优惠券").findOne(100) || text("我的抽奖码").findOne(100) ||
-        text("种成后还能换其他水果哦").findOne(100) ||
-        text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
-        textContains("前三次完成先睡觉再起床").findOne(100);
+
     // if (弹窗 && 弹窗.visibleToUser() === true) {
     //     lloogg("检测到弹窗");
     //     sleep(500);
@@ -2400,81 +2387,7 @@ function xx() {
         lloogg("检测到好评弹窗");
         back();
     };
-    if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
-        lloogg("在奇怪的地方");
-        log(在奇怪的地方);
-        // lloogg("先暂停");
-        // if (currentThread !== 100) {
-        //     try {
-        //         pauseThread10();
-        //         pauseThread1();
-        //         pauseThread2();
-        //         pauseThread3();
-        //         pauseThread4();
-        //         pauseThread5();
-        //         pauseThread6();
-        //         pauseThread7();
-        //         pauseThread8();
-        //         pauseThread11();
-        //         先暂停 = 1;
-        //     } catch (e) {
-        //         线 = 0;
-        //     }
 
-        // }
-        back();
-        sleep(250);
-        var 抵用金 = textContains("抵用金").findOne(250);
-        try {
-            var diyongjin = 抵用金.visibleToUser()
-        } catch (e) {
-            diyongjin = false;
-        };
-        if (抵用金) {
-            log("mission1")
-        } else {
-            back();
-            sleep(250);
-            var 抵用金 = textContains("抵用金").findOne(250);
-            try {
-                var diyongjin = 抵用金.visibleToUser()
-            } catch (e) {
-                diyongjin = false;
-            };
-            if (抵用金) {
-                log("mission2")
-            } else {
-                back();
-                sleep(250);
-                var 抵用金 = textContains("抵用金").findOne(250);
-                try {
-                    var diyongjin = 抵用金.visibleToUser()
-                } catch (e) {
-                    diyongjin = false;
-                };
-                if (抵用金) {
-                    log("mission2")
-                } else {
-                    yy();
-                }
-            }
-        }
-
-        // if (先暂停 == 1) {
-        //     先暂停 = 0;
-        //     resumeThread10();
-        //     resumeThread1();
-        //     resumeThread2();
-        //     resumeThread3();
-        //     resumeThread4();
-        //     resumeThread5();
-        //     resumeThread6();
-        //     resumeThread7();
-        //     resumeThread8();
-        //     resumeThread11();
-        //     runThreads();
-        // };
-    };
 
 
     sleep(1000);

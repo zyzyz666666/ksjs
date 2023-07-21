@@ -551,7 +551,7 @@ function 停留30秒倒计时() {
     back();
 };
 
-//停留8秒倒计时
+//停留8秒倒计时 //不好用
 function 八秒倒计时() {
     for (ggdjs = 0; ggdjs < 10; ggdjs++) {
         lloogg("等待" + (10 - ggdjs) + "秒");
@@ -640,7 +640,7 @@ threads.start(function () {
     lloogg("YY")
 
 });
-八秒倒计时();
+sleep(8888);
 try {
     var c = earnmoney.visibleToUser()
 } catch (e) {
@@ -678,14 +678,14 @@ if (earnmoney && c === true) {
     if (ISLOGIN == 1) {
         lloogg("开始任务,正在检测可做任务……");
 
-        八秒倒计时();
+        sleep(8888);
         签到();
-        八秒倒计时();
+        sleep(8888);
         doubleclickearnmoney();
         sleep(2000);
         doubleclickearnmoney();
         日历签到();
-        八秒倒计时();
+        sleep(8888);
 
 
 
@@ -722,10 +722,12 @@ if (earnmoney && c === true) {
             签到();
 
             lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t10 = 1;
             if (!thread10Paused && t10 == 1 && currentThread == 10) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread1, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -919,8 +921,8 @@ if (earnmoney && c === true) {
             // 线程1执行完毕后，调用线程2
             lloogg(currentThread + "thread已经结束,正在回顶");
             log(列表_每日挑战, 列表_饭点补贴, 列表_奖励翻倍, 列表_看视频赚得金币, 列表_逛街金币, 列表_给视频表态);
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
 
             if (列表_每日挑战 == 1 &&
                 列表_饭点补贴 == 1 &&
@@ -933,6 +935,8 @@ if (earnmoney && c === true) {
             } else {
                 t1 = 1;
                 if (!thread1Paused && t1 == 1 && currentThread == 1) {
+                    回顶();
+                    sleep(1000);
                     setTimeout(thread2, 1000);  // 延迟1秒调用线程2
                 }
             }
@@ -967,10 +971,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t2 = 1;
             if (!thread2Paused && t2 == 1 && currentThread == 2) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread3, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1154,10 +1160,12 @@ if (earnmoney && c === true) {
 
             // 线程执行完毕后，调用线程34
             lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t3 = 1;
             if (!thread3Paused && t3 == 1 && currentThread == 3) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread4, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1213,7 +1221,6 @@ if (earnmoney && c === true) {
                                     };
                                     if (ff == 9 && !领取饭补 && !领过了) {
                                         lloogg("饭补进错了");
-                                        lloogg("看视频进错了");
                                         奇怪地方返回任务中心();
                                         if (奇怪 == 1) {
                                             奇怪 = 0;
@@ -1444,10 +1451,12 @@ if (earnmoney && c === true) {
             };
 
             lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t4 = 1;
             if (!thread4Paused && t4 == 1 && currentThread == 4) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread5, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1518,10 +1527,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t5 = 1;
             if (!thread5Paused && t5 == 1 && currentThread == 5) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread6, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1635,10 +1646,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t6 = 1;
             if (!thread6Paused && t6 == 1 && currentThread == 6) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread7, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1730,10 +1743,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t7 = 1;
             if (!thread7Paused && t7 == 1 && currentThread == 7) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread8, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1876,10 +1891,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             // lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t8 = 1;
             if (!thread8Paused && t8 == 1 && currentThread == 8) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread11, 1000);  // 延迟1秒调用线程3
             }
         }
@@ -1941,10 +1958,12 @@ if (earnmoney && c === true) {
             看视频();
             sleep(5000);
             lloogg(currentThread + "thread已经结束,正在回顶");
-            回顶();
-            sleep(1000);
+            // 回顶();
+            // sleep(1000);
             t11 = 1;
             if (!thread11Paused && t11 == 1 && currentThread == 11) {
+                回顶();
+                sleep(1000);
                 setTimeout(thread10, 1000);  // 延迟1秒调用线程3
             }
         }

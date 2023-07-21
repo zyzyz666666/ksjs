@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="强制关闭" w="auto" h="auto" bg="#00FA9A" />
+        <button id="closeBtn" text="运行中" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -1723,7 +1723,7 @@ if (earnmoney && c === true) {
                 if (列表_逛街金币 == 1) {
                     break;
                 };
-                goandearn();
+                //goandearn();
             };
 
             // 线程2执行完毕后，调用线程3
@@ -2436,7 +2436,7 @@ function runThreads() {
 function 回顶() {
     lloogg("正在回顶");
     goandearn();
-    停留x秒倒计时(7);
+    sleep(888);
     var 抵用金 = textContains("抵用金").findOne(1000);
     if (抵用金 && 抵用金.visibleToUser() == true) {
         doubleclickearnmoney();

@@ -2435,7 +2435,7 @@ function runThreads() {
 function 回顶() {
     goandearn();
     var 抵用金 = textContains("抵用金").findOne(1000);
-    if (抵用金 && 抵用金.visibleToUser() == true) {
+    if (抵用金 && 抵用金.visibleToUser() == false) {
         doubleclickearnmoney();
     };
 };

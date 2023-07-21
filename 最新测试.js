@@ -1506,7 +1506,7 @@ if (earnmoney && c === true) {
                                 log("正在翻倍奖励");
                                 for (ble = 0; ble < 5; ble++) {
                                     var 翻倍 = textContains("看视频奖励翻倍特权").findOne(1000);
-                                    var 翻倍中 = 翻倍.parent().parent().child(翻倍.parent().parent().children().length - 1);
+                                    //var 翻倍中 = 翻倍.parent().parent().child(翻倍.parent().parent().children().length - 1);
                                     try {
                                         var ffb = 翻倍.visibleToUser()
                                     } catch (e) {
@@ -2070,8 +2070,9 @@ function 奇怪地方返回任务中心() {
         text("赚金小游戏").findOne(100) || text("金币兑换优惠券").findOne(100) || text("我的抽奖码").findOne(100) ||
         text("种成后还能换其他水果哦").findOne(100) || (text("可兑换").findOne(100) && text("审核中").findOne(100)) ||
         text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
-        textContains("前三次完成先睡觉再起床").findOne(100) ||
-        (text("早睡早起").findOne(100) && (text("切换角色").findOne(100) || textContains("切换性别").findOne(100)));
+        textContains("前三次完成先睡觉再起床").findOne(100) || text("如何添加小组件到桌面").findOne(100) ||
+        (text("早睡早起").findOne(100) && (text("切换角色").findOne(100) || textContains("切换性别").findOne(100)))
+        ;
     if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
         奇怪 = 1;
         返回找任务中心();

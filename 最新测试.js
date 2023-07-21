@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="运行中" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -1755,7 +1755,7 @@ if (earnmoney && c === true) {
                         if (gspbt && ads === true) {
                             列表_给视频表态 = 1;
                             lloogg("正在给视频表态");
-                            for (bt = 1; bt < 10; bt++) {
+                            for (bt = 1; bt < 5; bt++) {
                                 //var 明日再来 = text("明日再来").findOne(1000);
                                 var 表态 = textContains("给视频表态").findOne(1500);
                                 try {
@@ -1783,12 +1783,12 @@ if (earnmoney && c === true) {
                                             toast("在视频页");
                                             在视频页 = 1;
                                         } else {
-                                            toast("🙅‍视频页 或 做完了");
+                                            toast("🙅‍视频页 或 做完了" + (16 - bt * n));
                                             在视频页 = 0;
                                         };
                                     };
 
-                                    for (n = 0; n < 10; n++) {
+                                    for (n = 0; n < 5; n++) {
                                         if视频();
                                         sleep(1000);
                                         if (在视频页 == 1) {

@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="强制关闭" w="auto" h="auto" bg="#ff0000" />
+        <button id="closeBtn" text="强制关闭" w="auto" h="auto" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -56,6 +56,7 @@ function goandearn() {
     for (btgar = 1; btgar > 0; btgar++) {
         var quzhaunqian = text("去赚钱").findOne(5000);
         if (quzhaunqian) {
+            lloogg("goandearn:在中心");
             在中心 = 1;
             break;
         } else {
@@ -207,7 +208,7 @@ function doubleclickearnmoney() {
     var quzhaunqian = text("去赚钱").findOne(1000);
     if (quzhaunqian) {
         try {
-            var qquzq = quzhaunqian.visibleToUser() == true
+            var qquzq = quzhaunqian.visibleToUser();
         } catch (e) {
             qquzq = false;
         }
@@ -2433,9 +2434,11 @@ function runThreads() {
     threads.start(thread10);
 }
 function 回顶() {
+    lloogg("正在回顶");
     goandearn();
+    停留x秒倒计时(7);
     var 抵用金 = textContains("抵用金").findOne(1000);
-    if (抵用金 && 抵用金.visibleToUser() == false) {
+    if (抵用金 && 抵用金.visibleToUser() == true) {
         doubleclickearnmoney();
     };
 };

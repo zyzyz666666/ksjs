@@ -937,8 +937,12 @@ if (earnmoney && c === true) {
                 if (宝箱下 && 宝箱下.text().includes("开宝箱")) {
                     lloogg("🈶 开宝箱✅");
                     click(宝箱.bounds().centerX(), 宝箱.bounds().centerY());
+                    奇怪地方返回任务中心();
+                    if (奇怪 == 1) {
+                        奇怪 = 0;
+                    }
                     //xx();
-                    停留x秒倒计时(40);
+                    停留x秒倒计时(10);
                     //goandearn();
                 } else {
                     lloogg("没找到宝箱或宝箱不能开启");
@@ -1539,9 +1543,12 @@ if (earnmoney && c === true) {
                                 };
                                 if (ksp == 4 && !看视频 && !广告倒计时) {
                                     lloogg("看视频进错了");
-                                    back();
-                                    sleep(1500);
-                                    back();
+                                    奇怪地方返回任务中心();
+                                    奇怪地方返回任务中心();
+                                    if (奇怪 == 1) {
+                                        奇怪 = 0;
+                                        continue;
+                                    }
                                 };
                                 if (广告倒计时) {
                                     log("正在看广告——停留30秒")
@@ -1762,16 +1769,18 @@ if (earnmoney && c === true) {
                                         };
                                     };
 
-                                    for (n = 0; n < 50; n++) {
+                                    for (n = 0; n < 20; n++) {
                                         if视频();
                                         sleep(1000);
                                         if (在视频页 == 1) {
                                             lloogg("√视频页√");
                                             break;
-                                        }
+                                        } else {
+                                            continue;
+                                        };
                                         sleep(1000);
                                     };
-
+                                    sleep(1000);
                                     if (在视频页 == 1) {
                                         lloogg("开始表态");
                                     };
@@ -1779,43 +1788,45 @@ if (earnmoney && c === true) {
                                 };
 
                                 ////////////刷视频+表态/////////////////////
-                                for (pbt = 0; pbt < 35; pbt++) {
-                                    lloogg("正在评论第" + (pbt + 1) + "/50 条视频");
-                                    var bta = 0;
-                                    for (qbt = 0; qbt > -1; qbt++) {
-                                        var 表态 = text("你对此条视频是否满意？").find().filter(function (element) {
-                                            return element.visibleToUser();
-                                        });
-                                        log(表态);
+                                if (在视频页 == 1) {
+                                    for (pbt = 0; pbt < 35; pbt++) {
+                                        lloogg("正在评论第" + (pbt + 1) + "/50 条视频");
+                                        var bta = 0;
+                                        for (qbt = 0; qbt > -1; qbt++) {
+                                            var 表态 = text("你对此条视频是否满意？").find().filter(function (element) {
+                                                return element.visibleToUser();
+                                            });
+                                            log(表态);
 
-                                        if (表态.length > 0) {
-                                            var 可见表态 = 表态[0];
-                                            bta = 1;
-                                            lloogg("正在表态");
-                                        } else {
-                                            lloogg("不可表态");
+                                            if (表态.length > 0) {
+                                                var 可见表态 = 表态[0];
+                                                bta = 1;
+                                                lloogg("正在表态");
+                                            } else {
+                                                lloogg("不可表态");
+                                            };
+                                            break;
+
                                         };
-                                        break;
-
+                                        log(bta)
+                                        if (bta == 1) {
+                                            try {
+                                                var array = [可见表态.indexInParent() + 2, 可见表态.indexInParent() + 3, 可见表态.indexInParent() + 4];
+                                            } catch (e) {
+                                            }
+                                            var randomIndex = Math.floor(Math.random() * array.length);
+                                            var randomElement = array[randomIndex];
+                                            try {
+                                                click(可见表态.parent().child(randomElement).bounds().centerX(), 可见表态.parent().child(randomElement).bounds().centerY())
+                                            } catch (e) {
+                                            }
+                                            sleep(1000);
+                                        };
+                                        upslide();
+                                        sleep(1500);
+                                        sleep(3500)
                                     };
-                                    log(bta)
-                                    if (bta == 1) {
-                                        try {
-                                            var array = [可见表态.indexInParent() + 2, 可见表态.indexInParent() + 3, 可见表态.indexInParent() + 4];
-                                        } catch (e) {
-                                        }
-                                        var randomIndex = Math.floor(Math.random() * array.length);
-                                        var randomElement = array[randomIndex];
-                                        try {
-                                            click(可见表态.parent().child(randomElement).bounds().centerX(), 可见表态.parent().child(randomElement).bounds().centerY())
-                                        } catch (e) {
-                                        }
-                                        sleep(1000);
-                                    };
-                                    upslide();
-                                    sleep(1500);
-                                    sleep(3500)
-                                };
+                                }
                             };
 
 

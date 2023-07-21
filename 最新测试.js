@@ -55,7 +55,11 @@ function goandearn() {
     var 在中心 = 0;
     for (btgar = 1; btgar > 0; btgar++) {
         if (有广告 == 1) {
-            lloogg("等待30秒");
+            if (btgar == 4) {
+                lloogg("卡了×");
+                yy();
+            }
+            lloogg("等待30秒-120秒");
             sleep(1000 * 32);
         } else {
             var quzhaunqian = text("去赚钱").findOne(5000);

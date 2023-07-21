@@ -54,24 +54,31 @@ function downslide() {
 function goandearn() {
     var 在中心 = 0;
     for (btgar = 1; btgar > 0; btgar++) {
-        var quzhaunqian = text("去赚钱").findOne(5000);
-        if (quzhaunqian) {
-            lloogg("goandearn:在中心");
-            在中心 = 1;
-            break;
+        if (有广告 == 1) {
+            lloogg("等待30秒");
+            sleep(1000 * 32);
         } else {
-            toastLog("goandearn:" + (50 - btgar));
-            back();
-        };
-        if (btgar % 10 === 0) {
-            sleep(2000);
-            lloogg("返回快手极速版");
-            app.launchApp("快手极速版");
-            sleep(1000 * 2);
-        };
-        if (btgar == 50) {
-            log("goandearn:卡了,强制");
-            yy();
+            var quzhaunqian = text("去赚钱").findOne(5000);
+            if (quzhaunqian) {
+                lloogg("goandearn:在中心");
+                在中心 = 1;
+                有广告 = 0;
+                break;
+            } else {
+                toastLog("goandearn:" + (50 - btgar));
+                back();
+            };
+            if (btgar % 10 === 0) {
+                sleep(2000);
+                lloogg("返回快手极速版");
+                app.launchApp("快手极速版");
+                sleep(1000 * 2);
+            };
+            if (btgar == 50) {
+                log("goandearn:卡了,强制");
+                有广告 = 0;
+                yy();
+            }
         }
     };
     //     if (quzhaunqian.visibleToUser() == true) {
@@ -2068,7 +2075,7 @@ function 奇怪地方返回任务中心() {
 
 }
 
-
+var 有广告 = 0;
 function xx() {
     lloogg("xx");
     var 好评弹窗 = id("com.kuaishou.nebula:id/icon").findOne(100) || text("喜欢就给个好评吧").findOne(100);
@@ -2096,6 +2103,7 @@ function xx() {
     if (签到弹窗 && textContains("将从第一天开始签到").findOne(500)) {
         log("检测到签到弹窗");
         lloogg("先暂停");
+        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2156,6 +2164,7 @@ function xx() {
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
+            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2172,6 +2181,7 @@ function xx() {
     if (第一类弹窗 && 第一类弹窗.parent().child(0).className() == "android.widget.ImageView" && 第一类弹窗.visibleToUser() === true) {
         lloogg("检测到惊喜红包弹窗");
         lloogg("先暂停");
+        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2199,6 +2209,7 @@ function xx() {
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
+            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2214,6 +2225,7 @@ function xx() {
     };
     if (第二类弹窗 && 第二类弹窗.visibleToUser() === true) {
         lloogg("检测到存钱罐/再看一个弹窗");
+        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2269,6 +2281,7 @@ function xx() {
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
+            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2285,6 +2298,7 @@ function xx() {
     if (第三类额外弹窗 && 第三类额外弹窗.visibleToUser() === true) {
         lloogg("检测到额外弹窗");
         lloogg("先暂停");
+        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2313,6 +2327,7 @@ function xx() {
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
+            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2330,6 +2345,7 @@ function xx() {
     if (金币箱弹窗 && 金币箱弹窗.visibleToUser() === true) {
         lloogg("检测到金币箱弹窗");
         lloogg("先暂停");
+        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2429,6 +2445,7 @@ function xx() {
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
+            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2472,6 +2489,7 @@ function xx() {
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
+            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();

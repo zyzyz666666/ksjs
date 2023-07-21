@@ -2161,10 +2161,10 @@ function xx() {
                 };
             };
         };
+        有广告 = 0;
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
-            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2206,10 +2206,10 @@ function xx() {
             log("正在继续观看");
             dian继续观看.click();
         };
+        有广告 = 0;
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
-            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2278,10 +2278,10 @@ function xx() {
                 };
             };
         };
+        有广告 = 0;
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
-            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2441,11 +2441,11 @@ function xx() {
                 };
             }
         };
+        有广告 = 0;
         goandearn();
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
-            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2486,10 +2486,10 @@ function xx() {
             lloogg("No shut新用户")
         }
         shut新用户.click();
+        有广告 = 0;
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
-            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();

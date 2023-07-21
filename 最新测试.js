@@ -51,22 +51,36 @@ function downslide() {
     swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 660);
 };
 
-
 function goandearn() {
-    var quzhaunqian = text("去赚钱").findOne(5000);
-    if (quzhaunqian) {
-        //     if (quzhaunqian.visibleToUser() == true) {
-        //         for (qzq = 1; qzq > 0; qzq++) {
-        //             click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
-        //             var 抵用金 = textContains("抵用金").findOne(1000);
-        //             if (抵用金 && 抵用金.visibleToUser() == true) {
-        //                 lloogg("在任务中心界面");
-        //                 break;
-        //             } else {
-        //                 continue;
-        //             };
-        //         };
-        //     } else {
+    var 在中心 = 0;
+    for (btgar = 1; btgar > 0; btgar++) {
+        var quzhaunqian = text("去赚钱").findOne(5000);
+        if (quzhaunqian) {
+            在中心 = 1;
+            break;
+        } else {
+            back();
+        };
+        if (btgar == 10) {
+            sleep(2000);
+            lloogg("返回快手极速版");
+            app.launchApp("快手极速版");
+            sleep(1000 * 5);
+        };
+    };
+    //     if (quzhaunqian.visibleToUser() == true) {
+    //         for (qzq = 1; qzq > 0; qzq++) {
+    //             click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
+    //             var 抵用金 = textContains("抵用金").findOne(1000);
+    //             if (抵用金 && 抵用金.visibleToUser() == true) {
+    //                 lloogg("在任务中心界面");
+    //                 break;
+    //             } else {
+    //                 continue;
+    //             };
+    //         };
+    //     } else {
+    if (在中心 == 1) {
         for (qzq = 1; qzq > 0; qzq++) {
             if (qzq == 15) {
                 lloogg("识别超时，正在重启");
@@ -92,12 +106,10 @@ function goandearn() {
             }
             toastLog("等待" + (15 - qzq) + "次")
         };
-    } else {
-        back();
-    }
-    // } else {
-    // //     lloogg("不在")
-    // }
+        // } else {
+        // //     lloogg("不在")
+        // }
+    };
 };
 
 
@@ -1664,12 +1676,12 @@ if (earnmoney && c === true) {
                                             }
                                         };
                                     };
-                                    if (gj == 9 && !逛街倒计时) {
-                                        lloogg("逛街进错了");
-                                        back();
-                                        sleep(1500);
-                                        back();
-                                    }
+                                    // if (gj == 9 && !逛街倒计时) {
+                                    //     lloogg("逛街进错了");
+                                    //     back();
+                                    //     sleep(1500);
+                                    //     back();
+                                    // }
                                     if (逛街倒计时) {
                                         lloogg("正在逛街逛街——滑动停留100秒")
                                         break;
@@ -1710,7 +1722,7 @@ if (earnmoney && c === true) {
                 if (列表_逛街金币 == 1) {
                     break;
                 };
-
+                goandearn();
             };
 
             // 线程2执行完毕后，调用线程3

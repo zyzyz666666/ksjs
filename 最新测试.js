@@ -60,7 +60,7 @@ function goandearn() {
             在中心 = 1;
             break;
         } else {
-            log(btgar);
+            log("goandearn:" + btgar);
             back();
         };
         if (btgar == 10) {

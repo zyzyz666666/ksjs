@@ -60,15 +60,19 @@ function goandearn() {
             在中心 = 1;
             break;
         } else {
-            log("goandearn:" + btgar);
+            toastLog("goandearn:" + (50 - btgar));
             back();
         };
-        if (btgar == 10) {
+        if (btgar % 10 === 0) {
             sleep(2000);
             lloogg("返回快手极速版");
             app.launchApp("快手极速版");
-            sleep(1000 * 5);
+            sleep(1000 * 2);
         };
+        if (btgar == 50) {
+            log("goandearn:卡了,强制");
+            yy();
+        }
     };
     //     if (quzhaunqian.visibleToUser() == true) {
     //         for (qzq = 1; qzq > 0; qzq++) {

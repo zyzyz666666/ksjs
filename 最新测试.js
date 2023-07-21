@@ -60,6 +60,7 @@ function goandearn() {
             在中心 = 1;
             break;
         } else {
+            log(btgar);
             back();
         };
         if (btgar == 10) {
@@ -633,6 +634,7 @@ threads.start(function () {
     lloogg("xx")
 
 });
+
 threads.start(function () {
     setInterval(yy, 15 * 60 * 1000); // run the task every 5 second
     lloogg("YY")
@@ -2020,7 +2022,8 @@ function 奇怪地方返回任务中心() {
         text("赚金小游戏").findOne(100) || text("金币兑换优惠券").findOne(100) || text("我的抽奖码").findOne(100) ||
         text("种成后还能换其他水果哦").findOne(100) || (text("可兑换").findOne(100) && text("审核中").findOne(100)) ||
         text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
-        textContains("前三次完成先睡觉再起床").findOne(100);
+        textContains("前三次完成先睡觉再起床").findOne(100) ||
+        (text("早睡早起").findOne(100) && (text("切换角色").findOne(100) || textContains("切换性别").findOne(100)));
     if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
         奇怪 = 1;
         返回找任务中心();

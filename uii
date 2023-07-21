@@ -149,7 +149,7 @@ ui.layout(
                                         <text textSize="16sp" textColor="black" text="滑动间隔(秒)[此输入框不可输入]:" /> <input id="输入框1" text="6" hint="请输秒" inputType="none" />
                                     </linear>
                                     <linear>
-                                        <text textSize="16sp" textColor="black" text="自动重启(分钟)[此输入框不可输入]:" /> <input id="输入框3" text="16" hint="请输分钟" inputType="none" />
+                                        <checkbox id="选择框_强制" text="强制重启" textColor="black" textStyle="bold" checked='false' /><text textSize="16sp" textColor="black" text="自动重启(分钟)[此输入框不可输入]:" /> <input id="输入框3" text="16" hint="请输分钟" inputType="none" />
                                     </linear>
                                     <linear>
                                         <checkbox id="选择框_自检测" text="*必选*自检测" textColor="black" textStyle="bold" checked='true' />
@@ -275,6 +275,7 @@ var timeset = storages.create("timeset");
 ///////////////////////////////////保存
 
 ui.saveksjs.click(function () {
+    ksjsset.put("选择框_强制", ui.选择框_强制.isChecked());
     ksjsset.put("选择框_开宝箱", ui.选择框_开宝箱.isChecked());
     ksjsset.put("选择框_每日挑战", ui.选择框_每日挑战.isChecked());
     ksjsset.put("选择框_饭饭补贴", ui.选择框_饭饭补贴.isChecked());
@@ -321,13 +322,14 @@ ui.savetime.click(function () {
 
 // 读取脚本设置
 function Initialize() {
+    if (ksjsset.get("选择框_强制") != null) { ui.选择框_强制.setChecked(ksjsset.get("选择框_强制")) }
     if (ksjsset.get("选择框_开宝箱") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_开宝箱")) }
-    if (ksjsset.get("选择框_每日挑战") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_每日挑战")) }
-    if (ksjsset.get("选择框_饭饭补贴") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_饭饭补贴")) }
-    if (ksjsset.get("选择框_奖励翻倍") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_奖励翻倍")) }
-    if (ksjsset.get("选择框_看视频赚金币") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_看视频赚金币")) }
-    if (ksjsset.get("选择框_逛街") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_逛街")) }
-    if (ksjsset.get("选择框_表态") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_表态")) }
+    if (ksjsset.get("选择框_每日挑战") != null) { ui.选择框_每日挑战.setChecked(ksjsset.get("选择框_每日挑战")) }
+    if (ksjsset.get("选择框_饭饭补贴") != null) { ui.选择框_饭饭补贴.setChecked(ksjsset.get("选择框_饭饭补贴")) }
+    if (ksjsset.get("选择框_奖励翻倍") != null) { ui.选择框_奖励翻倍.setChecked(ksjsset.get("选择框_奖励翻倍")) }
+    if (ksjsset.get("选择框_看视频赚金币") != null) { ui.选择框_看视频赚金币.setChecked(ksjsset.get("选择框_看视频赚金币")) }
+    if (ksjsset.get("选择框_逛街") != null) { ui.选择框_逛街.setChecked(ksjsset.get("选择框_逛街")) }
+    if (ksjsset.get("选择框_表态") != null) { ui.选择框_表态.setChecked(ksjsset.get("选择框_表态")) }
 
 
     if (ksset.get("选择框_切换账号") != null) { ui.选择框_切换账号.setChecked(ksset.get("选择框_切换账号")) }
@@ -402,7 +404,7 @@ ui.start.on("click", function () {
         } else if (ui.script_chosen.getSelectedItemPosition() == 2 && files.exists(filePathks)) {
             engines.execScriptFile(filePathks); // 快手
         } else if (ui.script_chosen.getSelectedItemPosition() == 0 && files.exists(filePathtime) && files.exists(filePathtime2)) {
-            engines.execScriptFile(filePathtime2); // 互切
+            engines.execScriptFile(filePathtime); // 互切
         } else {
             alert("请先下载脚本");
         };

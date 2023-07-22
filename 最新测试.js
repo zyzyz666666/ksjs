@@ -10,7 +10,7 @@ var window = floaty.window(
 var filePathksjs = '/sdcard/ksjs.js';
 
 
-window.setPosition(device.width / 3 + 300, -100);
+window.setPosition(device.width / 3 + 188, -100);
 window.setSize(device.width * 1 / 2, 250);
 window.setAdjustEnabled(false);
 
@@ -18,6 +18,7 @@ var statusText = window.status;
 
 window.closeBtn.click(() => {//
     log("程序即将关闭");
+
     engines.stopAll();
     engines.execScriptFile("main.js");
 });

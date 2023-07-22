@@ -10,7 +10,7 @@ var window = floaty.window(
 var filePathksjs = '/sdcard/ksjs.js';
 
 
-window.setPosition(device.width / 3, 0);
+window.setPosition(device.width / 3, -100);
 window.setSize(device.width * 1 / 2, 250);
 window.setAdjustEnabled(false);
 

@@ -197,7 +197,7 @@ function goandearn() {
             if (btgar % 10 === 0) {
                 sleep(2000);
                 lloogg("返回快手极速版");
-                app.launchApp("快手极速版");
+                打开快手();
                 sleep(1000 * 2);
             };
             if (btgar == 50) {
@@ -710,6 +710,10 @@ function 重置ksapp() {
     permit();
 };
 
+function 打开快手() {
+    app.launchPackage("com.kuaishou.nebula");
+    permit();
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////功能性func
 
@@ -762,6 +766,7 @@ if (选择框_表态 == undefined) {
 重置ksapp();
 停留x秒倒计时(20);
 关闭其他应用();
+打开快手();
 停留x秒倒计时(10);
 
 log(currentThread);

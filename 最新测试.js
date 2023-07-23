@@ -35,8 +35,129 @@ function lloogg(msg) {
         });
     }, 1000); // 延迟一秒后清除文本
 };
+function aw找id(参数1, 参数2, 参数3) {
+    var 我的
+    if (参数3 < 1) {
+        我的 = idContains(参数1).visibleToUser(true).findOne(600);
+    } else {
+        我的 = idContains(参数1).visibleToUser(true).findOne(参数3 * 1000);
+    }
+    if (我的 != null) {
+        switch (true) {
+            case 参数2 == 0:
+                click(我的.bounds().centerX(), 我的.bounds().centerY());
+                return true
+            case 参数2 == 1:
+                log(我的.bounds().centerX(), 我的.bounds().centerY());
+                return true
+            case 参数2 == 2:
+                return [我的.bounds().centerX(), 我的.bounds().centerY()]
+            default:
+                var aw数据后 = 参数2.split(",");
+                click(我的.bounds().centerX() + (aw数据后[0] * 1), 我的.bounds().centerY() + (aw数据后[1] * 1));
+                return true
+        }
+    }
+    return false;
+}
 
 
+function aw找文字节点() {
+    let arr = packageNameMatches(/.*/).visibleToUser(true).find()
+    let 数量 = 0
+    let regexp = '/^' + arguments[0] + '$/';
+    log("aw找文字节点:" + arguments[0])
+    if (arguments.length - 1 >= 3) {
+        if (arguments[3] == false) { regexp = '/.*' + arguments[0] + '.*/' }
+    }
+    if (!arr.empty()) {
+        for (let item of arr) {
+            let t = item.text() || item.desc()
+            if (eval(regexp).test(t)) {
+                let t = item.text()
+                let x = item.bounds().centerX()
+                let y = item.bounds().centerY()
+                if (arguments.length - 1 == 2) {
+                    if (数量 >= arguments[2]) {
+                        switch (true) {
+                            case arguments[1] == 0:
+                                click(x, y);
+                                return true
+                            case arguments[1] == 1:
+                                log(x, y);
+                                return true
+                            case arguments[1] == 2:
+                                return [x, y]
+                            default:
+                                var aw数据后 = 参数2.split(",");
+                                click(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
+                                return true
+                        }
+                    } else {
+                        数量 = 数量 + 1
+                    }
+                } else {
+                    switch (true) {
+                        case arguments[1] == 0:
+                            click(x, y);
+                            return true
+                        case arguments[1] == 1:
+                            log(x, y);
+                            return true
+                        case arguments[1] == 2:
+                            return [x, y]
+                        default:
+                            var aw数据后 = arguments[1].split(",");
+                            click(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
+                            return true
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+
+function 关闭其他应用() {
+    home();//home
+    sleep(2500)
+    log("--清应用--")
+    recents();//任务管理
+    sleep(3500)
+    switch (true) {
+        case aw找id("clear_all_recents_image_button", 0, 0.2):
+            break;
+        case aw找id("recent_igmbutton_clear_all", 0, 0.2):
+            break;
+        case aw找id("clear_button", 0, 0.2):
+            break;
+        case aw找id("clearAnimView", 0, 0.2):
+            break;
+        case aw找文字节点("关闭全部", 0):
+            break;
+        case aw找文字节点("清除", 0):
+            break;
+        case aw找文字节点("全部清除", 0):
+            break;
+        case aw找文字节点("全部清理", 0):
+            break;
+        case aw找文字节点("全部清理", 0):
+            break;
+        case aw找文字节点("可用", 0, 0, false):
+            break;
+        case aw找文字节点("释放内存", 0, 0, false):
+            break;
+        case aw找文字节点("清除全部", 0, 0, false):
+            break;
+        default:
+            click(w * 0.5, h * 0.8)
+            click(w * 0.5, h * 0.9)
+    }
+    sleep(3000)
+    home();//home
+    sleep(2500)
+}
 
 function upslide() {
     var c = device.width;
@@ -640,7 +761,7 @@ if (选择框_表态 == undefined) {
 //////////////////////////////////////////////////////////////////////////
 重置ksapp();
 停留x秒倒计时(20);
-重置ksapp();
+关闭其他应用();
 停留x秒倒计时(10);
 
 log(currentThread);

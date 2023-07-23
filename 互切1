@@ -813,6 +813,11 @@ threads.start(function () {
 
         });
     } else {
+        threads.start(function () {
+            setInterval(yy, ((duration / 2) + 2) * 60 * 1000); // run the task every 5 second
+            lloogg("YY")
+
+        });
         lloogg("本次不开强制");
         sleep(500);
         lloogg("本次不开强制");
@@ -1038,12 +1043,12 @@ threads.start(function () {
                 // var 列表_给视频表态 = 0;
                 // var 给视频表态 = textContains("给视频表态").findOne(1500);
 
-                var 奖励翻倍 = textContains("看视频奖励翻倍特权").findOne(1500);
-                var 饭点补贴 = text("到饭点领饭补").findOne(1500);
-                var 每日挑战 = text("每日挑战").findOne(1500);
+                var 奖励翻倍 = textContains("看视频奖励翻倍特权").findOne(2000);
+                var 饭点补贴 = text("到饭点领饭补").findOne(2000);
+                var 每日挑战 = text("每日挑战").findOne(2000);
                 var 看视频赚得金币 = textMatches(/(看视频[得赚].*金币$)/).findOne(2000);
-                var 逛街金币 = text("逛街领金币").findOne(1500);
-                var 给视频表态 = textContains("给视频表态").findOne(1500);
+                var 逛街金币 = text("逛街领金币").findOne(2000);
+                var 给视频表态 = textContains("给视频表态").findOne(2000);
 
 
                 // 线程1的逻辑

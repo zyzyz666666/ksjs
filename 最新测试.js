@@ -163,14 +163,14 @@ function upslide() {
     var c = device.width;
     var b = device.height;
     lloogg("⬆正在滑动向上滑动");
-    swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 660);
+    swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 555);
 };
 
 function downslide() {
     var c = device.width;
     var b = device.height;
     lloogg("↓正在滑动向上滑动");
-    swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 660);
+    swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 555);
 };
 
 function goandearn() {
@@ -727,6 +727,7 @@ function 打开快手() {
 //表态() == thread8
 var ksjsset = storages.create("ksjsset");
 
+var 重启时间 = ksjsset.get("重启时间");
 var 选择框_强制 = ksjsset.get("选择框_强制");
 var 选择框_开宝箱 = ksjsset.get("选择框_开宝箱");
 var 选择框_每日挑战 = ksjsset.get("选择框_每日挑战");
@@ -736,6 +737,9 @@ var 选择框_看视频赚金币 = ksjsset.get("选择框_看视频赚金币");
 var 选择框_逛街 = ksjsset.get("选择框_逛街");
 var 选择框_表态 = ksjsset.get("选择框_表态");
 
+if (重启时间 == undefined) {
+    重启时间 = "16";
+};
 if (选择框_强制 == undefined) {
     选择框_强制 = false;
 };
@@ -775,6 +779,7 @@ var earnmoney = text("去赚钱").findOne();
 var a = earnmoney.bounds().centerX();
 var b = earnmoney.bounds().centerY();
 log((a, b));
+
 threads.start(function () {
     setInterval(xx, 1000); // run the task every 5 second
     lloogg("xx")
@@ -782,8 +787,13 @@ threads.start(function () {
 });
 
 if (选择框_强制) {
+    lloogg("本次开强制");
+    sleep(500);
+    lloogg("本次开强制");
+    sleep(500);
+    lloogg("本次开强制");
     threads.start(function () {
-        setInterval(yy, 15 * 60 * 1000); // run the task every 5 second
+        setInterval(yy, 重启时间 * 60 * 1000); // run the task every 5 second
         lloogg("YY")
 
     });
@@ -800,6 +810,7 @@ sleep(8888);
 try {
     var c = earnmoney.visibleToUser()
 } catch (e) {
+    log("找不到 ab click");
 }
 if (earnmoney && c === true) {
     for (m = 1; m > 0; m++) {
@@ -870,23 +881,6 @@ if (earnmoney && c === true) {
 
 
 
-        function thread10() {
-            var t10 = 0;
-            currentThread = 10;
-
-
-            签到();
-
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t10 = 1;
-            if (!thread10Paused && t10 == 1 && currentThread == 10) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread1, 1000);  // 延迟1秒调用线程3
-            }
-        }
         var thread1Id, thread2Id, thread3Id, thread4Id, thread5Id, thread6Id, thread7Id;
         // 暂停线程11
         function pauseThread11() {
@@ -986,6 +980,25 @@ if (earnmoney && c === true) {
         function resumeThread8() {
             thread8Paused = false;
         };
+
+        function thread10() {
+            var t10 = 0;
+            currentThread = 10;
+
+
+            签到();
+
+            lloogg(currentThread + "thread已经结束,正在回顶");
+            // 回顶();
+            // sleep(1000);
+            t10 = 1;
+            if (!thread10Paused && t10 == 1 && currentThread == 10) {
+                回顶();
+                sleep(1000);
+                setTimeout(thread1, 1000);  // 延迟1秒调用线程3
+            }
+        }
+
         function thread1() {
             var t1 = 0;
             currentThread = 1;
@@ -2102,7 +2115,7 @@ if (earnmoney && c === true) {
                         counter = 0;
                     };
                     sleep(1000);
-                    if (downup == 10) {
+                    if (downup == 6) {
                         lloogg("看视频");
                         upslide();
                         sleep(1500);

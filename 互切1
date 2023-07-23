@@ -872,12 +872,12 @@ threads.start(function () {
             var thread11Paused = false;
 
             var currentThread = 100;  // 默认为线程1当前正在运行
-            var 列表_奖励翻倍 = Number;
-            var 列表_饭点补贴 = Number;
-            var 列表_每日挑战 = Number;
-            var 列表_看视频赚得金币 = Number;
-            var 列表_逛街金币 = Number;
-            var 列表_给视频表态 = Number;
+            var 列表_奖励翻倍;
+            var 列表_饭点补贴;
+            var 列表_每日挑战;
+            var 列表_看视频赚得金币;
+            var 列表_逛街金币;
+            var 列表_给视频表态;
 
 
 

@@ -149,7 +149,7 @@ ui.layout(
                                         <text textSize="16sp" textColor="black" text="滑动间隔(秒)[此输入框不可输入]:" /> <input id="输入框1" text="6" hint="请输秒" inputType="none" />
                                     </linear>
                                     <linear>
-                                        <checkbox id="选择框_强制" text="强制重启" textColor="black" textStyle="bold" checked='false' /><text textSize="16sp" textColor="black" text="自动重启(分钟)[此输入框不可输入]:" /> <input id="输入框3" text="16" hint="请输分钟" inputType="none" />
+                                        <checkbox id="选择框_强制" text="强制重启" textColor="black" textStyle="bold" checked='false' /><text textSize="16sp" textColor="black" text="自动重启(分钟):" /> <input id="重启时间" text="16" hint="请输分钟" inputType="none" />
                                     </linear>
                                     <linear>
                                         <checkbox id="选择框_自检测" text="*必选*自检测" textColor="black" textStyle="bold" checked='true' />
@@ -275,6 +275,7 @@ var timeset = storages.create("timeset");
 ///////////////////////////////////保存
 
 ui.saveksjs.click(function () {
+    ksjsset.put("重启时间", ui.重启时间.text());
     ksjsset.put("选择框_强制", ui.选择框_强制.isChecked());
     ksjsset.put("选择框_开宝箱", ui.选择框_开宝箱.isChecked());
     ksjsset.put("选择框_每日挑战", ui.选择框_每日挑战.isChecked());
@@ -322,6 +323,7 @@ ui.savetime.click(function () {
 
 // 读取脚本设置
 function Initialize() {
+    if (ksjsset.get("重启时间") != undefined) { ui.重启时间.setText(ksjsset.get("重启时间")) }
     if (ksjsset.get("选择框_强制") != null) { ui.选择框_强制.setChecked(ksjsset.get("选择框_强制")) }
     if (ksjsset.get("选择框_开宝箱") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_开宝箱")) }
     if (ksjsset.get("选择框_每日挑战") != null) { ui.选择框_每日挑战.setChecked(ksjsset.get("选择框_每日挑战")) }

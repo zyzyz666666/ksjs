@@ -177,14 +177,14 @@ threads.start(function () {
         var c = device.width;
         var b = device.height;
         lloogg("⬆正在滑动向上滑动");
-        swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 660);
+        swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 555);
     };
 
     function downslide() {
         var c = device.width;
         var b = device.height;
         lloogg("↓正在滑动向上滑动");
-        swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 660);
+        swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 555);
     };
 
     function goandearn() {
@@ -742,6 +742,7 @@ threads.start(function () {
     //表态() == thread8
     var ksjsset = storages.create("ksjsset");
 
+    var 重启时间 = ksjsset.get("重启时间");
     var 选择框_强制 = ksjsset.get("选择框_强制");
     var 选择框_开宝箱 = ksjsset.get("选择框_开宝箱");
     var 选择框_每日挑战 = ksjsset.get("选择框_每日挑战");
@@ -751,6 +752,9 @@ threads.start(function () {
     var 选择框_逛街 = ksjsset.get("选择框_逛街");
     var 选择框_表态 = ksjsset.get("选择框_表态");
 
+    if (重启时间 == undefined) {
+        重启时间 = "16";
+    };
     if (选择框_强制 == undefined) {
         选择框_强制 = false;
     };
@@ -798,8 +802,13 @@ threads.start(function () {
     });
 
     if (选择框_强制) {
+        lloogg("本次开强制");
+        sleep(500);
+        lloogg("本次开强制");
+        sleep(500);
+        lloogg("本次开强制");
         threads.start(function () {
-            setInterval(yy, 15 * 60 * 1000); // run the task every 5 second
+            setInterval(yy, 重启时间 * 60 * 1000); // run the task every 5 second
             lloogg("YY")
 
         });
@@ -817,6 +826,7 @@ threads.start(function () {
     try {
         var c = earnmoney.visibleToUser()
     } catch (e) {
+        log("找不到 ab click");
     }
     if (earnmoney && c === true) {
         for (m = 1; m > 0; m++) {

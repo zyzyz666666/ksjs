@@ -791,6 +791,12 @@ threads.start(function () {
     var b = earnmoney.bounds().centerY();
     log((a, b));
 
+    threads.start(function () {
+        setInterval(xx, 1000); // run the task every 5 second
+        lloogg("xx")
+
+    });
+
     if (选择框_强制) {
         threads.start(function () {
             setInterval(yy, 15 * 60 * 1000); // run the task every 5 second

@@ -20,12 +20,12 @@ log("这是1")
 threads.start(function () {
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="HQ1" w="40" h="40" bg="#00FA9A" />
+            <button id="closeBtn" text="HJS" w="40" h="40" bg="#00FA9A" />
             <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
         </frame>
     );
 
-    window.setPosition(device.width / 3 + 110, -100);
+    window.setPosition(device.width / 3 + 110 + 55, -100);
     window.setSize(device.width * 1 / 2, 250);
     window.setAdjustEnabled(false);
 

@@ -127,7 +127,7 @@ threads.start(function () {
     function 悬浮() {
         var window = floaty.window(
             <frame>
-                <button id="action" text="HQ2" w="40" h="40" bg="#00FA9A" />
+                <button id="action" text="HKS" w="40" h="40" bg="#00FA9A" />
             </frame>
         );
         window.exitOnClose()

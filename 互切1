@@ -25,7 +25,7 @@ threads.start(function () {
         </frame>
     );
 
-    window.setPosition(device.width / 3 + 110, -100);
+    window.setPosition(device.width / 3 + 110 + 55, -100);
     window.setSize(device.width * 1 / 2, 250);
     window.setAdjustEnabled(false);
 

@@ -2207,7 +2207,7 @@ threads.start(function () {
         log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
         var newtimeout = origintimeout + elapsedTime;
         timeset.put("timeout", newtimeout);
-        log(newtimeout + "：" + (elapsedTime / 60000) + "分钟");
+        log("一共是：" + newtimeout + "：" + (elapsedTime / 60000) + "分钟");
         sleep(3000);
         //engines.stopAll();
         engines.execScriptFile(filePathtime);
@@ -2735,12 +2735,12 @@ function check() {
     startTime = currentTime;
     sleep(3000);
     if (newtimeout >= duration) {
-        threads.shutDownAll();
         log(a);
         origintimeout = 0;
         timeset.put("timeout", origintimeout);
         home();
-        sleep(1500);
         engines.execScriptFile(filePathtime2);
+        sleep(1500);
+        exit();
     };
 }

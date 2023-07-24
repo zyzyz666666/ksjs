@@ -2719,7 +2719,7 @@ threads.start(function () {
 
 threads.start(function () {
     setInterval(check, 10 * 60 * 1000); // run the task every 5 second
-    lloogg("check")
+    log("checking")
 
 });
 

@@ -20,7 +20,7 @@ log("这是1")
 threads.start(function () {
     var window = floaty.window(
         <frame gravity="center">
-            <button id="closeBtn" text="HJS" w="40" h="40" bg="#00FA9A" />
+            <button id="closeBtn" text="HQ1" w="40" h="40" bg="#00FA9A" />
             <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
         </frame>
     );
@@ -2220,7 +2220,7 @@ threads.start(function () {
         log("过去了" + elapsedTime + "也就是：" + (elapsedTime / 60000) + "分钟")
         var newtimeout = origintimeout + elapsedTime;
         timeset.put("timeout", newtimeout);
-        log("共是：" + newtimeout + "共：" + (newtimeout / 60000) + "分钟");
+        log("共是：" + newtimeout + "共：" + (newtimeout / 60000) + "分钟,设定的互切是：" + 输入框互切 + "分钟");
         sleep(3000);
         //engines.stopAll();
         engines.execScriptFile(filePathtime);
@@ -2757,3 +2757,12 @@ threads.start(function () {
 //         exit();
 //     };
 // }
+if (newtimeout >= duration) {
+    log(a);
+    origintimeout = 0;
+    timeset.put("timeout", origintimeout);
+    home();
+    engines.execScriptFile(filePathtime2);
+    sleep(1500);
+    exit();
+};

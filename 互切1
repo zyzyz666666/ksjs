@@ -25,7 +25,7 @@ threads.start(function () {
         </frame>
     );
 
-    window.setPosition(device.width / 3 + 110, -100);
+    window.setPosition(device.width / 3 + 110 + 55, -100);
     window.setSize(device.width * 1 / 2, 250);
     window.setAdjustEnabled(false);
 
@@ -235,7 +235,8 @@ threads.start(function () {
         //     } else {
         if (在中心 == 1) {
             for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 15) {
+                log("正在识别任务中心界面" + qzq)
+                if (qzq == 25) {
                     lloogg("识别超时，正在重启");
                     yy();
                 } else {
@@ -366,7 +367,8 @@ threads.start(function () {
             }
             if (qquzq) {
                 for (qzq = 1; qzq > 0; qzq++) {
-                    if (qzq == 15) {
+                    log("正在识别任务中心顶" + qzq)
+                    if (qzq == 25) {
                         lloogg("识别超时，正在重启");
                         yy();
                     } else {
@@ -391,7 +393,8 @@ threads.start(function () {
                 };
             } else {
                 for (qzq = 1; qzq > 0; qzq++) {
-                    if (qzq == 15) {
+                    log("正在识别任务中心顶" + qzq)
+                    if (qzq == 25) {
                         lloogg("识别超时，正在重启");
                         yy();
                     } else {
@@ -814,9 +817,9 @@ threads.start(function () {
         });
     } else {
         log("duration:" + duration);
-        log("被迫强制：" + ((duration / 2) + 2));
+        log("被迫强制：" + ((输入框互切 / 2) + 2));
         threads.start(function () {
-            setInterval(yy, ((duration / 2) + 2) * 60 * 1000); // run the task every 5 second
+            setInterval(yy, ((输入框互切 / 2) + 2) * 60 * 1000); // run the task every 5 second
             lloogg("YY2")
 
         });
@@ -837,6 +840,7 @@ threads.start(function () {
     }
     if (earnmoney && c === true) {
         for (m = 1; m > 0; m++) {
+            log("正在识别任务中心" + m)
             if (m == 15) {
                 lloogg("识别超时，正在重启");
                 yy();
@@ -1124,7 +1128,12 @@ threads.start(function () {
                     列表_逛街金币 == 1 &&
                     列表_给视频表态 == 1) {
                     log("准备重开");
-                    yy();
+                    t1 = 1;
+                    if (!thread1Paused && t1 == 1 && currentThread == 1) {
+                        回顶();
+                        sleep(1000);
+                        setTimeout(thread1, 1000);  // 延迟1秒调用线程3
+                    }
                 } else {
                     t1 = 1;
                     if (!thread1Paused && t1 == 1 && currentThread == 1) {
@@ -2100,6 +2109,7 @@ threads.start(function () {
 
                 lloogg("刷十分钟视频");
                 for (sy = 1; sy > 0; sy++) {
+                    log("正在识别刷视频" + sy)
                     if (sy == 15) {
                         lloogg("识别超时，正在重启");
                         yy();

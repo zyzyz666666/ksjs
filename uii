@@ -672,7 +672,10 @@ ui.deletetime.on("click", function () {
     if (files.exists(filePathtime)) {
         files.remove(filePathtime);
     };
-    alert('互切1' + '已卸载')
+        if (files.exists(filePathtime2)) {
+            files.remove(filePathtime2);
+        };
+    alert('互切' + '已卸载')
     TIMEi = 0;
     ui.timeyes.setVisibility(android.view.View.INVISIBLE);
     ui.timeno.setVisibility(android.view.View.VISIBLE);

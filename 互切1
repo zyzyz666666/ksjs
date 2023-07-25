@@ -2757,7 +2757,7 @@ threads.start(function () {
 //         exit();
 //     };
 // }
-if (newtimeout >= duration) {
+if (origintimeout >= duration) {
     log(a);
     origintimeout = 0;
     timeset.put("timeout", origintimeout);

@@ -2223,7 +2223,11 @@ threads.start(function () {
         log("共是：" + newtimeout + "共：" + (newtimeout / 60000) + "分钟,设定的互切是：" + 输入框互切 + "分钟");
         sleep(3000);
         //engines.stopAll();
-        engines.execScriptFile(filePathtime);
+        try {
+            engines.execScriptFile(filePathtime);
+        } catch (error) {
+            log("读取失败");
+        }
         exit();
     };
 
@@ -2762,7 +2766,11 @@ if (origintimeout >= duration) {
     origintimeout = 0;
     timeset.put("timeout", origintimeout);
     home();
-    engines.execScriptFile(filePathtime2);
+    try {
+        engines.execScriptFile(filePathtime2);
+    } catch (error) {
+        log("读取失败");
+    }
     sleep(1500);
     exit();
 };

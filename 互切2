@@ -127,7 +127,7 @@ threads.start(function () {
     function 悬浮() {
         var window = floaty.window(
             <frame>
-                <button id="action" text="HKS" w="40" h="40" bg="#00FA9A" />
+                <button id="action" text="HQ2" w="40" h="40" bg="#00FA9A" />
             </frame>
         );
         window.exitOnClose()
@@ -450,7 +450,7 @@ threads.start(function () {
                         awcontrol(/领金币/, 0) && sleep(3000 * 速度)//
                     }
                 }
-            } else if (awcontrol(/看完视频再领.*金币|继续观看|一键领取|立即解锁章节|看精彩视频.*赚更多|继续看视频赚更多|看精彩视频.*金币|继续逛街|领金币|再看一个.*金币|以后再说|始终允许|观看广告最高可得.*金币|再看一个|看视频赚更多金币|看视频赚.*金币/, 0)) {
+            } else if (awcontrol(/日常任务|详情|新手任务/, 1) == false && awcontrol(/看完视频再领.*金币|继续观看|一键领取|立即解锁章节|看精彩视频.*赚更多|继续看视频赚更多|看精彩视频.*金币|继续逛街|领金币|再看一个.*金币|以后再说|始终允许|观看广告最高可得.*金币|再看一个|看视频赚更多金币|看视频赚.*金币/, 0)) {
                 sleep(3000 * 速度)
                 if (awcontrol(/领金币/, 1)) {
                     sml_move(w * 0.3, h * 0.8, w * 0.3, h * 0.5, aw随机(700, 1200));

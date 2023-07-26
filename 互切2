@@ -249,7 +249,11 @@ threads.start(function () {
                 sleep(2000)
             }
         }
-        engines.execScriptFile(filePathtime);
+        try {
+            engines.execScriptFile(filePathtime);
+        } catch (error) {
+            log("读取失败")
+        }
         log("这是启动测试1");
         // aw打开app("ks7天任务")
         log('今日任务已完成!')

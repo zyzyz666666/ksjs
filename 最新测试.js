@@ -1,2688 +1,829 @@
-"uii"
+"ui";
+importClass(java.net.HttpURLConnection);
+importClass(java.net.URL);
+importClass(java.io.File);
+importClass(java.io.FileOutputStream);
+importClass(android.graphics.Color);
 
-var window = floaty.window(
-    <frame gravity="center">
-        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
-        <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
-    </frame>
+//++++++++++++++++++++++++++++++++++++++++++++++++++
+//首页配置
+
+var color = "#FF6600"
+
+ui.statusBarColor("#FF6600")
+ui.layout(
+    <drawer id="drawer">
+        <vertical>
+            <appbar>
+                <toolbar id="toolbar" bg="#FF6600" title="KS小帮手" />
+                <tabs id="tabs" bg="#FF6600" />
+            </appbar>
+            <viewpager id="viewpager" >
+                <frame>
+
+                    <vertical>
+                        <vertical gravity="center" layout_weight="1">
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <img src="https://s2-10623.kwimgs.com/kos/nlav10623/vision_images/topBannerx1.png" id="kslogo" />
+                                    </vertical>
+                                </horizontal>
+                            </card>
+
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <text text="   KS选择" textColor="#222222" textSize="18sp" maxLines="1" />
+                                        <text text="   设置配置内容" textColor="#999999" textSize="15sp" maxLines="1" />
+                                    </vertical>
+                                    <spinner id="script_chosen" marginLeft="10" marginRight="10" entries="快手极速帮|互切|快手" />
+                                </horizontal>
+                            </card>
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <text text="   无障碍服务" textColor="#222222" textSize="18sp" maxLines="1" />
+                                        <text text="    确保开启" textColor="#999999" textSize="15sp" maxLines="1" />
+                                    </vertical>
+                                    <Switch id="autoService" marginLeft="10" marginRight="20" checked="{{auto.service != null}}" />
+                                </horizontal>
+                            </card>
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="200dp" cardElevation="100dp" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <text text="   悬浮窗权限" textColor="#222222" textSize="18sp" maxLines="1" />
+                                        <text text="    确保开启" textColor="#999999" textSize="15sp" maxLines="1" />
+                                    </vertical>
+                                    <Switch id="consoleshow" marginLeft="10" marginRight="20" checked="{{floaty.checkPermission()}}" />
+                                </horizontal>
+                            </card>
+                            <card w="*" h="70" margin="10 5" cardCornerRadius="5000dp" cardElevation="1000p" foreground="?selectableItemBackground">
+                                <horizontal gravity="center_vertical">
+                                    <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                        <text text="               按下音量上键可以停止KS" textColor="#222222" textSize="18sp" maxLines="1" />
+                                    </vertical>
+                                </horizontal>
+                            </card>
+                            <horizontal gravity="center_vertical">
+                                <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                                    <text text="Q2254464797" textColor="#222222" textSize="15sp" maxLines="1" />
+                                    <linear>
+                                        {/* <button text="快手 脚本下载" id="downks" />
+                                        <text id="ksyes" text="已下载✅" />
+                                        <text id="ksno" text="未下载❌" />
+                                        <button text="刷" id="downksf5" />
+                                        <button text="卸" id="deleteks" /> */}
+                                    </linear>
+                                    <linear>
+                                        <button text="快手极速 下载" id="downksjs" />
+                                        <text id="ksjsyes" text="已下载✅" />
+                                        <text id="ksjsno" text="未下载❌" />
+                                        <button text="刷" id="downksjsf5" />
+                                        <button text="卸" id="deleteksjs" />
+                                    </linear>
+                                    <linear >
+                                        {/* <button text="互切1" id="downtime1" />
+                                        <button text="互切2" id="downtime2" />
+                                        <text id="timeyes" text="已下载✅" />
+                                        <text id="timeno" text="未下载❌" />
+                                        <button text="刷" id="downtimef5" />
+                                        <button text="卸" id="deletetime" /> */}
+                                    </linear>
+                                </vertical>
+                            </horizontal>
+
+                        </vertical>
+                        <horizontal>
+                            <button id="start" text="开 始 KS" textSize="25sp" color="#ffffff" bg="#FF6600" foreground="?selectableItemBackground" />
+                            <vertical w="1sp" h="*" margin="10 0 0 0" bg="#E2E2E2"></vertical>     //透明条
+                            <button id="exit" text="退 出" textSize="25sp" color="#ffffff" bg="#FF6600" foreground="?selectableItemBackground" />
+                        </horizontal>
+                        <horizontal w="*" h="1sp" margin="0 10 0 0" bg='#E2E2E2'></horizontal>     //透明条
+                    </vertical>
+                </frame>
+                <ScrollView>
+                    <frame>
+                        <vertical id="快手set" gravity="center">
+
+                            <ScrollView>
+                                <vertical>
+                                    <linear>
+                                        <checkbox id="选择框_切换账号" text="切换账号:" textColor="black" textStyle="bold" checked='false' />
+                                        <input id="输入框分钟" text="60" hint="请输分钟" /><text textSize="16sp" textColor="black" text="分钟" />
+                                    </linear>
+
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="滑动间隔(秒):" /> <input id="输入框1" text="6" hint="请输秒" />
+                                        <text textSize="16sp" textColor="black" text=" ~ " /> <input id="输入框11" text="10" hint="请输秒" />
+                                    </linear>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="强制返回(分钟):" /> <input id="输入框3" text="10" hint="请输分钟" />
+                                    </linear>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="速度调节:" /> <input id="输入框速度调节" text="1.8" hint="数值" />
+                                        <text textSize="16sp" textColor="black" text=" 数值越小速度越快(最低不低于1.2) " />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_悬赏任务" text="悬赏任务" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_逛街任务" text="逛街任务" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_点赞任务" text="点赞任务" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_评论任务" text="评论任务" textColor="black" textStyle="bold" checked='fales' />
+                                        <checkbox id="选择框_看视频任务" text="看视频任务" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
+                                </vertical>
+                            </ScrollView>
+                            <linear>
+                                <button text="保存 快手 脚本" id="saveks" textSize="18" />
+                            </linear>
+                        </vertical>
+
+
+                        <vertical id="快手极速set" gravity="center">
+                            <ScrollView>
+                                <vertical>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="滑动间隔(秒)[此输入框不可输入]:" /> <input id="输入框1" text="6" hint="请输秒" inputType="none" />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_强制" text="强制重启" textColor="black" textStyle="bold" checked='false' /><text textSize="16sp" textColor="black" text="自动重启(分钟):" /> <input id="重启时间" text="16" hint="请输分钟" inputType="none" />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_自检测" text="*必选*自检测" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_开宝箱" text="开宝箱" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_每日挑战" text="每日挑战" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_饭饭补贴" text="饭饭补贴" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_奖励翻倍" text="奖励翻倍" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_看视频赚金币" text="看视频赚金币" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <linear>
+                                        <checkbox id="选择框_逛街" text="逛街" textColor="black" textStyle="bold" checked='true' />
+                                        <checkbox id="选择框_表态" text="表态" textColor="black" textStyle="bold" checked='true' />
+                                    </linear>
+                                    <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
+                                </vertical>
+                            </ScrollView>
+                            <linear>
+                                <button text="保存 快手极速 脚本" id="saveksjs" textSize="18" />
+                            </linear>
+                        </vertical>
+
+                        <vertical id="互切set" gravity="center">
+                            <ScrollView>
+                                <vertical>
+                                    <linear>
+                                        <text textSize="16sp" textColor="black" text="互切间隔(分钟):" /><input id="输入框互切" text="60" hint="请输分钟" /><text textSize="16sp" textColor="black" text="分钟" />
+                                    </linear>
+                                    <text textSize="16sp" textColor="black" text="本软件用于替人工完成收到操作，请勿用于非法用途,**启动脚本前请打开该应用无障碍**" />
+                                </vertical>
+                            </ScrollView>
+                            <linear>
+                                <button text="保存 互切时间" id="savetime" textSize="18" />
+                            </linear>
+                        </vertical>
+                    </frame>
+                </ScrollView>
+            </viewpager >
+        </vertical >
+    </drawer >
 );
 
-var filePathksjs = '/sdcard/ksjs.js';
+ui.start.setWidth(device.width / 2);
+ui.exit.setWidth(device.width / 2);
+
+// ui.downtime1.setWidth(device.width / 9);
+// ui.downtime2.setWidth(device.width / 9);
+// ui.downtimef5.setWidth(device.width / 9);
+// ui.deletetime.setWidth(device.width / 9);
 
 
-window.setPosition(device.width / 3 + 110, -100);
-window.setSize(device.width * 1 / 2, 250);
-window.setAdjustEnabled(false);
+// 设置文本元素可见
+// ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+// ui.timeyes.setVisibility(android.view.View.INVISIBLE);
 
-var statusText = window.status;
+// 设置文本元素不可见
+// ui.ksno.setVisibility(android.view.View.VISIBLE);
+ui.ksjsno.setVisibility(android.view.View.VISIBLE);
+// ui.timeno.setVisibility(android.view.View.VISIBLE);
 
-window.closeBtn.click(() => {//
-    log("程序即将关闭");
 
-    engines.stopAll();
-    engines.execScriptFile("main.js");
+// 创建选项菜单(右上角)
+ui.emitter.on("create_options_menu", menu => {
+    menu.add("日志");
+    menu.add("关于");
+    menu.add("退出");
 });
 
-function lloogg(msg) {
-    log(msg);
-    ui.run(function () {
-        statusText.setText(msg);
-    });
-
-    setTimeout(function () {
-        ui.run(function () {
-            statusText.setText("");
-        });
-    }, 1000); // 延迟一秒后清除文本
-};
-function aw找id(参数1, 参数2, 参数3) {
-    var 我的
-    if (参数3 < 1) {
-        我的 = idContains(参数1).visibleToUser(true).findOne(600);
-    } else {
-        我的 = idContains(参数1).visibleToUser(true).findOne(参数3 * 1000);
+// 监听选项菜单点击
+ui.emitter.on("options_item_selected", (e, item) => {
+    switch (item.getTitle()) {
+        case "日志":
+            app.startActivity("console");
+            break;
+        case "关于":
+            alert("关于", "KS小帮手 v1.0.0");
+            break;
+        case "退出":
+            home();
+            engines.stopAll();
+            break;
     }
-    if (我的 != null) {
-        switch (true) {
-            case 参数2 == 0:
-                click(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 1:
-                log(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 2:
-                return [我的.bounds().centerX(), 我的.bounds().centerY()]
-            default:
-                var aw数据后 = 参数2.split(",");
-                click(我的.bounds().centerX() + (aw数据后[0] * 1), 我的.bounds().centerY() + (aw数据后[1] * 1));
-                return true
+    e.consumed = true;
+});
+activity.setSupportActionBar(ui.toolbar);
+
+// 设置滑动页面的标题
+ui.viewpager.setTitles(["首页", "KS Setting"]);
+// 让滑动页面和标签栏联动
+ui.tabs.setupWithViewPager(ui.viewpager);
+
+var script_chosen_Listener = new android.widget.AdapterView.OnItemSelectedListener({
+    onItemSelected: function (parent, view, position, id) {
+        toastLog('选择脚本：' + ui.script_chosen.getSelectedItem());
+        if (ui.script_chosen.getSelectedItemPosition() == 2) {
+            ui.快手set.visibility = 0;
+            ui.快手极速set.visibility = 8;
+            ui.互切set.visibility = 8;
+
         }
-    }
-    return false;
-}
+        else if (ui.script_chosen.getSelectedItemPosition() == 0) {
+            ui.快手set.visibility = 8;
+            ui.快手极速set.visibility = 0;
+            ui.互切set.visibility = 8;
 
+        } else if (ui.script_chosen.getSelectedItemPosition() == 1) {
+            ui.快手set.visibility = 8;
+            ui.快手极速set.visibility = 8;
+            ui.互切set.visibility = 0;
 
-function aw找文字节点() {
-    let arr = packageNameMatches(/.*/).visibleToUser(true).find()
-    let 数量 = 0
-    let regexp = '/^' + arguments[0] + '$/';
-    log("aw找文字节点:" + arguments[0])
-    if (arguments.length - 1 >= 3) {
-        if (arguments[3] == false) { regexp = '/.*' + arguments[0] + '.*/' }
-    }
-    if (!arr.empty()) {
-        for (let item of arr) {
-            let t = item.text() || item.desc()
-            if (eval(regexp).test(t)) {
-                let t = item.text()
-                let x = item.bounds().centerX()
-                let y = item.bounds().centerY()
-                if (arguments.length - 1 == 2) {
-                    if (数量 >= arguments[2]) {
-                        switch (true) {
-                            case arguments[1] == 0:
-                                click(x, y);
-                                return true
-                            case arguments[1] == 1:
-                                log(x, y);
-                                return true
-                            case arguments[1] == 2:
-                                return [x, y]
-                            default:
-                                var aw数据后 = 参数2.split(",");
-                                click(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
-                                return true
-                        }
-                    } else {
-                        数量 = 数量 + 1
-                    }
-                } else {
-                    switch (true) {
-                        case arguments[1] == 0:
-                            click(x, y);
-                            return true
-                        case arguments[1] == 1:
-                            log(x, y);
-                            return true
-                        case arguments[1] == 2:
-                            return [x, y]
-                        default:
-                            var aw数据后 = arguments[1].split(",");
-                            click(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
-                            return true
-                    }
-                }
-            }
         }
+        //GLOBAL_CONFIG.put("script_chosen", ui.script_chosen.getSelectedItemPosition());
     }
-    return false;
-}
+})
+ui.script_chosen.setOnItemSelectedListener(script_chosen_Listener);
 
-
-function 关闭其他应用() {
-    home();//home
-    sleep(2500)
-    log("--清应用--")
-    recents();//任务管理
-    sleep(3500)
-    switch (true) {
-        case aw找id("clear_all_recents_image_button", 0, 0.2):
-            break;
-        case aw找id("recent_igmbutton_clear_all", 0, 0.2):
-            break;
-        case aw找id("clear_button", 0, 0.2):
-            break;
-        case aw找id("clearAnimView", 0, 0.2):
-            break;
-        case aw找文字节点("关闭全部", 0):
-            break;
-        case aw找文字节点("清除", 0):
-            break;
-        case aw找文字节点("全部清除", 0):
-            break;
-        case aw找文字节点("全部清理", 0):
-            break;
-        case aw找文字节点("全部清理", 0):
-            break;
-        case aw找文字节点("可用", 0, 0, false):
-            break;
-        case aw找文字节点("释放内存", 0, 0, false):
-            break;
-        case aw找文字节点("清除全部", 0, 0, false):
-            break;
-        default:
-            click(w * 0.5, h * 0.8)
-            click(w * 0.5, h * 0.9)
-    }
-    sleep(3000)
-    home();//home
-    sleep(2500)
-}
-
-function upslide() {
-    var c = device.width;
-    var b = device.height;
-    lloogg("⬆正在滑动向上滑动");
-    swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 555);
-};
-
-function downslide() {
-    var c = device.width;
-    var b = device.height;
-    lloogg("↓正在滑动向上滑动");
-    swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 555);
-};
-
-function goandearn() {
-    var 在中心 = 0;
-    for (btgar = 1; btgar > 0; btgar++) {
-        if (有广告 == 1) {
-            if (btgar == 4) {
-                lloogg("卡了×");
-                yy();
-            }
-            lloogg("等待30秒-120秒");
-            sleep(1000 * 32);
-        } else {
-            var quzhaunqian = text("去赚钱").findOne(5000);
-            if (quzhaunqian) {
-                lloogg("goandearn:在中心");
-                在中心 = 1;
-                有广告 = 0;
-                break;
-            } else {
-                toastLog("goandearn:" + (50 - btgar));
-                back();
-            };
-            if (btgar % 10 === 0) {
-                sleep(2000);
-                lloogg("返回快手极速版");
-                打开快手();
-                sleep(1000 * 2);
-            };
-            if (btgar == 50) {
-                log("goandearn:卡了,强制");
-                有广告 = 0;
-                yy();
-            }
-        }
-    };
-    //     if (quzhaunqian.visibleToUser() == true) {
-    //         for (qzq = 1; qzq > 0; qzq++) {
-    //             click(quzhaunqian.bounds().centerX(), quzhaunqian.bounds().centerY());
-    //             var 抵用金 = textContains("抵用金").findOne(1000);
-    //             if (抵用金 && 抵用金.visibleToUser() == true) {
-    //                 lloogg("在任务中心界面");
-    //                 break;
-    //             } else {
-    //                 continue;
-    //             };
-    //         };
-    //     } else {
-    if (在中心 == 1) {
-        for (qzq = 1; qzq > 0; qzq++) {
-            if (qzq == 15) {
-                lloogg("识别超时，正在重启");
-                yy();
-            } else {
-                lloogg("正在调用abclick1");
-                click(a, b);
-                var 抵用金 = textContains("抵用金").findOne(1000);
-                try {
-                    var diyongjin = 抵用金.visibleToUser()
-                } catch (e) {
-                    diyongjin = false;
-                }
-
-                if (抵用金 && diyongjin == true) {
-                    lloogg("在任务中心界面");
-                    lloogg("若出现点赞，等待自查找");
-                    break;
-                } else {
-                    continue;
-                };
-
-            }
-            toastLog("等待" + (15 - qzq) + "次")
-        };
-        // } else {
-        // //     lloogg("不在")
-        // }
-    };
-};
-
-
-function real_click(obj) {
-    for (let i = 1; i <= 3; i++) {
-        if (obj.click()) { lloogg("real click: true"); return true; }
-        sleep(300);
-    }
-    console.warn("控件无法正常点击：", obj);
-    lloogg("尝试再次点击");
-    click(obj.bounds().centerX(), obj.bounds().centerY());
-    return false;
-};
-
-//允许
-function permit() {
-    threads.start(function () {
-        var btn = className("android.widget.Button").textMatches(/确定|允许|confirm|permit/).findOne(5000);
-        if (btn) {
-            sleep(1000);
-            btn.click();
-        };
-    });
-};
-
-//始终允许
-function alwayspermit() {
-    threads.start(function () {
-        var btn = className("android.widget.Button").textMatches(/允许|始终允许|permit/).findOne(5000);
-        if (btn) {
-            sleep(1000);
-            btn.click();
-        };
-    });
-};
-
-function iknow() {
-    threads.start(function () {
-        var btn = className("android.widget.Button").textMatches(/我知道了|知道了|知道/).findOne(5000);
-        if (btn) {
-            sleep(1000);
-            btn.click();
-        };
-    });
-};
-
-function exit_app(name) {
-    // fClear();
-    lloogg("尝试结束" + name + "APP");
-    var packageName = getPackageName(name);
-    if (!packageName) {
-        if (getAppName(name)) {
-            packageName = name;
-        } else {
-            return false;
-        }
-    }
-    lloogg("打开应用设置界面");
-    app.openAppSetting(packageName);
-    var appName = app.getAppName(packageName);
-    //lloogg(appName);
-    lloogg("等待加载界面")
-    //textMatches(/应用信息|应用详情/).findOne(5000);
-    text(appName).findOne(5000);
-    sleep(1500);
-    lloogg("查找结束按钮")
-    //let stop = textMatches(/(^强行.*|.*停止$|^结束.*)/).packageNameMatches(/.*settings.*|.*securitycenter.*/).findOne();
-    let stop = textMatches(/(强.停止$|.*停止$|结束运行|停止运行|[Ff][Oo][Rr][Cc][Ee] [Ss][Tt][Oo][Pp])/).findOne();
-    lloogg("stop:", stop.enabled())
-    if (stop.enabled()) {
-        //lloogg("click:", stop.click());
-        real_click(stop);
-        sleep(1000);
-        lloogg("等待确认弹框")
-        //let sure = textMatches(/(确定|^强行.*|.*停止$)/).packageNameMatches(/.*settings.*|.*securitycenter.*/).clickable().findOne();
-        let sure = textMatches(/(确定|.*停止.*|[Ff][Oo][Rr][Cc][Ee] [Ss][Tt][Oo][Pp]|O[Kk])/).clickable().findOne(1500);
-        if (!sure) {
-            lloogg(appName + "应用已关闭");
-            back();
-            return false;
-        }
-        lloogg("sure click:", sure.click());
-        lloogg(appName + "应用已被关闭");
-        sleep(1000);
-        back();
-    } else {
-        lloogg(appName + "应用不能被正常关闭或不在后台运行");
-        sleep(1000);
-        back();
-    }
-    return true;
-};
-
-function doubleclickearnmoney() {
-    var quzhaunqian = text("去赚钱").findOne(1000);
-    if (quzhaunqian) {
-        try {
-            var qquzq = quzhaunqian.visibleToUser();
-        } catch (e) {
-            qquzq = false;
-        }
-        if (qquzq) {
-            for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 15) {
-                    lloogg("识别超时，正在重启");
-                    yy();
-                } else {
-                    click(a, b);
-                    sleep(50);
-                    click(a, b);
-                    var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                    try {
-                        var yyaiding = 在顶.visibleToUser()
-                    } catch (e) {
-                        yyaiding = false;
-                    }
-                    if (在顶 && yyaiding == true) {
-                        lloogg("在任务中心顶");
-                        break;
-                    } else {
-                        continue;
-                    };
-
-                }
-                toastLog("等待" + (15 - qzq) + "次")
-            };
-        } else {
-            for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 15) {
-                    lloogg("识别超时，正在重启");
-                    yy();
-                } else {
-                    lloogg("正在调用abclick2");
-                    click(a, b);
-                    sleep(50);
-                    click(a, b);
-                    var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                    try {
-                        var zaiding = 在顶.visibleToUser()
-                    } catch (e) {
-                        zaiding = false;
-                    }
-                    if (在顶 && zaiding == true) {
-                        lloogg("在任务中心顶");
-                        break;
-                    } else {
-                        continue;
-                    };
-                }
-                toastLog("等待" + (15 - qzq) + "次")
-            };
-        };
-
-    } else {
-        lloogg("卡🙅‍了")
-    };
-};
-
-function 签到() {
-    // var G1 = text("gift-active-2x-0424").findOne(800);
-    // var G2 = text("coins-active-2x-0424").findOne(800);
-    // var G3 = text("redpack-active-2x-0424").findOne(800);
-    var G11 = textContains("gift-active").findOne(1500);
-    var G22 = textContains("coins-active").findOne(1500);
-    var G33 = textContains("redpack-active").findOne(1500);
-    var GG = null;
-    var 中心签到 = 0;
-    var 是弹窗签到 = 0;
-    if ((G11 || G22 || G33)) {
-        if (G11 != null) {
-            var GG1 = G11.visibleToUser();
-        };
-        if (G22 != null) {
-            var GG2 = G22.visibleToUser();
-        };
-        if (G33 != null) {
-            var GG3 = G33.visibleToUser();
-        };
-        if (GG1 || GG2 || GG3) {
-
-            log("发现签到");
-            if (G11 && G11 !== null) {
-                GG = G11;
-            } else
-                if (G22 && G22 !== null) {
-                    GG = G22;
-                } else
-                    if (G33 && G33 !== null) {
-                        GG = G33;
-                    };
-            //log(GG);
-            try {
-                var 签到条 = GG.parent().parent().parent().parent();
-            } catch (e) {
-                lloogg("No 签到条")
-            }
-            if (签到条) {
-                log("签到条");
-                var aa = Number;
-                var bb = 签到条.indexInParent();
-                if (bb == -1) {
-                    aa = 2;
-                } else if (bb >= 0) {
-                    aa = 1;
-                };
-                try {
-                    var 领签到 = 签到条.parent();
-                } catch (e) {
-                    lloogg("No 领签到")
-                }
-                if (领签到) {
-                    log("正在判断签到");
-                    if (领签到.children().length > 1) {
-                        var rootElement = 领签到.child(bb + aa);
-                        if (rootElement) {
-                            log(rootElement.children().length);
-                            if (rootElement.children().length > 1) {
-                                中心签到 = 1;
-                                log("是任务中心签到");
-                            } else {
-                                是弹窗签到 = 1;
-                                log("是弹窗")
-                            };
-                            var x = 0;
-                            var y = 0;
-                            var a = null; // 定义为全局变量
-
-                            function traverseChildren(element) {
-                                if (element.childCount() === 0) {
-                                    return;
-                                };
-
-                                var childCount = element.childCount();
-                                for (var i = 0; i < childCount; i++) {
-                                    var child = element.child(i);
-                                    x = x + 1;
-                                    //console.log(x + child.className());
-                                    if (child.className() == "android.widget.Button") {
-                                        a = element.child(i);
-                                        y = y + 1;
-                                    };
-                                    traverseChildren(child);
-                                };
-
-                            };
-                            traverseChildren(rootElement);
-                            if (a !== null) {
-                                log("找到按钮了");
-                                if (a.visibleToUser() == true) {
-                                    log("可签")
-                                    //log(a);
-                                    click(a.bounds().centerX(), a.bounds().centerY());
-                                    if (中心签到 == 1) {
-                                        alwayspermit();
-                                        var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                        if (广子倒计时) {
-                                            log("正在看广告");
-                                            停留30秒倒计时();
-                                            var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                            try {
-                                                var hmkw = 还没看完.text();
-                                            } catch (error) {
-                                                var hmkw = null || undefined;
-                                            };
-                                            if (hmkw !== "去完成任务") {
-                                                log("还没看完,继续等待30秒");
-                                                try {
-                                                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                    还没看完button.click();
-                                                } catch (error) {
-                                                    log("还没看完buttonz找不到");
-                                                };
-                                                停留30秒倒计时();
-                                            } else {
-                                                log("额外任务");
-                                                try {
-                                                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                    放弃button.click();
-                                                } catch (error) {
-                                                    log("放弃buttonz找不到");
-                                                };
-                                            };
-                                        };
-                                    };
-                                    if (弹窗签到 = 1) {
-                                        try {
-                                            var seeagain = textMatches(/(看广告最高.*金币$)/).findOne(10000);
-                                        } catch (error) {
-                                        }
-                                        if (seeagain) {
-                                            click(a.bounds().centerX(), a.bounds().centerY());
-                                            var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                            if (广子倒计时) {
-                                                log("正在看广告");
-                                                停留30秒倒计时();
-                                                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                                try {
-                                                    var hmkw = 还没看完.text();
-                                                } catch (error) {
-                                                    var hmkw = null || undefined;
-                                                };
-                                                if (hmkw !== "去完成任务") {
-                                                    log("还没看完,继续等待30秒");
-                                                    try {
-                                                        var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                        还没看完button.click();
-                                                    } catch (error) {
-                                                        log("还没看完buttonz找不到");
-                                                    };
-                                                    停留30秒倒计时();
-                                                } else {
-                                                    log("额外任务");
-                                                    try {
-                                                        var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                        放弃button.click();
-                                                    } catch (error) {
-                                                        log("放弃buttonz找不到");
-                                                    };
-                                                };
-                                            };
-                                        };
-                                    };
-                                } else {
-                                    log("不在视野内，不可签到")
-                                }
-
-                            };
-                        };
-                    } else {
-                        lloogg("无需点击");
-                    };
-                } else {
-                    log("无法判断签到");
-                };
-            } else {
-                log("未找到签到条");
-            };
-        }
-    };
-};
-
-
-function 日历签到() {
-    try {
-        var 日历 = textContains("calendar").findOne(1000) || textContains("日历").findOne(1000);
-        if (日历) {
-            log("签到日历");
-            try {
-                var parentj1 = 日历.parent().parent();
-                if (parentj1) {
-                    try {
-                        var listqian = parentj1.parent().child(parentj1.indexInParent() + 1);
-                        if (listqian) {
-                            log("有日历list");
-                            try {
-                                var 签到target = listqian.child(0).child(1);
-                                if (签到target) {
-                                    click(签到target.button().centerX(), 签到target.button().centerY());
-                                    var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                    if (广子倒计时) {
-                                        log("正在看广告");
-                                        停留30秒倒计时();
-                                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                        try {
-                                            var hmkw = 还没看完.text();
-                                        } catch (error) {
-                                            var hmkw = null || undefined;
-                                        };
-                                        if (hmkw !== "去完成任务") {
-                                            log("还没看完,继续等待30秒");
-                                            try {
-                                                var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                还没看完button.click();
-                                            } catch (error) {
-                                                log("还没看完buttonz找不到");
-                                            };
-                                            停留30秒倒计时();
-                                        } else {
-                                            log("额外任务");
-                                            try {
-                                                var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                放弃button.click();
-                                            } catch (error) {
-                                                log("放弃buttonz找不到");
-                                            };
-                                        };
-                                    };
-                                };
-                            } catch (error) {
-                                log("找不到日历签到button")
-                            };
-                        };
-                    } catch (error) {
-                        log("无日历list")
-                    }
-                }
-            } catch (error) {
-                log("只有日历无签到啊？")
-            };
-        };
-    } catch (error) {
-    };
-};
-
-
-
-//停留100秒滑动倒计时
-function 停留100秒滑动() {
-    var downup = 0;
-    var jos = 1;
-    for (gjdjs = 0; gjdjs < 103; gjdjs++) {
-        downup = downup + 1;
-        lloogg("等待" + (103 - gjdjs) + "秒后返回");
-        sleep(1000);
-        if (downup == 5 && jos % 2 === 0) {
-            lloogg("上");
-            downslide();
-            jos = jos + 1;
-            downup = 0;
-        } else if (downup == 5 && jos % 2 !== 0) {
-            lloogg("下");
-            upslide();
-            sleep(1500);
-            jos = jos + 1;
-            downup = 0;
-        };
-    };
-};
-
-
-//停留30秒倒计时
-function 停留30秒倒计时() {
-    for (ggdjs = 0; ggdjs < 30; ggdjs++) {
-        lloogg("等待" + (30 - ggdjs) + "秒后返回");
-        sleep(1000);
-    };
-    back();
-};
-
-//停留8秒倒计时 //不好用
-function 八秒倒计时() {
-    for (ggdjs = 0; ggdjs < 10; ggdjs++) {
-        lloogg("等待" + (10 - ggdjs) + "秒");
-        sleep(1000);
-    };
-};
-//停留30秒倒计时
-function 停留x秒倒计时(x) {
-    for (ggdjs = 0; ggdjs < x; ggdjs++) {
-        lloogg("等待" + (x - ggdjs) + "秒");
-        sleep(1000);
-    };
-    // back();
-};
-
-function 重置ksapp() {
-    exit_app("快手极速版");
-    app.launchPackage("com.kuaishou.nebula");
-    permit();
-};
-
-function 打开快手() {
-    app.launchPackage("com.kuaishou.nebula");
-    permit();
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////功能性func
-
-//自检测() == thread1
-//开宝箱() == thread2
-//每日挑战() == thread3
-//饭饭补贴() == thread4 
-//奖励翻倍() == thread5
-//看视频赚金币() == thread6
-//逛街() == thread7
-//表态() == thread8
+////////////////////
 var ksjsset = storages.create("ksjsset");
+var ksset = storages.create("ksset");
+var timeset = storages.create("timeset");
+///////////////////////////////////保存
 
-var 重启时间 = ksjsset.get("重启时间");
-var 选择框_强制 = ksjsset.get("选择框_强制");
-var 选择框_开宝箱 = ksjsset.get("选择框_开宝箱");
-var 选择框_每日挑战 = ksjsset.get("选择框_每日挑战");
-var 选择框_饭饭补贴 = ksjsset.get("选择框_饭饭补贴");
-var 选择框_奖励翻倍 = ksjsset.get("选择框_奖励翻倍");
-var 选择框_看视频赚金币 = ksjsset.get("选择框_看视频赚金币");
-var 选择框_逛街 = ksjsset.get("选择框_逛街");
-var 选择框_表态 = ksjsset.get("选择框_表态");
-
-if (重启时间 == undefined) {
-    重启时间 = "16";
-};
-if (选择框_强制 == undefined) {
-    选择框_强制 = false;
-};
-if (选择框_开宝箱 == undefined) {
-    选择框_开宝箱 = true;
-};
-if (选择框_每日挑战 == undefined) {
-    选择框_每日挑战 = true;
-};
-if (选择框_饭饭补贴 == undefined) {
-    选择框_饭饭补贴 = true;
-};
-if (选择框_奖励翻倍 == undefined) {
-    选择框_奖励翻倍 = true;
-};
-if (选择框_看视频赚金币 == undefined) {
-    选择框_看视频赚金币 = true;
-};
-if (选择框_逛街 == undefined) {
-    选择框_逛街 = true;
-};
-if (选择框_表态 == undefined) {
-    选择框_表态 = true;
-};
-
-
-//////////////////////////////////////////////////////////////////////////
-重置ksapp();
-停留x秒倒计时(20);
-关闭其他应用();
-打开快手();
-停留x秒倒计时(10);
-
-log(currentThread);
-var ISLOGIN = -1;
-var earnmoney = text("去赚钱").findOne();
-var a = earnmoney.bounds().centerX();
-var b = earnmoney.bounds().centerY();
-log((a, b));
-
-threads.start(function () {
-    setInterval(xx, 1000); // run the task every 5 second
-    lloogg("xx")
-
+ui.saveksjs.click(function () {
+    ksjsset.put("重启时间", ui.重启时间.text());
+    ksjsset.put("选择框_强制", ui.选择框_强制.isChecked());
+    ksjsset.put("选择框_开宝箱", ui.选择框_开宝箱.isChecked());
+    ksjsset.put("选择框_每日挑战", ui.选择框_每日挑战.isChecked());
+    ksjsset.put("选择框_饭饭补贴", ui.选择框_饭饭补贴.isChecked());
+    ksjsset.put("选择框_奖励翻倍", ui.选择框_奖励翻倍.isChecked());
+    ksjsset.put("选择框_看视频赚金币", ui.选择框_看视频赚金币.isChecked());
+    ksjsset.put("选择框_逛街", ui.选择框_逛街.isChecked());
+    ksjsset.put("选择框_表态", ui.选择框_表态.isChecked());
+    //ksjsset.put("选择框_自检测", ui.选择框_自检测.isChecked());
+    Initialize();
+    toastLog("快手极速 脚本设置 保存成功！");
 });
 
-if (选择框_强制) {
-    lloogg("本次开强制");
-    sleep(500);
-    lloogg("本次开强制");
-    sleep(500);
-    lloogg("本次开强制");
-    threads.start(function () {
-        setInterval(yy, 重启时间 * 60 * 1000); // run the task every 5 second
-        lloogg("YY")
+///////////////////////////
+ui.saveks.click(function () {
+    ksset.put("选择框_切换账号", ui.选择框_切换账号.isChecked());
+    ksset.put("输入框分钟", ui.输入框分钟.text());
+    ksset.put("输入框1", ui.输入框1.text());
+    ksset.put("输入框11", ui.输入框11.text());
+    ksset.put("输入框3", ui.输入框3.text());
+    ksset.put("输入框速度调节", ui.输入框速度调节.text());
+    ksset.put("选择框_悬赏任务", ui.选择框_悬赏任务.isChecked());
+    ksset.put("选择框_逛街任务", ui.选择框_逛街任务.isChecked());
+    ksset.put("选择框_点赞任务", ui.选择框_点赞任务.isChecked());
+    ksset.put("选择框_评论任务", ui.选择框_评论任务.isChecked());
+    ksset.put("选择框_看视频任务", ui.选择框_看视频任务.isChecked());
+    //ksjsset.put("选择框_自检测", ui.选择框_自检测.isChecked());
+    Initialize();
+    toastLog("快手 脚本设置 保存成功！");
+});
+/////////////////////////////////////////
+ui.savetime.click(function () {
+    timeset.put("输入框互切", ui.输入框互切.text());
+    //
+    Initialize();
+    toastLog("互切 时间设置 保存成功！");
+});
+// 保存脚本设置
+// ui.saveks.click(function () {
+//     cmCONFIG0.put("ad_randomsetting", ui.ad_randomsetting.getText() + "");
+//     toastLog("快手 脚本设置 保存成功！");
+// });
 
-    });
-} else {
-    lloogg("本次不开强制");
-    sleep(500);
-    lloogg("本次不开强制");
-    sleep(500);
-    lloogg("本次不开强制");
-    sleep(500);
+
+
+// 读取脚本设置
+function Initialize() {
+    if (ksjsset.get("重启时间") != undefined) { ui.重启时间.setText(ksjsset.get("重启时间")) }
+    if (ksjsset.get("选择框_强制") != null) { ui.选择框_强制.setChecked(ksjsset.get("选择框_强制")) }
+    if (ksjsset.get("选择框_开宝箱") != null) { ui.选择框_开宝箱.setChecked(ksjsset.get("选择框_开宝箱")) }
+    if (ksjsset.get("选择框_每日挑战") != null) { ui.选择框_每日挑战.setChecked(ksjsset.get("选择框_每日挑战")) }
+    if (ksjsset.get("选择框_饭饭补贴") != null) { ui.选择框_饭饭补贴.setChecked(ksjsset.get("选择框_饭饭补贴")) }
+    if (ksjsset.get("选择框_奖励翻倍") != null) { ui.选择框_奖励翻倍.setChecked(ksjsset.get("选择框_奖励翻倍")) }
+    if (ksjsset.get("选择框_看视频赚金币") != null) { ui.选择框_看视频赚金币.setChecked(ksjsset.get("选择框_看视频赚金币")) }
+    if (ksjsset.get("选择框_逛街") != null) { ui.选择框_逛街.setChecked(ksjsset.get("选择框_逛街")) }
+    if (ksjsset.get("选择框_表态") != null) { ui.选择框_表态.setChecked(ksjsset.get("选择框_表态")) }
+
+
+    if (ksset.get("选择框_切换账号") != null) { ui.选择框_切换账号.setChecked(ksset.get("选择框_切换账号")) }
+    if (ksset.get("输入框分钟") != undefined) { ui.输入框分钟.setText(ksset.get("输入框分钟")) }
+    if (ksset.get("输入框1") != undefined) { ui.输入框1.setText(ksset.get("输入框1")) }
+    if (ksset.get("输入框11") != undefined) { ui.输入框11.setText(ksset.get("输入框11")) }
+    if (ksset.get("输入框3") != undefined) { ui.输入框3.setText(ksset.get("输入框3")) }
+    if (ksset.get("输入框速度调节") != undefined) { ui.输入框速度调节.setText(ksset.get("输入框速度调节")) }
+    if (ksset.get("选择框_悬赏任务") != null) { ui.选择框_悬赏任务.setChecked(ksset.get("选择框_悬赏任务")) }
+    if (ksset.get("选择框_逛街任务") != null) { ui.选择框_逛街任务.setChecked(ksset.get("选择框_逛街任务")) }
+    if (ksset.get("选择框_点赞任务") != null) { ui.选择框_点赞任务.setChecked(ksset.get("选择框_点赞任务")) }
+    if (ksset.get("选择框_评论任务") != null) { ui.选择框_评论任务.setChecked(ksset.get("选择框_评论任务")) }
+    if (ksset.get("选择框_看视频任务") != null) { ui.选择框_看视频任务.setChecked(ksset.get("选择框_看视频任务")) }
+
+
+    if (timeset.get("输入框互切") != undefined) { ui.输入框互切.setText(timeset.get("输入框互切")) }
 };
 
-sleep(8888);
-try {
-    var c = earnmoney.visibleToUser()
-} catch (e) {
-    log("找不到 ab click");
-}
-if (earnmoney && c === true) {
-    for (m = 1; m > 0; m++) {
-        if (m == 15) {
-            lloogg("识别超时，正在重启");
-            yy();
-        } else {
-            click(a, b);
-            lloogg("click任务中心");
-            var missoncenter = text("任务中心").findOne(1000);
-            var 抵用金0 = textContains("抵用金").findOne(1000);
-            var dlmtx = text("登录秒提现").findOne(1000);
-            if (missoncenter || dlmtx || 抵用金0) {
-                lloogg("任务中心");
-                break;
-            } else {
-                continue;
-            };
-        }
-        toastLog("等待" + (15 - m) + "次")
-    };
-    var isllooggin = text("我的金币").findOne(2500);
-    if (isllooggin) {
-        ISLOGIN = 1;
-        toastLog("已登录");
+
+
+
+
+
+
+
+
+
+//***************************************************************** */
+
+// 用户勾选无障碍服务的选项时，跳转到页面让用户去开启 
+// android.permission.SYSTEM_ALERT_WINDOW
+ui.autoService.on("check", function (checked) {
+    if (checked && auto.service == null) {
+        app.startActivity({
+            action: "android.settings.ACCESSIBILITY_SETTINGS"
+        });
+    }
+    if (!checked && auto.service != null) {
+        auto.service.disableSelf();
+    }
+});
+// 当用户回到本界面时，resume事件会被触发
+ui.emitter.on("resume", function () {
+    // 此时根据无障碍服务的开启情况，同步开关的状态
+    ui.autoService.checked = auto.service != null;
+});
+
+// 悬浮窗权限
+ui.consoleshow.on("check", function (checked) {
+    if (checked && !floaty.checkPermission()) {
+        app.startActivity({
+            packageName: "com.android.settings",
+            className: "com.android.settings.Settings$AppDrawOverlaySettingsActivity",
+            data: "package:" + context.getPackageName(),
+        });
+    }
+});
+
+ui.kslogo.on("click", function () {
+    app.startActivity("console");
+});//删掉了
+
+ui.start.on("click", function () {
+    //程序开始运行之前判断无障碍服务
+    if (auto.service == null) {
+        toast("请先开启无障碍服务！");
+        return;
     } else {
-        ISLOGIN = 0;
-        toastLog("未登录")
+        //engines.execScriptFile("main.js")
+        if (ui.script_chosen.getSelectedItemPosition() == 0 && files.exists(filePathksjs)) {
+            engines.execScriptFile(filePathksjs); // 快手极速
+        } else if (ui.script_chosen.getSelectedItemPosition() == 2 && files.exists(filePathks)) {
+            engines.execScriptFile(filePathks); // 快手
+        } else if (ui.script_chosen.getSelectedItemPosition() == 1 && files.exists(filePathtime) && files.exists(filePathtime2)) {
+            engines.execScriptFile(filePathtime); // 互切
+        } else {
+            alert("请先下载脚本");
+        };
     };
-
-
-    if (ISLOGIN == 1) {
-        lloogg("开始任务,正在检测可做任务……");
-
-        sleep(8888);
-        签到();
-        sleep(8888);
-        doubleclickearnmoney();
-        sleep(2000);
-        doubleclickearnmoney();
-        日历签到();
-        sleep(8888);
-
-
-
-
-        ////////////////////////////////////////////////////
-        var 线 = 0;
-        var thread10Paused = false;
-        var thread1Paused = false;
-        var thread2Paused = false;
-        var thread3Paused = false;
-        var thread4Paused = false;
-        var thread5Paused = false;
-        var thread6Paused = false;
-        var thread7Paused = false;
-        var thread8Paused = false;
-        var thread9Paused = false;
-        var thread11Paused = false;
-
-        var currentThread = 100;  // 默认为线程1当前正在运行
-        var 列表_奖励翻倍 = Number;
-        var 列表_饭点补贴 = Number;
-        var 列表_每日挑战 = Number;
-        var 列表_看视频赚得金币 = Number;
-        var 列表_逛街金币 = Number;
-        var 列表_给视频表态 = Number;
-
-
-
-        var thread1Id, thread2Id, thread3Id, thread4Id, thread5Id, thread6Id, thread7Id;
-        // 暂停线程11
-        function pauseThread11() {
-            thread11Paused = true;
-        }
-
-        // 恢复线程10的执行
-        function resumeThread11() {
-            thread11Paused = false;
-        };
-        // 暂停线程10
-        function pauseThread10() {
-            thread10Paused = true;
-        }
-
-        // 恢复线程10的执行
-        function resumeThread10() {
-            thread10Paused = false;
-        };
-        // 暂停线程1
-        function pauseThread1() {
-            thread1Paused = true;
-
-        }
-
-        // 恢复线程1的执行
-        function resumeThread1() {
-            thread1Paused = false;
-        }
-
-        // 暂停线程2
-        function pauseThread2() {
-            thread2Paused = true;
-        }
-
-        // 恢复线程2的执行
-        function resumeThread2() {
-            thread2Paused = false;
-        }
-
-        // 暂停线程3
-        function pauseThread3() {
-            thread3Paused = true;
-        }
-
-        // 恢复线程3的执行
-        function resumeThread3() {
-            thread3Paused = false;
-        };
-
-        // 暂停线程4
-        function pauseThread4() {
-            thread4Paused = true;
-        }
-
-        // 恢复线程4的执行
-        function resumeThread4() {
-            thread4Paused = false;
-        };
-
-        // 暂停线程5
-        function pauseThread5() {
-            thread4Paused = true;
-        }
-
-        // 恢复线程5的执行
-        function resumeThread5() {
-            thread4Paused = false;
-        };
-
-        // 暂停线程6
-        function pauseThread6() {
-            thread6Paused = true;
-        }
-
-        // 恢复线程6的执行
-        function resumeThread6() {
-            thread6Paused = false;
-        };
-
-        // 暂停线程7
-        function pauseThread7() {
-            thread7Paused = true;
-        }
-
-        // 恢复线程7的执行
-        function resumeThread7() {
-            thread7Paused = false;
-        };
-
-        // 暂停线程8
-        function pauseThread8() {
-            thread8Paused = true;
-        }
-
-        // 恢复线程8的执行
-        function resumeThread8() {
-            thread8Paused = false;
-        };
-
-        function thread10() {
-            var t10 = 0;
-            currentThread = 10;
-
-
-            签到();
-
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t10 = 1;
-            if (!thread10Paused && t10 == 1 && currentThread == 10) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread1, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-        function thread1() {
-            var t1 = 0;
-            currentThread = 1;
-            // var 奖励翻倍P = Boolean;
-            // var 列表_奖励翻倍 = 1;
-            // var 奖励翻倍 = textContains("看视频奖励翻倍特权").findOne(1500);
-            // var 饭点补贴P = Boolean;
-            // var 列表_饭点补贴 = 1;
-            // var 饭点补贴 = text("到饭点领饭补").findOne(1500);
-            // var 每日挑战P = Boolean;
-            // var 列表_每日挑战 = 0;
-            // var 每日挑战 = text("每日挑战").findOne(1500);
-            // var 看视频赚得金币P = Boolean;
-            // var 列表_看视频赚得金币 = 1;
-            // var 看视频赚得金币 = textMatches(/(看视频[得赚].*金币$)/).findOne(2000);
-            // var 逛街金币P = Boolean;
-            // var 列表_逛街金币 = 0;
-            // var 逛街金币 = text("逛街领金币").findOne(1500);
-            // var 给视频表态P = Boolean;
-            // var 列表_给视频表态 = 0;
-            // var 给视频表态 = textContains("给视频表态").findOne(1500);
-
-            var 奖励翻倍 = textContains("看视频奖励翻倍特权").findOne(1500);
-            var 饭点补贴 = text("到饭点领饭补").findOne(1500);
-            var 每日挑战 = text("每日挑战").findOne(1500);
-            var 看视频赚得金币 = textMatches(/(看视频[得赚].*金币$)/).findOne(2000);
-            var 逛街金币 = text("逛街领金币").findOne(1500);
-            var 给视频表态 = textContains("给视频表态").findOne(1500);
-
-
-            // 线程1的逻辑
-            if (奖励翻倍) {
-                lloogg("🈶 奖励翻倍✅")
-                奖励翻倍P = true;
-                列表_奖励翻倍 = 0;          //3
-                lloogg("🈶 奖励翻倍 ✅")
-                奖励翻倍P = true;
-            } else {
-                lloogg("🈚️ 奖励翻倍")
-                奖励翻倍P = false;
-                列表_奖励翻倍 = 1;
-            };
-            if (饭点补贴) {                   //2
-                lloogg("🈶 饭点补贴 ✅")
-                饭点补贴P = true;
-                列表_饭点补贴 = 0;
-            } else {
-                lloogg("🈚️ 饭点补贴")
-                饭点补贴P = false;
-                列表_饭点补贴 = 1;
-            };
-            if (每日挑战) {                    //1
-                lloogg("🈶 每日挑战 ✅")
-                每日挑战P = true;
-                列表_每日挑战 = 0;
-            } else {
-                lloogg("🈚️ 每日挑战")
-                每日挑战P = false;
-                列表_每日挑战 = 1;
-            };
-            if (看视频赚得金币) {                    //4
-                lloogg("🈶 看视频赚得金币 ✅")
-                看视频赚得金币P = true;
-                列表_看视频赚得金币 = 0;
-            } else {
-                lloogg("🈚️ 看视频赚得金币")
-                看视频赚得金币P = false;
-                列表_看视频赚得金币 = 1;
-            };
-            if (逛街金币) {                    //5
-                lloogg("🈶 逛街 ✅")
-                逛街金币P = true;
-                列表_逛街金币 = 0;
-            } else {
-                lloogg("🈚️ 逛街")
-                逛街金币P = false;
-                列表_逛街金币 = 1;
-            };
-            if (给视频表态) {                    //6
-                lloogg("🈶 给视频表态 ✅")
-                给视频表态P = true;
-                列表_给视频表态 = 0;
-            } else {
-                lloogg("🈚️ 给视频表态")
-                给视频表态P = false;
-                列表_给视频表态 = 1;
-            };
-
-            // 线程1执行完毕后，调用线程2
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            log(列表_每日挑战, 列表_饭点补贴, 列表_奖励翻倍, 列表_看视频赚得金币, 列表_逛街金币, 列表_给视频表态);
-            // 回顶();
-            // sleep(1000);
-
-            if (列表_每日挑战 == 1 &&
-                列表_饭点补贴 == 1 &&
-                列表_奖励翻倍 == 1 &&
-                列表_看视频赚得金币 == 1 &&
-                列表_逛街金币 == 1 &&
-                列表_给视频表态 == 1) {
-                log("准备重开");
-                yy();
-            } else {
-                t1 = 1;
-                if (!thread1Paused && t1 == 1 && currentThread == 1) {
-                    回顶();
-                    sleep(1000);
-                    setTimeout(thread2, 1000);  // 延迟1秒调用线程2
-                }
-            }
-        }
-
-        function thread2() {
-            var t2 = 0;
-            currentThread = 2;
-            // 线程2的逻辑
-            var 宝箱 = text("treasurebox").findOne(2000);
-            if (宝箱 && 选择框_开宝箱) {
-                try {
-                    var 宝箱下 = 宝箱.parent().child(宝箱.indexInParent() + 1);
-                } catch (e) {
-                    lloogg("No 宝箱下")
-                }
-                if (宝箱下 && 宝箱下.text().includes("开宝箱")) {
-                    lloogg("🈶 开宝箱✅");
-                    click(宝箱.bounds().centerX(), 宝箱.bounds().centerY());
-                    奇怪地方返回任务中心();
-                    if (奇怪 == 1) {
-                        奇怪 = 0;
-                    }
-                    //xx();
-                    停留x秒倒计时(10);
-                    //goandearn();
-                } else {
-                    lloogg("没找到宝箱或宝箱不能开启");
-                    goandearn();
-                };
-            };
-
-            // 线程2执行完毕后，调用线程3
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t2 = 1;
-            if (!thread2Paused && t2 == 1 && currentThread == 2) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread3, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-        function thread3() {
-            var t3 = 0;
-            currentThread = 3
-            // 线程3的逻辑
-            for (n = 0; n > -1; n++) {
-
-                if (列表_每日挑战 == 0) {
-                    if (选择框_每日挑战) {
-                        var xhpd = text("每日挑战").findOne(3500);
-                        if (xhpd) {
-                            //列表_每日挑战 = 1;
-                            var pd3 = 0;//判断
-                            var pd5 = 0;//判断
-                            var pd7 = 0;//判断
-                            var mrtz = 0;//判断
-                            lloogg("正在检查每日挑战");
-                            var 金币300 = textContains("300").findOne(1500);
-                            var 金币500 = textContains("500").findOne(1500);
-                            var 金币1200 = textContains("1200").findOne(1500);
-                            try {
-                                var sansan = 金币300.visibleToUser();
-                                var wuwu = 金币500.visibleToUser();
-                                var qiqi = 金币1200.visibleToUser();
-                            } catch (e) {
-                                sansan = false;
-                                wuwu = false;
-                                qiqi = false;
-                            }
-                            try {
-                                var 完成3个 = 金币300.parent().child(金币300.indexInParent() + 1);
-                            } catch (e) {
-                                lloogg("No 300")
-                            };
-                            try {
-                                var 完成5个 = 金币500.parent().child(金币500.indexInParent() + 1);
-                            } catch (e) {
-                                lloogg("No 500")
-                            };
-                            try {
-                                var 完成7个 = 金币1200.parent().child(金币1200.indexInParent() + 1);
-                            } catch (e) {
-                                lloogg("No 1200")
-                            };
-                            if ((金币300 && sansan === true) || (金币500 && wuwu === true) || (金币1200 && qiqi === true)) {
-                                lloogg("判断每日挑战");
-                                列表_每日挑战 = 1;
-                                //300
-                                if (完成3个) {
-                                    if (完成3个.text() == "完成3个") {
-                                        lloogg("尚未完成3个");
-                                    } else if (完成3个.text() === "点击领取") {
-                                        for (dd3 = 1; dd3 < 10; dd3++) {
-                                            try {
-                                                完成3个.parent().click();
-                                            } catch (e) {
-                                            }
-                                            lloogg("正在领取300金币");
-                                            停留x秒倒计时(3);
-                                            back();
-                                            goandearn();
-                                            停留x秒倒计时(2);
-                                            try {
-                                                var pdd3 = text("300金币").findOne(600).parent().child(金币300.indexInParent() + 1);
-                                            } catch (e) {
-                                                lloogg("300已不在");
-                                            };
-
-                                            if (pdd3 && pdd3.text() == "已领取") {
-                                                pd3 = 1;
-                                                lloogg("已经领取300金币");
-                                                break;
-                                            };
-
-                                        };
-                                    } else if (完成3个.text() == "已领取") {
-                                        pd3 = 1;
-                                        lloogg("300金币已经领取");
-                                    };
-                                }
-                                //500
-                                if (完成5个) {
-                                    if (完成5个.text() == "完成5个") {
-                                        lloogg("尚未完成5个");
-                                    } else if (完成5个.text() === "点击领取") {
-                                        for (dd5 = 1; dd5 < 10; dd5++) {
-                                            try {
-                                                完成5个.parent().click();
-                                            } catch (e) {
-                                            }
-                                            lloogg("正在领取500金币");
-                                            停留x秒倒计时(3);
-                                            back();
-                                            goandearn();
-                                            停留x秒倒计时(2);
-                                            try {
-                                                var pdd5 = text("500金币").findOne(600).parent().child(金币500.indexInParent() + 1);
-                                            } catch (e) {
-                                                lloogg("500已不在");
-                                            };
-                                            if (pdd5 && pdd5.text() == "已领取") {
-                                                pd5 = 1;
-                                                lloogg("已经领取500金币");
-                                                break;
-                                            };
-
-                                        };
-                                    } else if (完成5个.text() == "已领取") {
-                                        pd5 = 1;
-                                        lloogg("500金币已经领取");
-                                    };
-                                }
-                                //1200F
-                                if (完成7个) {
-                                    if (完成7个.text() == "完成7个") {
-                                        lloogg("尚未完成7个");
-                                    } else if (完成7个.text() === "点击领取") {
-                                        for (dd7 = 1; dd7 < 10; dd7++) {
-                                            try {
-                                                完成7个.parent().click();
-                                            } catch (e) {
-                                            }
-                                            lloogg("正在领取1200金币");
-                                            停留x秒倒计时(3);
-                                            back();
-                                            goandearn();
-                                            停留x秒倒计时(2);
-                                            try {
-                                                var pdd7 = text("1200金币").findOne(600).parent().child(金币1200.indexInParent() + 1);
-                                            } catch (e) {
-                                                lloogg("1200已不在");
-                                            };
-                                            if (pdd7 && pdd7.text() == "已领取") {
-                                                pd7 = 1;
-                                                lloogg("已经领取1200金币");
-                                                break;
-                                            };
-
-                                        };
-                                    } else if (完成7个.text() == "已领取") {
-                                        pd7 = 1;
-                                        lloogg("1200金币已经领取");
-                                    };
-                                    //mrtz
-                                    if (pd3 == 1 && pd5 == 1 && pd7 == 1) {
-                                        mrtz = 1;
-                                        lloogg("每日挑战全部完成");
-                                    } else {
-                                        lloogg("继续每日挑战");
-                                    }
-                                }
-
-                            } else {
-                                lloogg("每日挑战进度条不在视野内");
-                                upslide();
-                                sleep(1500);
-                            };
-                            if (n % 10 === 0) {
-                                回顶();
-                                n = 0;
-                                if (n == 15) {
-                                    yy();
-                                }
-                            };
-                        } else {
-                            lloogg("每日挑战不在视野内");
-                        };
-                    } else {
-                        列表_每日挑战 = 1;
-                        log("未选");
-                    };
-                };
-                if (列表_每日挑战 == 1) {
-                    break;
-                };
-
-            };
-
-            // 线程执行完毕后，调用线程34
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t3 = 1;
-            if (!thread3Paused && t3 == 1 && currentThread == 3) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread4, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-
-        function thread4() {
-            var 饭补进对了 = 0;
-            var t4 = 0;
-            currentThread = 4;
-            // 线程2的逻辑
-            for (n = 0; n < 10; n++) {
-                if (列表_饭点补贴 == 0) {
-                    if (选择框_饭饭补贴) {
-                        var fdbt = text("到饭点领饭补").findOne(3500);
-                        if (fdbt) {
-                            lloogg("到饭点领饭补")
-                            try {
-                                var ffdbt = fdbt.visibleToUser();
-                            } catch (e) {
-                                ffdbt = false;
-                            }
-                            if (ffdbt) {
-                                log("正在去领取饭点补贴");
-                                列表_饭点补贴 = 1;
-                                for (ff = 1; ff < 10; ff++) {
-                                    var 饭补 = textContains("到饭点领饭补").findOne(1000);
-                                    try {
-                                        var fbb = 饭补.visibleToUser()
-                                    } catch (e) {
-                                        fbb = false;
-                                    }
-                                    if (饭补 && fbb) {
-                                        log("正在进领取饭补界面");
-                                        click(饭补.bounds().centerX(), 饭补.bounds().centerY());
-                                        奇怪地方返回任务中心();
-                                        if (奇怪 == 1) {
-                                            奇怪 = 0;
-                                            continue;
-                                        }
-                                        sleep(1000);
-                                    } else {
-                                        var 领取饭补 = text("领取饭补").findOne(1000);
-                                        var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(1000);
-                                        if (领取饭补) {
-                                            log("领取饭补");
-                                            饭补进对了 = 1;
-                                            break;
-                                        } else if (领过了) {
-                                            log("领过了");
-                                            饭补进对了 = 1;
-                                            break;
-                                        };
-                                    };
-                                    if (ff == 9 && !领取饭补 && !领过了) {
-                                        lloogg("饭补进错了");
-                                        奇怪地方返回任务中心();
-                                        if (奇怪 == 1) {
-                                            奇怪 = 0;
-                                            continue;
-                                        }
-                                        back();
-
-                                    };
-                                };
-                                if (领取饭补) {
-                                    try {
-                                        var dian领取饭补 = 领取饭补.parent();
-                                    } catch (e) {
-                                    }
-                                    if (dian领取饭补) {
-                                        for (ffd = 1; ffd < 10; ffd++) {
-                                            dian领取饭补.click();
-                                            var 饭补领取 = textContains("恭喜获得").findOne(3000);
-                                            if (饭补领取) {
-                                                log("饭补领取");
-                                                try {
-                                                    var 恭喜获得视频 = 饭补领取.parent().child(饭补领取.parent().children().length - 2);
-                                                } catch (e) {
-                                                }
-                                                if (恭喜获得视频) {
-                                                    log("正在去看恭喜获得视频");
-                                                    click(恭喜获得视频.bounds().centerX(), 恭喜获得视频.bounds().centerY());
-                                                    奇怪地方返回任务中心();
-                                                    if (奇怪 == 1) {
-                                                        奇怪 = 0;
-                                                        continue;
-                                                    }
-                                                    var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                                    if (广子倒计时) {
-                                                        log("正在看广告");
-                                                        停留30秒倒计时();
-                                                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                                        try {
-                                                            var hmkw = 还没看完.text();
-                                                        } catch (error) {
-                                                            var hmkw = null || undefined;
-                                                        };
-                                                        if (hmkw !== "去完成任务") {
-                                                            log("还没看完,继续等待30秒");
-                                                            try {
-                                                                var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                                还没看完button.click();
-                                                            } catch (error) {
-                                                                log("还没看完buttonz找不到");
-                                                            };
-                                                            停留30秒倒计时();
-                                                        } else {
-                                                            log("额外任务");
-                                                            try {
-                                                                var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                                放弃button.click();
-                                                            } catch (error) {
-                                                                log("放弃buttonz找不到");
-                                                            };
-                                                        };
-                                                    };
-                                                };
-                                                // back();
-                                                break;
-                                            } else {
-                                                log("没有领");
-                                            };
-                                        };
-                                    };
-
-                                } else if (领过了) {
-                                    log("领过饭补了或不在饭补时间");
-                                } else {
-                                    log("饭补异常");
-                                    //back();
-                                };
-
-
-                                ////////、、、、、、、、、、、、、、、、、、、、、、、、、
-                                //////////////补签/////////////
-                                if (饭补进对了 == 1) {
-                                    log("开始寻找补签");
-                                    for (dbqys = 1; dbqys < 10; dbqys++) {
-                                        var 待补签元素 = textMatches(/(.*待补签$)/).find();
-                                        if (待补签元素 && 待补签元素.length !== 0) {
-                                            log("正在补签");
-                                            log("等待补签数量:" + 待补签元素.length);
-                                            for (dbq = 0; dbq < 待补签元素.length; dbq++) {
-                                                click(待补签元素[dbq].bounds().centerX(), 待补签元素[dbq].bounds().centerY());
-                                                sleep(300);
-                                                var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-                                                if (广子倒计时) {
-                                                    log("正在看广告");
-                                                    停留30秒倒计时();
-                                                    sleep(300)
-                                                    var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                                    try {
-                                                        var hmkw = 还没看完.text();
-                                                    } catch (error) {
-                                                        var hmkw = null || undefined;
-                                                    };
-                                                    if (hmkw !== "去完成任务") {
-                                                        log("还没看完,继续等待30秒");
-                                                        try {
-                                                            var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                            还没看完button.click();
-                                                        } catch (error) {
-                                                            log("还没看完buttonz找不到");
-                                                        };
-                                                        停留30秒倒计时();
-                                                    } else {
-                                                        log("额外任务");
-                                                        try {
-                                                            var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                            放弃button.click();
-                                                        } catch (error) {
-                                                            log("放弃buttonz找不到");
-                                                        };
-                                                    };
-                                                };
-
-                                            };
-                                        } else if (待补签元素.length == 0) {
-                                            log("无补待签元素");
-                                            break;
-                                        };
-                                    };
-                                    //////////////补签/////////////
-                                    /////////////////看视频////////////
-
-                                    log("开始看视频");
-                                    var 饭补视频 = text("看视频").findOne(1000);
-                                    if (饭补视频) {
-                                        log("正在去看饭补视频");
-                                        for (fbsp = 0; fbsp < 10; fbsp++) {
-                                            var 饭补视频 = text("看视频").findOne(1500);
-                                            click(饭补视频.bounds().centerX(), 饭补视频.bounds().centerY());
-                                            奇怪地方返回任务中心();
-                                            if (奇怪 == 1) {
-                                                奇怪 == 0;
-                                                continue;
-                                            }
-                                            var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
-                                            var toast窗 = id("com.kuaishou.nebula:id/toast_text").findOne(1000);
-                                            var 今日饭补广告看完了 = textContains("已完成").findOne(800) || textContains("明天再来").findOne(800) || text("任务已完成，明天再来吧～").findOne(800);
-                                            var 领取饭补 = text("领取饭补").findOne(500);
-                                            var 领过了 = textContains("后领取").findOne(1000) || textMatches(/(明.*补贴$)/).findOne(500);
-                                            if (toast窗) {
-                                                log(toast窗.text())
-                                            };
-                                            if (今日饭补广告看完了) {
-                                                log("今日饭补广告看完了");
-                                                break;
-                                            };
-                                            if (广告倒计时) {
-                                                log("正在看广告——停留30秒")
-                                                break;
-                                            };
-                                            if (!广告倒计时 && !今日饭补广告看完了 && !领取饭补 && !领取饭补) {
-                                                log("饭补卡住了");
-                                                停留x秒倒计时(50);
-                                                sleep(300);
-                                                break;
-                                            };
-                                        };
-                                        if (广告倒计时) {
-                                            停留30秒倒计时();
-                                            sleep(300);
-                                            var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                            try {
-                                                var hmkw = 还没看完.text();
-                                            } catch (error) {
-                                                var hmkw = null || undefined;
-                                            };
-                                            if (hmkw !== "去完成任务") {
-                                                log("还没看完,继续等待30秒");
-                                                try {
-                                                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                    还没看完button.click();
-                                                } catch (error) {
-                                                    log("还没看完buttonz找不到");
-                                                };
-                                                停留30秒倒计时();
-                                            } else {
-                                                log("额外任务");
-                                                try {
-                                                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                    放弃button.click();
-                                                } catch (error) {
-                                                    log("放弃buttonz找不到");
-                                                };
-                                            };
-                                        };
-                                    };
-                                    sleep(3000);
-
-
-
-                                    /////////////////看视频////////////
-
-
-                                    back();
-
-                                };
-
-
-                            } else {
-                                log("饭补不在视野内");
-                                upslide();
-                                sleep(1500);
-                            };
-                            if (n % 10 === 0) {
-                                回顶();
-                                n = 0;
-                                if (n == 15) {
-                                    yy();
-                                }
-                            };
-                        }
-                    } else {
-                        列表_饭点补贴 = 1;
-                        log("未选");
-                    };
-                }
-                if (列表_饭点补贴 == 1) {
-                    break;
-                };
-            };
-
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t4 = 1;
-            if (!thread4Paused && t4 == 1 && currentThread == 4) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread5, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-
-        function thread5() {
-            var t5 = 0;
-            currentThread = 5;
-            // 线程2的逻辑
-            for (n = 0; n < 9; n++) {
-                if (列表_奖励翻倍 == 0) {
-                    if (选择框_奖励翻倍) {
-                        var jlfb = textContains("看视频奖励翻倍特权").findOne(3500);
-                        if (jlfb) {
-                            lloogg("看视频奖励翻倍特权")
-                            if (jlfb.visibleToUser() === true) {
-                                列表_奖励翻倍 = 1;
-                                log("正在翻倍奖励");
-                                for (ble = 0; ble < 5; ble++) {
-                                    var 翻倍 = textContains("看视频奖励翻倍特权").findOne(1000);
-                                    //var 翻倍中 = 翻倍.parent().parent().child(翻倍.parent().parent().children().length - 1);
-                                    try {
-                                        var ffb = 翻倍.visibleToUser()
-                                    } catch (e) {
-                                        ffb = false;
-                                    }
-                                    if (翻倍 && ffb) {
-                                        click(翻倍.bounds().centerX(), 翻倍.bounds().centerY());
-                                        奇怪地方返回任务中心();
-                                        if (奇怪 == 1) {
-                                            奇怪 = 0;
-                                            continue;
-                                        }
-                                        sleep(500);
-                                    };
-                                    // if (翻倍中.text() !== "点击翻倍") {
-                                    //     log("翻倍中")
-                                    //     break;
-                                    // } else {
-                                    //     continue;
-                                    // };
-                                };
-                            } else {
-                                log("奖励翻倍不在视野内");
-                                upslide();
-                                sleep(1500);
-                            };
-                            if (n % 10 === 0) {
-                                回顶();
-                                n = 0;
-                                if (n == 15) {
-                                    yy();
-                                }
-                            };
-                        }
-                    } else {
-                        列表_奖励翻倍 = 1;
-                        log("未选");
-                    };
-                }
-                if (列表_奖励翻倍 == 1) {
-                    log("已翻倍");
-                    break;
-                };
-
-            };
-            back();
-
-            // 线程2执行完毕后，调用线程3
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t5 = 1;
-            if (!thread5Paused && t5 == 1 && currentThread == 5) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread6, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-
-        function thread6() {
-            var t6 = 0;
-            currentThread = 6;
-            // 线程2的逻辑
-            for (n = 0; n < 10; n++) {
-
-                if (列表_看视频赚得金币 == 0) {
-                    if (选择框_看视频赚金币) {
-                        var kspzdjb = textMatches(/(看视频[得赚].*金币$)/).findOne(3500);
-                        try {
-                            var kksbz = kspzdjb.visibleToUser()
-                        } catch (e) {
-                            kksbz = false;
-                        }
-                        if (kspzdjb && kksbz === true) {
-                            列表_看视频赚得金币 = 1;
-                            log("正在看视频赚得金币-停留2分钟");
-                            for (ksp = 1; ksp < 5; ksp++) {
-                                //var 明天再来 = text("明天再来").findOne(1000);
-                                var 看视频 = textMatches(/(看视频[得赚].*金币$)/).findOne(1000);
-                                var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
-                                try {
-                                    var lknlks = 看视频.visibleToUser()
-                                } catch (e) {
-                                    lknlks = false;
-                                }
-                                if (看视频 && lknlks === true) {
-                                    click(看视频.bounds().centerX(), 看视频.bounds().centerY());
-                                    奇怪地方返回任务中心();
-                                    if (奇怪 == 1) {
-                                        奇怪 = 0;
-                                        continue;
-                                    }
-                                    sleep(500);
-                                };
-                                if (ksp == 4 && !看视频 && !广告倒计时) {
-                                    lloogg("看视频进错了");
-                                    奇怪地方返回任务中心();
-                                    if (奇怪 == 1) {
-                                        奇怪 = 0;
-                                        continue;
-                                    }
-                                };
-                                if (广告倒计时) {
-                                    log("正在看广告——停留30秒")
-                                    break;
-                                } else {
-                                    continue;
-                                };
-
-                            };
-
-                            if (广告倒计时) {
-                                停留30秒倒计时();
-                                sleep(300);
-                                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                try {
-                                    var hmkw = 还没看完.text();
-                                } catch (error) {
-                                    var hmkw = null || undefined;
-                                };
-                                if (hmkw !== "去完成任务") {
-                                    log("还没看完,继续等待30秒");
-                                    try {
-                                        var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                        还没看完button.click();
-                                    } catch (error) {
-                                        log("还没看完buttonz找不到");
-                                    };
-                                    停留30秒倒计时();
-                                } else {
-                                    log("额外任务");
-                                    try {
-                                        var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                        放弃button.click();
-                                    } catch (error) {
-                                        log("放弃buttonz找不到");
-                                    };
-                                };
-                            } else {
-                                goandearn();
-                            };
-                        } else {
-                            log("看视频赚得金币不在视野内");
-                            upslide();
-                            sleep(1500);
-                        };
-                        if (n % 10 === 0) {
-                            回顶();
-                            n = 0;
-                            if (n == 15) {
-                                yy();
-                            }
-                        };
-
-                    } else {
-                        列表_看视频赚得金币 = 1;
-                        log("未选");
-                    };
-                };
-                if (列表_看视频赚得金币 == 1) {
-                    break;
-                };
-
-            };
-
-            // 线程2执行完毕后，调用线程3
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t6 = 1;
-            if (!thread6Paused && t6 == 1 && currentThread == 6) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread7, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-
-        function thread7() {
-            var t7 = 0;
-            currentThread = 7;
-            // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
-                if (列表_逛街金币 == 0) {
-                    if (选择框_逛街) {
-                        var gjljb = text("逛街领金币").findOne(3500);
-                        if (gjljb) {
-                            if (gjljb.visibleToUser() === true) {
-                                列表_逛街金币 = 1;
-                                lloogg("正在逛街");
-                                for (gj = 1; gj < 10; gj++) {
-                                    var 逛街 = text("逛街领金币").findOne(1000);
-                                    var 逛街倒计时 = id("com.kuaishou.nebula:id/reward_merchant_pendant_container").findOne(10000);
-                                    if (逛街) {
-                                        if (逛街.visibleToUser() === true) {
-                                            try {
-                                                var 逛完了 = 逛街.parent().parent().child(逛街.parent().parent().children().length - 1);
-                                            } catch (e) {
-                                            }
-                                            if (!逛完了.text().includes("去")) {
-                                                lloogg("逛完了");
-                                                break;
-                                            } else {
-                                                click(逛街.bounds().centerX(), 逛街.bounds().centerY());
-                                                奇怪地方返回任务中心();
-                                                if (奇怪 == 1) {
-                                                    奇怪 = 0;
-                                                    continue;
-                                                }
-                                                sleep(500);
-                                            }
-                                        };
-                                    };
-                                    // if (gj == 9 && !逛街倒计时) {
-                                    //     lloogg("逛街进错了");
-                                    //     back();
-                                    //     sleep(1500);
-                                    //     back();
-                                    // }
-                                    if (逛街倒计时) {
-                                        lloogg("正在逛街逛街——滑动停留100秒")
-                                        break;
-                                    } else {
-                                        continue;
-                                    };
-
-                                };
-                                if (逛街倒计时) {
-                                    停留100秒滑动();
-                                    back();
-                                    var 继续逛街 = text("继续逛街").findOne(10000);
-                                    if (继续逛街) {
-                                        lloogg("还没逛完,继续等待100秒");
-                                        var 继续逛街but = text("继续逛街").findOne(1500);
-                                        click(继续逛街but.bounds().centerX(), 继续逛街but.bounds().centerY());
-                                        停留100秒滑动();
-                                    };
-                                };
-                            } else {
-                                lloogg("逛街不在视野内");
-                                upslide();
-                                sleep(1500);
-                            };
-                            if (n % 10 === 0) {
-                                回顶();
-                                n = 0;
-                                if (n == 15) {
-                                    yy();
-                                }
-                            };
-                        };
-                    } else {
-                        列表_逛街金币 = 1;
-                        log("未选");
-                    };
-                };
-                if (列表_逛街金币 == 1) {
-                    break;
-                };
-                //goandearn();
-            };
-
-            // 线程2执行完毕后，调用线程3
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t7 = 1;
-            if (!thread7Paused && t7 == 1 && currentThread == 7) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread8, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-
-        function thread8() {
-            var t8 = 0;
-            currentThread = 8;
-            // 线程2的逻辑
-            for (n = 0; n > -1; n++) {
-
-                var 在视频页 = 0;
-                if (列表_给视频表态 == 0) {
-                    if (选择框_表态) {
-                        var gspbt = textContains("给视频表态").findOne(3500);
-                        try {
-                            var ads = gspbt.visibleToUser()
-                        } catch (e) {
-                            ads = false;
-                        }
-                        if (gspbt && ads === true) {
-                            列表_给视频表态 = 1;
-                            lloogg("正在给视频表态");
-                            for (bt = 1; bt < 5; bt++) {
-                                //var 明日再来 = text("明日再来").findOne(1000);
-                                var 表态 = textContains("给视频表态").findOne(1500);
-                                try {
-                                    var bbtt = 表态.visibleToUser()
-                                } catch (e) {
-                                    bbtt = false;
-                                }
-                                if (表态 && bbtt === true) {
-                                    click(表态.bounds().centerX(), 表态.bounds().centerY());
-                                    奇怪地方返回任务中心();
-                                    if (奇怪 == 1) {
-                                        奇怪 = 0;
-                                        continue;
-                                    }
-                                    sleep(500);
-
-                                    function if视频() {
-                                        var 视频 = id("com.kuaishou.nebula:id/nasa_groot_view_pager").findOne(3000);
-                                        try {
-                                            var qdss = 视频.visibleToUser()
-                                        } catch (e) {
-                                            qdss = false;
-                                        }
-                                        if (视频 && qdss === true) {
-                                            toast("在视频页");
-                                            在视频页 = 1;
-                                        } else {
-                                            toast("🙅‍视频页 或 做完了" + (16 - bt * n));
-                                            在视频页 = 0;
-                                        };
-                                    };
-
-                                    for (n = 0; n < 5; n++) {
-                                        if视频();
-                                        sleep(1000);
-                                        if (在视频页 == 1) {
-                                            lloogg("√视频页√");
-                                            break;
-                                        } else {
-                                            continue;
-                                        };
-                                        sleep(1000);
-                                    };
-                                    sleep(1000);
-                                    if (在视频页 == 1) {
-                                        lloogg("开始表态");
-                                    };
-
-                                };
-
-                                ////////////刷视频+表态/////////////////////
-                                if (在视频页 == 1) {
-                                    for (pbt = 0; pbt < 35; pbt++) {
-                                        lloogg("正在评论第" + (pbt + 1) + "/50 条视频");
-                                        var bta = 0;
-                                        for (qbt = 0; qbt > -1; qbt++) {
-                                            var 表态 = text("你对此条视频是否满意？").find().filter(function (element) {
-                                                return element.visibleToUser();
-                                            });
-                                            log(表态);
-
-                                            if (表态.length > 0) {
-                                                var 可见表态 = 表态[0];
-                                                bta = 1;
-                                                lloogg("正在表态");
-                                            } else {
-                                                lloogg("不可表态");
-                                            };
-                                            break;
-
-                                        };
-                                        log(bta)
-                                        if (bta == 1) {
-                                            try {
-                                                var array = [可见表态.indexInParent() + 2, 可见表态.indexInParent() + 3, 可见表态.indexInParent() + 4];
-                                            } catch (e) {
-                                            }
-                                            var randomIndex = Math.floor(Math.random() * array.length);
-                                            var randomElement = array[randomIndex];
-                                            try {
-                                                click(可见表态.parent().child(randomElement).bounds().centerX(), 可见表态.parent().child(randomElement).bounds().centerY())
-                                            } catch (e) {
-                                            }
-                                            sleep(1000);
-                                        };
-                                        upslide();
-                                        sleep(1500);
-                                        sleep(3500)
-                                    };
-                                }
-                            };
-
-
-                        } else {
-                            lloogg("给视频表态不在视野内");
-                            upslide();
-                            sleep(1500);
-                        };
-                        if (n % 10 === 0) {
-                            回顶();
-                            n = 0;
-                            if (n == 15) {
-                                yy();
-                            }
-                        };
-                    } else {
-                        列表_给视频表态 = 1;
-                        log("未选");
-                    };
-                };
-                if (列表_给视频表态 == 1) {
-                    break;
-                };
-
-            };
-
-            // 线程2执行完毕后，调用线程3
-            // lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t8 = 1;
-            if (!thread8Paused && t8 == 1 && currentThread == 8) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread11, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-        function thread11() {
-            var t11 = 0;
-            currentThread = 11;
-
-            lloogg("刷十分钟视频");
-            for (sy = 1; sy > 0; sy++) {
-                if (sy == 15) {
-                    lloogg("识别超时，正在重启");
-                    yy();
-                } else {
-                    var 首页 = text("首页").findOne(1500);
-                    try {
-                        var sssyy = 首页.visibleToUser()
-                        var ssyyy = 首页.selected()
-                    } catch (e) {
-                        sssyy = false;
-                        ssyyy = false;
-                    }
-                    if (sssyy == true && ssyyy == false) {
-                        click(首页.bounds().centerX(), 首页.bounds().centerY());
-                        奇怪地方返回任务中心();
-                        if (奇怪 == 1) {
-                            奇怪 = 0;
-                            continue;
-                        }
-                    };
-                    if (首页.selected() == true) {
-                        lloogg("在首页");
+});
+
+ui.exit.on("click", function () {
+    home();
+    engines.stopAll();
+});
+
+////////////////////////////////////////////////////////////////////////////ksjs
+var KSJSi = 0;
+var KSJS;
+var filePathksjs = '/sdcard/ksjs.js';
+ui.downksjs.on("click", function () {
+    toastLog("开始下载KSJS脚本");
+    //
+    function 下载KSJS() {
+        let url = [
+            'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/最新测试.js',
+        ];
+        for (var i = 0; i < 2; i++) {
+            try {
+                let res = http.get(url[i], {
+                    timeout: 10000 // 设置超时时间为10秒
+                });
+                console.log(res.statusCode);
+                if (res.statusCode == 200) {
+                    KSJS = res.body.string();
+                    if (KSJS.indexOf('"uii"') == 0) {
+                        KSJSi = 1;
+                        toastLog('快手极速版' + '下载成功✅');
+                        alert('快手极速版' + '下载成功✅')
+                        //log("开始加载KSJS");
+                        //engines.execScript("KSJS", KSJS);
                         break;
                     };
+                } else {
+                    toastLog('快手极速版' + '下载链接失败❌');
+                    alert('快手极速版' + '下载链接失败❌')
                 }
-                toastLog(15 - sy)
-            };
-
-            function 看视频() {
-                var downup = 0;
-                var counter = 0;
-                for (gjdjs = 0; gjdjs < 600; gjdjs++) {
-                    downup = downup + 1;
-                    counter = counter + 1;
-                    if (counter == 10) { // 每10秒提示一次
-                        lloogg("继续刷" + (600 - gjdjs) + "秒视频");
-                        counter = 0;
-                    };
-                    sleep(1000);
-                    if (downup == 6) {
-                        lloogg("看视频");
-                        upslide();
-                        sleep(1500);
-                        lloogg("继续刷" + (600 - gjdjs) + "秒视频");
-                        downup = 0;
-                    };
-                };
-            };
-            看视频();
-            sleep(5000);
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t11 = 1;
-            if (!thread11Paused && t11 == 1 && currentThread == 11) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread10, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
-
-
-
-
-        /////////////////////////////// 判断一轮是否全做完了 ///////////////////////
-        log(列表_每日挑战, 列表_饭点补贴, 列表_奖励翻倍, 列表_看视频赚得金币, 列表_逛街金币, 列表_给视频表态);
-        if (列表_每日挑战 == 1 && 列表_饭点补贴 == 1 && 列表_奖励翻倍 == 1 && 列表_看视频赚得金币 == 1 && 列表_逛街金币 == 1 && 列表_给视频表态 == 1) {
-            lloogg("一轮做完,等待下一轮");
-            sleep(2000);
-            runThreads();
-        };
-
-        sleep(5000);
-
-
-
-
-        /////////////////////////////////////////////////////////////////////////////////////////////
-        for (n = 0; n > -1; n++) {
-            if (线 == 1) {
-                线 = 0;
-                runThreads();
-                sleep(5000);
-                break;
-            };
-        };
-
-
-
-    } else if (ISLOGIN == 0) {
-        alert("未登录");
-    } else {
-        lloogg("卡住了,请联系管理员")
-    };
-};
-
-
-lloogg("已完成");
-yy();
-//exit();
-
-///////////////////////////////////////////////////////////////////////////////
-function yy() {
-    sleep(1500);
-    //engines.stopAll();
-    engines.execScriptFile(filePathksjs);
-    exit();
-};
-
-
-function 返回找任务中心() {
-    for (n = 1; n < 10; n++) {
-        var 抵用金 = textContains("抵用金").findOne(700);
-        // try {
-        //     var diyongjin = 抵用金.visibleToUser()
-        // } catch (e) {
-        //     diyongjin = false;
-        // }
-        sleep(300);
-        if (抵用金) {
-            lloogg("回到了任务中心");
-            break;
-        };
-    };
-};
-
-var 奇怪 = 0;
-function 奇怪地方返回任务中心() {
-    var 在奇怪的地方 = text("邀请好友 必得现金").findOne(100) || textMatches(/(仅差.*成长值升级)/).findOne(100) ||
-        idContains("live_audience").findOne(100) || idContains("svg__icons__dom").findOne(100) ||
-        id("com.kuaishou.nebula:id/avatar").findOne(100) || text("距本周活动结束").findOne(100) ||
-        text("赚金小游戏").findOne(100) || text("金币兑换优惠券").findOne(100) || text("我的抽奖码").findOne(100) ||
-        text("种成后还能换其他水果哦").findOne(100) || (text("可兑换").findOne(100) && text("审核中").findOne(100)) ||
-        text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
-        textContains("前三次完成先睡觉再起床").findOne(100) || text("如何添加小组件到桌面").findOne(100) ||
-        (text("早睡早起").findOne(100) && (text("切换角色").findOne(100) || textContains("切换性别").findOne(100)))
-        ;
-    if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
-        奇怪 = 1;
-        返回找任务中心();
-    };
-
-}
-
-var 有广告 = 0;
-function xx() {
-    lloogg("xx");
-    var 好评弹窗 = id("com.kuaishou.nebula:id/icon").findOne(100) || text("喜欢就给个好评吧").findOne(100);
-    var 签到弹窗 = textContains("gift-active").findOne(100) || textContains("coins-active").findOne(100) || textContains("redpack-active").findOne(100);
-    var 金币箱弹窗 = text("nebula-box-jinbi").findOne(100);
-    var 第一类弹窗 = text("恭喜获得看视频惊喜红包").findOne(100);
-    var 第二类弹窗 = text("popup_icon").findOne(100) || id("com.kuaishou.nebula.neo_video:id/again_dialog_image").findOne(100);
-    var 第三类额外弹窗 = id("com.kuaishou.nebula.neo_video:id/close_dialog_logo").findOne(100);
-    var 弹窗 = textContains("签到领取").findOne(100) || textContains("恭喜你获得").findOne(100) || text("早起打卡瓜分金币").findOne(100) || text("恭喜获得金币大礼包").findOne(100)//|| textContains("限时福利").findOne(500); 
-    var 邀请新用户 = textContains("邀请新用户").findOne(100);
-    var 青少年模式 = id("com.kuaishou.nebula:id/set_teenage_mode").findOne(100);
-    var 先暂停 = 0;
-
-    // if (弹窗 && 弹窗.visibleToUser() === true) {
-    //     lloogg("检测到弹窗");
-    //     sleep(500);
-    //     back();
-    //     lloogg("已关闭弹窗✅");
-    //     lloogg(弹窗);
-    //     sleep(1000);
-    //     goandearn();
-    //     sleep(500);
-
-
-    if (签到弹窗 && textContains("将从第一天开始签到").findOne(500)) {
-        log("检测到签到弹窗");
-        lloogg("先暂停");
-        有广告 = 1;
-        if (currentThread !== 100) {
-            try {
-                pauseThread10();
-                pauseThread1();
-                pauseThread2();
-                pauseThread3();
-                pauseThread4();
-                pauseThread5();
-                pauseThread6();
-                pauseThread7();
-                pauseThread8();
-                pauseThread11();
-                先暂停 = 1;
-            } catch (e) {
-                线 = 0;
-            }
-
-        }
-        var dkh = textContains("将从第一天开始签到").findOne(1500);
-        try {
-            var but = dkh.parent().child(dkh.parent().children().length - 2);
-        } catch (e) {
-        }
-        // log(but);
-        // log(but.visibleToUser())
-        // log(but.child(0));
-        // log(but.child(0).visibleToUser())
-        click(but.bounds().centerX(), but.bounds().centerY());
-        var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-        if (广子倒计时) {
-            log("正在看宝箱广告");
-            停留30秒倒计时();
-            var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-            try {
-                var hmkw = 还没看完.text();
             } catch (error) {
-                var hmkw = null || undefined;
-            };
-            if (hmkw !== "去完成任务") {
-                log("还没看完,继续等待30秒");
-                try {
-                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                    还没看完button.click();
-                } catch (error) {
-                    log("还没看完buttonz找不到");
-                };
-                停留30秒倒计时();
-            } else {
-                log("额外任务");
-                try {
-                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                    放弃button.click();
-                } catch (error) {
-                    log("放弃buttonz找不到");
-                };
-            };
-        };
-        有广告 = 0;
-        回顶();
-        if (先暂停 == 1) {
-            先暂停 = 0;
-            resumeThread10();
-            resumeThread1();
-            resumeThread2();
-            resumeThread3();
-            resumeThread4();
-            resumeThread5();
-            resumeThread6();
-            resumeThread7();
-            resumeThread8();
-            resumeThread11();
-            runThreads();
-        }
-    }
-    if (第一类弹窗 && 第一类弹窗.parent().child(0).className() == "android.widget.ImageView" && 第一类弹窗.visibleToUser() === true) {
-        lloogg("检测到惊喜红包弹窗");
-        lloogg("先暂停");
-        有广告 = 1;
-        if (currentThread !== 100) {
-            try {
-                pauseThread10();
-                pauseThread1();
-                pauseThread2();
-                pauseThread3();
-                pauseThread4();
-                pauseThread5();
-                pauseThread6();
-                pauseThread7();
-                pauseThread8();
-                pauseThread11();
-                先暂停 = 1;
-            } catch (e) {
-                线 = 0;
-            }
-
-        }
-        var 惊喜 = text("恭喜获得看视频惊喜红包").findOne(1000);
-        var dian继续观看 = 惊喜.parent().child(惊喜.parent().children().length - 2);
-        if (dian继续观看) {
-            log("正在继续观看");
-            dian继续观看.click();
-        };
-        有广告 = 0;
-        回顶();
-        if (先暂停 == 1) {
-            先暂停 = 0;
-            resumeThread10();
-            resumeThread1();
-            resumeThread2();
-            resumeThread3();
-            resumeThread4();
-            resumeThread5();
-            resumeThread6();
-            resumeThread7();
-            resumeThread8();
-            resumeThread11();
-            runThreads();
-        }
-    };
-    if (第二类弹窗 && 第二类弹窗.visibleToUser() === true) {
-        lloogg("检测到存钱罐/再看一个弹窗");
-        有广告 = 1;
-        if (currentThread !== 100) {
-            try {
-                pauseThread10();
-                pauseThread1();
-                pauseThread2();
-                pauseThread3();
-                pauseThread4();
-                pauseThread5();
-                pauseThread6();
-                pauseThread7();
-                pauseThread8();
-                pauseThread11();
-                先暂停 = 1;
-            } catch (e) {
-                线 = 0;
-            }
-
-        }
-        var shut第二类 = 第二类弹窗.parent().child(第二类弹窗.indexInParent() + 1);
-        if (shut第二类) {
-            lloogg("正在关闭存钱罐弹窗/再看一个");
-            shut第二类.click();
-            var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-            if (广子倒计时) {
-                log("正在看宝箱广告");
-                停留30秒倒计时();
-                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                try {
-                    var hmkw = 还没看完.text();
-                } catch (error) {
-                    var hmkw = null || undefined;
-                };
-                if (hmkw !== "去完成任务") {
-                    log("还没看完,继续等待30秒");
-                    try {
-                        var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                        还没看完button.click();
-                    } catch (error) {
-                        log("还没看完buttonz找不到");
-                    };
-                    停留30秒倒计时();
+                if (error instanceof java.net.SocketTimeoutException) {
+                    toastLog('快手极速版' + '下载超时❌');
+                    alert('快手极速版' + '下载超时❌')
+                    continue; // 继续下一次循环请求
                 } else {
-                    log("额外任务");
-                    try {
-                        var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                        放弃button.click();
-                    } catch (error) {
-                        log("放弃buttonz找不到");
-                    };
+                    toastLog('快手极速版' + '下载失败❌' + error)//，错误：' + error);
+                    alert('快手极速版' + '下载失败❌')
                 };
             };
-        };
-        有广告 = 0;
-        回顶();
-        if (先暂停 == 1) {
-            先暂停 = 0;
-            resumeThread10();
-            resumeThread1();
-            resumeThread2();
-            resumeThread3();
-            resumeThread4();
-            resumeThread5();
-            resumeThread6();
-            resumeThread7();
-            resumeThread8();
-            resumeThread11();
-            runThreads();
-        }
-    };
-    if (第三类额外弹窗 && 第三类额外弹窗.visibleToUser() === true) {
-        lloogg("检测到额外弹窗");
-        lloogg("先暂停");
-        有广告 = 1;
-        if (currentThread !== 100) {
-            try {
-                pauseThread10();
-                pauseThread1();
-                pauseThread2();
-                pauseThread3();
-                pauseThread4();
-                pauseThread5();
-                pauseThread6();
-                pauseThread7();
-                pauseThread8();
-                pauseThread11();
-                先暂停 = 1;
-            } catch (e) {
-                线 = 0;
-            }
-
-        };
-        try {
-            var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-            放弃button.click();
-        } catch (error) {
-            lloogg("额外弹窗error");
-        };
-        goandearn();
-        回顶();
-        if (先暂停 == 1) {
-            先暂停 = 0;
-            有广告 = 0;
-            resumeThread10();
-            resumeThread1();
-            resumeThread2();
-            resumeThread3();
-            resumeThread4();
-            resumeThread5();
-            resumeThread6();
-            resumeThread7();
-            resumeThread8();
-            resumeThread11();
-            runThreads();
-        };
-    };
-
-    if (金币箱弹窗 && 金币箱弹窗.visibleToUser() === true) {
-        lloogg("检测到金币箱弹窗");
-        lloogg("先暂停");
-        有广告 = 1;
-        if (currentThread !== 100) {
-            try {
-                pauseThread10();
-                pauseThread1();
-                pauseThread2();
-                pauseThread3();
-                pauseThread4();
-                pauseThread5();
-                pauseThread6();
-                pauseThread7();
-                pauseThread8();
-                pauseThread11();
-                先暂停 = 1;
-            } catch (e) {
-                线 = 0;
-            }
-
-        };
-        try {
-            var chahcakan = 金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).child(金币箱弹窗.parent().child(金币箱弹窗.parent().children().length - 1).children().length - 1);
-        } catch (error) {
-            lloogg("金币箱弹窗领取error")
-        };
-
-        if (chahcakan) {
-            log("  z  ")
-            chahcakan.click();
-            var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(10000);
-            if (广子倒计时) {
-                log("正在看宝箱广告");
-                停留30秒倒计时();
-                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                try {
-                    var hmkw = 还没看完.text();
-                } catch (error) {
-                    var hmkw = null || undefined;
-                };
-                if (hmkw !== "去完成任务") {
-                    log("还没看完,继续等待30秒");
-                    try {
-                        var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                        还没看完button.click();
-                    } catch (error) {
-                        log("还没看完buttonz找不到");
-                    };
-                    停留30秒倒计时();
-                } else {
-                    log("额外任务");
-                    try {
-                        var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                        放弃button.click();
-                    } catch (error) {
-                        log("放弃buttonz找不到");
-                    };
-                };
-            };
-            var xx还xx = id("com.kuaishou.nebula.neo_video:id/again_dialog_image").findOne(3000);
-            if (xx还xx) {
-                lloogg("检测到xx");
-                var shut第二类 = xx还xx.parent().child(xx还xx.indexInParent() + 1);
-                if (shut第二类) {
-                    lloogg("正在关闭存钱罐弹窗/再看一个");
-                    shut第二类.click();
-                    var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(5000);
-                    if (广子倒计时) {
-                        log("正在看宝箱广告");
-                        停留30秒倒计时();
-                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(3000);
-                        try {
-                            var hmkw = 还没看完.text();
-                        } catch (error) {
-                            var hmkw = null || undefined;
-                        };
-                        if (hmkw !== "去完成任务") {
-                            log("还没看完,继续等待30秒");
-                            try {
-                                var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1500) || desc("dialog_positive_view").findOne(1500);
-                                还没看完button.click();
-                            } catch (error) {
-                                log("还没看完buttonz找不到");
-                            };
-                            停留30秒倒计时();
-                        } else {
-                            log("额外任务");
-                            try {
-                                var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1500) || desc("dialog_negative_view").findOne(1500);
-                                放弃button.click();
-                            } catch (error) {
-                                log("放弃buttonz找不到");
-                            };
-                        };
-                    };
-                };
-            }
-        };
-        有广告 = 0;
-        goandearn();
-        回顶();
-        if (先暂停 == 1) {
-            先暂停 = 0;
-            resumeThread10();
-            resumeThread1();
-            resumeThread2();
-            resumeThread3();
-            resumeThread4();
-            resumeThread5();
-            resumeThread6();
-            resumeThread7();
-            resumeThread8();
-            resumeThread11();
-            runThreads();
-        }
-    }
-    if (邀请新用户 && 邀请新用户.visibleToUser() === true) {
-        lloogg("检测到邀请新用户弹窗");
-        lloogg("先暂停");
-        if (currentThread !== 100) {
-            try {
-                pauseThread10();
-                pauseThread1();
-                pauseThread2();
-                pauseThread3();
-                pauseThread4();
-                pauseThread5();
-                pauseThread6();
-                pauseThread7();
-                pauseThread8();
-                pauseThread11();
-                先暂停 = 1;
-            } catch (e) {
-                线 = 0;
-            }
 
         }
-        try {
-            var shut新用户 = 邀请新用户.parent().child(邀请新用户.parent().children().length - 1);
-        } catch (e) {
-            lloogg("No shut新用户")
-        }
-        shut新用户.click();
-        有广告 = 0;
-        回顶();
-        if (先暂停 == 1) {
-            先暂停 = 0;
-            resumeThread10();
-            resumeThread1();
-            resumeThread2();
-            resumeThread3();
-            resumeThread4();
-            resumeThread5();
-            resumeThread6();
-            resumeThread7();
-            resumeThread8();
-            resumeThread11();
-            runThreads();
-        }
-    }
-    if (青少年模式 && 青少年模式.visibleToUser() === true) {
-        lloogg("检测到青少年模式");
-        back();
-        回顶();
-        // runThreads();
-    };
-    if (好评弹窗 && 好评弹窗.visibleToUser() === true) {
-        lloogg("检测到好评弹窗");
-        back();
+
     };
 
-
-
-    sleep(1000);
-    //xx完了
-    线 = 1;
-};
-
-
-
-
-///////////////////////////////////////////////////////
-function runThreads() {
-    lloogg("正在调用线程");
-    threads.start(thread10);
-}
-function 回顶() {
-    lloogg("正在回顶");
-    goandearn();
-    sleep(888);
-    var 抵用金 = textContains("抵用金").findOne(1000);
-    if (抵用金 && 抵用金.visibleToUser() == true) {
-        doubleclickearnmoney();
+    threads.start(function () { // 创建新的子线程
+        下载KSJS();
+    });
+    //
+    if (KSJSi == 1) {
+        toastLog("正在保存快手极速版");
+        if (files.exists(filePathksjs)) {
+            files.remove(filePathksjs);
+        };
+        files.write(filePathksjs, KSJS);
+        toastLog("快手极速版 已保存");
+        ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
     };
-};
+});
+ui.downksjsf5.on("click", function () {
+    if (KSJSi == 1) {
+        if (files.exists(filePathksjs)) {
+            files.remove(filePathksjs);
+        };
+        files.write(filePathksjs, KSJS);
+        toastLog("快手极速版 已保存");
+        ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
+        ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
+    } else if (KSJSi == 0) {
+        ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+        ui.ksjsno.setVisibility(android.view.View.VISIBLE);
+    };
+});
+ui.deleteksjs.on("click", function () {
+    if (files.exists(filePathksjs)) {
+        files.remove(filePathksjs);
+    };
+    alert('快手极速版' + '已卸载')
+    KSJSi = 0;
+    ui.ksjsyes.setVisibility(android.view.View.INVISIBLE);
+    ui.ksjsno.setVisibility(android.view.View.VISIBLE);
+});
 
-//
+// /////////////////////////////////////////////////////////////////////////////ks
+// var KSi = 0;
+// var KS;
+// var filePathks = '/sdcard/ks.js';
+// ui.downks.on("click", function () {
+//     toastLog("开始下载KS脚本");
+//     //
+//     function 下载KS() {
+//         //
+//         let url = [
+//             'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/次新更新',
+//         ];
+//         for (var i = 0; i < 2; i++) {
+//             try {
+//                 let resks = http.get(url[i], {
+//                     timeout: 10000 // 设置超时时间为10秒
+//                 });
+//                 //console.log(res.statusCode);
+//                 if (resks.statusCode == 200) {
+//                     KS = resks.body.string();
+//                     if (KS.indexOf('"uuii"') == 0) {
+//                         KSi = 1;
+//                         toastLog('快手' + '下载成功✅');
+//                         alert('快手' + '下载成功✅')
+//                         //log("开始加载KS");
+//                         //engines.execScript("KS", KS);
+//                         break;
+//                     };
+//                 } else {
+//                     toastLog('快手' + '下载链接失败❌');
+//                     alert('快手' + '下载链接失败❌')
+//                 }
+//             } catch (error) {
+//                 if (error instanceof java.net.SocketTimeoutException) {
+//                     toastLog('快手' + '下载超时❌');
+//                     alert('快手' + '下载超时❌')
+//                     continue; // 继续下一次循环请求
+//                 } else {
+//                     toastLog('快手' + '下载失败❌' + error)//，错误：' + error);
+//                     alert('快手' + '下载失败❌')
+//                 };
+//             };
+
+//         }
+
+//     };
+
+//     threads.start(function () { // 创建新的子线程
+//         下载KS();
+//     });
+//     //
+//     if (KSi == 1) {
+//         toastLog("正在保存快手");
+//         if (files.exists(filePathks)) {
+//             files.remove(filePathks);
+//         };
+//         files.write(filePathks, KS);
+//         toastLog("快手 已保存");
+//         ui.ksyes.setVisibility(android.view.View.VISIBLE);
+//         ui.ksno.setVisibility(android.view.View.INVISIBLE);
+//     };
+// });
+// ui.downksf5.on("click", function () {
+//     if (KSi == 1) {
+//         if (files.exists(filePathks)) {
+//             files.remove(filePathks);
+//         };
+//         files.write(filePathks, KS);
+//         toastLog("快手 已保存");
+//         ui.ksyes.setVisibility(android.view.View.VISIBLE);
+//         ui.ksno.setVisibility(android.view.View.INVISIBLE);
+//     } else if (KSi == 0) {
+//         ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+//         ui.ksno.setVisibility(android.view.View.VISIBLE);
+//     };
+// });
+// ui.deleteks.on("click", function () {
+//     if (files.exists(filePathks)) {
+//         files.remove(filePathks);
+//     };
+//     alert('快手' + '已卸载')
+//     KSi = 0;
+//     ui.ksyes.setVisibility(android.view.View.INVISIBLE);
+//     ui.ksno.setVisibility(android.view.View.VISIBLE);
+// });
+
+// /////////////////////////////////////////////////////////////////////////////time
+// var TIMEi = 0;
+// var TIME;
+// var filePathtime = '/sdcard/time.js';
+// ui.downtime1.on("click", function () {
+//     toastLog("开始下载互切1脚本");
+//     //
+//     function 下载TIME() {
+//         //
+//         let url = [
+//             'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/互切1',
+//         ];
+//         for (var i = 0; i < 2; i++) {
+//             try {
+//                 let restime = http.get(url[i], {
+//                     timeout: 10000 // 设置超时时间为10秒
+//                 });
+//                 //console.log(res.statusCode);
+//                 if (restime.statusCode == 200) {
+//                     TIME = restime.body.string();
+//                     if (TIME.indexOf('"uuvii1"') == 0) {
+//                         TIMEi = 1;
+//                         toastLog('互切1' + '下载成功✅');
+//                         alert('互切1' + '下载成功✅')
+//                         //log("开始加载TIME");
+//                         //engines.execScript("TIME", TIME);
+//                         break;
+//                     };
+//                 } else {
+//                     toastLog('互切1' + '下载链接失败❌');
+//                     alert('互切1' + '下载链接失败❌')
+//                 }
+//             } catch (error) {
+//                 if (error instanceof java.net.SocketTimeoutException) {
+//                     toastLog('互切1' + '下载超时❌');
+//                     alert('互切1' + '下载超时❌')
+//                     continue; // 继续下一次循环请求
+//                 } else {
+//                     toastLog('互切1' + '下载失败❌' + error)//，错误：' + error);
+//                     alert('互切1' + '下载失败❌')
+//                 };
+//             };
+//         }
+
+//     };
+
+//     threads.start(function () { // 创建新的子线程
+//         下载TIME();
+//     });
+//     //
+//     if (TIMEi == 1) {
+//         toastLog("正在保存互切1");
+//         if (files.exists(filePathtime)) {
+//             files.remove(filePathtime);
+//         };
+//         files.write(filePathtime, TIME);
+//         toastLog("互切1 已保存");
+//         ui.timeyes.setVisibility(android.view.View.VISIBLE);
+//         ui.timeno.setVisibility(android.view.View.INVISIBLE);
+//     };
+// });
+// ui.downtimef5.on("click", function () {
+//     if (TIMEi == 1 && time2i == 1) {
+//         if (files.exists(filePathtime)) {
+//             files.remove(filePathtime);
+//         };
+//         files.write(filePathtime, TIME);
+//         if (files.exists(filePathtime2)) {
+//             files.remove(filePathtime2);
+//         };
+//         files.write(filePathtime2, time2);
+//         toastLog("互切 已保存");
+//         ui.timeyes.setVisibility(android.view.View.VISIBLE);
+//         ui.timeno.setVisibility(android.view.View.INVISIBLE);
+//     } else if (TIMEi == 0) {
+//         ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+//         ui.timeno.setVisibility(android.view.View.VISIBLE);
+//     };
+// });
+// ui.deletetime.on("click", function () {
+//     if (files.exists(filePathtime)) {
+//         files.remove(filePathtime);
+//     };
+//     alert('互切1' + '已卸载')
+//     TIMEi = 0;
+//     ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+//     ui.timeno.setVisibility(android.view.View.VISIBLE);
+// });
+
+// /////////////////////////////////////////////////////////////////////////////time2
+// var time2i = 0;
+// var time2;
+// var filePathtime2 = '/sdcard/time2.js';
+// ui.downtime2.on("click", function () {
+//     toastLog("开始下载互切2脚本");
+//     //
+//     function 下载time2() {
+//         //
+//         let url = [
+//             'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/互切2',
+//         ];
+//         for (var i = 0; i < 2; i++) {
+//             try {
+//                 let restime2 = http.get(url[i], {
+//                     time2out: 10000 // 设置超时时间为10秒
+//                 });
+//                 //console.log(res.statusCode);
+//                 if (restime2.statusCode == 200) {
+//                     time2 = restime2.body.string();
+//                     if (time2.indexOf('"uuvii2"') == 0) {
+//                         time2i = 1;
+//                         toastLog('互切2' + '下载成功✅');
+//                         alert('互切2' + '下载成功✅')
+//                         //log("开始加载time2");
+//                         //engines.execScript("time2", time2);
+//                         break;
+//                     };
+//                 } else {
+//                     toastLog('互切2' + '下载链接失败❌');
+//                     alert('互切2' + '下载链接失败❌')
+//                 }
+//             } catch (error) {
+//                 if (error instanceof java.net.Sockettime2outException) {
+//                     toastLog('互切2' + '下载超时❌');
+//                     alert('互切2' + '下载超时❌')
+//                     continue; // 继续下一次循环请求
+//                 } else {
+//                     toastLog('互切2' + '下载失败❌' + error)//，错误：' + error);
+//                     alert('互切2' + '下载失败❌')
+//                 };
+//             };
+
+//         }
+
+//     };
+
+//     threads.start(function () { // 创建新的子线程
+//         下载time2();
+//     });
+//     //
+//     if (time2i == 1) {
+//         toastLog("正在保存互切2");
+//         if (files.exists(filePathtime2)) {
+//             files.remove(filePathtime2);
+//         };
+//         files.write(filePathtime2, time2);
+//         toastLog("互切2 已保存");
+//     };
+// });
+
+// /////////////////////////////////////////////////////////////////////////////测试文件
+// var TIMEi = 0;
+// var TIME;
+// var filePathtime = '/sdcard/time.js';
+// ui.downtime1.on("click", function () {
+//     toastLog("开始下载互切脚本");
+//     //
+//     function 下载TIME() {
+//         //
+//         let url = [
+//             'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/测试文件',
+//         ];
+//         for (var i = 0; i < 2; i++) {
+//             try {
+//                 let restime = http.get(url[i], {
+//                     timeout: 10000 // 设置超时时间为10秒
+//                 });
+//                 //console.log(res.statusCode);
+//                 if (restime.statusCode == 200) {
+//                     TIME = restime.body.string();
+//                     if (TIME.indexOf('"uui"') == 0) {
+//                         TIMEi = 1;
+//                         toastLog('互切' + '下载成功✅');
+//                         alert('互切' + '下载成功✅')
+//                         //log("开始加载TIME");
+//                         //engines.execScript("TIME", TIME);
+//                         break;
+//                     };
+//                 } else {
+//                     toastLog('互切' + '下载链接失败❌');
+//                     alert('互切' + '下载链接失败❌')
+//                 }
+//             } catch (error) {
+//                 if (error instanceof java.net.SocketTimeoutException) {
+//                     toastLog('互切' + '下载超时❌');
+//                     alert('互切' + '下载超时❌')
+//                     continue; // 继续下一次循环请求
+//                 } else {
+//                     toastLog('互切' + '下载失败❌' + error)//，错误：' + error);
+//                     alert('互切' + '下载失败❌')
+//                 };
+//             };
+//             if (i == 9) {
+//                 toastLog("请重新下载");
+
+//             }
+//         }
+
+//     };
+
+//     threads.start(function () { // 创建新的子线程
+//         下载TIME();
+//     });
+//     //
+//     if (TIMEi == 1) {
+//         toastLog("正在保存互切");
+//         if (files.exists(filePathtime)) {
+//             files.remove(filePathtime);
+//         };
+//         files.write(filePathtime, TIME);
+//         toastLog("互切 已保存");
+//         ui.timeyes.setVisibility(android.view.View.VISIBLE);
+//         ui.timeno.setVisibility(android.view.View.INVISIBLE);
+//     };
+// });
+// ui.downtimef5.on("click", function () {
+//     if (TIMEi == 1) {
+//         if (files.exists(filePathtime)) {
+//             files.remove(filePathtime);
+//         };
+//         files.write(filePathtime, TIME);
+//         toastLog("互切 已保存");
+//         ui.timeyes.setVisibility(android.view.View.VISIBLE);
+//         ui.timeno.setVisibility(android.view.View.INVISIBLE);
+//     } else if (TIMEi == 0) {
+//         ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+//         ui.timeno.setVisibility(android.view.View.VISIBLE);
+//     };
+// });
+// ui.deletetime.on("click", function () {
+//     if (files.exists(filePathtime)) {
+//         files.remove(filePathtime);
+//     };
+//     alert('互切' + '已卸载')
+//     TIMEi = 0;
+//     ui.timeyes.setVisibility(android.view.View.INVISIBLE);
+//     ui.timeno.setVisibility(android.view.View.VISIBLE);
+// });

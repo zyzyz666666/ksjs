@@ -102,19 +102,22 @@ function yy() {
     timeset.put("timeout", newtimeout);
     log("共是：" + newtimeout + "共：" + (newtimeout / 60000) + "分钟,设定的互切是：" + 输入框互切 + "分钟");
     startTime = currentTime;
-    if (now == 1) {
-        log("now = 1")
-        关ks7天()
-        sleep(1000);
-        开极速版()
-    } else if (now == 2) {
-        log("now = 2")
-        关极速版()
-        sleep(1000);
-        开ks7天()
-    } else {
-        log("now ")
-        开ks7天()
+    if (newtimeout > duration) {
+        log("互切")
+        if (now == 1) {
+            log("now = 1")
+            关ks7天()
+            sleep(1000);
+            开极速版()
+        } else if (now == 2) {
+            log("now = 2")
+            关极速版()
+            sleep(1000);
+            开ks7天()
+        } else {
+            log("now ")
+            开ks7天()
+        }
     }
 }
 

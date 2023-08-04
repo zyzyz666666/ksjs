@@ -93,7 +93,7 @@ function alwayspermit() {
 };
 
 function yy() {
-    origintimeout = timeset.get("timeout");
+    var origintimeout = timeset.get("timeout");
     var currentTime = new Date().getTime(); // 获取当前时间
     log("现在:" + currentTime)
     var elapsedTime = currentTime - startTime; // 计算已经过去的时间

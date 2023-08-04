@@ -63,11 +63,11 @@ log("现在是" + startTime);
 
 function real_click(obj) {
     for (let i = 1; i <= 3; i++) {
-        if (obj.click()) { lloogg("real click: true"); return true; }
+        if (obj.click()) { log("real click: true"); return true; }
         sleep(300);
     }
     console.warn("控件无法正常点击：", obj);
-    lloogg("尝试再次点击");
+    log("尝试再次点击");
     click(obj.bounds().centerX(), obj.bounds().centerY());
     return false;
 };
@@ -131,7 +131,7 @@ function 开ks7天() {
             sleep(1500);
             var w = device.width;
             var h = device.height;
-            click(w * 0.7 + 10, 80)
+            click(w * 0.7 + 100, 200)
             break;
         } else {
             exit_app("ks7天任务")

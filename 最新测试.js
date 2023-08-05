@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="JSv1" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -2143,7 +2143,8 @@ if (earnmoney && c === true) {
 
         /////////////////////////////// 判断一轮是否全做完了 ///////////////////////
         log(列表_每日挑战, 列表_饭点补贴, 列表_奖励翻倍, 列表_看视频赚得金币, 列表_逛街金币, 列表_给视频表态);
-        if (列表_每日挑战 == 1 && 列表_饭点补贴 == 1 && 列表_奖励翻倍 == 1 && 列表_看视频赚得金币 == 1 && 列表_逛街金币 == 1 && 列表_给视频表态 == 1) {
+        if ((列表_每日挑战 == 1 && 列表_饭点补贴 == 1 && 列表_奖励翻倍 == 1 && 列表_看视频赚得金币 == 1 && 列表_逛街金币 == 1 && 列表_给视频表态 == 1) ||
+            (列表_每日挑战 == undefined && 列表_饭点补贴 == undefined && 列表_奖励翻倍 == undefined && 列表_看视频赚得金币 == undefined && 列表_逛街金币 == undefined && 列表_给视频表态 == undefined)) {
             lloogg("一轮做完,等待下一轮");
             sleep(2000);
             runThreads();

@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="JSv2" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -10,7 +10,7 @@ var window = floaty.window(
 var filePathksjs = '/sdcard/ksjs.js';
 
 
-window.setPosition(device.width / 3 + 110, -100);
+window.setPosition(device.width / 3, 0);
 window.setSize(device.width * 1 / 2, 250);
 window.setAdjustEnabled(false);
 
@@ -18,7 +18,6 @@ var statusText = window.status;
 
 window.closeBtn.click(() => {//
     log("程序即将关闭");
-
     engines.stopAll();
     engines.execScriptFile("main.js");
 });
@@ -35,176 +34,44 @@ function lloogg(msg) {
         });
     }, 1000); // 延迟一秒后清除文本
 };
-function aw找id(参数1, 参数2, 参数3) {
-    var 我的
-    if (参数3 < 1) {
-        我的 = idContains(参数1).visibleToUser(true).findOne(600);
-    } else {
-        我的 = idContains(参数1).visibleToUser(true).findOne(参数3 * 1000);
-    }
-    if (我的 != null) {
-        switch (true) {
-            case 参数2 == 0:
-                click(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 1:
-                log(我的.bounds().centerX(), 我的.bounds().centerY());
-                return true
-            case 参数2 == 2:
-                return [我的.bounds().centerX(), 我的.bounds().centerY()]
-            default:
-                var aw数据后 = 参数2.split(",");
-                click(我的.bounds().centerX() + (aw数据后[0] * 1), 我的.bounds().centerY() + (aw数据后[1] * 1));
-                return true
-        }
-    }
-    return false;
-}
 
 
-function aw找文字节点() {
-    let arr = packageNameMatches(/.*/).visibleToUser(true).find()
-    let 数量 = 0
-    let regexp = '/^' + arguments[0] + '$/';
-    log("aw找文字节点:" + arguments[0])
-    if (arguments.length - 1 >= 3) {
-        if (arguments[3] == false) { regexp = '/.*' + arguments[0] + '.*/' }
-    }
-    if (!arr.empty()) {
-        for (let item of arr) {
-            let t = item.text() || item.desc()
-            if (eval(regexp).test(t)) {
-                let t = item.text()
-                let x = item.bounds().centerX()
-                let y = item.bounds().centerY()
-                if (arguments.length - 1 == 2) {
-                    if (数量 >= arguments[2]) {
-                        switch (true) {
-                            case arguments[1] == 0:
-                                click(x, y);
-                                return true
-                            case arguments[1] == 1:
-                                log(x, y);
-                                return true
-                            case arguments[1] == 2:
-                                return [x, y]
-                            default:
-                                var aw数据后 = 参数2.split(",");
-                                click(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
-                                return true
-                        }
-                    } else {
-                        数量 = 数量 + 1
-                    }
-                } else {
-                    switch (true) {
-                        case arguments[1] == 0:
-                            click(x, y);
-                            return true
-                        case arguments[1] == 1:
-                            log(x, y);
-                            return true
-                        case arguments[1] == 2:
-                            return [x, y]
-                        default:
-                            var aw数据后 = arguments[1].split(",");
-                            click(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
-                            return true
-                    }
-                }
-            }
-        }
-    }
-    return false;
-}
-
-
-function 关闭其他应用() {
-    home();//home
-    sleep(2500)
-    log("--清应用--")
-    recents();//任务管理
-    sleep(3500)
-    switch (true) {
-        case aw找id("clear_all_recents_image_button", 0, 0.2):
-            break;
-        case aw找id("recent_igmbutton_clear_all", 0, 0.2):
-            break;
-        case aw找id("clear_button", 0, 0.2):
-            break;
-        case aw找id("clearAnimView", 0, 0.2):
-            break;
-        case aw找文字节点("关闭全部", 0):
-            break;
-        case aw找文字节点("清除", 0):
-            break;
-        case aw找文字节点("全部清除", 0):
-            break;
-        case aw找文字节点("全部清理", 0):
-            break;
-        case aw找文字节点("全部清理", 0):
-            break;
-        case aw找文字节点("可用", 0, 0, false):
-            break;
-        case aw找文字节点("释放内存", 0, 0, false):
-            break;
-        case aw找文字节点("清除全部", 0, 0, false):
-            break;
-        default:
-            click(w * 0.5, h * 0.8)
-            click(w * 0.5, h * 0.9)
-    }
-    sleep(3000)
-    home();//home
-    sleep(2500)
-}
 
 function upslide() {
     var c = device.width;
     var b = device.height;
     lloogg("⬆正在滑动向上滑动");
-    swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 555);
+    swipe(c * 4 / 5, b / 10 * 8, c * 4 / 5, b / 10 * 2, 660);
 };
 
 function downslide() {
     var c = device.width;
     var b = device.height;
     lloogg("↓正在滑动向上滑动");
-    swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 555);
+    swipe(c * 4 / 5, b / 10 * 2, c * 4 / 5, b / 10 * 8, 660);
 };
 
 function goandearn() {
     var 在中心 = 0;
     for (btgar = 1; btgar > 0; btgar++) {
-        if (有广告 == 1) {
-            if (btgar == 4) {
-                lloogg("卡了×");
-                yy();
-            }
-            lloogg("等待30秒-120秒");
-            sleep(1000 * 32);
+        var quzhaunqian = text("去赚钱").findOne(5000);
+        if (quzhaunqian) {
+            lloogg("goandearn:在中心");
+            在中心 = 1;
+            break;
         } else {
-            var quzhaunqian = text("去赚钱").findOne(5000);
-            if (quzhaunqian) {
-                lloogg("goandearn:在中心");
-                在中心 = 1;
-                有广告 = 0;
-                break;
-            } else {
-                toastLog("goandearn:" + (50 - btgar));
-                back();
-            };
-            if (btgar % 10 === 0) {
-                sleep(2000);
-                lloogg("返回快手极速版");
-                打开快手();
-                sleep(1000 * 2);
-            };
-            if (btgar == 50) {
-                log("goandearn:卡了,强制");
-                有广告 = 0;
-                yy();
-            }
+            toastLog("goandearn:" + (50 - btgar));
+            back();
+        };
+        if (btgar % 10 === 0) {
+            sleep(2000);
+            lloogg("返回快手极速版");
+            app.launchApp("快手极速版");
+            sleep(1000 * 2);
+        };
+        if (btgar == 50) {
+            log("goandearn:卡了,强制");
+            yy();
         }
     };
     //     if (quzhaunqian.visibleToUser() == true) {
@@ -710,10 +577,6 @@ function 重置ksapp() {
     permit();
 };
 
-function 打开快手() {
-    app.launchPackage("com.kuaishou.nebula");
-    permit();
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////功能性func
 
@@ -727,8 +590,6 @@ function 打开快手() {
 //表态() == thread8
 var ksjsset = storages.create("ksjsset");
 
-var 重启时间 = ksjsset.get("重启时间");
-var 选择框_强制 = ksjsset.get("选择框_强制");
 var 选择框_开宝箱 = ksjsset.get("选择框_开宝箱");
 var 选择框_每日挑战 = ksjsset.get("选择框_每日挑战");
 var 选择框_饭饭补贴 = ksjsset.get("选择框_饭饭补贴");
@@ -737,12 +598,6 @@ var 选择框_看视频赚金币 = ksjsset.get("选择框_看视频赚金币");
 var 选择框_逛街 = ksjsset.get("选择框_逛街");
 var 选择框_表态 = ksjsset.get("选择框_表态");
 
-if (重启时间 == undefined) {
-    重启时间 = "16";
-};
-if (选择框_强制 == undefined) {
-    选择框_强制 = false;
-};
 if (选择框_开宝箱 == undefined) {
     选择框_开宝箱 = true;
 };
@@ -769,8 +624,7 @@ if (选择框_表态 == undefined) {
 //////////////////////////////////////////////////////////////////////////
 重置ksapp();
 停留x秒倒计时(20);
-关闭其他应用();
-打开快手();
+重置ksapp();
 停留x秒倒计时(10);
 
 log(currentThread);
@@ -779,38 +633,21 @@ var earnmoney = text("去赚钱").findOne();
 var a = earnmoney.bounds().centerX();
 var b = earnmoney.bounds().centerY();
 log((a, b));
-
 threads.start(function () {
     setInterval(xx, 1000); // run the task every 5 second
     lloogg("xx")
 
 });
 
-if (选择框_强制) {
-    lloogg("本次开强制");
-    sleep(500);
-    lloogg("本次开强制");
-    sleep(500);
-    lloogg("本次开强制");
-    threads.start(function () {
-        setInterval(yy, 重启时间 * 60 * 1000); // run the task every 5 second
-        lloogg("YY")
+threads.start(function () {
+    setInterval(yy, 15 * 60 * 1000); // run the task every 5 second
+    lloogg("YY")
 
-    });
-} else {
-    lloogg("本次不开强制");
-    sleep(500);
-    lloogg("本次不开强制");
-    sleep(500);
-    lloogg("本次不开强制");
-    sleep(500);
-};
-
+});
 sleep(8888);
 try {
     var c = earnmoney.visibleToUser()
 } catch (e) {
-    log("找不到 ab click");
 }
 if (earnmoney && c === true) {
     for (m = 1; m > 0; m++) {
@@ -872,15 +709,32 @@ if (earnmoney && c === true) {
         var thread11Paused = false;
 
         var currentThread = 100;  // 默认为线程1当前正在运行
-        var 列表_奖励翻倍 = 1;
-        var 列表_饭点补贴 = 1;
-        var 列表_每日挑战 = 1;
-        var 列表_看视频赚得金币 = 1;
-        var 列表_逛街金币 = 1;
-        var 列表_给视频表态 = 1;
+        var 列表_奖励翻倍 = Number;
+        var 列表_饭点补贴 = Number;
+        var 列表_每日挑战 = Number;
+        var 列表_看视频赚得金币 = Number;
+        var 列表_逛街金币 = Number;
+        var 列表_给视频表态 = Number;
 
 
 
+        function thread10() {
+            var t10 = 0;
+            currentThread = 10;
+
+
+            签到();
+
+            lloogg(currentThread + "thread已经结束,正在回顶");
+            // 回顶();
+            // sleep(1000);
+            t10 = 1;
+            if (!thread10Paused && t10 == 1 && currentThread == 10) {
+                回顶();
+                sleep(1000);
+                setTimeout(thread1, 1000);  // 延迟1秒调用线程3
+            }
+        }
         var thread1Id, thread2Id, thread3Id, thread4Id, thread5Id, thread6Id, thread7Id;
         // 暂停线程11
         function pauseThread11() {
@@ -980,25 +834,6 @@ if (earnmoney && c === true) {
         function resumeThread8() {
             thread8Paused = false;
         };
-
-        function thread10() {
-            var t10 = 0;
-            currentThread = 10;
-
-
-            签到();
-
-            lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
-            // sleep(1000);
-            t10 = 1;
-            if (!thread10Paused && t10 == 1 && currentThread == 10) {
-                回顶();
-                sleep(1000);
-                setTimeout(thread1, 1000);  // 延迟1秒调用线程3
-            }
-        }
-
         function thread1() {
             var t1 = 0;
             currentThread = 1;
@@ -2115,7 +1950,7 @@ if (earnmoney && c === true) {
                         counter = 0;
                     };
                     sleep(1000);
-                    if (downup == 6) {
+                    if (downup == 10) {
                         lloogg("看视频");
                         upslide();
                         sleep(1500);
@@ -2143,8 +1978,7 @@ if (earnmoney && c === true) {
 
         /////////////////////////////// 判断一轮是否全做完了 ///////////////////////
         log(列表_每日挑战, 列表_饭点补贴, 列表_奖励翻倍, 列表_看视频赚得金币, 列表_逛街金币, 列表_给视频表态);
-        if ((列表_每日挑战 == 1 && 列表_饭点补贴 == 1 && 列表_奖励翻倍 == 1 && 列表_看视频赚得金币 == 1 && 列表_逛街金币 == 1 && 列表_给视频表态 == 1)
-        ) {
+        if (列表_每日挑战 == 1 && 列表_饭点补贴 == 1 && 列表_奖励翻倍 == 1 && 列表_看视频赚得金币 == 1 && 列表_逛街金币 == 1 && 列表_给视频表态 == 1) {
             lloogg("一轮做完,等待下一轮");
             sleep(2000);
             runThreads();
@@ -2176,7 +2010,6 @@ if (earnmoney && c === true) {
 
 
 lloogg("已完成");
-yy();
 //exit();
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2213,8 +2046,7 @@ function 奇怪地方返回任务中心() {
         text("种成后还能换其他水果哦").findOne(100) || (text("可兑换").findOne(100) && text("审核中").findOne(100)) ||
         text("朋友扫码拆红包").findOne(100) || text("邀请未下载过快手极速版的人提现更快").findOne(100) || text("guide-icon").findOne(100) ||
         textContains("前三次完成先睡觉再起床").findOne(100) || text("如何添加小组件到桌面").findOne(100) ||
-        (text("早睡早起").findOne(100) && (text("切换角色").findOne(100) || textContains("切换性别").findOne(100)))
-        ;
+        (text("早睡早起").findOne(100) && (text("切换角色").findOne(100) || textContains("切换性别").findOne(100)));
     if (在奇怪的地方 && 在奇怪的地方.visibleToUser() === true) {
         奇怪 = 1;
         返回找任务中心();
@@ -2222,7 +2054,7 @@ function 奇怪地方返回任务中心() {
 
 }
 
-var 有广告 = 0;
+
 function xx() {
     lloogg("xx");
     var 好评弹窗 = id("com.kuaishou.nebula:id/icon").findOne(100) || text("喜欢就给个好评吧").findOne(100);
@@ -2250,7 +2082,6 @@ function xx() {
     if (签到弹窗 && textContains("将从第一天开始签到").findOne(500)) {
         log("检测到签到弹窗");
         lloogg("先暂停");
-        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2308,7 +2139,6 @@ function xx() {
                 };
             };
         };
-        有广告 = 0;
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2328,7 +2158,6 @@ function xx() {
     if (第一类弹窗 && 第一类弹窗.parent().child(0).className() == "android.widget.ImageView" && 第一类弹窗.visibleToUser() === true) {
         lloogg("检测到惊喜红包弹窗");
         lloogg("先暂停");
-        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2353,7 +2182,6 @@ function xx() {
             log("正在继续观看");
             dian继续观看.click();
         };
-        有广告 = 0;
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2372,7 +2200,6 @@ function xx() {
     };
     if (第二类弹窗 && 第二类弹窗.visibleToUser() === true) {
         lloogg("检测到存钱罐/再看一个弹窗");
-        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2425,7 +2252,6 @@ function xx() {
                 };
             };
         };
-        有广告 = 0;
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2445,7 +2271,6 @@ function xx() {
     if (第三类额外弹窗 && 第三类额外弹窗.visibleToUser() === true) {
         lloogg("检测到额外弹窗");
         lloogg("先暂停");
-        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2474,7 +2299,6 @@ function xx() {
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
-            有广告 = 0;
             resumeThread10();
             resumeThread1();
             resumeThread2();
@@ -2492,7 +2316,6 @@ function xx() {
     if (金币箱弹窗 && 金币箱弹窗.visibleToUser() === true) {
         lloogg("检测到金币箱弹窗");
         lloogg("先暂停");
-        有广告 = 1;
         if (currentThread !== 100) {
             try {
                 pauseThread10();
@@ -2549,46 +2372,7 @@ function xx() {
                     };
                 };
             };
-            var xx还xx = id("com.kuaishou.nebula.neo_video:id/again_dialog_image").findOne(3000);
-            if (xx还xx) {
-                lloogg("检测到xx");
-                var shut第二类 = xx还xx.parent().child(xx还xx.indexInParent() + 1);
-                if (shut第二类) {
-                    lloogg("正在关闭存钱罐弹窗/再看一个");
-                    shut第二类.click();
-                    var 广子倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(5000);
-                    if (广子倒计时) {
-                        log("正在看宝箱广告");
-                        停留30秒倒计时();
-                        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(3000);
-                        try {
-                            var hmkw = 还没看完.text();
-                        } catch (error) {
-                            var hmkw = null || undefined;
-                        };
-                        if (hmkw !== "去完成任务") {
-                            log("还没看完,继续等待30秒");
-                            try {
-                                var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1500) || desc("dialog_positive_view").findOne(1500);
-                                还没看完button.click();
-                            } catch (error) {
-                                log("还没看完buttonz找不到");
-                            };
-                            停留30秒倒计时();
-                        } else {
-                            log("额外任务");
-                            try {
-                                var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1500) || desc("dialog_negative_view").findOne(1500);
-                                放弃button.click();
-                            } catch (error) {
-                                log("放弃buttonz找不到");
-                            };
-                        };
-                    };
-                };
-            }
         };
-        有广告 = 0;
         goandearn();
         回顶();
         if (先暂停 == 1) {
@@ -2633,7 +2417,6 @@ function xx() {
             lloogg("No shut新用户")
         }
         shut新用户.click();
-        有广告 = 0;
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;

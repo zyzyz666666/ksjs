@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="JSLS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -35,6 +35,129 @@ function lloogg(msg) {
     }, 1000); // 延迟一秒后清除文本
 };
 
+function aw找id(参数1, 参数2, 参数3) {
+    var 我的
+    if (参数3 < 1) {
+        我的 = idContains(参数1).visibleToUser(true).findOne(600);
+    } else {
+        我的 = idContains(参数1).visibleToUser(true).findOne(参数3 * 1000);
+    }
+    if (我的 != null) {
+        switch (true) {
+            case 参数2 == 0:
+                click(我的.bounds().centerX(), 我的.bounds().centerY());
+                return true
+            case 参数2 == 1:
+                log(我的.bounds().centerX(), 我的.bounds().centerY());
+                return true
+            case 参数2 == 2:
+                return [我的.bounds().centerX(), 我的.bounds().centerY()]
+            default:
+                var aw数据后 = 参数2.split(",");
+                click(我的.bounds().centerX() + (aw数据后[0] * 1), 我的.bounds().centerY() + (aw数据后[1] * 1));
+                return true
+        }
+    }
+    return false;
+}
+
+
+function aw找文字节点() {
+    let arr = packageNameMatches(/.*/).visibleToUser(true).find()
+    let 数量 = 0
+    let regexp = '/^' + arguments[0] + '$/';
+    log("aw找文字节点:" + arguments[0])
+    if (arguments.length - 1 >= 3) {
+        if (arguments[3] == false) { regexp = '/.*' + arguments[0] + '.*/' }
+    }
+    if (!arr.empty()) {
+        for (let item of arr) {
+            let t = item.text() || item.desc()
+            if (eval(regexp).test(t)) {
+                let t = item.text()
+                let x = item.bounds().centerX()
+                let y = item.bounds().centerY()
+                if (arguments.length - 1 == 2) {
+                    if (数量 >= arguments[2]) {
+                        switch (true) {
+                            case arguments[1] == 0:
+                                click(x, y);
+                                return true
+                            case arguments[1] == 1:
+                                log(x, y);
+                                return true
+                            case arguments[1] == 2:
+                                return [x, y]
+                            default:
+                                var aw数据后 = 参数2.split(",");
+                                click(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
+                                return true
+                        }
+                    } else {
+                        数量 = 数量 + 1
+                    }
+                } else {
+                    switch (true) {
+                        case arguments[1] == 0:
+                            click(x, y);
+                            return true
+                        case arguments[1] == 1:
+                            log(x, y);
+                            return true
+                        case arguments[1] == 2:
+                            return [x, y]
+                        default:
+                            var aw数据后 = arguments[1].split(",");
+                            click(x + (aw数据后[0] * 1), y + (aw数据后[1] * 1));
+                            return true
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+
+function 关闭其他应用() {
+    home();//home
+    sleep(2500)
+    log("--清应用--")
+    recents();//任务管理
+    sleep(3500)
+    switch (true) {
+        case aw找id("clear_all_recents_image_button", 0, 0.2):
+            break;
+        case aw找id("recent_igmbutton_clear_all", 0, 0.2):
+            break;
+        case aw找id("clear_button", 0, 0.2):
+            break;
+        case aw找id("clearAnimView", 0, 0.2):
+            break;
+        case aw找文字节点("关闭全部", 0):
+            break;
+        case aw找文字节点("清除", 0):
+            break;
+        case aw找文字节点("全部清除", 0):
+            break;
+        case aw找文字节点("全部清理", 0):
+            break;
+        case aw找文字节点("全部清理", 0):
+            break;
+        case aw找文字节点("可用", 0, 0, false):
+            break;
+        case aw找文字节点("释放内存", 0, 0, false):
+            break;
+        case aw找文字节点("清除全部", 0, 0, false):
+            break;
+        default:
+            click(w * 0.5, h * 0.8)
+            click(w * 0.5, h * 0.9)
+    }
+    sleep(3000)
+    home();//home
+    sleep(2500)
+}
 
 
 function upslide() {
@@ -66,7 +189,7 @@ function goandearn() {
         if (btgar % 10 === 0) {
             sleep(2000);
             lloogg("返回快手极速版");
-            app.launchApp("快手极速版");
+            打开快手();
             sleep(1000 * 2);
         };
         if (btgar == 50) {
@@ -577,7 +700,10 @@ function 重置ksapp() {
     permit();
 };
 
-
+function 打开快手() {
+    app.launchPackage("com.kuaishou.nebula");
+    permit();
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////功能性func
 
 //自检测() == thread1
@@ -590,6 +716,8 @@ function 重置ksapp() {
 //表态() == thread8
 var ksjsset = storages.create("ksjsset");
 
+var 重启时间 = ksjsset.get("重启时间");
+var 选择框_强制 = ksjsset.get("选择框_强制");
 var 选择框_开宝箱 = ksjsset.get("选择框_开宝箱");
 var 选择框_每日挑战 = ksjsset.get("选择框_每日挑战");
 var 选择框_饭饭补贴 = ksjsset.get("选择框_饭饭补贴");
@@ -598,6 +726,12 @@ var 选择框_看视频赚金币 = ksjsset.get("选择框_看视频赚金币");
 var 选择框_逛街 = ksjsset.get("选择框_逛街");
 var 选择框_表态 = ksjsset.get("选择框_表态");
 
+if (重启时间 == undefined) {
+    重启时间 = "16";
+};
+if (选择框_强制 == undefined) {
+    选择框_强制 = false;
+};
 if (选择框_开宝箱 == undefined) {
     选择框_开宝箱 = true;
 };
@@ -624,7 +758,8 @@ if (选择框_表态 == undefined) {
 //////////////////////////////////////////////////////////////////////////
 重置ksapp();
 停留x秒倒计时(20);
-重置ksapp();
+关闭其他应用();
+打开快手();
 停留x秒倒计时(10);
 
 log(currentThread);
@@ -633,17 +768,33 @@ var earnmoney = text("去赚钱").findOne();
 var a = earnmoney.bounds().centerX();
 var b = earnmoney.bounds().centerY();
 log((a, b));
+
 threads.start(function () {
     setInterval(xx, 1000); // run the task every 5 second
     lloogg("xx")
 
 });
 
-threads.start(function () {
-    setInterval(yy, 15 * 60 * 1000); // run the task every 5 second
-    lloogg("YY")
+if (选择框_强制) {
+    lloogg("本次开强制");
+    sleep(500);
+    lloogg("本次开强制");
+    sleep(500);
+    lloogg("本次开强制");
+    threads.start(function () {
+        setInterval(yy, 重启时间 * 60 * 1000); // run the task every 5 second
+        lloogg("YY")
 
-});
+    });
+} else {
+    lloogg("本次不开强制");
+    sleep(500);
+    lloogg("本次不开强制");
+    sleep(500);
+    lloogg("本次不开强制");
+    sleep(500);
+};
+
 sleep(8888);
 try {
     var c = earnmoney.visibleToUser()

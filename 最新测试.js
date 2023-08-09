@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="JSv3" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="JSv3.1" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -27,7 +27,6 @@ function lloogg(msg) {
     ui.run(function () {
         statusText.setText(msg);
     });
-
     setTimeout(function () {
         ui.run(function () {
             statusText.setText("");
@@ -2342,8 +2341,13 @@ function xx() {
         } catch (error) {
             lloogg("金币箱弹窗领取error")
         };
-
-        if (chahcakan) {
+        try {
+            jianchakan = chahcakan.child(0).text();
+        } catch (error) {
+            log("无字")
+            jianchakan = undefined;
+        }
+        if (jianchakan !== undefined && !jianchakan.includes("起床") && !jianchakan.includes("睡觉")) {
             log("  z  ")
             chahcakan.click();
             看广告v();

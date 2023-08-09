@@ -2074,8 +2074,14 @@ function yy() {
     //engines.stopAll();
     // engines.execScriptFile(filePathksjs);
     // exit();
-    engines.execScriptFile(filePathksjs);
-    exit();
+    关闭其他应用();
+    sleep(1200);
+    打开快手();
+    sleep(1200);
+    doubleclickearnmoney()
+    sleep(1000);
+    goandearn();
+
 };
 
 

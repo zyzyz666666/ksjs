@@ -1,3 +1,5 @@
+"ui";
+
 var KSJSi = 0;
 var KSJS;
 var filePathksjs = '/sdcard/ksjs.js';

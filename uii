@@ -3,9 +3,7 @@
 var KSJSi = 0;
 var KSJS;
 var filePathksjs = '/sdcard/ksjs.js';
-ui.downksjs.on("click", function () {
-    toastLog("开始下载KSJS脚本");
-    //
+
     function 下载KSJS() {
         let url = [
             'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/最新测试.js',
@@ -59,4 +57,4 @@ ui.downksjs.on("click", function () {
         ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
         ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
     };
-});
+

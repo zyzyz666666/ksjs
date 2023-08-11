@@ -19,23 +19,23 @@ ui.downksjs.on("click", function () {
                     if (KSJS.indexOf('"uii"') == 0) {
                         KSJSi = 1;
                         toastLog('快手极速版' + '下载成功✅');
-                        alert('快手极速版' + '下载成功✅')
+                        log('快手极速版' + '下载成功✅')
                         //log("开始加载KSJS");
                         //engines.execScript("KSJS", KSJS);
                         break;
                     };
                 } else {
                     toastLog('快手极速版' + '下载链接失败❌');
-                    alert('快手极速版' + '下载链接失败❌')
+                    log('快手极速版' + '下载链接失败❌')
                 }
             } catch (error) {
                 if (error instanceof java.net.SocketTimeoutException) {
                     toastLog('快手极速版' + '下载超时❌');
-                    alert('快手极速版' + '下载超时❌')
+                    log('快手极速版' + '下载超时❌')
                     continue; // 继续下一次循环请求
                 } else {
                     toastLog('快手极速版' + '下载失败❌' + error)//，错误：' + error);
-                    alert('快手极速版' + '下载失败❌')
+                    log('快手极速版' + '下载失败❌')
                 };
             };
 

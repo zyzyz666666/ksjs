@@ -5,7 +5,8 @@ var KSJS;
 var filePathksjs = '/sdcard/ksjs.js';
 
     function 下载KSJS() {
-        let url = [
+     log("download!)
+let url = [
             'https://ghproxy.com/https://raw.githubusercontent.com/zyzyz666666/ksjs/main/最新测试.js',
         ];
         for (var i = 0; i < 2; i++) {

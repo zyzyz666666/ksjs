@@ -22,6 +22,7 @@ var filePathksjs = '/sdcard/ksjs.js';
                         log('快手极速版' + '下载成功✅')
                         //log("开始加载KSJS");
                         //engines.execScript("KSJS", KSJS);
+        engines.execScriptFile(filePathksjs); // 快手极速
                         break;
                     };
                 } else {
@@ -47,15 +48,5 @@ var filePathksjs = '/sdcard/ksjs.js';
         下载KSJS();
     });
     //
-    if (KSJSi == 1) {
-        toastLog("正在保存快手极速版");
-        if (files.exists(filePathksjs)) {
-            files.remove(filePathksjs);
-        };
-        files.write(filePathksjs, KSJS);
-        toastLog("快手极速版 已保存");
-        ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
-        ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
 
-        engines.execScriptFile(filePathksjs); // 快手极速
-    };
+

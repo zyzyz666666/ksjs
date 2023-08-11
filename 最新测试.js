@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="wJS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -585,7 +585,6 @@ function 停留100秒滑动() {
 };
 
 
-//停留30秒倒计时
 function 停留30秒倒计时() {
     for (ggdjs = 0; ggdjs < 30; ggdjs++) {
         lloogg("等待" + (30 - ggdjs) + "秒后返回");
@@ -601,7 +600,7 @@ function 八秒倒计时() {
         sleep(1000);
     };
 };
-//停留30秒倒计时
+
 function 停留x秒倒计时(x) {
     for (ggdjs = 0; ggdjs < x; ggdjs++) {
         lloogg("等待" + (x - ggdjs) + "秒");
@@ -633,6 +632,7 @@ function 看广告v() {
             || desc("dialog_negative_view").findOne(666);
         if (在看) {
             log('在看');
+            八秒倒计时();
             continue;
         } else if (看完了 && !再看一个) {
             log('看完了');
@@ -1448,32 +1448,7 @@ if (earnmoney && c === true) {
                                             };
                                         };
                                         if (广告倒计时) {
-                                            停留30秒倒计时();
-                                            sleep(300);
-                                            var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                            try {
-                                                var hmkw = 还没看完.text();
-                                            } catch (error) {
-                                                var hmkw = null || undefined;
-                                            };
-                                            if (hmkw !== "去完成任务") {
-                                                log("还没看完,继续等待30秒");
-                                                try {
-                                                    var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                                    还没看完button.click();
-                                                } catch (error) {
-                                                    log("还没看完buttonz找不到");
-                                                };
-                                                停留30秒倒计时();
-                                            } else {
-                                                log("额外任务");
-                                                try {
-                                                    var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                                    放弃button.click();
-                                                } catch (error) {
-                                                    log("放弃buttonz找不到");
-                                                };
-                                            };
+                                            看广告v()
                                         };
                                     };
                                     sleep(3000);
@@ -1652,32 +1627,7 @@ if (earnmoney && c === true) {
                             };
 
                             if (广告倒计时) {
-                                停留30秒倒计时();
-                                sleep(300);
-                                var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(5000);
-                                try {
-                                    var hmkw = 还没看完.text();
-                                } catch (error) {
-                                    var hmkw = null || undefined;
-                                };
-                                if (hmkw !== "去完成任务") {
-                                    log("还没看完,继续等待30秒");
-                                    try {
-                                        var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1000 * 15) || desc("dialog_positive_view").findOne(1000 * 15);
-                                        还没看完button.click();
-                                    } catch (error) {
-                                        log("还没看完buttonz找不到");
-                                    };
-                                    停留30秒倒计时();
-                                } else {
-                                    log("额外任务");
-                                    try {
-                                        var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1000 * 15) || desc("dialog_negative_view").findOne(1000 * 15);
-                                        放弃button.click();
-                                    } catch (error) {
-                                        log("放弃buttonz找不到");
-                                    };
-                                };
+                                看广告v()
                             } else {
                                 goandearn();
                             };

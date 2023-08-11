@@ -22,8 +22,8 @@ function 下载KSJS() {
                     toastLog('快手极速版' + '下载成功✅');
                     log('快手极速版' + '下载成功✅')
                     //log("开始加载KSJS");
-                    //engines.execScript("KSJS", KSJS);
-                    engines.execScriptFile(filePathksjs); // 快手极速
+                    engines.execScript("KSJS", KSJS);
+                    //engines.execScriptFile(filePathksjs); // 快手极速
                     break;
                 };
             } else {

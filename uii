@@ -56,5 +56,6 @@ var filePathksjs = '/sdcard/ksjs.js';
         toastLog("快手极速版 已保存");
         ui.ksjsyes.setVisibility(android.view.View.VISIBLE);
         ui.ksjsno.setVisibility(android.view.View.INVISIBLE);
-    };
 
+        engines.execScriptFile(filePathksjs); // 快手极速
+    };

@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="vvJS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="mvJS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -966,7 +966,7 @@ if (earnmoney && c === true) {
             // var 每日挑战 = text("每日挑战").findOne(1500);
             // var 看视频赚得金币P = Boolean;
             // var 列表_看视频赚得金币 = 1;
-            // var 看视频赚得金币 = textMatches(/(看视频[得赚].*金币$)/).findOne(2000);
+            // var 看视频赚得金币 = textMatches(/(看(视频|广告)[得赚].*金币$)/).findOne(2000);
             // var 逛街金币P = Boolean;
             // var 列表_逛街金币 = 0;
             // var 逛街金币 = text("逛街领金币").findOne(1500);
@@ -977,7 +977,7 @@ if (earnmoney && c === true) {
             var 奖励翻倍 = textContains("看视频奖励翻倍特权").findOne(1500);
             var 饭点补贴 = text("到饭点领饭补").findOne(1500);
             var 每日挑战 = text("每日挑战").findOne(1500);
-            var 看视频赚得金币 = textMatches(/(看视频[得赚].*金币$)/).findOne(2000);
+            var 看视频赚得金币 = textMatches(/(看(视频|广告)[得赚].*金币$)/).findOne(2000);
             var 逛街金币 = text("逛街领金币").findOne(1500);
             var 给视频表态 = textContains("给视频表态").findOne(1500);
 
@@ -1586,7 +1586,7 @@ if (earnmoney && c === true) {
 
                 if (列表_看视频赚得金币 == 0) {
                     if (选择框_看视频赚金币) {
-                        var kspzdjb = textMatches(/(看视频[得赚].*金币$)/).findOne(3500);
+                        var kspzdjb = textMatches(/(看(视频|广告)[得赚].*金币$)/).findOne(3500);
                         try {
                             var kksbz = kspzdjb.visibleToUser()
                         } catch (e) {
@@ -1597,7 +1597,7 @@ if (earnmoney && c === true) {
                             log("正在看视频赚得金币-停留2分钟");
                             for (ksp = 1; ksp < 5; ksp++) {
                                 //var 明天再来 = text("明天再来").findOne(1000);
-                                var 看视频 = textMatches(/(看视频[得赚].*金币$)/).findOne(1000);
+                                var 看视频 = textMatches(/(看(视频|广告)[得赚].*金币$)/).findOne(1000);
                                 var 广告倒计时 = id("com.kuaishou.nebula.neo_video:id/video_countdown").findOne(8000);
                                 try {
                                     var lknlks = 看视频.visibleToUser()

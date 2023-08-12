@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="vvJS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );

@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="vvJS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -626,24 +626,25 @@ function 打开快手() {
 
 function 看广告v() {
     for (n = 1; n > 0; n++) {
-        var 在看 = textMatches(/(.*后可领取奖励)/).findOne(666);
-        var 看完了 = textMatches(/(已领取.*金币$)/).findOne(666) || textMatches(/(已成功领取奖励)/).findOne(666);
-        var 再看一个 = textMatches(/(再看一个.*)/).findOne(666);
-        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(666);
-        var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(666)
-            || desc("dialog_positive_view").findOne(666);
-        var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(666)
-            || desc("dialog_negative_view").findOne(666);
+        var 在看 = textMatches(/(.*后可领取奖励)/).findOne(1666);
+        var 看完了 = textMatches(/(已领取.*金币$)/).findOne(1666) || textMatches(/(已成功领取奖励)/).findOne(1666);
+        var 再看一个 = textMatches(/(再看一个.*)/).findOne(1666);
+        var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(1666);
+        var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(1666)
+            || desc("dialog_positive_view").findOne(1666);
+        var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(1666)
+            || desc("dialog_negative_view").findOne(1666);
         if (在看) {
             log('在看');
+            八秒倒计时();
             continue;
-        } else if (看完了 && !再看一个) {
-            log('看完了');
-            break;
         } else if (再看一个) {
             log('再看一个')
             click(再看一个.bounds().centerX(), 再看一个.bounds().centerY());
             continue;
+        } else if (看完了 && !再看一个) {
+            log('看完了');
+            break;
         } else if (还没看完) {
             try {
                 var hmkw = 还没看完.text();

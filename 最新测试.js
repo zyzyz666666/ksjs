@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="vJS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="vvJS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -495,15 +495,18 @@ function 签到() {
                                         alwayspermit();
                                         看广告v()
                                     };
-                                    if (弹窗签到 = 1) {
+                                    if (是弹窗签到 = 1) {
                                         try {
                                             var seeagain = textMatches(/(看广告最高.*金币$)/).findOne(10000);
                                         } catch (error) {
                                         }
                                         if (seeagain) {
+                                            log("有看广告最高.*金币$")
                                             click(a.bounds().centerX(), a.bounds().centerY());
                                             看广告v()
-                                        };
+                                        } else {
+                                            log("有看广告最高.*金币$")
+                                        }
                                     };
                                 } else {
                                     log("不在视野内，不可签到")

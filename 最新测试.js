@@ -671,6 +671,8 @@ function 看广告v() {
                     log("放弃buttonz找不到");
                 };
             };
+        }else{
+            break;
         }
     }
 }

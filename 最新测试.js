@@ -631,12 +631,12 @@ function 看广告v() {
         var 再看一个 = textMatches(/(再看一个.*)/).findOne(666);
         var 还没看完 = id("com.kuaishou.nebula.neo_video:id/close_dialog_ensure_text").findOne(666);
         var 还没看完button = idContains("com.kuaishou.nebula.neo_video:id/close_dialog_ensure").findOne(666)
-            || desc("dialog_positive_view").findOne(666) ||text("继续观看").findOne(666);
+            || desc("dialog_positive_view").findOne(666) || text("继续观看").findOne(666);
         var 放弃button = idContains("com.kuaishou.nebula.neo_video:id/award_video_close_dialog_abandon").findOne(666)
             || desc("dialog_negative_view").findOne(666);
         if (在看) {
             log('在看');
-            八秒倒计时();
+            停留x秒倒计时(15);
             continue;
         } else if (再看一个) {
             log('再看一个')
@@ -2391,10 +2391,16 @@ function 回顶() {
     lloogg("正在回顶");
     goandearn();
     sleep(888);
-    var 抵用金 = textContains("抵用金").findOne(1000);
-    if (抵用金 && 抵用金.visibleToUser() == true) {
-        doubleclickearnmoney();
-    };
+    for (n = 1; n > 0; n++) {
+        var 抵用金 = textContains("抵用金").findOne(1000);
+        if (抵用金) {
+            doubleclickearnmoney();
+            break;
+        } else {
+            upslide();
+        };
+        sleep(2000);
+    }
 };
 
 //

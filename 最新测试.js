@@ -14,6 +14,9 @@ window.setPosition(device.width / 3, 0);
 window.setSize(device.width * 1 / 2, 250);
 window.setAdjustEnabled(false);
 
+var w = device.width;
+var h = device.height;
+
 var statusText = window.status;
 
 window.closeBtn.click(() => {//

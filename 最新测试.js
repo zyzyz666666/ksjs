@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="vvJS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="wwJS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -180,13 +180,13 @@ function downslide() {
 function goandearn() {
     var 在中心 = 0;
     for (btgar = 1; btgar > 0; btgar++) {
-        var quzhaunqian = text("去赚钱").findOne(5000);
+        var quzhaunqian = text("去赚钱").findOne(50000);
         if (quzhaunqian) {
             lloogg("goandearn:在中心");
             在中心 = 1;
             break;
         } else {
-            toastLog("goandearn:" + (50 - btgar));
+            toastLog("goandearn:" + (5 - btgar));
             back();
         };
         if (btgar % 10 === 0) {
@@ -671,8 +671,6 @@ function 看广告v() {
                     log("放弃buttonz找不到");
                 };
             };
-        }else{
-            break;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 var window = floaty.window(
     <frame gravity="center">
-        <button id="closeBtn" text="JS" w="40" h="40" bg="#00FA9A" />
+        <button id="closeBtn" text="jjJS" w="40" h="40" bg="#00FA9A" />
         <text id="status" text="运行状态：停止" textSize="22sp" textColor="#778899" />//
     </frame>
 );
@@ -180,13 +180,13 @@ function downslide() {
 function goandearn() {
     var 在中心 = 0;
     for (btgar = 1; btgar > 0; btgar++) {
-        var quzhaunqian = text("去赚钱").findOne(50000);
+        var quzhaunqian = text("去赚钱").findOne(5000);
         if (quzhaunqian) {
             lloogg("goandearn:在中心");
             在中心 = 1;
             break;
         } else {
-            toastLog("goandearn:" + (5 - btgar));
+            toastLog("goandearn:" + (50 - btgar));
             back();
         };
         if (btgar % 10 === 0) {
@@ -338,63 +338,30 @@ function exit_app(name) {
 function doubleclickearnmoney() {
     var quzhaunqian = text("去赚钱").findOne(1000);
     if (quzhaunqian) {
-        try {
-            var qquzq = quzhaunqian.visibleToUser();
-        } catch (e) {
-            qquzq = false;
-        }
-        if (qquzq) {
-            for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 15) {
-                    lloogg("识别超时，正在重启");
-                    yy();
+        for (qzq = 1; qzq > 0; qzq++) {
+            if (qzq == 15) {
+                lloogg("识别超时，正在重启");
+                yy();
+            } else {
+                click(a, b);
+                sleep(50);
+                click(a, b);
+                var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
+                try {
+                    var yyaiding = 在顶.visibleToUser()
+                } catch (e) {
+                    yyaiding = false;
+                }
+                if (在顶 && yyaiding == true) {
+                    lloogg("在任务中心顶");
+                    break;
                 } else {
-                    click(a, b);
-                    sleep(50);
-                    click(a, b);
-                    var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                    try {
-                        var yyaiding = 在顶.visibleToUser()
-                    } catch (e) {
-                        yyaiding = false;
-                    }
-                    if (在顶 && yyaiding == true) {
-                        lloogg("在任务中心顶");
-                        break;
-                    } else {
-                        continue;
-                    };
+                    continue;
+                };
 
-                }
-                toastLog("等待" + (15 - qzq) + "次")
-            };
-        } else {
-            for (qzq = 1; qzq > 0; qzq++) {
-                if (qzq == 15) {
-                    lloogg("识别超时，正在重启");
-                    yy();
-                } else {
-                    lloogg("正在调用abclick2");
-                    click(a, b);
-                    sleep(50);
-                    click(a, b);
-                    var 在顶 = text("我的金币").findOne(1000) || text("我的抵用金").findOne(1000);
-                    try {
-                        var zaiding = 在顶.visibleToUser()
-                    } catch (e) {
-                        zaiding = false;
-                    }
-                    if (在顶 && zaiding == true) {
-                        lloogg("在任务中心顶");
-                        break;
-                    } else {
-                        continue;
-                    };
-                }
-                toastLog("等待" + (15 - qzq) + "次")
-            };
+            }
+            toastLog("等待" + (15 - qzq) + "次")
         };
-
     } else {
         lloogg("卡🙅‍了")
     };
@@ -628,7 +595,7 @@ function 打开快手() {
 }
 
 function 看广告v() {
-    for (n = 1; n > 0; n++) {
+    for (n = 1; n < 10; n++) {
         var 在看 = textMatches(/(.*后可领取奖励)/).findOne(666);
         var 看完了 = textMatches(/(已领取.*金币$)/).findOne(666) || textMatches(/(已成功领取奖励)/).findOne(666);
         var 再看一个 = textMatches(/(再看一个.*)/).findOne(666);
@@ -737,7 +704,7 @@ var ISLOGIN = -1;
 var earnmoney = text("去赚钱").findOne();
 var a = earnmoney.bounds().centerX();
 var b = earnmoney.bounds().centerY();
-log((a, b));
+log([a, b]);
 
 threads.start(function () {
     setInterval(xx, 1000); // run the task every 5 second
@@ -847,10 +814,12 @@ if (earnmoney && c === true) {
             签到();
 
             lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t10 = 1;
             if (!thread10Paused && t10 == 1 && currentThread == 10) {
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread1, 1000);  // 延迟1秒调用线程3
@@ -1046,7 +1015,8 @@ if (earnmoney && c === true) {
             // 线程1执行完毕后，调用线程2
             lloogg(currentThread + "thread已经结束,正在回顶");
             log(列表_每日挑战, 列表_饭点补贴, 列表_奖励翻倍, 列表_看视频赚得金币, 列表_逛街金币, 列表_给视频表态);
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
 
             if (列表_每日挑战 == 1 &&
@@ -1060,6 +1030,7 @@ if (earnmoney && c === true) {
             } else {
                 t1 = 1;
                 if (!thread1Paused && t1 == 1 && currentThread == 1) {
+                    log("正在回顶")
                     回顶();
                     sleep(1000);
                     setTimeout(thread2, 1000);  // 延迟1秒调用线程2
@@ -1096,10 +1067,13 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t2 = 1;
             if (!thread2Paused && t2 == 1 && currentThread == 2) {
+                log("正在回顶")
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread3, 1000);  // 延迟1秒调用线程3
@@ -1263,6 +1237,7 @@ if (earnmoney && c === true) {
                                 sleep(1500);
                             };
                             if (n % 10 === 0) {
+                                log("正在回顶")
                                 回顶();
                                 n = 0;
                                 if (n == 15) {
@@ -1285,10 +1260,12 @@ if (earnmoney && c === true) {
 
             // 线程执行完毕后，调用线程34
             lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t3 = 1;
             if (!thread3Paused && t3 == 1 && currentThread == 3) {
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread4, 1000);  // 延迟1秒调用线程3
@@ -1476,6 +1453,7 @@ if (earnmoney && c === true) {
                                 sleep(1500);
                             };
                             if (n % 10 === 0) {
+                                log("正在回顶")
                                 回顶();
                                 n = 0;
                                 if (n == 15) {
@@ -1494,10 +1472,12 @@ if (earnmoney && c === true) {
             };
 
             lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t4 = 1;
             if (!thread4Paused && t4 == 1 && currentThread == 4) {
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread5, 1000);  // 延迟1秒调用线程3
@@ -1548,6 +1528,7 @@ if (earnmoney && c === true) {
                                 sleep(1500);
                             };
                             if (n % 10 === 0) {
+                                log("正在回顶")
                                 回顶();
                                 n = 0;
                                 if (n == 15) {
@@ -1570,10 +1551,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t5 = 1;
             if (!thread5Paused && t5 == 1 && currentThread == 5) {
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread6, 1000);  // 延迟1秒调用线程3
@@ -1644,6 +1627,7 @@ if (earnmoney && c === true) {
                             sleep(1500);
                         };
                         if (n % 10 === 0) {
+                            log("正在回顶")
                             回顶();
                             n = 0;
                             if (n == 15) {
@@ -1664,10 +1648,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t6 = 1;
             if (!thread6Paused && t6 == 1 && currentThread == 6) {
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread7, 1000);  // 延迟1秒调用线程3
@@ -1741,6 +1727,7 @@ if (earnmoney && c === true) {
                                 sleep(1500);
                             };
                             if (n % 10 === 0) {
+                                log("正在回顶")
                                 回顶();
                                 n = 0;
                                 if (n == 15) {
@@ -1761,10 +1748,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t7 = 1;
             if (!thread7Paused && t7 == 1 && currentThread == 7) {
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread8, 1000);  // 延迟1秒调用线程3
@@ -1890,6 +1879,7 @@ if (earnmoney && c === true) {
                             sleep(1500);
                         };
                         if (n % 10 === 0) {
+                            log("正在回顶")
                             回顶();
                             n = 0;
                             if (n == 15) {
@@ -1909,10 +1899,12 @@ if (earnmoney && c === true) {
 
             // 线程2执行完毕后，调用线程3
             // lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t8 = 1;
             if (!thread8Paused && t8 == 1 && currentThread == 8) {
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread11, 1000);  // 延迟1秒调用线程3
@@ -1976,10 +1968,12 @@ if (earnmoney && c === true) {
             看视频();
             sleep(5000);
             lloogg(currentThread + "thread已经结束,正在回顶");
-            // 回顶();
+            // log("正在回顶")
+            回顶();
             // sleep(1000);
             t11 = 1;
             if (!thread11Paused && t11 == 1 && currentThread == 11) {
+                log("正在回顶")
                 回顶();
                 sleep(1000);
                 setTimeout(thread10, 1000);  // 延迟1秒调用线程3
@@ -2126,6 +2120,7 @@ function xx() {
         // log(but.child(0).visibleToUser())
         click(but.bounds().centerX(), but.bounds().centerY());
         看广告v()
+        log("正在回顶")
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2169,6 +2164,7 @@ function xx() {
             log("正在继续观看");
             dian继续观看.click();
         };
+        log("正在回顶")
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2211,6 +2207,7 @@ function xx() {
             shut第二类.click();
             看广告v()
         };
+        log("正在回顶")
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2255,6 +2252,7 @@ function xx() {
             lloogg("额外弹窗error");
         };
         goandearn();
+        log("正在回顶")
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2305,6 +2303,7 @@ function xx() {
             看广告v()
         };
         goandearn();
+        log("正在回顶")
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2348,6 +2347,7 @@ function xx() {
             lloogg("No shut新用户")
         }
         shut新用户.click();
+        log("正在回顶")
         回顶();
         if (先暂停 == 1) {
             先暂停 = 0;
@@ -2367,6 +2367,7 @@ function xx() {
     if (青少年模式 && 青少年模式.visibleToUser() === true) {
         lloogg("检测到青少年模式");
         back();
+        log("正在回顶")
         回顶();
         // runThreads();
     };
